@@ -97,6 +97,29 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .reviewForm label{font-size:13px;display:flex;flex-direction:column;gap:5px}
 .reviewForm input:not([type=checkbox]),.reviewForm select{width:100%;box-sizing:border-box;background:#30243d;color:white;border:1px solid #73598f;padding:10px;border-radius:9px}
 .reviewForm .reviewConsent{flex-direction:row;align-items:flex-start;line-height:1.4}
+.amBtn{background:#5b3a86;border:1px solid #9b72cf;color:#fff;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px}
+.amBtn:hover{background:#6e47a2}
+.amBadge{display:inline-block;min-width:18px;padding:1px 6px;margin-left:4px;border-radius:999px;background:#ff4f7b;color:#fff;font-size:11px;text-align:center}
+.reviewPop{width:min(96vw,980px);max-height:90vh;margin:auto;overflow:auto;color:#f3ebff;box-shadow:0 20px 80px #000a}
+.reviewPop::backdrop{background:#000b}
+.reviewPop .reviewCards{max-height:none;overflow:visible}
+.reviewHeadBtns,.reviewToolBtns{display:flex;gap:8px;flex-wrap:wrap}
+.reviewTools{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.reviewTools button,.reviewCard .reviewRow button{background:#413052;border:1px solid #8463a8;color:#f4eaff;border-radius:9px;padding:7px 10px;cursor:pointer;font-size:12px}
+.reviewRow{display:flex;gap:6px;flex-wrap:wrap}
+.reviewRow .reviewDismiss{background:#3a2430;border-color:#a8637e}
+@media(max-width:620px){
+.reviewPop{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border-radius:0;border:0;padding:12px 12px calc(16px + env(safe-area-inset-bottom))}
+.reviewPop .reviewHead{position:sticky;top:-12px;z-index:2;background:#1c1728;padding:10px 0;margin-top:-12px;border-bottom:1px solid #3d3150}
+.reviewHeadBtns{width:100%}.reviewHeadBtns button{flex:1;min-height:44px}
+.reviewManual input{min-width:0;width:100%;flex:1 1 100%;min-height:44px;font-size:16px}
+.reviewManual button{width:100%;min-height:44px}
+.reviewTools{flex-direction:column;align-items:stretch}.reviewToolBtns button{flex:1 1 100%;min-height:44px}
+.reviewCard{flex-direction:column}.reviewCard img{width:100%;height:150px}
+.reviewRow button{flex:1;min-height:44px}
+.reviewDialog{width:94vw}.reviewForm input:not([type=checkbox]),.reviewForm select{font-size:16px;min-height:44px}
+.amBtn{padding:8px 12px;font-size:12px}
+}
 .reviewBtns{display:flex;gap:12px;justify-content:end}
 @media(max-width:620px){.reviewCards{grid-template-columns:1fr}.reviewPanel{padding:10px}.reviewCard img{width:76px;height:68px}}
 </style>
@@ -104,7 +127,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <body>
 <section id="gate" class="gate" role="dialog" aria-modal="true" aria-label="Entrada da WC Library"><form id="gateForm" class="gateBox" autocomplete="off"><img class="gateLogo" src="./assets/jojo-logo.webp" alt="JOJO Library" loading="eager"><div class="sub">JOJO LIBRARY · ÁREA DOS AMIGOS</div><h1>Seu ringue começa aqui.</h1><p>Digite a senha compartilhada para entrar na biblioteca.</p><input id="gatePassword" type="password" placeholder="Senha de acesso" autocomplete="off" required aria-label="Senha de acesso"><button id="gateSubmit" type="submit">Entrar na biblioteca</button><div id="gateError" class="gateError" aria-live="polite"></div><div class="privacyNote">Entrada simples para amigos. Atenção: o GitHub Pages e os catálogos são públicos; esta senha não protege os arquivos.</div></form></section>
 <div class="wrap">
-<header class="top"><div class="brandCluster"><img class="headerLogo" src="./assets/jojo-logo.webp" alt="JOJO"><div><div class="brand">JOJO <span>LIBRARY</span></div><div class="sub">Seu portal de wrestling para TV e celular</div></div></div><div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><div class="chip">LINHA DO TEMPO</div><button type="button" id="lock" class="lockBtn">Sair</button></div></header>
+<header class="top"><div class="brandCluster"><img class="headerLogo" src="./assets/jojo-logo.webp" alt="JOJO"><div><div class="brand">JOJO <span>LIBRARY</span></div><div class="sub">Seu portal de wrestling para TV e celular</div></div></div><div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><div class="chip">LINHA DO TEMPO</div><button type="button" id="autoMatchOpen" class="amBtn" aria-haspopup="dialog">🎬 AutoMatch <span id="autoMatchBadge" class="amBadge" hidden>0</span></button><button type="button" id="lock" class="lockBtn">Sair</button></div></header>
 <section class="hero"><div><div class="sub">Seu catálogo, seu controle</div><h1>Wrestling de todos os tempos.<br><span style="color:#b58bff">Direto da fonte.</span></h1><p>Catálogo independente conectado ao seu GitHub. Para vídeos públicos, tenta primeiro o arquivo direto e oferece alternativas quando o player da TV falhar.</p></div><div class="status" id="status" role="status">Selecione uma empresa para carregar os eventos.</div></section>
 <section class="continuePanel" id="continuePanel" aria-label="Continue assistindo" hidden><div class="continueHeader"><div><h2>▶ Continue assistindo</h2><small>Progresso salvo só neste navegador · sem conta e sem sincronização</small></div><button type="button" class="continueClear" id="continueClear">Limpar histórico</button></div><div id="continueItems" class="continueItems"></div></section>
 <nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
@@ -132,13 +155,13 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 </div>
 </details>
 </section>
-<section class="reviewPanel" id="reviewPanel" aria-label="Revisar vídeos OK.ru">
- <div class="reviewHead"><strong>🎬 AutoMatch · Revisar vídeos encontrados</strong><button type="button" id="reviewReload">↻ Atualizar candidatos</button></div>
- <p class="reviewHint">A Oracle sugere pistas; confira o vídeo antes de vincular ao evento. Somente confirmações administrativas seguem para publicação.</p>
+<dialog id="reviewPanel" class="reviewPanel reviewPop" aria-label="AutoMatch · Revisar vídeos OK.ru">
+ <div class="reviewHead"><strong>🎬 AutoMatch · Revisar vídeos encontrados</strong><div class="reviewHeadBtns"><button type="button" id="reviewReload">↻ Atualizar candidatos</button><button type="button" id="reviewClose" aria-label="Fechar">✕ Fechar</button></div></div>
+ <p class="reviewHint">A Oracle sugere pistas; confira o vídeo antes de vincular ao evento. Somente confirmações administrativas seguem para publicação. Atualização automática a cada 5 min enquanto o site está aberto.</p>
  <div class="reviewManual"><input id="reviewManualUrl" type="url" placeholder="Vídeo fora da lista? Cole https://ok.ru/video/123..." aria-label="Link manual do vídeo OK.ru"><button type="button" id="reviewManualAdd">Vincular link manual</button></div>
- <div id="reviewMessage" class="reviewHint">Carregando candidatos...</div>
+ <div class="reviewTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Dispensar sem título</button><button type="button" id="reviewDismissAll">🗑 Dispensar todos</button><button type="button" id="reviewRestore">↩ Restaurar dispensados</button></div></div>
  <div id="reviewCandidates" class="reviewCards"></div>
-</section>
+</dialog>
 <dialog id="reviewDialog" class="reviewDialog" aria-label="Confirmar vídeo do evento">
 <form id="reviewForm" class="reviewForm">
 <h3>✅ Confirmar vídeo OK.ru</h3><p id="reviewSummary"></p>
@@ -256,11 +279,17 @@ function initMonitorManual(){
 }
 
 function initReviewPanel(){
- var cfg='', candidates=[], approvedIds=new Set(), selectedId='', selectedManualUrl='';
+ var cfg='', candidates=[], approvedIds=new Set(), selectedId='', selectedManualUrl='', DKEY='jojo_am_dismissed', AUTO_MS=300000;
+ var dismissed=(function(){try{return new Set(JSON.parse(localStorage.getItem(DKEY)||'[]').map(String))}catch(e){return new Set()}})();
+ function saveDismissed(){try{localStorage.setItem(DKEY,JSON.stringify(Array.from(dismissed)))}catch(e){}}
+ function linkedIds(){var ids=new Set(),re=/ok\.ru\/video\/(\d{8,20})/g,m,blob='';try{blob=JSON.stringify(state.updates||[])+JSON.stringify(state.cache||{})}catch(e){}while((m=re.exec(blob)))ids.add(m[1]);(state.updates||[]).forEach(function(e){(e.sources||[]).forEach(function(x){if(x&&x.videoId)ids.add(String(x.videoId))})});return ids}
+ function pendingList(){var linked=linkedIds();return candidates.filter(function(c){var id=String(c.videoId);return !approvedIds.has(id)&&!dismissed.has(id)&&!linked.has(id)})}
+ function unknown(c){return !c.title&&!c.duration}
+ function updateBadge(){var n=pendingList().length,b=$('autoMatchBadge');txt(b,String(n));b.hidden=!n}
  var panel=$('reviewPanel'),grid=$('reviewCandidates'),message=$('reviewMessage'),dialog=$('reviewDialog');
  function setMsg(s){txt(message,s)}
- function load(){
-  setMsg('Consultando candidatos e aprovações na Oracle…');
+ function load(silent){
+  if(!silent)setMsg('Consultando candidatos e aprovações na Oracle…');
   return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem configuração');return r.json()}).then(function(conf){
    cfg=String(conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^/\s?#]+$/.test(cfg))throw Error('Endereço HTTPS não configurado');
    return Promise.all([fetch(cfg+'/api/jojo-monitor/candidates',{cache:'no-store',credentials:'omit'}),fetch(cfg+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'})]);
@@ -268,11 +297,11 @@ function initReviewPanel(){
    candidates=Array.isArray(data[0].candidates)?data[0].candidates:[];
    approvedIds=new Set((data[1].approved||[]).map(function(a){return String(a.videoId)}));
    render();
-  }).catch(function(err){setMsg('Não foi possível buscar os candidatos: '+err.message);grid.replaceChildren()})
+  }).catch(function(err){if(!silent){setMsg('Não foi possível buscar os candidatos: '+err.message);grid.replaceChildren()}})
  }
  function render(){
-  grid.replaceChildren();var pending=candidates.filter(function(c){return !approvedIds.has(String(c.videoId))});
-  setMsg(pending.length+' candidatos disponíveis para revisão · Sem publicação automática');
+  grid.replaceChildren();var pending=pendingList();updateBadge();
+  setMsg(pending.length+' candidato(s) para revisão'+(dismissed.size?' · '+dismissed.size+' dispensado(s)':'')+' · Sem publicação automática');
   pending.slice().reverse().slice(0,80).forEach(function(c){
    var card=el('div','reviewCard'),info=el('div','reviewInfo'),im=el('img','');
    im.alt='Miniatura do vídeo';im.loading='lazy';im.referrerPolicy='no-referrer';
@@ -280,7 +309,10 @@ function initReviewPanel(){
    info.append(el('strong','',c.title||'Vídeo '+c.videoId));
    info.append(el('small','',[(c.duration?'⏱ '+c.duration:''),(c.publishedAt||''),(c.sourceProfiles||[]).join(', ')].filter(Boolean).join(' · ')||'Título ou duração não identificados'));
    var a=el('a','','↗ Conferir no OK.ru');a.href='https://ok.ru/video/'+encodeURIComponent(c.videoId);a.target='_blank';a.rel='noopener noreferrer';info.append(a);
-   var b=el('button','','Vincular a um evento');b.type='button';b.addEventListener('click',function(){openCandidate(c)});info.append(b);
+   var row=el('div','reviewRow');
+   var b=el('button','','Vincular a um evento');b.type='button';b.addEventListener('click',function(){openCandidate(c)});
+   var x=el('button','reviewDismiss','🗑 Dispensar');x.type='button';x.title='Remove da lista (só neste navegador)';x.addEventListener('click',function(){dismissed.add(String(c.videoId));saveDismissed();render()});
+   row.append(b,x);info.append(row);
    card.append(im,info);grid.append(card)
   })
  }
@@ -293,7 +325,15 @@ function initReviewPanel(){
   $('reviewKey').value='';$('reviewRights').checked=false;txt($('reviewFeedback'),'');
   if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','')
  }
- $('reviewReload').addEventListener('click',load);
+ $('reviewReload').addEventListener('click',function(){load()});
+ $('autoMatchOpen').addEventListener('click',function(){if(typeof panel.showModal==='function'){if(!panel.open)panel.showModal()}else panel.setAttribute('open','');load()});
+ $('reviewClose').addEventListener('click',function(){panel.close()});
+ panel.addEventListener('click',function(e){if(e.target===panel)panel.close()});
+ $('reviewDismissUnknown').addEventListener('click',function(){var n=0;pendingList().forEach(function(c){if(unknown(c)){dismissed.add(String(c.videoId));n++}});saveDismissed();render();setMsg(n+' sem título dispensado(s) · '+pendingList().length+' restante(s)')});
+ $('reviewDismissAll').addEventListener('click',function(){var l=pendingList();if(!l.length||!confirm('Dispensar '+l.length+' candidato(s) da lista? Isso só afeta este navegador e não apaga nada na Oracle.'))return;l.forEach(function(c){dismissed.add(String(c.videoId))});saveDismissed();render()});
+ $('reviewRestore').addEventListener('click',function(){dismissed.clear();saveDismissed();render()});
+ setInterval(function(){if(!document.hidden)load(true)},AUTO_MS);
+ document.addEventListener('visibilitychange',function(){if(!document.hidden)load(true)});
  $('reviewManualAdd').addEventListener('click',function(){
    var url=String($('reviewManualUrl').value||'').trim(),m=url.match(/^https:\/\/(?:www\.)?ok\.ru\/video\/([0-9]{8,20})\/?(?:\?.*)?$/i);
    if(!m){setMsg('Cole um link completo de vídeo OK.ru, como https://ok.ru/video/12345678901234');return}
