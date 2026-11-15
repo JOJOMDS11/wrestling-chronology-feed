@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-15T16:00:00Z",
+  "events": [
+    {
+      "id": "official:wwe:2026-11-28:survivor-series-wargames-2026",
+      "company": "wwe",
+      "title": "Survivor Series: WarGames 2026",
+      "date": "2026-11-28",
+      "year": 2026,
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
+      "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "official:wwe:2026-12-12:wrestlepalooza-2026",
+      "company": "wwe",
+      "title": "Wrestlepalooza 2026",
+      "date": "2026-12-12",
+      "year": 2026,
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
+      "status": "awaiting_video",
+      "sources": []
+    }
+  ],
+  "sources": [
+    "https://www.wwe.com/article/wwe-upcoming-events",
+    "https://www.njpw1972.com/schedule/"
+  ]
+}
