@@ -1,7 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T16:00:00Z",
+  "generatedAt": "2026-11-15T17:34:01Z",
   "events": [
+    {
+      "id": "official:wwe:2026-11-07:crown-jewel-2026",
+      "company": "wwe",
+      "title": "Crown Jewel 2026",
+      "date": "2026-11-07",
+      "year": 2026,
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
+      "status": "awaiting_video",
+      "sources": []
+    },
     {
       "id": "official:wwe:2026-11-28:survivor-series-wargames-2026",
       "company": "wwe",
