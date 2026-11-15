@@ -2,14 +2,16 @@
 """Update JOJO Library's *event listings* from official schedules.
 
 This does NOT scrape, download or automatically embed video streams.
-Only new WWE premium live events and major NJPW cards are listed,
-and each entry remains 'awaiting video' until an authorized URL is provided.
+Lists WWE premium live events, major NJPW cards, and AEW Dynamite,
+Collision and PPVs from the official results page. Videos are NOT inferred.
+An event remains 'awaiting_video' until a legal playable URL is added.
 """
 import datetime as dt
 import json
 import re
 import sys
 from html.parser import HTMLParser
+from urllib.parse import urljoin, urlparse
 from pathlib import Path
 from urllib.request import Request, urlopen
 
@@ -18,6 +20,7 @@ DEST = HERE / 'updates.json'
 SOURCES = {
     'wwe': 'https://www.wwe.com/article/wwe-upcoming-events',
     'njpw': 'https://www.njpw1972.com/schedule/',
+    'aew': 'https://www.allelitewrestling.com/aew-results',
 }
 MONTHS = {m: i for i, m in enumerate('jan feb mar apr may jun jul aug sep oct nov dec'.split(), 1)}
 DATE = re.compile(r'\b(?:Mon(?:day)?|Tue(?:sday)?|Wed(?:nesday)?|Thu(?:rsday)?|Fri(?:day)?|Sat(?:urday)?|Sun(?:day)?)\s*[.,]?\s*'
@@ -118,6 +121,96 @@ def parse_events(html, company, today=None):
     return list(events.values())
 
 
+# Official AEW results contain article titles such as
+# "AEW Dynamite & Collision Results: November 11, 2026 – ...".
+# A recurring show is NEVER mislabeled as a PPV.
+AEW_MONTHS = {m.lower(): i for i, m in enumerate(
+    'January February March April May June July August September October November December'.split(), 1)}
+AEW_DATE = re.compile(
+    r'\b(' + '|'.join(AEW_MONTHS) + r')\s+(\d{1,2}),?\s+(20\d{2})\b', re.I)
+AEW_DATE_SLUG = re.compile(
+    r'(' + '|'.join(AEW_MONTHS) + r')-(\d{1,2})-(20\d{2})(?:\b|$)', re.I)
+AEW_PPVS = re.compile(
+    r'\b(?:Full Gear|Revolution|Double or Nothing|Forbidden Door|All In|All Out|'
+    r'WrestleDream|Worlds End|Dynasty|Grand Slam: Australia)\b', re.I)
+
+class AEWResultsLinks(HTMLParser):
+    """Read result article anchors; tolerate nested markup and relative URLs."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.active = None
+        self.links = []
+        self.skip = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ('script', 'style', 'noscript'):
+            self.skip += 1
+        if tag == 'a':
+            href = dict(attrs).get('href', '')
+            if href:
+                full = urljoin(SOURCES['aew'], href)
+                url = urlparse(full)
+                if url.scheme == 'https' and url.netloc.lower() in ('www.allelitewrestling.com', 'allelitewrestling.com') and url.path.startswith('/post/'):
+                    self.active = {'url': full, 'text': []}
+
+    def handle_data(self, data):
+        if self.active is not None and not self.skip:
+            self.active['text'].append(data)
+
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style', 'noscript'):
+            self.skip = max(0, self.skip - 1)
+        if tag == 'a' and self.active is not None:
+            self.links.append((self.active['url'], ' '.join(self.active['text'])))
+            self.active = None
+
+
+def parse_aew_results(html, today=None):
+    """Parse official AEW result article links. No stream URLs are fabricated."""
+    today = today or dt.datetime.now(dt.timezone.utc).date()
+    p = AEWResultsLinks()
+    p.feed(html)
+    # Some Wix layouts expose links only in embedded JSON rather than visible anchors.
+    # Take URL slugs from raw HTML as a fallback, but only under AEW's official /post/ path.
+    fallback = re.findall(r'(?:https?://(?:www\.)?allelitewrestling\.com)?/post/[a-z0-9-]*results-[a-z]+-\d{1,2}-20\d{2}', html, re.I)
+    links = list(p.links) + [(urljoin(SOURCES['aew'], x), '') for x in fallback]
+    events = {}
+    for url, visible in links:
+        slug = urlparse(url).path.rsplit('/', 1)[-1].lower()
+        if '-results-' not in slug:
+            continue
+        m = AEW_DATE.search(visible)
+        if m is None:
+            m = AEW_DATE_SLUG.search(slug)
+        if m is None:
+            continue
+        try:
+            date = dt.date(int(m.group(3)), AEW_MONTHS[m.group(1).lower()], int(m.group(2)))
+        except ValueError:
+            continue
+        if not today - dt.timedelta(days=90) <= date <= today:
+            continue
+        head = slug.split('-results-')[0].removeprefix('aew-').replace('-', ' ')
+        names = []
+        if 'dynamite' in head:
+            names.append(('Dynamite', 'Dynamite'))
+        if 'collision' in head:
+            names.append(('Collision', 'Collision'))
+        if not names:
+            ppv = AEW_PPVS.search(head)
+            if ppv:
+                names.append((ppv.group(0), 'PPV'))
+        for title, show in names:
+            iso = date.isoformat()
+            key = f'official:aew:{iso}:{show.lower() if show != "PPV" else re.sub("[^a-z0-9]+", "-", title.lower())}'
+            events[key] = {
+                'id': key, 'company': 'aew', 'date': iso, 'year': date.year,
+                'title': title, 'show': show, 'official_url': url,
+                'status': 'awaiting_video', 'sources': [],
+            }
+    return sorted(events.values(), key=lambda x: (x['date'], x['show'], x['title']))
+
+
 def fetch(url):
     request = Request(url, headers={
         'User-Agent': 'Mozilla/5.0 (compatible; JOJOLibrarySchedule/1.0)',
@@ -136,7 +229,8 @@ def run():
     success = 0
     for company, url in SOURCES.items():
         try:
-            found = parse_events(fetch(url), company, now.date())
+            found = (parse_aew_results(fetch(url), now.date()) if company == 'aew'
+                     else parse_events(fetch(url), company, now.date()))
             if not found:
                 print(f'AVISO: {company} não retornou novos eventos reconhecidos. Mantendo os anteriores.')
                 continue
@@ -151,7 +245,7 @@ def run():
     results = sorted((event for event in saved.values() if event.get('date', '0000') >= cutoff),
                      key=lambda e: (e['date'], e['company'], e['title']))
     if results == existing.get('events', []):
-        print('Nenhuma mudança nos PPVs. Arquivo preservado.')
+        print('Nenhuma mudança na agenda. Arquivo preservado.')
         return
     payload = {
         'schemaVersion': 1,

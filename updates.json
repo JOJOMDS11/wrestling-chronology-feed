@@ -1,7 +1,40 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T17:34:01Z",
+  "generatedAt": "2026-11-15T17:43:19Z",
   "events": [
+    {
+      "id": "official:aew:2026-10-31:collision",
+      "company": "aew",
+      "title": "Collision",
+      "date": "2026-10-31",
+      "year": 2026,
+      "show": "Collision",
+      "official_url": "https://www.allelitewrestling.com/post/aew-fright-night-collision-results-october-31-2026",
+      "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "official:aew:2026-11-04:dynamite",
+      "company": "aew",
+      "title": "Dynamite",
+      "date": "2026-11-04",
+      "year": 2026,
+      "show": "Dynamite",
+      "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-blood-and-guts-results-november-4-2026",
+      "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "official:aew:2026-11-07:collision",
+      "company": "aew",
+      "title": "Collision",
+      "date": "2026-11-07",
+      "year": 2026,
+      "show": "Collision",
+      "official_url": "https://www.allelitewrestling.com/post/aew-collision-rock-n-wrestling-rager-results-november-7-2026",
+      "status": "awaiting_video",
+      "sources": []
+    },
     {
       "id": "official:wwe:2026-11-07:crown-jewel-2026",
       "company": "wwe",
@@ -10,6 +43,39 @@
       "year": 2026,
       "show": "PPV",
       "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
+      "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "official:aew:2026-11-11:collision",
+      "company": "aew",
+      "title": "Collision",
+      "date": "2026-11-11",
+      "year": 2026,
+      "show": "Collision",
+      "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-collision-results-november-11-2026",
+      "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "official:aew:2026-11-11:dynamite",
+      "company": "aew",
+      "title": "Dynamite",
+      "date": "2026-11-11",
+      "year": 2026,
+      "show": "Dynamite",
+      "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-collision-results-november-11-2026",
+      "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "official:aew:2026-11-14:full-gear",
+      "company": "aew",
+      "title": "Full Gear",
+      "date": "2026-11-14",
+      "year": 2026,
+      "show": "PPV",
+      "official_url": "https://www.allelitewrestling.com/post/aew-full-gear-results-november-14-2026",
       "status": "awaiting_video",
       "sources": []
     },
@@ -38,6 +104,7 @@
   ],
   "sources": [
     "https://www.wwe.com/article/wwe-upcoming-events",
-    "https://www.njpw1972.com/schedule/"
+    "https://www.njpw1972.com/schedule/",
+    "https://www.allelitewrestling.com/aew-results"
   ]
 }
