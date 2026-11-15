@@ -126,6 +126,20 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .reviewManual select{background:#20182c;color:#f1e8ff;border:1px solid #6c5684;border-radius:9px;padding:10px;max-width:155px}
 .reviewExternalSearch{color:#d8b8ff;text-decoration:underline;font-size:12px;align-self:center;white-space:nowrap}
 @media(max-width:520px){.reviewManual select,.reviewExternalSearch{width:100%;max-width:none}}
+
+/* AutoMatch sync controls: independent from Oracle discovery */
+.amSyncBar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:12px 0;padding:12px;border:1px solid #635075;border-radius:12px;background:#281e35}
+.amSyncBar button{background:#654194;color:#fff;border:1px solid #9d78cb;border-radius:10px;padding:10px 13px;font-weight:750;cursor:pointer}
+.amSyncBar button:disabled{opacity:.55;cursor:not-allowed}
+.amSyncInfo{flex:1 1 280px;font-size:12px;color:#deccef;line-height:1.5}
+.amSyncDialog{width:min(94vw,440px);background:#21182d;color:#eee5ff;border:1px solid #8c6ab5;border-radius:14px;padding:21px}
+.amSyncDialog::backdrop{background:#000b}
+.amSyncDialog form{display:grid;gap:12px}
+.amSyncDialog input{font-size:16px;background:#130f1b;color:white;border:1px solid #9072b1;border-radius:9px;padding:11px;width:100%;box-sizing:border-box}
+.amSyncDialog menu{display:flex;gap:8px;justify-content:flex-end;padding:0;margin:0}
+.amSyncDialog button{background:#5c3b82;border:1px solid #906ac2;border-radius:9px;color:#fff;padding:10px 13px}
+.amSyncDialog button:disabled{opacity:.5}
+@media(max-width:570px){.amSyncBar button{width:100%}}
 </style>
 </head>
 <body>
@@ -162,11 +176,23 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <dialog id="reviewPanel" class="reviewPanel reviewPop" aria-label="AutoMatch · Revisar vídeos OK.ru e Bilibili">
  <div class="reviewHead"><strong>🎬 AutoMatch · Revisar vídeos encontrados</strong><div class="reviewHeadBtns"><button type="button" id="reviewReload">↻ Atualizar candidatos</button><button type="button" id="reviewClose" aria-label="Fechar">✕ Fechar</button></div></div>
  <p class="reviewHint">A Oracle sugere pistas; confira o vídeo antes de vincular ao evento. Somente confirmações administrativas seguem para publicação. Atualização automática a cada 5 min enquanto o site está aberto.</p>
+ <div class="amSyncBar" aria-label="Sincronização do AutoMatch">
+   <button type="button" id="amSyncNow" disabled>🔄 Sincronizar agora</button>
+   <div class="amSyncInfo" id="amSyncStatus" role="status" aria-live="polite">Consultando sincronização…</div>
+   <button type="button" id="amSyncRefresh">↻ Ver status</button>
+ </div>
  <div class="reviewManual"><input id="reviewManualUrl" type="url" placeholder="Link OK.ru ou bilibili.tv/en/video/..." aria-label="Link de vídeo OK.ru ou Bilibili"><button type="button" id="reviewManualAdd">Vincular link manual</button></div>
  <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Filtrar vídeos encontrados por título, show ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
  <div class="reviewTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Dispensar sem título</button><button type="button" id="reviewDismissAll">🗑 Dispensar todos</button><button type="button" id="reviewRestore">↩ Restaurar dispensados</button></div></div>
  <div id="reviewCandidates" class="reviewCards"></div>
 </dialog>
+<dialog id="amSyncDialog" class="amSyncDialog" aria-label="Sincronizar aprovações com GitHub">
+<form id="amSyncForm"><strong>🔄 Sincronizar AutoMatch</strong>
+<p class="reviewHint">Dispara o GitHub Actions para publicar somente os vínculos já aprovados. Não aprova vídeos novos.</p>
+<label>Master Key<input id="amSyncKey" type="password" autocomplete="off" maxlength="128" required></label>
+<div id="amSyncFeedback" class="reviewHint" role="status"></div>
+<menu><button type="button" id="amSyncCancel">Cancelar</button><button type="submit" id="amSyncSend">Confirmar sincronização</button></menu>
+</form></dialog>
 <dialog id="reviewDialog" class="reviewDialog" aria-label="Confirmar vídeo do evento">
 <form id="reviewForm" class="reviewForm">
 <h3>✅ Confirmar fonte de vídeo</h3><p id="reviewSummary"></p>
@@ -281,6 +307,41 @@ function initMonitorManual(){
  });
  $('monitorRefresh').addEventListener('click',loadStatus);
  refresh();
+}
+
+function initAutoMatchSync(){
+ var base='',btn=$('amSyncNow'),statusEl=$('amSyncStatus'),dlg=$('amSyncDialog'),key=$('amSyncKey'),feedback=$('amSyncFeedback'),send=$('amSyncSend');
+ function ago(iso){if(!iso)return '—';var t=new Date(iso);return isNaN(t.getTime())?'—':t.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}
+ function syncStatus(){
+  if(!base)return;
+  return fetch(base+'/api/jojo-monitor/sync/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('API indisponível');return r.json()}).then(function(d){
+   var stage=d.status||'idle',labels={idle:'Nenhuma sincronização manual recente',queued:'⏳ Na fila do GitHub',in_progress:'⚙️ Executando no GitHub',success:'✅ Execução finalizada com sucesso',failure:'❌ GitHub informou falha',unknown:'⚠️ Sem confirmação do resultado no GitHub'};
+   var text=(labels[stage]||stage)+' · Automático: 1h';
+   if(d.requestedAt)text+=' · Solicitado: '+ago(d.requestedAt);
+   if(stage==='success')text+=' · Links aprovados são publicados conforme validação do workflow';
+   if(stage==='failure'&&d.conclusion)text+=' ('+d.conclusion+')';
+   if(d.cooldownSeconds>0)text+=' · Disponível em '+Math.ceil(d.cooldownSeconds/60)+' min';
+   if(!d.configured)text='⚠️ Falta configurar o token GitHub somente na Oracle. O automático continua funcionando.';
+   btn.disabled=!d.canRequest;txt(statusEl,text);
+  }).catch(function(){btn.disabled=true;txt(statusEl,'Não foi possível consultar a sincronização na Oracle. Automático: 1h.')})
+ }
+ fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()}).then(function(d){
+  base=String(d.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\/\s?#]+$/.test(base))throw Error();return syncStatus()
+ }).catch(function(){btn.disabled=true;txt(statusEl,'API Oracle indisponível; sincronização automática independente.')});
+ $('amSyncRefresh').addEventListener('click',syncStatus);
+ btn.addEventListener('click',function(){if(btn.disabled)return;key.value='';txt(feedback,'');dlg.showModal();key.focus()});
+ $('amSyncCancel').addEventListener('click',function(){dlg.close()});
+ dlg.addEventListener('close',function(){key.value='';txt(feedback,'')});
+ $('amSyncForm').addEventListener('submit',function(e){
+  e.preventDefault();if(!base)return;send.disabled=true;txt(feedback,'Solicitando execução ao GitHub…');
+  fetch(base+'/api/jojo-monitor/sync/request',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:key.value})})
+   .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d}})})
+   .then(function(result){key.value='';txt(feedback,result.data.message||'Resposta recebida');syncStatus();if(result.ok){dlg.close()}})
+   .catch(function(){key.value='';txt(feedback,'Falha de conexão. Confira a API da Oracle.')})
+   .finally(function(){send.disabled=false})
+ });
+ document.addEventListener('visibilitychange',function(){if(!document.hidden)syncStatus()});
+ setInterval(function(){if(!document.hidden)syncStatus()},20000);
 }
 
 function initReviewPanel(){
@@ -436,7 +497,7 @@ function close(){if(state.current&&state.source)saveWatch();var v=$('video');v.p
 function vlc(){var s=state.source,u=sourceUrl(s);if(!u||s.type!=='archive')return;try{var parsed=new URL(u);var fallback=encodeURIComponent(u);location.href='intent://'+parsed.host+parsed.pathname+parsed.search+'#Intent;scheme=https;package=org.videolan.vlc;S.browser_fallback_url='+fallback+';end'}catch(e){txt($('videoInfo'),'Não foi possível abrir o VLC; use Abrir fonte.') }}
 function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.tagName)>=0}
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
-function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
+function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initAutoMatchSync();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}
