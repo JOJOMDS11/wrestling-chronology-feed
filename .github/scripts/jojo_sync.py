@@ -53,7 +53,30 @@ def add_weekly_raw(updates, now=None):
     return 1
 
 
+def source_key(src):
+    if not isinstance(src, dict):
+        return None
+    kind = src.get('type') or 'okru'
+    vid = str(src.get('videoId') or '')
+    if kind in ('okru', 'bilibili') and re.fullmatch(r'[0-9]{8,20}', vid):
+        return kind, vid
+    return None
+
+
+def approved_source(a):
+    """Only construct canonical HTTPS links; do not trust URLs from approval payload."""
+    kind = str(a.get('platform') or 'okru')
+    vid = str(a.get('videoId') or '')
+    if kind not in ('okru', 'bilibili') or not re.fullmatch(r'[0-9]{8,20}', vid):
+        return None
+    url = ('https://ok.ru/video/' if kind == 'okru'
+           else 'https://www.bilibili.tv/en/video/') + vid
+    return {'type':kind, 'videoId':vid, 'url':url,
+            'label':('OK.ru' if kind == 'okru' else 'Bilibili') + ' · Revisão administrativa'}
+
+
 def consume_approvals(updates, data):
+    """Append up to 3 administratively confirmed sources, retaining all existing links."""
     events = {str(x.get('id')): x for x in updates.get('events', []) if isinstance(x, dict) and x.get('id')}
     used = set()
     for cat in ('wwe','aew','nxt','tna','roh','njpw','wcw','ecw'):
@@ -63,29 +86,33 @@ def consume_approvals(updates, data):
             continue
         for ep in episodes:
             for src in ep.get('sources', []) if isinstance(ep,dict) else []:
-                if isinstance(src,dict) and src.get('type') == 'okru':
-                    used.add(str(src.get('videoId') or ''))
+                key=source_key(src)
+                if key:
+                    used.add(key)
     for e in events.values():
         for src in e.get('sources', []):
-            if isinstance(src,dict) and src.get('type') == 'okru':
-                used.add(str(src.get('videoId') or ''))
+            key=source_key(src)
+            if key:
+                used.add(key)
     changed = 0
     for a in data.get('approved', [])[:250]:
         if not isinstance(a,dict):
             continue
-        vid = str(a.get('videoId',''))
         eid = str(a.get('eventId',''))
-        if not re.fullmatch(r'[0-9]{8,20}',vid) or not re.fullmatch(r'[A-Za-z0-9:_-]{8,180}',eid):
+        if not re.fullmatch(r'[A-Za-z0-9:_-]{8,180}',eid):
             continue
         event = events.get(eid)
-        if not event or vid in used or event.get('sources'):
+        source = approved_source(a)
+        if not event or not source or not isinstance(event.get('sources', []), list):
             continue
-        event['sources'] = [{'type': 'okru', 'videoId': vid, 'url': 'https://ok.ru/video/'+vid,
-                             'label': 'OK.ru · Revisão administrativa'}]
+        key = source_key(source)
+        if key in used or len(event.get('sources') or []) >= 3:
+            continue
+        event.setdefault('sources', []).append(source)
         event['status'] = 'video_available'
         event['provisional'] = False
         event['approvedAt'] = str(a.get('approvedAt',''))[:40]
-        used.add(vid)
+        used.add(key)
         changed += 1
     return changed
 
