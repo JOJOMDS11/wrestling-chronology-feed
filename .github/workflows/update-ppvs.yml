@@ -1,4 +1,4 @@
-name: Atualizar agenda de PPVs (JOJO Library)
+name: Atualizar PPVs e episódios AEW (JOJO Library)
 
 on:
   schedule:
@@ -25,13 +25,13 @@ jobs:
           python-version: '3.12'
       - name: Testes do extrator
         run: python -m unittest discover -s scripts/tests -v
-      - name: Buscar novos PPVs nas agendas oficiais
+      - name: Consultar WWE, NJPW e resultados AEW
         run: python scripts/update_ppvs.py
       - name: Publicar apenas se houver mudança
         run: |
           git add updates.json
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Atualizar agenda oficial de PPVs'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Atualizar agenda oficial de wrestling'
             git push
           else
             echo 'Nenhum PPV novo encontrado'
