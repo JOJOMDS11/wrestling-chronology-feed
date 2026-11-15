@@ -1,0 +1,30 @@
+name: JOJO Library - AutoMatch e RAW
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+permissions:
+  contents: write
+concurrency:
+  group: jojo-feed-write
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Apply approved links and provisional RAW
+        run: python3 .github/scripts/jojo_sync.py
+      - name: Commit only when updates changed
+        run: |
+          if ! git diff --quiet -- updates.json; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add updates.json
+            git commit -m 'JOJO: revisar videos aprovados e atualizar RAW provisoria'
+            git push
+          fi
