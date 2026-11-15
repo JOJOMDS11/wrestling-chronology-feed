@@ -1,8 +1,8 @@
-name: Atualizar eventos e monitorar fontes (JOJO Library)
+name: Atualizar agenda oficial (JOJO Library)
 
 on:
   schedule:
-    - cron: '17 */6 * * *' # A cada seis horas, em UTC
+    - cron: '17 9 * * *' # Atualização diária de agendas oficiais em UTC
   workflow_dispatch:
 
 permissions:
@@ -25,16 +25,14 @@ jobs:
           python-version: '3.12'
       - name: Validar os monitores
         run: python -m unittest discover -s scripts/tests -v
-      - name: Consultar eventos oficiais
+      - name: Atualizar somente agendas oficiais (sem monitor OK.ru público)
         run: python scripts/update_ppvs.py
-      - name: Consultar perfis públicos e verificar links conhecidos
-        run: python scripts/monitor_sources.py
-      - name: Publicar somente se houver mudanças
+      - name: Publicar somente a agenda
         run: |
-          git add updates.json video_candidates.json source_monitor_status.json
+          git add updates.json
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Atualizar agenda e estado das fontes da JOJO Library'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Atualizar agenda de eventos JOJO Library'
             git push
           else
-            echo 'Sem novas mudanças para publicar'
+            echo 'Sem mudanças na agenda'
           fi
