@@ -36,6 +36,13 @@
       "url": "https://ok.ru/group/53164030820549/video",
       "label": "OK.ru — grupo WWE Wrestling Live (11 vídeos, não verificado)",
       "enabled": false
+    },
+    {
+      "id": "bilibili-2027368045",
+      "platform": "bilibili",
+      "url": "https://www.bilibili.tv/en/space/2027368045",
+      "label": "Bilibili · EliteOfHonor2 (AEW / ROH)",
+      "enabled": true
     }
   ],
   "video_examples_for_review": [

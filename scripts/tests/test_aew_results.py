@@ -16,6 +16,7 @@ class TestAEWOfficialResults(unittest.TestCase):
         self.assertEqual([(r['date'],r['show']) for r in rows], [
             ('2026-11-04','Dynamite'), ('2026-11-11','Collision'),
             ('2026-11-11','Dynamite'), ('2026-11-14','PPV')])
+        self.assertEqual(rows[0]['title'], 'Dynamite: Blood & Guts 2026')
         self.assertTrue(all(r['sources']==[] and r['status']=='awaiting_video' for r in rows))
         self.assertTrue(all(r['official_url'].startswith('https://www.allelitewrestling.com/post/') for r in rows))
 

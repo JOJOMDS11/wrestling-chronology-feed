@@ -193,7 +193,8 @@ def parse_aew_results(html, today=None):
         head = slug.split('-results-')[0].removeprefix('aew-').replace('-', ' ')
         names = []
         if 'dynamite' in head:
-            names.append(('Dynamite', 'Dynamite'))
+            named = 'Dynamite: Blood & Guts ' + str(date.year) if 'blood and guts' in head else 'Dynamite'
+            names.append((named, 'Dynamite'))
         if 'collision' in head:
             names.append(('Collision', 'Collision'))
         if not names:
@@ -231,6 +232,9 @@ def merge_preserving_sources(existing, discovered):
         result['status'] = old.get('status', 'video_available')
         if 'sourceReview' in old:
             result['sourceReview'] = old['sourceReview']
+    for field in ('description','approvedAt','provisional'):
+        if field in old:
+            result[field] = old[field]
     return result
 
 
