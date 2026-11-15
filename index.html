@@ -56,6 +56,8 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .trustedOpen[hidden]{display:none}
 .trustedDesc{margin:10px 0 0;font-size:12px;color:#b5a7c6;overflow-wrap:anywhere}
 @media(max-width:570px){.trustedPanel summary{padding:13px}.trustedCount{margin-left:0}.trustedBody{padding:13px}.trustedRow{display:grid}.trustedOpen{width:100%}}
+.trustedPrompt{display:flex;align-items:flex-start;gap:9px;padding:14px 17px 2px;font-size:13px;line-height:1.5;color:#d8c9e8}
+.trustedPrompt span:first-child{font-size:18px;line-height:1.2}
 
 </style>
 </head>
@@ -65,16 +67,8 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <header class="top"><div class="brandCluster"><img class="headerLogo" src="./assets/jojo-logo.webp" alt="JOJO"><div><div class="brand">JOJO <span>LIBRARY</span></div><div class="sub">Seu portal de wrestling para TV e celular</div></div></div><div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><div class="chip">LINHA DO TEMPO</div><button type="button" id="lock" class="lockBtn">Sair</button></div></header>
 <section class="hero"><div><div class="sub">Seu catálogo, seu controle</div><h1>Wrestling de todos os tempos.<br><span style="color:#b58bff">Direto da fonte.</span></h1><p>Catálogo independente conectado ao seu GitHub. Para vídeos públicos, tenta primeiro o arquivo direto e oferece alternativas quando o player da TV falhar.</p></div><div class="status" id="status" role="status">Selecione uma empresa para carregar os eventos.</div></section>
 <section class="continuePanel" id="continuePanel" aria-label="Continue assistindo" hidden><div class="continueHeader"><div><h2>▶ Continue assistindo</h2><small>Progresso salvo só neste navegador · sem conta e sem sincronização</small></div><button type="button" class="continueClear" id="continueClear">Limpar histórico</button></div><div id="continueItems" class="continueItems"></div></section>
-<nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
-<section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
-<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 Próximos PPVs anunciados</strong><small>Adicionados automaticamente de agendas oficiais · vídeo disponível somente quando houver fonte válida</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
-<section class="monitorPanel" id="monitorPanel" aria-label="Fontes monitoradas">
-<div class="monitorHead"><strong>🔎 Fontes monitoradas · OK.ru</strong><button id="monitorRefresh" type="button">↻ Atualizar status</button></div>
-<div class="monitorMeta" id="monitorMeta">Aguardando resultado da primeira verificação automática.</div>
-<div class="monitorProfiles" id="monitorProfiles"></div>
-</section>
-
 <section class="trustedPanel" aria-label="Sites confiáveis e arquivos cadastrados">
+<div class="trustedPrompt"><span aria-hidden="true">💡</span><span>Não encontrou o PPV recente que procura? Confira estes sites confiáveis para encontrar outros eventos.</span></div>
 <details id="trustedDetails">
 <summary><span>🌐 Sites confiáveis</span><span class="trustedHint">Fontes e arquivos adicionados manualmente</span><span class="trustedCount" id="trustedCount">Carregando</span></summary>
 <div class="trustedBody">
@@ -83,6 +77,14 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <p id="trustedDesc" class="trustedDesc" aria-live="polite">A lista é editada no GitHub e aparece aqui automaticamente quando a página é atualizada.</p>
 </div>
 </details>
+</section>
+<nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
+<section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
+<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 Próximos PPVs anunciados</strong><small>Adicionados automaticamente de agendas oficiais · vídeo disponível somente quando houver fonte válida</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
+<section class="monitorPanel" id="monitorPanel" aria-label="Fontes monitoradas">
+<div class="monitorHead"><strong>🔎 Fontes monitoradas · OK.ru</strong><button id="monitorRefresh" type="button">↻ Atualizar status</button></div>
+<div class="monitorMeta" id="monitorMeta">Aguardando resultado da primeira verificação automática.</div>
+<div class="monitorProfiles" id="monitorProfiles"></div>
 </section>
 <div class="timelineLabel" id="timelineLabel">Cronologia completa</div><main id="results" class="cards" aria-live="polite"></main>
 <div class="foot"><button class="pageBtn" id="more" style="display:none">Mostrar mais eventos</button></div>
@@ -123,7 +125,6 @@ function setYearOptions(rows){var years={};rows.forEach(function(r){if(r.year)ye
 function updateYearRail(){var current=$('year').value;Array.prototype.forEach.call($('yearRail').children,function(b){var selected=b.dataset.year===current;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',selected?'true':'false')})}
 function selectYear(year){$('year').value=year;apply();var selected=$('yearRail').querySelector('.selected');if(selected)selected.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}
 
-
 function loadTrustedSites(){
  var select=$('trustedSelect'),link=$('trustedOpen'),desc=$('trustedDesc'),count=$('trustedCount');
  txt(count,'Carregando');select.replaceChildren(new Option('Carregando links...',''));link.hidden=true;
@@ -159,6 +160,7 @@ function loadMonitorStatus(){
   });
  }).catch(function(){txt(info,'Status ainda não publicado. Execute a rotina no GitHub Actions para iniciar o monitor.');box.replaceChildren()});
 }
+
 function fetchUpdates(){return fetch('./updates.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem arquivo de atualizações');return r.json()}).then(function(p){state.updates=Array.isArray(p.events)?p.events.filter(function(x){return codes.indexOf(x.company)>=0&&/^\d{4}-\d{2}-\d{2}$/.test(x.date||'')}):[]}).catch(function(){state.updates=[]})}
 function isPpv(r){return /^(PPV|PLE|Weekly PPV|Premium Live Event)$/i.test(String(r.show||'').trim())}
 function mergeUpdates(code,rows){var all=rows.slice();var seen={};all.forEach(function(r){seen[(r.date||'')+'|'+clean(r.title)]=1});state.updates.forEach(function(r){if(r.company!==code)return;var k=r.date+'|'+clean(r.title);if(seen[k])return;var o=Object.assign({},r,{_company:code,show:r.show||'PPV',sources:[],year:Number(r.date.slice(0,4)),scheduled:true});o._needle=clean([o.title,o.show,o.date].join(' '));all.push(o);seen[k]=1});return all}
