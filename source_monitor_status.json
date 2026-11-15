@@ -1,11 +1,113 @@
 {
   "schemaVersion": 1,
-  "checkedAt": null,
+  "checkedAt": "2026-11-15T18:24:17Z",
   "profiles": [
-    {"id": "okru-910420669433", "label": "OK.ru — perfil 910420669433", "url": "https://ok.ru/profile/910420669433/video", "state": "aguardando_primeira_execucao", "found": 0},
-    {"id": "okru-910148261710", "label": "OK.ru — perfil 910148261710", "url": "https://ok.ru/profile/910148261710/video", "state": "aguardando_primeira_execucao", "found": 0}
+    {
+      "id": "okru-910420669433",
+      "label": "OK.ru — perfil 910420669433",
+      "url": "https://ok.ru/profile/910420669433/video",
+      "state": "acesso_restrito",
+      "found": 2
+    },
+    {
+      "id": "okru-910148261710",
+      "label": "OK.ru — perfil 910148261710",
+      "url": "https://ok.ru/profile/910148261710/video",
+      "state": "acesso_restrito",
+      "found": 2
+    }
   ],
-  "links": {},
-  "counts": {"profilesConfigured": 2, "profilesReadable": 0, "candidatesPendingReview": 2, "linksUnavailable": 0},
-  "note": "A automação ainda não foi executada."
+  "links": {
+    "14220439325262": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14340036627152": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14380354701935": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14454763948752": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14459261028975": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14472113425069": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14522429082223": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14556560099918": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14567879019216": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14584756374189": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14632642349679": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14635469703791": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14661755996750": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    },
+    "14674087643856": {
+      "status": "pagina_respondeu",
+      "consecutiveMissing": 0,
+      "httpStatus": 200,
+      "checkedAt": "2026-11-15T18:24:17Z"
+    }
+  },
+  "counts": {
+    "profilesConfigured": 2,
+    "profilesReadable": 0,
+    "candidatesPendingReview": 6,
+    "linksUnavailable": 0
+  },
+  "note": "Acesso público pode ser bloqueado. Links não são substituídos automaticamente; candidatos exigem revisão de direitos e correspondência."
 }
