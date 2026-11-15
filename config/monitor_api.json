@@ -1,0 +1,4 @@
+{
+  "apiBase": "",
+  "observacao": "Preencha apiBase com HTTPS do hostname da Oracle APOS configurar o Caddy e DNS. Ex.: https://SEU-DOMINIO, sem / no final."
+}

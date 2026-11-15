@@ -56,8 +56,24 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .trustedOpen[hidden]{display:none}
 .trustedDesc{margin:10px 0 0;font-size:12px;color:#b5a7c6;overflow-wrap:anywhere}
 @media(max-width:570px){.trustedPanel summary{padding:13px}.trustedCount{margin-left:0}.trustedBody{padding:13px}.trustedRow{display:grid}.trustedOpen{width:100%}}
-.trustedPrompt{display:flex;align-items:flex-start;gap:9px;padding:14px 17px 2px;font-size:13px;line-height:1.5;color:#d8c9e8}
-.trustedPrompt span:first-child{font-size:18px;line-height:1.2}
+
+
+/* JOJO Refresh Manual: status publico e envio seguro da chave somente ao HTTPS da Oracle */
+.monitorManualArea{margin-top:13px;padding-top:12px;border-top:1px solid #4c3b61;display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.monitorManualBtn{background:linear-gradient(135deg,#8151b9,#5b3485);border:1px solid #af83de;border-radius:11px;padding:11px 16px;color:#fff;font-size:13px;font-weight:850}
+.monitorManualBtn:disabled{opacity:.55;cursor:not-allowed;filter:grayscale(.35)}
+.monitorManualInfo{font-size:12px;color:#c4b4d3;line-height:1.5;flex:1 1 250px}
+.monitorAuthDialog{width:min(94vw,420px);padding:0;background:#1e162b;color:#f6edff;border:1px solid #8d65b8;border-radius:17px;box-shadow:0 20px 90px #0009}
+.monitorAuthDialog::backdrop{background:#06040aca;backdrop-filter:blur(4px)}
+.monitorAuthInner{padding:23px}
+.monitorAuthInner h3{margin:0 0 7px;font-size:20px}
+.monitorAuthInner p{margin:0 0 14px;font-size:13px;color:#b6a7c8}
+.monitorAuthInner input{width:100%;background:#100c1a;border:1px solid #775a93;color:white;padding:13px 14px;border-radius:10px;margin-bottom:12px}
+.monitorAuthButtons{display:flex;gap:9px}
+.monitorAuthButtons button{flex:1;border-radius:10px;padding:11px 10px;background:#5e3b86;border:1px solid #9b76bf;font-weight:750}
+.monitorAuthButtons button[type=button]{background:#2e253b;border-color:#625172}
+.monitorAuthFeedback{min-height:18px;margin:10px 0 0!important;color:#dec5ff!important}
+@media(max-width:570px){.monitorManualBtn{width:100%}.monitorManualInfo{flex-basis:100%}}
 
 </style>
 </head>
@@ -67,8 +83,22 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <header class="top"><div class="brandCluster"><img class="headerLogo" src="./assets/jojo-logo.webp" alt="JOJO"><div><div class="brand">JOJO <span>LIBRARY</span></div><div class="sub">Seu portal de wrestling para TV e celular</div></div></div><div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><div class="chip">LINHA DO TEMPO</div><button type="button" id="lock" class="lockBtn">Sair</button></div></header>
 <section class="hero"><div><div class="sub">Seu catálogo, seu controle</div><h1>Wrestling de todos os tempos.<br><span style="color:#b58bff">Direto da fonte.</span></h1><p>Catálogo independente conectado ao seu GitHub. Para vídeos públicos, tenta primeiro o arquivo direto e oferece alternativas quando o player da TV falhar.</p></div><div class="status" id="status" role="status">Selecione uma empresa para carregar os eventos.</div></section>
 <section class="continuePanel" id="continuePanel" aria-label="Continue assistindo" hidden><div class="continueHeader"><div><h2>▶ Continue assistindo</h2><small>Progresso salvo só neste navegador · sem conta e sem sincronização</small></div><button type="button" class="continueClear" id="continueClear">Limpar histórico</button></div><div id="continueItems" class="continueItems"></div></section>
+<nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
+<section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
+<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 Próximos PPVs anunciados</strong><small>Adicionados automaticamente de agendas oficiais · vídeo disponível somente quando houver fonte válida</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
+<section class="monitorPanel" id="monitorPanel" aria-label="Fontes monitoradas">
+<div class="monitorHead"><strong>🔎 Fontes monitoradas · OK.ru</strong><button id="monitorRefresh" type="button">↻ Atualizar status</button></div>
+<div class="monitorMeta" id="monitorMeta">Aguardando resultado da primeira verificação automática.</div>
+<div class="monitorProfiles" id="monitorProfiles"></div>
+
+<div class="monitorManualArea">
+<button type="button" id="monitorManual" class="monitorManualBtn" disabled>🔄 Solicitar atualização</button>
+<div id="monitorManualInfo" class="monitorManualInfo" aria-live="polite">Carregando controle de atualização manual…</div>
+</div>
+
+</section>
+
 <section class="trustedPanel" aria-label="Sites confiáveis e arquivos cadastrados">
-<div class="trustedPrompt"><span aria-hidden="true">💡</span><span>Não encontrou o PPV recente que procura? Confira estes sites confiáveis para encontrar outros eventos.</span></div>
 <details id="trustedDetails">
 <summary><span>🌐 Sites confiáveis</span><span class="trustedHint">Fontes e arquivos adicionados manualmente</span><span class="trustedCount" id="trustedCount">Carregando</span></summary>
 <div class="trustedBody">
@@ -78,17 +108,21 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 </div>
 </details>
 </section>
-<nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
-<section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
-<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 Próximos PPVs anunciados</strong><small>Adicionados automaticamente de agendas oficiais · vídeo disponível somente quando houver fonte válida</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
-<section class="monitorPanel" id="monitorPanel" aria-label="Fontes monitoradas">
-<div class="monitorHead"><strong>🔎 Fontes monitoradas · OK.ru</strong><button id="monitorRefresh" type="button">↻ Atualizar status</button></div>
-<div class="monitorMeta" id="monitorMeta">Aguardando resultado da primeira verificação automática.</div>
-<div class="monitorProfiles" id="monitorProfiles"></div>
-</section>
 <div class="timelineLabel" id="timelineLabel">Cronologia completa</div><main id="results" class="cards" aria-live="polite"></main>
 <div class="foot"><button class="pageBtn" id="more" style="display:none">Mostrar mais eventos</button></div>
 </div>
+
+<dialog id="monitorAuthDialog" class="monitorAuthDialog" aria-label="Solicitar atualização do OK.ru">
+<form id="monitorAuthForm" class="monitorAuthInner">
+<h3>🔄 Atualizar OK.ru agora</h3>
+<p>A Oracle valida a chave e o limite global: até 3 solicitações por dia, com 90 minutos de intervalo. A chave não é salva no navegador.</p>
+<label for="monitorKey">Chave administrativa</label>
+<input id="monitorKey" type="password" autocomplete="off" required minlength="6" maxlength="128" placeholder="Digite sua chave">
+<div class="monitorAuthButtons"><button type="submit" id="monitorAuthSend">Solicitar</button><button type="button" id="monitorAuthCancel">Cancelar</button></div>
+<p id="monitorAuthFeedback" class="monitorAuthFeedback" role="status"></p>
+</form>
+</dialog>
+
 <div id="shade" class="shade" aria-hidden="true"><section class="viewer" role="dialog" aria-modal="true" aria-label="Reprodução"><div class="viewerTop"><div><h2 id="videoTitle">Evento</h2><p id="videoSubtitle"></p></div><button id="close" class="close" aria-label="Fechar reprodução">✕</button></div><div class="screen"><video id="video" controls playsinline preload="metadata"></video><iframe id="embed" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" title="Player incorporado"></iframe></div><div id="videoInfo" class="videoInfo" role="status"></div><div class="actions"><label class="autoControl" title="Quando o MP4 acabar, iniciar automaticamente o próximo evento cronológico"><input id="autoplayNext" type="checkbox" checked> ▶ Autoplay próximo evento</label><select id="sourceChoice" class="sourceChoice" aria-label="Escolher fonte"></select><button id="playDirect" class="act primary">▶ MP4 direto</button><button id="playEmbed" class="act secondary">▣ Player incorporado</button><a id="sourceLink" class="act secondary" target="_blank" rel="noopener noreferrer">↗ Abrir fonte</a><button id="vlcBtn" class="act secondary">▶ Tentar VLC</button></div><div class="episodeNav"><button id="prevEvent" type="button">◀ Evento anterior</button><button id="nextEvent" type="button">Próximo evento ▶</button><span class="upNext" id="upNext">Próximo da cronologia</span></div><div class="help">O autoplay e a retomada do minuto exato funcionam para MP4 direto; no OK.ru, salvamos apenas o episódio e o player externo pode exigir ▶ e não informa quando termina. Arquivos divididos em partes são reproduzidos na ordem antes de passar para o próximo evento. O MP4 abre direto no navegador. O player alternativo usa a página incorporada do Internet Archive. O botão VLC tenta abrir o arquivo no aplicativo VLC instalado no Android; alguns navegadores podem bloquear essa função. Vídeos podem deixar de estar disponíveis por decisão de seus provedores.</div></section></div>
 <script>
 (function(){'use strict';
@@ -125,6 +159,7 @@ function setYearOptions(rows){var years={};rows.forEach(function(r){if(r.year)ye
 function updateYearRail(){var current=$('year').value;Array.prototype.forEach.call($('yearRail').children,function(b){var selected=b.dataset.year===current;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',selected?'true':'false')})}
 function selectYear(year){$('year').value=year;apply();var selected=$('yearRail').querySelector('.selected');if(selected)selected.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}
 
+
 function loadTrustedSites(){
  var select=$('trustedSelect'),link=$('trustedOpen'),desc=$('trustedDesc'),count=$('trustedCount');
  txt(count,'Carregando');select.replaceChildren(new Option('Carregando links...',''));link.hidden=true;
@@ -139,6 +174,44 @@ function loadTrustedSites(){
   function show(){var item=items[Number(select.value)];if(!item){link.hidden=true;return}link.href=https(item.url);link.hidden=false;txt(link,item.arquivo?'↗ Abrir arquivo':'↗ Abrir site');txt(desc,(item.arquivo?'Arquivo: '+item.arquivo+' · ':'')+(item.descricao||'Link cadastrado manualmente. Disponibilidade não verificada automaticamente.'))}
   select.addEventListener('change',show);show();
  }).catch(function(){txt(count,'Indisponível');select.replaceChildren(new Option('Não foi possível carregar os links',''));select.disabled=true;link.hidden=true;txt(desc,'Verifique se config/sites_confiaveis.json foi enviado ao GitHub Pages.')});
+}
+
+
+function initMonitorManual(){
+ var btn=$('monitorManual'),info=$('monitorManualInfo'),dialog=$('monitorAuthDialog'),key=$('monitorKey');
+ var send=$('monitorAuthSend'),feedback=$('monitorAuthFeedback'),base='';
+ function message(s){txt(info,s)}
+ function clock(sec){var m=Math.ceil(Math.max(0,Number(sec)||0)/60);return m>=60?Math.floor(m/60)+'h '+(m%60)+'min':m+'min'}
+ function loadStatus(){
+  if(!base){btn.disabled=true;message('API segura ainda não conectada. Configure o endereço HTTPS da Oracle.');return Promise.resolve()}
+  return fetch(base+'/api/jojo-monitor/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('API indisponível');return r.json()}).then(function(d){
+   var t='Automático: 6h · Manuais: '+Number(d.usedToday||0)+'/3 hoje';
+   if(d.running)t+=' · Verificação em andamento';
+   else if(d.queued)t+=' · Na fila';
+   else if(d.remainingToday===0)t+=' · Limite de hoje atingido';
+   else if(d.cooldownSeconds>0)t+=' · Liberado em '+clock(d.cooldownSeconds);
+   else t+=' · Pronto para solicitar';
+   btn.disabled=!d.canRequest;message(t);
+  }).catch(function(){btn.disabled=true;message('Oracle indisponível. A rotina automática continua independente do botão.')});
+ }
+ function refresh(){return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Configuração não encontrada');return r.json()}).then(function(d){
+  var s=String(d.apiBase||'').trim().replace(/\/+$/,'');
+  if(!/^https:\/\/[^/\s?#]+$/i.test(s))throw Error('Sem API HTTPS');
+  base=s;return loadStatus();
+ }).catch(function(){base='';btn.disabled=true;message('Atualização manual indisponível até configurar o HTTPS da Oracle.')});}
+ btn.addEventListener('click',function(){if(btn.disabled||!base)return;txt(feedback,'');key.value='';dialog.showModal();key.focus()});
+ $('monitorAuthCancel').addEventListener('click',function(){key.value='';dialog.close()});
+ dialog.addEventListener('close',function(){key.value='';txt(feedback,'')});
+ $('monitorAuthForm').addEventListener('submit',function(e){
+  e.preventDefault();if(!base)return;var secret=key.value;send.disabled=true;txt(feedback,'Solicitando à Oracle…');
+  fetch(base+'/api/jojo-monitor/request',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',cache:'no-store',body:JSON.stringify({key:secret})})
+  .then(function(r){return r.json().catch(function(){return {message:'Resposta inválida da Oracle'}}).then(function(d){return {ok:r.ok,data:d}})})
+  .then(function(result){txt(feedback,result.data.message||'Resposta recebida');key.value='';if(result.ok){dialog.close();message('Solicitação aceita. O monitor será executado pela Oracle.');setTimeout(function(){loadStatus();loadMonitorStatus()},1800)}else{loadStatus()}})
+  .catch(function(){key.value='';txt(feedback,'Erro de conexão. Verifique o endereço HTTPS da Oracle.');loadStatus()})
+  .finally(function(){send.disabled=false});
+ });
+ $('monitorRefresh').addEventListener('click',loadStatus);
+ refresh();
 }
 
 function loadMonitorStatus(){
@@ -160,7 +233,6 @@ function loadMonitorStatus(){
   });
  }).catch(function(){txt(info,'Status ainda não publicado. Execute a rotina no GitHub Actions para iniciar o monitor.');box.replaceChildren()});
 }
-
 function fetchUpdates(){return fetch('./updates.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem arquivo de atualizações');return r.json()}).then(function(p){state.updates=Array.isArray(p.events)?p.events.filter(function(x){return codes.indexOf(x.company)>=0&&/^\d{4}-\d{2}-\d{2}$/.test(x.date||'')}):[]}).catch(function(){state.updates=[]})}
 function isPpv(r){return /^(PPV|PLE|Weekly PPV|Premium Live Event)$/i.test(String(r.show||'').trim())}
 function mergeUpdates(code,rows){var all=rows.slice();var seen={};all.forEach(function(r){seen[(r.date||'')+'|'+clean(r.title)]=1});state.updates.forEach(function(r){if(r.company!==code)return;var k=r.date+'|'+clean(r.title);if(seen[k])return;var o=Object.assign({},r,{_company:code,show:r.show||'PPV',sources:[],year:Number(r.date.slice(0,4)),scheduled:true});o._needle=clean([o.title,o.show,o.date].join(' '));all.push(o);seen[k]=1});return all}
@@ -195,7 +267,7 @@ function close(){if(state.current&&state.source)saveWatch();var v=$('video');v.p
 function vlc(){var s=state.source,u=sourceUrl(s);if(!u||s.type!=='archive')return;try{var parsed=new URL(u);var fallback=encodeURIComponent(u);location.href='intent://'+parsed.host+parsed.pathname+parsed.search+'#Intent;scheme=https;package=org.videolan.vlc;S.browser_fallback_url='+fallback+';end'}catch(e){txt($('videoInfo'),'Não foi possível abrir o VLC; use Abrir fonte.') }}
 function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.tagName)>=0}
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
-function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
+function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}
