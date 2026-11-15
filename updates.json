@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T21:46:09.896242Z",
+  "generatedAt": "2026-11-15T22:35:01.108375Z",
   "events": [
     {
       "id": "official:aew:2026-08-22:collision",
@@ -241,9 +241,18 @@
       "title": "Dynamite: Blood & Guts 2026",
       "show": "Dynamite",
       "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-blood-and-guts-results-november-4-2026",
-      "status": "awaiting_video",
-      "sources": [],
-      "description": "Edição especial Blood & Guts, em 4 de novembro de 2026. Evento confirmado oficialmente pela AEW; fonte de vídeo ainda não verificada."
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801522259991552",
+          "url": "https://www.bilibili.tv/en/video/4801522259991552",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "description": "Edição especial Blood & Guts, em 4 de novembro de 2026. Evento confirmado oficialmente pela AEW; fonte de vídeo ainda não verificada.",
+      "provisional": false,
+      "approvedAt": "2026-11-15T22:34:01Z"
     },
     {
       "id": "official:aew:2026-11-07:collision",
@@ -328,8 +337,17 @@
       "year": 2026,
       "show": "PPV",
       "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16916107430649",
+          "url": "https://ok.ru/video/16916107430649",
+          "label": "OK.ru · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-15T21:53:09Z"
     },
     {
       "id": "auto:wwe:2026-11-09:raw",
