@@ -206,7 +206,7 @@ function initMonitorManual(){
   e.preventDefault();if(!base)return;var secret=key.value;send.disabled=true;txt(feedback,'Solicitando à Oracle…');
   fetch(base+'/api/jojo-monitor/request',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',cache:'no-store',body:JSON.stringify({key:secret})})
   .then(function(r){return r.json().catch(function(){return {message:'Resposta inválida da Oracle'}}).then(function(d){return {ok:r.ok,data:d}})})
-  .then(function(result){txt(feedback,result.data.message||'Resposta recebida');key.value='';if(result.ok){dialog.close();message('Solicitação aceita. O monitor será executado pela Oracle.');setTimeout(function(){loadStatus();loadMonitorStatus()},1800)}else{loadStatus()}})
+  .then(function(result){txt(feedback,result.data.message||'Resposta recebida');key.value='';if(result.ok){dialog.close();message('Solicitação aceita. O monitor será executado pela Oracle.');setTimeout(function(){loadStatus();loadMonitorStatus()},1800);setTimeout(function(){loadStatus();loadMonitorStatus()},90000)}else{loadStatus()}})
   .catch(function(){key.value='';txt(feedback,'Erro de conexão. Verifique o endereço HTTPS da Oracle.');loadStatus()})
   .finally(function(){send.disabled=false});
  });
@@ -216,22 +216,27 @@ function initMonitorManual(){
 
 function loadMonitorStatus(){
  var info=$('monitorMeta'),box=$('monitorProfiles');
- txt(info,'Consultando o status público dos perfis…');
- return fetch('./source_monitor_status.json?t='+Date.now(),{cache:'no-store'}).then(function(r){
-  if(!r.ok)throw Error('Monitor ainda não publicado');return r.json();
- }).then(function(report){
-  var c=report.counts||{}, profiles=Array.isArray(report.profiles)?report.profiles:[];
-  var message=report.checkedAt?'Última verificação: '+new Date(report.checkedAt).toLocaleString('pt-BR'): 'Aguardando a primeira execução do GitHub Actions';
+ txt(info,'Consultando o relatório mais recente da Oracle…');
+ var fallback=function(){return fetch('./source_monitor_status.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Relatório público indisponível');return r.json()}).then(function(d){d.origin='github';return d})};
+ var fetchLive=function(){return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Configuração ausente');return r.json()}).then(function(conf){
+  var base=String(conf.apiBase||'').trim().replace(/\/+$/,'');if(!/^https:\/\/[^\/\s?#]+$/i.test(base))throw Error('API não configurada');
+  return fetch(base+'/api/jojo-monitor/report',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('Oracle sem relatório');return r.json()});
+ })};
+ return fetchLive().catch(fallback).then(function(report){
+  var c=report.counts||{},profiles=Array.isArray(report.profiles)?report.profiles:[];
+  var source=report.origin==='oracle'?'Oracle (ao vivo)':'GitHub (último relatório publicado)';
+  var message=report.checkedAt?'Última verificação: '+new Date(report.checkedAt).toLocaleString('pt-BR'):'Aguardando primeira verificação';
+  message+=' · Fonte: '+source;
   message+=' · '+Number(c.candidatesPendingReview||0)+' candidato(s) para revisão';
   message+=' · '+Number(c.linksUnavailable||0)+' link(s) sinalizado(s) como indisponível(is)';
+  if(report.origin==='oracle')message+=' · Consulta sem publicação automática';
   txt(info,message);box.replaceChildren();
-  var labels={lista_lida:'Leitura concluída',acesso_restrito:'Acesso restrito no OK.ru',sem_links_visiveis:'Nenhum link público detectável',consulta_falhou:'Consulta falhou',limite_requisicoes:'Limite de consultas',pagina_indisponivel:'Página indisponível',aguardando_primeira_execucao:'Aguardando primeira execução',url_invalida:'Configuração inválida'};
-  profiles.forEach(function(p){
-   var a=document.createElement('a'),url=https(p.url);if(!url)return;
+  var labels={lista_lida:'Leitura concluída',lista_parcial:'Leitura parcial (poucos links visíveis)',acesso_restrito:'Acesso restrito no OK.ru',sessao_ou_acesso_restrito:'Sessão ou acesso restrito',sem_links_visiveis:'Nenhum link detectável',consulta_falhou:'Consulta falhou',limite_requisicoes:'Limite de consultas',pagina_indisponivel:'Página indisponível',aguardando_primeira_execucao:'Aguardando primeira execução',url_invalida:'Configuração inválida'};
+  profiles.forEach(function(p){var a=document.createElement('a'),url=https(p.url);if(!url)return;
    a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.className='monitorProfile';
-   txt(a,(p.label||p.id||'Perfil')+' · '+(labels[p.state]||p.state||'Aguardando'));box.append(a);
+   txt(a,(p.label||p.id||'Perfil')+' · '+(labels[p.state]||p.state||'Aguardando')+' · '+Number(p.found||0)+' link(s)');box.append(a);
   });
- }).catch(function(){txt(info,'Status ainda não publicado. Execute a rotina no GitHub Actions para iniciar o monitor.');box.replaceChildren()});
+ }).catch(function(){txt(info,'Nenhum relatório disponível na Oracle ou no GitHub.');box.replaceChildren()});
 }
 function fetchUpdates(){return fetch('./updates.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem arquivo de atualizações');return r.json()}).then(function(p){state.updates=Array.isArray(p.events)?p.events.filter(function(x){return codes.indexOf(x.company)>=0&&/^\d{4}-\d{2}-\d{2}$/.test(x.date||'')}):[]}).catch(function(){state.updates=[]})}
 function isPpv(r){return /^(PPV|PLE|Weekly PPV|Premium Live Event)$/i.test(String(r.show||'').trim())}
