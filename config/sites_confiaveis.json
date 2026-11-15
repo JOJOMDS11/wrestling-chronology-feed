@@ -23,6 +23,13 @@
       "ativo": true
     },
     {
+      "nome": "Bilibili — EliteOfHonor2 (AEW full shows)",
+      "url": "https://www.bilibili.tv/en/space/2027368045",
+      "arquivo": "",
+      "descricao": "Uploader com shows completos da AEW (ex.: Blood and Guts 04/11/2026). Abre em nova aba; sem player integrado.",
+      "ativo": true
+    },
+    {
       "nome": "Exemplo — substitua pelo arquivo que encontrar",
       "url": "https://example.com/",
       "arquivo": "Nome do evento ou arquivo",
