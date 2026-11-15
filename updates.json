@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T18:24:15Z",
+  "generatedAt": "2026-11-15T21:46:09.896242Z",
   "events": [
     {
       "id": "official:aew:2026-08-22:collision",
@@ -296,8 +296,17 @@
       "title": "full gear",
       "show": "PPV",
       "official_url": "https://www.allelitewrestling.com/post/aew-full-gear-results-november-14-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "17022650223353",
+          "url": "https://ok.ru/video/17022650223353",
+          "label": "OK.ru · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-15T21:43:46Z"
     },
     {
       "id": "official:wwe:2026-11-28:survivor-series-wargames-2026",
@@ -319,6 +328,18 @@
       "show": "PPV",
       "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
       "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-11-09:raw",
+      "company": "wwe",
+      "date": "2026-11-09",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Registro semanal provisório; confirmar a programação oficial.",
       "sources": []
     }
   ],
