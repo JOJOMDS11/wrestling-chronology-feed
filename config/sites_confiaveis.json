@@ -1,5 +1,5 @@
 {
-  "instrucoes": "Adicione uma entrada em links para cada site ou arquivo. Use URL HTTPS. ativo=false oculta. Se preencher arquivo, o botão exibirá 'Abrir arquivo'. Publique com Commit changes no GitHub.",
+  "instrucoes": "Adicione uma entrada em links para cada site ou arquivo. Use URL HTTPS. ativo=false oculta. Se preencher arquivo, o botão exibirá Abrir arquivo. Publique com Commit changes no GitHub.",
   "links": [
     {
       "nome": "OK.ru — Perfil 1",
@@ -13,6 +13,13 @@
       "url": "https://ok.ru/profile/910148261710/video",
       "arquivo": "",
       "descricao": "Outro perfil acompanhado no OK.ru.",
+      "ativo": true
+    },
+    {
+      "nome": "OK.ru — Perfil 3",
+      "url": "https://ok.ru/profile/579391530351/video",
+      "arquivo": "",
+      "descricao": "Perfil com muitos registros históricos de AEW, ROH e TNA nos APKs Wrestling Chronology.",
       "ativo": true
     },
     {
