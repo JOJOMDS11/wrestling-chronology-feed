@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "companies": {
+    "aew": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/aew.json",
+      "sha256": "807fa03c5acf4117dc2df7611f6f5aee076d29810bd949470fec2f9dcad90a10",
+      "bytes": 1030717,
+      "revision": 1793727570
+    },
+    "ecw": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/ecw.json",
+      "sha256": "237a6a2f6ea4cf00ba2d5c4150853eda84bdb8b643c3485d7bfa999ca3ebe23a",
+      "bytes": 609953,
+      "revision": 1793688895
+    },
+    "njpw": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/njpw.json",
+      "sha256": "49901aacb121719eb0b17aeed2f40ce7c56b3063b7b1bfdf5c0570595f05d7e4",
+      "bytes": 886693,
+      "revision": 1793762116
+    },
+    "nxt": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/nxt.json",
+      "sha256": "f8c02a4d71478f61ea5726915dcf53567e309d23655af04938e5d6f2f0c23366",
+      "bytes": 1780209,
+      "revision": 1793688896
+    },
+    "roh": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/roh.json",
+      "sha256": "c25128836b55d53ae86571374e7229ebf24fe73f68a07c1b76ddc20146136e65",
+      "bytes": 544478,
+      "revision": 1793688895
+    },
+    "tna": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/tna.json",
+      "sha256": "187bd4703e36f24b7ecbfc32a042860c8dc7f63a9ee2060e4e861abfa4b90d3f",
+      "bytes": 2223511,
+      "revision": 1793688895
+    },
+    "wcw": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/wcw.json",
+      "sha256": "924a41dabb124c38aeca7a41b070ecff3bd3920ac1696971d01e556c4769d29a",
+      "bytes": 2968780,
+      "revision": 1793688895
+    },
+    "wwe": {
+      "url": "https://raw.githubusercontent.com/JOJOMDS11/wrestling-chronology-feed/main/wwe.json",
+      "sha256": "26b39ff4442ecccc2694b1555c8469a93e2c70843e02f4f942c4318d025261d9",
+      "bytes": 11877481,
+      "revision": 1793754957
+    }
+  }
+}
