@@ -1,8 +1,8 @@
-name: Atualizar PPVs e episódios AEW (JOJO Library)
+name: Atualizar eventos e monitorar fontes (JOJO Library)
 
 on:
   schedule:
-    - cron: '17 9 * * *' # 06:17 horário de Brasília (UTC-3)
+    - cron: '17 */6 * * *' # A cada seis horas, em UTC
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - name: Baixar repositório
         uses: actions/checkout@v4
@@ -23,16 +23,18 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Testes do extrator
+      - name: Validar os monitores
         run: python -m unittest discover -s scripts/tests -v
-      - name: Consultar WWE, NJPW e resultados AEW
+      - name: Consultar eventos oficiais
         run: python scripts/update_ppvs.py
-      - name: Publicar apenas se houver mudança
+      - name: Consultar perfis públicos e verificar links conhecidos
+        run: python scripts/monitor_sources.py
+      - name: Publicar somente se houver mudanças
         run: |
-          git add updates.json
+          git add updates.json video_candidates.json source_monitor_status.json
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Atualizar agenda oficial de wrestling'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Atualizar agenda e estado das fontes da JOJO Library'
             git push
           else
-            echo 'Nenhum PPV novo encontrado'
+            echo 'Sem novas mudanças para publicar'
           fi
