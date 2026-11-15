@@ -1,6 +1,12 @@
 name: JOJO Library - AutoMatch e RAW
+run-name: ${{ github.event_name == 'workflow_dispatch' && inputs.request_id != '' && format('JOJO Sync {0}', inputs.request_id) || 'JOJO Sync automática' }}
 on:
   workflow_dispatch:
+    inputs:
+      request_id:
+        description: Identificador privado da solicitação manual
+        required: false
+        type: string
   schedule:
     - cron: '17 * * * *'
 permissions:
