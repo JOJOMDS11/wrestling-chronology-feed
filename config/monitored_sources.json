@@ -15,6 +15,13 @@
       "url": "https://ok.ru/profile/910148261710/video",
       "label": "OK.ru — perfil 910148261710",
       "enabled": true
+    },
+    {
+      "id": "okru-579391530351",
+      "platform": "okru",
+      "url": "https://ok.ru/profile/579391530351/video",
+      "label": "OK.ru — perfil 579391530351",
+      "enabled": true
     }
   ],
   "video_examples_for_review": [
