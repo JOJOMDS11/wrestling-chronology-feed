@@ -1,0 +1,26 @@
+{
+  "instrucoes": "Adicione uma entrada em links para cada site ou arquivo. Use URL HTTPS. ativo=false oculta. Se preencher arquivo, o botão exibirá 'Abrir arquivo'. Publique com Commit changes no GitHub.",
+  "links": [
+    {
+      "nome": "OK.ru — Perfil 1",
+      "url": "https://ok.ru/profile/910420669433/video",
+      "arquivo": "",
+      "descricao": "Perfil que você acompanha no OK.ru.",
+      "ativo": true
+    },
+    {
+      "nome": "OK.ru — Perfil 2",
+      "url": "https://ok.ru/profile/910148261710/video",
+      "arquivo": "",
+      "descricao": "Outro perfil acompanhado no OK.ru.",
+      "ativo": true
+    },
+    {
+      "nome": "Exemplo — substitua pelo arquivo que encontrar",
+      "url": "https://example.com/",
+      "arquivo": "Nome do evento ou arquivo",
+      "descricao": "Exemplo desativado. Edite o nome, link e coloque ativo=true para exibir.",
+      "ativo": false
+    }
+  ]
+}

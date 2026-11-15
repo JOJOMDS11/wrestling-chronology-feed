@@ -36,6 +36,27 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .monitorMeta{font-size:12px;color:#b9adcb;margin-top:7px}.monitorProfiles{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
 .monitorProfile{font-size:12px;background:#2b223b;border:1px solid #544367;border-radius:10px;padding:9px 12px;color:#dcd2ed;text-decoration:none}
 .monitorProfile:hover{border-color:#9e7ac4}
+/* Links manuais para sites e arquivos confiaveis */
+.trustedPanel{margin:0 0 19px;border:1px solid #56436e;border-radius:16px;background:#20192d;overflow:hidden}
+.trustedPanel summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px 18px;cursor:pointer;list-style:none;font-weight:850;color:#e7d7ff}
+.trustedPanel summary::-webkit-details-marker{display:none}
+.trustedPanel summary:before{content:'▸';color:#c3a0f6;transition:transform .18s}
+.trustedPanel details[open] summary:before{transform:rotate(90deg)}
+.trustedHint{color:#ac9ebd;font-size:12px;font-weight:500}
+.trustedCount{margin-left:auto;border:1px solid #72558f;border-radius:999px;padding:3px 9px;font-size:11px;color:#d7c7e9}
+.trustedBody{border-top:1px solid #4d3a64;padding:16px 18px}
+.trustedHeader{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.trustedHeader label{font-size:13px;font-weight:700;color:#e5d8f3}
+.trustedEdit{font-size:12px;color:#cbb2f2;text-decoration:none;border:1px solid #755896;border-radius:9px;padding:7px 10px;background:#31233f}
+.trustedEdit:hover{background:#46305e}
+.trustedRow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.trustedRow select{flex:1 1 270px;min-width:0;border:1px solid #70578a;border-radius:10px;background:#15111f;color:#eee1ff;padding:12px}
+.trustedOpen{display:inline-flex;align-items:center;justify-content:center;background:#7046a6;color:white;border:1px solid #a77bd6;border-radius:10px;padding:12px 18px;font-weight:800;font-size:13px;text-decoration:none;white-space:nowrap}
+.trustedOpen:hover{background:#8659c4}
+.trustedOpen[hidden]{display:none}
+.trustedDesc{margin:10px 0 0;font-size:12px;color:#b5a7c6;overflow-wrap:anywhere}
+@media(max-width:570px){.trustedPanel summary{padding:13px}.trustedCount{margin-left:0}.trustedBody{padding:13px}.trustedRow{display:grid}.trustedOpen{width:100%}}
+
 </style>
 </head>
 <body>
@@ -51,6 +72,17 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <div class="monitorHead"><strong>🔎 Fontes monitoradas · OK.ru</strong><button id="monitorRefresh" type="button">↻ Atualizar status</button></div>
 <div class="monitorMeta" id="monitorMeta">Aguardando resultado da primeira verificação automática.</div>
 <div class="monitorProfiles" id="monitorProfiles"></div>
+</section>
+
+<section class="trustedPanel" aria-label="Sites confiáveis e arquivos cadastrados">
+<details id="trustedDetails">
+<summary><span>🌐 Sites confiáveis</span><span class="trustedHint">Fontes e arquivos adicionados manualmente</span><span class="trustedCount" id="trustedCount">Carregando</span></summary>
+<div class="trustedBody">
+<div class="trustedHeader"><label for="trustedSelect">Escolha o site ou arquivo</label><a class="trustedEdit" href="https://github.com/JOJOMDS11/wrestling-chronology-feed/edit/main/config/sites_confiaveis.json" target="_blank" rel="noopener noreferrer" title="Editar o arquivo de links no GitHub, entrando na sua conta">✎ Editar lista no GitHub</a></div>
+<div class="trustedRow"><select id="trustedSelect" aria-label="Sites confiáveis e arquivos"><option>Carregando links...</option></select><a id="trustedOpen" class="trustedOpen" target="_blank" rel="noopener noreferrer" hidden>↗ Abrir link</a></div>
+<p id="trustedDesc" class="trustedDesc" aria-live="polite">A lista é editada no GitHub e aparece aqui automaticamente quando a página é atualizada.</p>
+</div>
+</details>
 </section>
 <div class="timelineLabel" id="timelineLabel">Cronologia completa</div><main id="results" class="cards" aria-live="polite"></main>
 <div class="foot"><button class="pageBtn" id="more" style="display:none">Mostrar mais eventos</button></div>
@@ -90,6 +122,23 @@ function renderContinue(){var panel=$('continuePanel'),box=$('continueItems'),ro
 function setYearOptions(rows){var years={};rows.forEach(function(r){if(r.year)years[r.year]=1});var values=Object.keys(years).sort(function(a,b){return Number(a)-Number(b)}), y=$('year'),rail=$('yearRail');y.replaceChildren(new Option('Todos os anos',''));rail.replaceChildren();var allButton=el('button','yearPill','Todos');allButton.type='button';allButton.dataset.year='';allButton.addEventListener('click',function(){selectYear('')});rail.append(allButton);values.forEach(function(v){y.add(new Option(v,v));var b=el('button','yearPill',v);b.type='button';b.dataset.year=v;b.addEventListener('click',function(){selectYear(v)});rail.append(b)});updateYearRail()}
 function updateYearRail(){var current=$('year').value;Array.prototype.forEach.call($('yearRail').children,function(b){var selected=b.dataset.year===current;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',selected?'true':'false')})}
 function selectYear(year){$('year').value=year;apply();var selected=$('yearRail').querySelector('.selected');if(selected)selected.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}
+
+
+function loadTrustedSites(){
+ var select=$('trustedSelect'),link=$('trustedOpen'),desc=$('trustedDesc'),count=$('trustedCount');
+ txt(count,'Carregando');select.replaceChildren(new Option('Carregando links...',''));link.hidden=true;
+ return fetch('./config/sites_confiaveis.json?t='+Date.now(),{cache:'no-store'}).then(function(r){
+  if(!r.ok)throw Error('Arquivo de sites nao encontrado');return r.json();
+ }).then(function(data){
+  var items=(Array.isArray(data.links)?data.links:[]).filter(function(item){return item&&item.ativo!==false&&typeof item.nome==='string'&&item.nome.trim()&&https(item.url)});
+  txt(count,items.length+' link(s)');select.replaceChildren();
+  if(!items.length){select.add(new Option('Nenhum site ou arquivo cadastrado',''));select.disabled=true;link.hidden=true;txt(desc,'Edite config/sites_confiaveis.json no GitHub para adicionar seu primeiro link.');return}
+  select.disabled=false;
+  items.forEach(function(item,i){select.add(new Option((item.arquivo?'📁 ':'🌐 ')+item.nome,String(i)))});
+  function show(){var item=items[Number(select.value)];if(!item){link.hidden=true;return}link.href=https(item.url);link.hidden=false;txt(link,item.arquivo?'↗ Abrir arquivo':'↗ Abrir site');txt(desc,(item.arquivo?'Arquivo: '+item.arquivo+' · ':'')+(item.descricao||'Link cadastrado manualmente. Disponibilidade não verificada automaticamente.'))}
+  select.addEventListener('change',show);show();
+ }).catch(function(){txt(count,'Indisponível');select.replaceChildren(new Option('Não foi possível carregar os links',''));select.disabled=true;link.hidden=true;txt(desc,'Verifique se config/sites_confiaveis.json foi enviado ao GitHub Pages.')});
+}
 
 function loadMonitorStatus(){
  var info=$('monitorMeta'),box=$('monitorProfiles');
@@ -144,7 +193,7 @@ function close(){if(state.current&&state.source)saveWatch();var v=$('video');v.p
 function vlc(){var s=state.source,u=sourceUrl(s);if(!u||s.type!=='archive')return;try{var parsed=new URL(u);var fallback=encodeURIComponent(u);location.href='intent://'+parsed.host+parsed.pathname+parsed.search+'#Intent;scheme=https;package=org.videolan.vlc;S.browser_fallback_url='+fallback+';end'}catch(e){txt($('videoInfo'),'Não foi possível abrir o VLC; use Abrir fonte.') }}
 function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.tagName)>=0}
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
-function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
+function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}
