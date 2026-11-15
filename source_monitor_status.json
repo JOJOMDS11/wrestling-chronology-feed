@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": null,
+  "profiles": [
+    {"id": "okru-910420669433", "label": "OK.ru — perfil 910420669433", "url": "https://ok.ru/profile/910420669433/video", "state": "aguardando_primeira_execucao", "found": 0},
+    {"id": "okru-910148261710", "label": "OK.ru — perfil 910148261710", "url": "https://ok.ru/profile/910148261710/video", "state": "aguardando_primeira_execucao", "found": 0}
+  ],
+  "links": {},
+  "counts": {"profilesConfigured": 2, "profilesReadable": 0, "candidatesPendingReview": 2, "linksUnavailable": 0},
+  "note": "A automação ainda não foi executada."
+}

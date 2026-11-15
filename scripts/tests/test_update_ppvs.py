@@ -3,7 +3,7 @@ import sys
 import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from update_ppvs import parse_events
+from update_ppvs import parse_events, merge_preserving_sources
 
 
 class TestListing(unittest.TestCase):
@@ -26,6 +26,14 @@ class TestListing(unittest.TestCase):
         html = '<h3>DOMINION</h3><p>SUN.Jun.14.2026</p><h3>DOMINION</h3><p>SUN.Jun.14.2026</p>'
         rows = parse_events(html, 'njpw', dt.date(2026, 6, 14))
         self.assertEqual(len(rows), 1)
+
+    def test_keep_reviewed_existing_video_on_event_refresh(self):
+        previous = {'id': 'x', 'sources': [{'type': 'okru', 'videoId': '123456789'}],
+                    'status': 'video_available', 'sourceReview': 'approved'}
+        found = {'id': 'x', 'sources': [], 'status': 'awaiting_video'}
+        result = merge_preserving_sources(previous, found)
+        self.assertEqual(result['sources'], previous['sources'])
+        self.assertEqual(result['sourceReview'], 'approved')
 
     def test_no_generated_video_links(self):
         html = '<h3>SAKURA GENESIS</h3><p>SAT.Apr.3.2027</p>'

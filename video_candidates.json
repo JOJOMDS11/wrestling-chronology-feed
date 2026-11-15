@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "candidates": [
+    {
+      "videoId": "16916107430649",
+      "url": "https://ok.ru/video/16916107430649",
+      "title": "",
+      "origin": "exemplo_fornecido",
+      "note": "Apontado pelo usuário como Crown Jewel; conteúdo e direitos ainda não verificados",
+      "review": "pendente",
+      "possibleEventIds": []
+    },
+    {
+      "videoId": "16975515421433",
+      "url": "https://ok.ru/video/16975515421433",
+      "title": "",
+      "origin": "exemplo_fornecido",
+      "note": "ID atribuído a Dynamite e Full Gear em mensagens diferentes; correspondência ambígua",
+      "review": "pendente",
+      "possibleEventIds": []
+    }
+  ]
+}

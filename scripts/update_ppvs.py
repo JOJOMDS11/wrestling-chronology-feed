@@ -222,6 +222,18 @@ def fetch(url):
         return response.read(4_000_000).decode('utf-8', errors='replace')
 
 
+def merge_preserving_sources(existing, discovered):
+    """Refresh event metadata without deleting previously reviewed source links."""
+    result = dict(discovered)
+    old = existing or {}
+    if old.get('sources'):
+        result['sources'] = old['sources']
+        result['status'] = old.get('status', 'video_available')
+        if 'sourceReview' in old:
+            result['sourceReview'] = old['sourceReview']
+    return result
+
+
 def run():
     existing = json.loads(DEST.read_text(encoding='utf-8')) if DEST.exists() else {}
     saved = {event['id']: event for event in existing.get('events', []) if 'id' in event}
@@ -236,7 +248,7 @@ def run():
                 continue
             success += 1
             for event in found:
-                saved[event['id']] = event
+                saved[event['id']] = merge_preserving_sources(saved.get(event['id']), event)
             print(f'{company.upper()}: {len(found)} eventos oficiais encontrados')
         except Exception as exc:
             print(f'AVISO: falha ao consultar {company}: {exc}. Mantendo os anteriores.', file=sys.stderr)

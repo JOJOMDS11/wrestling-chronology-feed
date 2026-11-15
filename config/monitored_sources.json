@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "about": "Perfis para descoberta de metadados públicos. Vídeos não são incorporados automaticamente sem revisão de autorização.",
+  "profiles": [
+    {
+      "id": "okru-910420669433",
+      "platform": "okru",
+      "url": "https://ok.ru/profile/910420669433/video",
+      "label": "OK.ru — perfil 910420669433",
+      "enabled": true
+    },
+    {
+      "id": "okru-910148261710",
+      "platform": "okru",
+      "url": "https://ok.ru/profile/910148261710/video",
+      "label": "OK.ru — perfil 910148261710",
+      "enabled": true
+    }
+  ],
+  "video_examples_for_review": [
+    {
+      "id": "16975515421433",
+      "url": "https://ok.ru/video/16975515421433",
+      "note": "O mesmo vídeo foi atribuído a dois eventos diferentes; associação não verificada"
+    },
+    {
+      "id": "16916107430649",
+      "url": "https://ok.ru/video/16916107430649",
+      "note": "Exemplo associado pelo usuário ao Crown Jewel; título publicado não confirma identidade"
+    }
+  ]
+}
