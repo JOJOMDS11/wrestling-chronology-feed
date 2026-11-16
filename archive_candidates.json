@@ -191,6 +191,137 @@
       "sourceProfiles": [
         "Internet Archive"
       ]
+    },
+    {
+      "videoId": "a2396dbcde21ae02a2df7849a9b62a673",
+      "platform": "archive",
+      "url": "https://archive.org/download/wwe-nxt-10-11-2026-mp-4-mania/WWE%20NXT%20-%2010-11-2026%20%28Mp4Mania%29.mp4",
+      "duration": "1:39:38",
+      "detail": "https://archive.org/details/wwe-nxt-10-11-2026-mp-4-mania",
+      "title": "WWE NXT 10 11 2026 ( Mp 4 Mania)",
+      "filename": "WWE NXT - 10-11-2026 (Mp4Mania).mp4",
+      "publishedAt": "2026-11-12T16:53:52Z",
+      "thumbnailUrl": "https://archive.org/services/img/wwe-nxt-10-11-2026-mp-4-mania",
+      "possibleEventIds": [
+        "auto:wwe:2026-11-10:nxt"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
+    },
+    {
+      "videoId": "a6481ead2bf5a4ccffbe480c54334351e",
+      "platform": "archive",
+      "url": "https://archive.org/download/tna-impact-wrestling-12-11-26/TNA%20Impact%20Wrestling%2012-11-26.mp4",
+      "duration": "1:33:09",
+      "detail": "https://archive.org/details/tna-impact-wrestling-12-11-26",
+      "title": "TNA Impact Wrestling 12-11-26",
+      "filename": "TNA Impact Wrestling 12-11-26.mp4",
+      "publishedAt": "2026-11-14T01:23:52Z",
+      "thumbnailUrl": "https://archive.org/services/img/tna-impact-wrestling-12-11-26",
+      "possibleEventIds": [
+        "official:tna:2026-11-12:impact"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
+    },
+    {
+      "videoId": "a7f94679960c4f19c8ad90cd926496da1",
+      "platform": "archive",
+      "url": "https://archive.org/download/tna-impact-wrestling-05-11-26/TNA%20Impact%20Wrestling%2005-11-26.ia.mp4",
+      "duration": "1:25:03",
+      "detail": "https://archive.org/details/tna-impact-wrestling-05-11-26",
+      "title": "TNA Impact Wrestling 05-11-26",
+      "filename": "TNA Impact Wrestling 05-11-26.ia.mp4",
+      "publishedAt": "2026-11-06T20:56:59Z",
+      "thumbnailUrl": "https://archive.org/services/img/tna-impact-wrestling-05-11-26",
+      "possibleEventIds": [
+        "official:tna:2026-11-05:impact"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
+    },
+    {
+      "videoId": "a1856defc26c41fb93f5b80bfa316804e",
+      "platform": "archive",
+      "url": "https://archive.org/download/tna-impact-wrestling-05-11-26/TNA%20Impact%20Wrestling%2005-11-26.mp4",
+      "duration": "1:25:03",
+      "detail": "https://archive.org/details/tna-impact-wrestling-05-11-26",
+      "title": "TNA Impact Wrestling 05-11-26",
+      "filename": "TNA Impact Wrestling 05-11-26.mp4",
+      "publishedAt": "2026-11-06T20:56:59Z",
+      "thumbnailUrl": "https://archive.org/services/img/tna-impact-wrestling-05-11-26",
+      "possibleEventIds": [
+        "official:tna:2026-11-05:impact"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
+    },
+    {
+      "videoId": "a440ae782214d58ddd69e84b72269b72a",
+      "platform": "archive",
+      "url": "https://archive.org/download/tna-impact-wrestling-29-10-26/TNA%20Impact%20Wrestling%2029-10-26.ia.mp4",
+      "duration": "1:34:05",
+      "detail": "https://archive.org/details/tna-impact-wrestling-29-10-26",
+      "title": "TNA Impact Wrestling 29-10-26",
+      "filename": "TNA Impact Wrestling 29-10-26.ia.mp4",
+      "publishedAt": "2026-10-30T22:25:18Z",
+      "thumbnailUrl": "https://archive.org/services/img/tna-impact-wrestling-29-10-26",
+      "possibleEventIds": [
+        "auto:tna:2026-10-29:impact"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
+    },
+    {
+      "videoId": "a746136ba751ccb91976aca892cbd254c",
+      "platform": "archive",
+      "url": "https://archive.org/download/tna-impact-wrestling-29-10-26/TNA%20Impact%20Wrestling%2029-10-26.mp4",
+      "duration": "1:34:05",
+      "detail": "https://archive.org/details/tna-impact-wrestling-29-10-26",
+      "title": "TNA Impact Wrestling 29-10-26",
+      "filename": "TNA Impact Wrestling 29-10-26.mp4",
+      "publishedAt": "2026-10-30T22:25:18Z",
+      "thumbnailUrl": "https://archive.org/services/img/tna-impact-wrestling-29-10-26",
+      "possibleEventIds": [
+        "auto:tna:2026-10-29:impact"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
+    },
+    {
+      "videoId": "aee3a52bba9e1ff3696da239af5abc033",
+      "platform": "archive",
+      "url": "https://archive.org/download/roh-on-honor-club-episode-192-12-11-26/ROH%20on%20HonorClub%20Episode%20192%2012-11-26.mp4",
+      "detail": "https://archive.org/details/roh-on-honor-club-episode-192-12-11-26",
+      "title": "ROH on HonorClub Episode 192 12-11-26",
+      "filename": "ROH on HonorClub Episode 192 12-11-26.mp4",
+      "thumbnailUrl": "https://archive.org/services/img/roh-on-honor-club-episode-192-12-11-26",
+      "possibleEventIds": [
+        "auto:roh:2026-11-12:honorclub"
+      ],
+      "confidence": "ROH Wrestling: assunto, título e data; reprodução/direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive · ROH Wrestling"
+      ]
     }
   ]
 }
