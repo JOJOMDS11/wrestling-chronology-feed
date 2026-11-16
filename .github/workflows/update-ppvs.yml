@@ -41,7 +41,8 @@ jobs:
             git reset --hard origin/main
             # Recalculate instead of merging stale or overwriting approved sources.
             python scripts/update_ppvs.py
-            git add updates.json
+            python scripts/discover_archive.py || echo 'Internet Archive indisponível: mantendo a última lista de candidatos'
+            git add updates.json archive_candidates.json
             if git diff --cached --quiet; then
               echo 'Nenhuma alteração nova para publicar.'
               exit 0
