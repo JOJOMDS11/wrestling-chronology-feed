@@ -14,6 +14,7 @@ import urllib.request
 
 BASE = Path(__file__).resolve().parents[2]
 API = os.getenv('JOJO_APPROVAL_URL', 'https://jojo-wrestling.tail90c651.ts.net/api/jojo-monitor/approved')
+EDIT_API = os.getenv('JOJO_EVENT_EDITS_URL', API.rsplit('/',1)[0] + '/event-edits')
 
 
 def read(path):
@@ -267,11 +268,38 @@ def consume_approvals(updates, data):
     return changed + materialized
 
 
+
+
+def refresh_event_edits():
+    """Mirror admin-only edits from Oracle, without deleting a good local mirror on failure."""
+    path = BASE / 'config/event_edits.json'
+    try:
+        req = urllib.request.Request(EDIT_API, headers={'User-Agent':'JOJO-GitHub-Action/2.0'})
+        with urllib.request.urlopen(req, timeout=18) as response:
+            data = response.read(500_001)
+        if len(data) > 500_000:
+            raise ValueError('Edições acima do limite')
+        parsed = json.loads(data.decode('utf-8'))
+        if not isinstance(parsed, dict) or parsed.get('schemaVersion') != 1 or not isinstance(parsed.get('events'), dict):
+            raise ValueError('Formato de edições inválido')
+        # Edits are public source URLs, never secret keys.
+        for eid, edit in parsed['events'].items():
+            if not re.fullmatch(r'[A-Za-z0-9:_-]{8,180}', eid) or not isinstance(edit, dict):
+                raise ValueError('Registro inválido')
+        old = read('config/event_edits.json') if path.exists() else {'schemaVersion':1,'events':{}}
+        if old != parsed:
+            save('config/event_edits.json',parsed)
+            return len(parsed['events'])
+    except (OSError, ValueError, TypeError) as ex:
+        print('Edições Oracle temporariamente indisponíveis:',type(ex).__name__)
+    return 0
+
 def main():
     updates = read('updates.json')
     nraw = add_weekly_raw(updates)
     curated = add_curated_events(updates)
     weeklies = add_missing_weeklies(updates)
+    edits_mirrored = refresh_event_edits()
     approved = 0
     try:
         req = urllib.request.Request(API, headers={'User-Agent':'JOJO-GitHub-Action/2.0'})
@@ -289,7 +317,7 @@ def main():
     if nraw or curated or weeklies or approved:
         updates['generatedAt'] = dt.datetime.now(dt.timezone.utc).isoformat().replace('+00:00','Z')
         save('updates.json',updates)
-    print('RAW provisórias:',nraw,'Eventos especiais:',curated,'Semanais pendentes:',weeklies,'Vínculos publicados:',approved)
+    print('RAW provisórias:',nraw,'Eventos especiais:',curated,'Semanais pendentes:',weeklies,'Vínculos publicados:',approved,'Eventos editados:',edits_mirrored)
 
 
 if __name__ == '__main__':
