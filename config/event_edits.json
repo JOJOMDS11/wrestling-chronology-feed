@@ -1,4 +1,68 @@
 {
   "schemaVersion": 1,
-  "events": {}
+  "events": {
+    "wwe:2026-11-02:raw": {
+      "revision": 1,
+      "removed": [
+        "okru|16275187173966"
+      ],
+      "added": [
+        {
+          "type": "okru",
+          "videoId": "16365068290638",
+          "url": "https://ok.ru/video/16365068290638",
+          "label": "Adição manual · okru",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=18725556259406&type=37&idx=3&scl=4&tkn=zix_GhGrN-CQm-LZnbca87ZSqQU&fn=external_8"
+        }
+      ],
+      "sourceThumbnails": {},
+      "thumbnailUrl": "",
+      "updatedAt": "2026-11-16T14:55:45Z"
+    },
+    "wwe:2026-11-06:smackdown": {
+      "revision": 1,
+      "removed": [],
+      "added": [
+        {
+          "type": "okru",
+          "videoId": "16332367006286",
+          "url": "https://ok.ru/video/16332367006286",
+          "label": "Adição manual · okru"
+        }
+      ],
+      "sourceThumbnails": {},
+      "thumbnailUrl": "",
+      "updatedAt": "2026-11-16T14:57:57Z"
+    },
+    "official:tna:2026-11-15:destination-x": {
+      "revision": 1,
+      "removed": [],
+      "added": [
+        {
+          "type": "okru",
+          "videoId": "17035794320121",
+          "url": "https://ok.ru/video/17035794320121",
+          "label": "Adição manual · okru"
+        }
+      ],
+      "sourceThumbnails": {},
+      "thumbnailUrl": "",
+      "updatedAt": "2026-11-16T15:40:12Z"
+    },
+    "reference:wwe:2026-10-10:money-in-the-bank-2026": {
+      "revision": 1,
+      "removed": [],
+      "added": [
+        {
+          "type": "okru",
+          "videoId": "16289278724713",
+          "url": "https://ok.ru/video/16289278724713",
+          "label": "Adição manual · okru"
+        }
+      ],
+      "sourceThumbnails": {},
+      "thumbnailUrl": "",
+      "updatedAt": "2026-11-16T15:44:09Z"
+    }
+  }
 }

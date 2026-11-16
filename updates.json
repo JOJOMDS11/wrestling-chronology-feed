@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T16:45:05.519150Z",
+  "generatedAt": "2026-11-16T16:48:25.879477Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -609,10 +609,20 @@
       "year": 2026,
       "title": "TNA Impact",
       "show": "Impact",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+      "status": "video_available",
+      "provisional": false,
+      "sources": [
+        {
+          "type": "archive",
+          "videoId": "a440ae782214d58ddd69e84b72269b72a",
+          "url": "https://archive.org/download/tna-impact-wrestling-29-10-26/TNA%20Impact%20Wrestling%2029-10-26.ia.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-29-10-26"
+        }
+      ],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo.",
+      "approvedAt": "2026-11-16T16:48:04Z",
+      "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-29-10-26"
     },
     {
       "id": "official:aew:2026-10-31:collision",
@@ -730,9 +740,27 @@
       "title": "TNA Thursday Night iMPACT!",
       "show": "Impact",
       "official_url": "https://tnawrestling.com/news/tna-thursday-night-impact-on-amc-results-november-5-2026",
-      "status": "awaiting_video",
-      "sources": [],
-      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado."
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "archive",
+          "videoId": "a7f94679960c4f19c8ad90cd926496da1",
+          "url": "https://archive.org/download/tna-impact-wrestling-05-11-26/TNA%20Impact%20Wrestling%2005-11-26.ia.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-05-11-26"
+        },
+        {
+          "type": "archive",
+          "videoId": "a1856defc26c41fb93f5b80bfa316804e",
+          "url": "https://archive.org/download/tna-impact-wrestling-05-11-26/TNA%20Impact%20Wrestling%2005-11-26.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-05-11-26"
+        }
+      ],
+      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado.",
+      "provisional": false,
+      "approvedAt": "2026-11-16T16:47:58Z",
+      "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-05-11-26"
     },
     {
       "id": "auto:wwe:2026-11-06:smackdown",
@@ -829,11 +857,21 @@
       "year": 2026,
       "title": "NXT",
       "show": "NXT",
-      "status": "awaiting_video",
-      "provisional": true,
+      "status": "video_available",
+      "provisional": false,
       "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
-      "sources": [],
-      "official_url": "https://www.wwe.com/shows/wwenxt/2026-11-10"
+      "sources": [
+        {
+          "type": "archive",
+          "videoId": "a2396dbcde21ae02a2df7849a9b62a673",
+          "url": "https://archive.org/download/wwe-nxt-10-11-2026-mp-4-mania/WWE%20NXT%20-%2010-11-2026%20%28Mp4Mania%29.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/wwe-nxt-10-11-2026-mp-4-mania"
+        }
+      ],
+      "official_url": "https://www.wwe.com/shows/wwenxt/2026-11-10",
+      "approvedAt": "2026-11-16T16:47:51Z",
+      "thumbnail": "https://archive.org/services/img/wwe-nxt-10-11-2026-mp-4-mania"
     },
     {
       "id": "official:aew:2026-11-11:collision",
@@ -874,10 +912,20 @@
       "year": 2026,
       "title": "HonorClub",
       "show": "HonorClub",
-      "status": "awaiting_video",
-      "provisional": true,
+      "status": "video_available",
+      "provisional": false,
       "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
-      "sources": []
+      "sources": [
+        {
+          "type": "archive",
+          "videoId": "aee3a52bba9e1ff3696da239af5abc033",
+          "url": "https://archive.org/download/roh-on-honor-club-episode-192-12-11-26/ROH%20on%20HonorClub%20Episode%20192%2012-11-26.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/roh-on-honor-club-episode-192-12-11-26"
+        }
+      ],
+      "approvedAt": "2026-11-16T16:47:37Z",
+      "thumbnail": "https://archive.org/services/img/roh-on-honor-club-episode-192-12-11-26"
     },
     {
       "id": "official:tna:2026-11-12:impact",
@@ -887,9 +935,20 @@
       "title": "TNA Thursday Night iMPACT!",
       "show": "Impact",
       "official_url": "https://tnawrestling.com/news/tna-thursday-night-impact-on-amc-results-november-12-2026",
-      "status": "awaiting_video",
-      "sources": [],
-      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado."
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "archive",
+          "videoId": "a6481ead2bf5a4ccffbe480c54334351e",
+          "url": "https://archive.org/download/tna-impact-wrestling-12-11-26/TNA%20Impact%20Wrestling%2012-11-26.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-12-11-26"
+        }
+      ],
+      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado.",
+      "provisional": false,
+      "approvedAt": "2026-11-16T16:47:45Z",
+      "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-12-11-26"
     },
     {
       "id": "official:wwe:2026-11-13:smackdown",
@@ -977,9 +1036,27 @@
       "title": "TNA Destination X 2026",
       "show": "PPV",
       "official_url": "https://tnawrestling.com/destinationx",
-      "status": "awaiting_video",
-      "sources": [],
-      "description": "PPV de 15/11/2026 oficialmente anunciado pela TNA. Link de vídeo ainda não cadastrado."
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16444091075150",
+          "url": "https://ok.ru/video/16444091075150",
+          "label": "OK.ru · Revisão administrativa",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=18988212030030&type=37&idx=1&scl=4&tkn=saBQKPknrT0oOIu7C5QTXZxSqC8&fn=external_8"
+        },
+        {
+          "type": "okru",
+          "videoId": "17035794320121",
+          "url": "https://ok.ru/video/17035794320121",
+          "label": "OK.ru · Revisão administrativa",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=20438527773433&type=37&idx=1&scl=4&tkn=EonuaHF8qpE7hlOKDXGePjGE7cA&fn=external_8"
+        }
+      ],
+      "description": "PPV de 15/11/2026 oficialmente anunciado pela TNA. Link de vídeo ainda não cadastrado.",
+      "provisional": false,
+      "approvedAt": "2026-11-16T15:41:52Z",
+      "thumbnail": "https://iv.okcdn.ru/videoPreview?id=18988212030030&type=37&idx=1&scl=4&tkn=saBQKPknrT0oOIu7C5QTXZxSqC8&fn=external_8"
     },
     {
       "id": "auto:wwe:2026-11-16:raw",
