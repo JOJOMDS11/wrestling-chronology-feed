@@ -171,6 +171,105 @@ def discover(fetch=get_json, now=None):
     return successful, list(result.values())
 
 
+def recent_ppvs_without_video(now=None):
+    """Recent, already documented specials with no approved source in any catalogue.
+
+    These are metadata SEARCH TARGETS, never confirmed recordings. Keep the daily
+    work bounded, avoid old unlicensed catalogues and exclude future shows.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc).date()
+    earliest = now - dt.timedelta(days=90)
+    catalogues = {}
+    for company in ('wwe', 'aew', 'tna', 'nxt', 'roh', 'njpw'):
+        try:
+            episodes=json.loads((ROOT/(company+'.json')).read_text(encoding='utf-8'))['catalogue']['episodes']
+            catalogues[company]=episodes
+        except (OSError, ValueError, KeyError):
+            catalogues[company]=[]
+    updates=json.loads((ROOT/'updates.json').read_text(encoding='utf-8')).get('events',[])
+    result=[]
+    seen=set()
+    for e in updates:
+        if e.get('show','').lower() not in ('ppv','ple','premium live event') or e.get('sources'):
+            continue
+        date=e.get('date','')
+        try:
+            day=dt.date.fromisoformat(date)
+        except (ValueError,TypeError):
+            continue
+        if not earliest <= day <= now:
+            continue
+        company=e.get('company')
+        if company not in catalogues or not e.get('id') or not e.get('title'):
+            continue
+        if any(x.get('date')==date and x.get('show','').lower() in ('ppv','ple') and x.get('sources')
+               for x in catalogues[company]):
+            continue
+        key=(company,date,e['title'].lower())
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(e)
+    result.sort(key=lambda x:x.get('date',''),reverse=True)
+    return result[:6]
+
+
+def discover_missing_ppvs(fetch=get_json, now=None):
+    """Metadata-only PPV search; date/year match is a suggestion, not proof."""
+    now=now or dt.datetime.now(dt.timezone.utc).date()
+    candidates={}
+    done=0
+    for event in recent_ppvs_without_video(now):
+        title=re.sub(r'\s+',' ',str(event['title'])).strip()
+        # At most six short searches and two metadata calls per PPV per day.
+        query='mediatype:movies AND title:("'+title.replace('"','')[:90]+'")'
+        args=urlencode({'q':query,'output':'json','rows':12,'page':1,
+                        'fl[]':['identifier','title','publicdate'], 'sort[]':'publicdate desc'},doseq=True)
+        try:
+            docs=fetch(SEARCH+'?'+args).get('response',{}).get('docs',[])
+            done+=1
+        except (OSError, ValueError, KeyError, TimeoutError):
+            continue
+        calls=0
+        needle=set(re.findall(r'[a-z0-9]{4,}',title.lower()))-{'2026','2025','event'}
+        for doc in docs:
+            if calls>=2:break
+            identifier=str(doc.get('identifier') or '')
+            doc_title=str(doc.get('title') or '')
+            if not re.fullmatch(r'[a-zA-Z0-9_.-]{3,120}',identifier):continue
+            if needle and len(needle & set(re.findall(r'[a-z0-9]{4,}',doc_title.lower()))) < min(2,len(needle)):
+                continue
+            try:info=fetch(META+quote(identifier,safe=''))
+            except (OSError, ValueError, KeyError, TimeoutError):continue
+            calls+=1
+            if str(info.get('is_dark') or '') in ('True','1') or not info.get('metadata'):continue
+            for item in (info.get('files') or [])[:100]:
+                filename=str(item.get('name') or '')
+                url=archive_url(identifier,filename)
+                if not url:continue
+                combined=(doc_title+' '+filename).lower()
+                if any(x in combined for x in ('trailer','teaser','highlights','countdown','buy in','press conference')):
+                    continue
+                date=episode_date(combined)
+                # Exact date OR name+year is enough for review, NOT approval.
+                if date and date!=event['date']:continue
+                if not date and event['date'][:4] not in combined:continue
+                if needle and len(needle & set(re.findall(r'[a-z0-9]{4,}',combined))) < min(2,len(needle)):
+                    continue
+                try:
+                    if item.get('length') is not None and float(item['length']) < 25*60:continue
+                except (ValueError,TypeError,OverflowError):pass
+                uid=candidate_id(url)
+                candidates[uid]={'videoId':uid,'platform':'archive','url':url,
+                                 'detail':'https://archive.org/details/'+quote(identifier,safe=''),
+                                 'title':(doc_title or filename)[:220], 'filename':filename[:240],
+                                 'thumbnailUrl':'https://archive.org/services/img/'+quote(identifier,safe=''),
+                                 'possibleEventIds':[str(event['id'])],
+                                 'confidence':'Metadados: nome e '+('data' if date else 'ano')+' semelhantes; reprodução e direitos NÃO verificados',
+                                 'review':'pendente','sourceProfiles':['Internet Archive - PPV pendente']}
+    return done,list(candidates.values())
+
+
 def main():
     existing = []
     if DEST.exists():
@@ -179,7 +278,9 @@ def main():
         except (OSError, ValueError):
             pass
     success, rows = discover()
-    if not success:
+    ppv_queries, ppv_rows = discover_missing_ppvs()
+    rows += ppv_rows
+    if not success and not ppv_queries:
         print('Nenhuma consulta respondida; preservando os candidatos já cadastrados.')
         return
     merged = {x['videoId']: x for x in existing if isinstance(x, dict) and x.get('videoId')}
@@ -191,7 +292,7 @@ def main():
     blob=json.dumps(output, ensure_ascii=False, indent=2)+'\n'
     if not DEST.exists() or DEST.read_text(encoding='utf-8')!=blob:
         DEST.write_text(blob,encoding='utf-8')
-    print('Internet Archive:',success,'consultas; ',len(rows),'candidatos novos/reencontrados')
+    print('Internet Archive:',success,'consultas semanais;',ppv_queries,'consultas de PPV;',len(rows),'candidatos para revisão')
 
 if __name__ == '__main__':
     main()

@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "description": "Referências documentadas para auditoria limitada de PPVs. Anos sem referências NÃO estão declarados completos. Sem aprovação de vídeos automática.",
+  "sources": [
+    "https://www.wwe.com/shows",
+    "https://www.allelitewrestling.com/post/aew-full-gear-2026-preview",
+    "https://tnawrestling.com/news/destination-x-returns-showcase-event-from-tna-wrestling-is-sunday-november-15-live-from-edmonton-alberta-canada"
+  ],
+  "events": [
+    {
+      "id": "reference:wwe:2026-01-31:royal-rumble-2026",
+      "company": "wwe",
+      "date": "2026-01-31",
+      "year": 2026,
+      "title": "Royal Rumble 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/royalrumble/2026",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-04-18:wrestlemania-42---noite-1",
+      "company": "wwe",
+      "date": "2026-04-18",
+      "year": 2026,
+      "title": "WrestleMania 42 — Noite 1",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/wrestlemania/42",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-04-19:wrestlemania-42---noite-2",
+      "company": "wwe",
+      "date": "2026-04-19",
+      "year": 2026,
+      "title": "WrestleMania 42 — Noite 2",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/wrestlemania/42",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-05-09:backlash-2026",
+      "company": "wwe",
+      "date": "2026-05-09",
+      "year": 2026,
+      "title": "Backlash 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/backlash/2026",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-05-31:clash-in-italy-2026",
+      "company": "wwe",
+      "date": "2026-05-31",
+      "year": 2026,
+      "title": "Clash in Italy 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-06-27:night-of-champions-2026",
+      "company": "wwe",
+      "date": "2026-06-27",
+      "year": 2026,
+      "title": "Night of Champions 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-08-01:summerslam-2026---noite-1",
+      "company": "wwe",
+      "date": "2026-08-01",
+      "year": 2026,
+      "title": "SummerSlam 2026 — Noite 1",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/summerslam",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-08-02:summerslam-2026---noite-2",
+      "company": "wwe",
+      "date": "2026-08-02",
+      "year": 2026,
+      "title": "SummerSlam 2026 — Noite 2",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/summerslam",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-10-10:money-in-the-bank-2026",
+      "company": "wwe",
+      "date": "2026-10-10",
+      "year": 2026,
+      "title": "Money in the Bank 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/moneyinthebank",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-11-07:crown-jewel-2026",
+      "company": "wwe",
+      "date": "2026-11-07",
+      "year": 2026,
+      "title": "Crown Jewel 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-11-28:survivor-series--wargames-2026",
+      "company": "wwe",
+      "date": "2026-11-28",
+      "year": 2026,
+      "title": "Survivor Series: WarGames 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-12-12:wrestlepalooza-2026",
+      "company": "wwe",
+      "date": "2026-12-12",
+      "year": 2026,
+      "title": "Wrestlepalooza 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:nxt:2026-10-31:nxt-halloween-havoc",
+      "company": "nxt",
+      "date": "2026-10-31",
+      "year": 2026,
+      "title": "NXT Halloween Havoc",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/wwenxt",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:aew:2026-11-14:aew-full-gear-2026",
+      "company": "aew",
+      "date": "2026-11-14",
+      "year": 2026,
+      "title": "AEW Full Gear 2026",
+      "show": "PPV",
+      "official_url": "https://www.allelitewrestling.com/post/aew-full-gear-2026-preview",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:tna:2026-11-15:tna-destination-x-2026",
+      "company": "tna",
+      "date": "2026-11-15",
+      "year": 2026,
+      "title": "TNA Destination X 2026",
+      "show": "PPV",
+      "official_url": "https://tnawrestling.com/news/destination-x-returns-showcase-event-from-tna-wrestling-is-sunday-november-15-live-from-edmonton-alberta-canada",
+      "status": "awaiting_video",
+      "sources": [],
+      "referenceOnly": true
+    }
+  ]
+}

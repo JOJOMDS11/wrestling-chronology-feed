@@ -1,0 +1,539 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-16T15:21:45.077129Z",
+  "referenceCoverage": "partial",
+  "notice": "Ausências significam apenas referências documentadas não localizadas; anos sem calendário de referência NÃO estão completos.",
+  "catalogueFailures": [],
+  "years": {
+    "2000": {
+      "companies": {
+        "wwe": 14,
+        "wcw": 13,
+        "ecw": 7
+      },
+      "cataloguePpvs": 34,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2001": {
+      "companies": {
+        "wwe": 14,
+        "wcw": 3,
+        "ecw": 1
+      },
+      "cataloguePpvs": 18,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2002": {
+      "companies": {
+        "wwe": 14,
+        "tna": 26,
+        "roh": 12,
+        "njpw": 1
+      },
+      "cataloguePpvs": 53,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2003": {
+      "companies": {
+        "wwe": 14,
+        "tna": 50,
+        "roh": 21,
+        "njpw": 1
+      },
+      "cataloguePpvs": 86,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2004": {
+      "companies": {
+        "wwe": 14,
+        "tna": 38,
+        "roh": 26
+      },
+      "cataloguePpvs": 78,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2005": {
+      "companies": {
+        "wwe": 15,
+        "tna": 12,
+        "roh": 35,
+        "ecw": 1
+      },
+      "cataloguePpvs": 63,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2006": {
+      "companies": {
+        "wwe": 16,
+        "tna": 12,
+        "roh": 43,
+        "ecw": 2
+      },
+      "cataloguePpvs": 73,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2007": {
+      "companies": {
+        "wwe": 15,
+        "tna": 12,
+        "njpw": 1
+      },
+      "cataloguePpvs": 28,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2008": {
+      "companies": {
+        "wwe": 13,
+        "tna": 12,
+        "roh": 2,
+        "njpw": 6
+      },
+      "cataloguePpvs": 33,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2009": {
+      "companies": {
+        "wwe": 14,
+        "tna": 12,
+        "roh": 4,
+        "njpw": 7
+      },
+      "cataloguePpvs": 37,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2010": {
+      "companies": {
+        "wwe": 13,
+        "tna": 12,
+        "roh": 3,
+        "njpw": 6
+      },
+      "cataloguePpvs": 34,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2011": {
+      "companies": {
+        "wwe": 13,
+        "tna": 12,
+        "roh": 1,
+        "njpw": 11
+      },
+      "cataloguePpvs": 37,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2012": {
+      "companies": {
+        "wwe": 12,
+        "tna": 12,
+        "njpw": 4
+      },
+      "cataloguePpvs": 28,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2013": {
+      "companies": {
+        "wwe": 12,
+        "tna": 6,
+        "njpw": 10
+      },
+      "cataloguePpvs": 28,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2014": {
+      "companies": {
+        "wwe": 14,
+        "nxt": 4,
+        "tna": 4,
+        "njpw": 1
+      },
+      "cataloguePpvs": 23,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2015": {
+      "companies": {
+        "wwe": 18,
+        "nxt": 5,
+        "tna": 2,
+        "njpw": 1
+      },
+      "cataloguePpvs": 26,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2016": {
+      "companies": {
+        "wwe": 20,
+        "nxt": 4,
+        "tna": 3,
+        "njpw": 1
+      },
+      "cataloguePpvs": 28,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2017": {
+      "companies": {
+        "wwe": 21,
+        "nxt": 5,
+        "tna": 3,
+        "njpw": 1
+      },
+      "cataloguePpvs": 30,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2018": {
+      "companies": {
+        "wwe": 19,
+        "nxt": 5,
+        "tna": 10,
+        "aew": 1,
+        "roh": 1,
+        "njpw": 1
+      },
+      "cataloguePpvs": 37,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2019": {
+      "companies": {
+        "wwe": 19,
+        "nxt": 5,
+        "tna": 18,
+        "aew": 8,
+        "roh": 1,
+        "njpw": 1
+      },
+      "cataloguePpvs": 52,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2020": {
+      "companies": {
+        "wwe": 17,
+        "nxt": 6,
+        "tna": 10,
+        "aew": 7,
+        "roh": 1,
+        "njpw": 68
+      },
+      "cataloguePpvs": 109,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2021": {
+      "companies": {
+        "wwe": 17,
+        "nxt": 6,
+        "tna": 14,
+        "aew": 8,
+        "roh": 7,
+        "njpw": 142
+      },
+      "cataloguePpvs": 194,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2022": {
+      "companies": {
+        "wwe": 20,
+        "nxt": 5,
+        "tna": 12,
+        "aew": 10,
+        "roh": 3,
+        "njpw": 120
+      },
+      "cataloguePpvs": 170,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2023": {
+      "companies": {
+        "wwe": 19,
+        "nxt": 6,
+        "tna": 15,
+        "aew": 16,
+        "roh": 3,
+        "njpw": 15
+      },
+      "cataloguePpvs": 74,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2024": {
+      "companies": {
+        "wwe": 18,
+        "nxt": 7,
+        "tna": 12,
+        "aew": 18,
+        "roh": 3,
+        "njpw": 14
+      },
+      "cataloguePpvs": 72,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2025": {
+      "companies": {
+        "wwe": 19,
+        "nxt": 10,
+        "tna": 12,
+        "aew": 17,
+        "roh": 3,
+        "njpw": 129
+      },
+      "cataloguePpvs": 190,
+      "references": 0,
+      "missing": 0,
+      "withoutVideo": 0,
+      "withSources": 0
+    },
+    "2026": {
+      "companies": {
+        "wwe": 15,
+        "nxt": 5,
+        "tna": 7,
+        "aew": 18,
+        "roh": 2,
+        "njpw": 106
+      },
+      "cataloguePpvs": 153,
+      "references": 15,
+      "missing": 1,
+      "withoutVideo": 3,
+      "withSources": 11
+    }
+  },
+  "references": [
+    {
+      "id": "reference:wwe:2026-01-31:royal-rumble-2026",
+      "company": "wwe",
+      "date": "2026-01-31",
+      "year": 2026,
+      "title": "Royal Rumble 2026",
+      "official_url": "https://www.wwe.com/shows/royalrumble/2026",
+      "state": "with_sources",
+      "eventId": "wwe:2026-01-31:ppv",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:wwe:2026-04-18:wrestlemania-42---noite-1",
+      "company": "wwe",
+      "date": "2026-04-18",
+      "year": 2026,
+      "title": "WrestleMania 42 — Noite 1",
+      "official_url": "https://www.wwe.com/shows/wrestlemania/42",
+      "state": "with_sources",
+      "eventId": "wwe:2026-04-18:ppv:wrestlemania2026-night1",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:wwe:2026-04-19:wrestlemania-42---noite-2",
+      "company": "wwe",
+      "date": "2026-04-19",
+      "year": 2026,
+      "title": "WrestleMania 42 — Noite 2",
+      "official_url": "https://www.wwe.com/shows/wrestlemania/42",
+      "state": "with_sources",
+      "eventId": "wwe:2026-04-19:ppv:wrestlemania2026-night2",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:wwe:2026-05-09:backlash-2026",
+      "company": "wwe",
+      "date": "2026-05-09",
+      "year": 2026,
+      "title": "Backlash 2026",
+      "official_url": "https://www.wwe.com/shows/backlash/2026",
+      "state": "with_sources",
+      "eventId": "wwe:2026-05-09:ppv",
+      "sourcesCount": 3
+    },
+    {
+      "id": "reference:wwe:2026-05-31:clash-in-italy-2026",
+      "company": "wwe",
+      "date": "2026-05-31",
+      "year": 2026,
+      "title": "Clash in Italy 2026",
+      "official_url": "https://www.wwe.com/shows",
+      "state": "with_sources",
+      "eventId": "wwe:2026-05-31:ppv",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:wwe:2026-06-27:night-of-champions-2026",
+      "company": "wwe",
+      "date": "2026-06-27",
+      "year": 2026,
+      "title": "Night of Champions 2026",
+      "official_url": "https://www.wwe.com/shows",
+      "state": "with_sources",
+      "eventId": "wwe:2026-06-27:ppv",
+      "sourcesCount": 2
+    },
+    {
+      "id": "reference:wwe:2026-08-01:summerslam-2026---noite-1",
+      "company": "wwe",
+      "date": "2026-08-01",
+      "year": 2026,
+      "title": "SummerSlam 2026 — Noite 1",
+      "official_url": "https://www.wwe.com/shows/summerslam",
+      "state": "with_sources",
+      "eventId": "wwe:2026-08-01:ppv:summerslam2026-night1",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:wwe:2026-08-02:summerslam-2026---noite-2",
+      "company": "wwe",
+      "date": "2026-08-02",
+      "year": 2026,
+      "title": "SummerSlam 2026 — Noite 2",
+      "official_url": "https://www.wwe.com/shows/summerslam",
+      "state": "with_sources",
+      "eventId": "wwe:2026-08-02:ppv:summerslam2026-night2",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:wwe:2026-10-10:money-in-the-bank-2026",
+      "company": "wwe",
+      "date": "2026-10-10",
+      "year": 2026,
+      "title": "Money in the Bank 2026",
+      "official_url": "https://www.wwe.com/shows/moneyinthebank",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "reference:nxt:2026-10-31:nxt-halloween-havoc",
+      "company": "nxt",
+      "date": "2026-10-31",
+      "year": 2026,
+      "title": "NXT Halloween Havoc",
+      "official_url": "https://www.wwe.com/shows/wwenxt",
+      "state": "with_sources",
+      "eventId": "nxt:2026-10-31:nxthalloweenhavoc",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:wwe:2026-11-07:crown-jewel-2026",
+      "company": "wwe",
+      "date": "2026-11-07",
+      "year": 2026,
+      "title": "Crown Jewel 2026",
+      "official_url": "https://www.wwe.com/shows",
+      "state": "with_sources",
+      "eventId": "official:wwe:2026-11-07:crown-jewel-2026",
+      "sourcesCount": 1
+    },
+    {
+      "id": "reference:aew:2026-11-14:aew-full-gear-2026",
+      "company": "aew",
+      "date": "2026-11-14",
+      "year": 2026,
+      "title": "AEW Full Gear 2026",
+      "official_url": "https://www.allelitewrestling.com/post/aew-full-gear-2026-preview",
+      "state": "with_sources",
+      "eventId": "official:aew:2026-11-14:full-gear",
+      "sourcesCount": 3
+    },
+    {
+      "id": "reference:tna:2026-11-15:tna-destination-x-2026",
+      "company": "tna",
+      "date": "2026-11-15",
+      "year": 2026,
+      "title": "TNA Destination X 2026",
+      "official_url": "https://tnawrestling.com/news/destination-x-returns-showcase-event-from-tna-wrestling-is-sunday-november-15-live-from-edmonton-alberta-canada",
+      "state": "without_video",
+      "eventId": "official:tna:2026-11-15:destination-x",
+      "sourcesCount": 0
+    },
+    {
+      "id": "reference:wwe:2026-11-28:survivor-series--wargames-2026",
+      "company": "wwe",
+      "date": "2026-11-28",
+      "year": 2026,
+      "title": "Survivor Series: WarGames 2026",
+      "official_url": "https://www.wwe.com/shows",
+      "state": "without_video",
+      "eventId": "official:wwe:2026-11-28:survivor-series-wargames-2026",
+      "sourcesCount": 0
+    },
+    {
+      "id": "reference:wwe:2026-12-12:wrestlepalooza-2026",
+      "company": "wwe",
+      "date": "2026-12-12",
+      "year": 2026,
+      "title": "Wrestlepalooza 2026",
+      "official_url": "https://www.wwe.com/shows",
+      "state": "without_video",
+      "eventId": "official:wwe:2026-12-12:wrestlepalooza-2026",
+      "sourcesCount": 0
+    }
+  ]
+}

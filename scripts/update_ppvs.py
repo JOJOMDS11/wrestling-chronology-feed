@@ -238,6 +238,41 @@ def merge_preserving_sources(existing, discovered):
     return result
 
 
+def reconcile_verified_ppvs(saved):
+    """Seed documented PPVs even when a provider's dynamic schedule is unavailable.
+
+    Date/company/title overlap is checked before creating a new record. A reference
+    is NOT a proof that the video is available and cannot replace an existing link.
+    """
+    ref_file = HERE / 'config' / 'ppv_reference.json'
+    if not ref_file.exists():
+        return 0
+    ref = json.loads(ref_file.read_text(encoding='utf-8'))
+    created = 0
+    for item in ref.get('events', []):
+        if not isinstance(item, dict) or item.get('company') not in ('wwe','aew','tna','nxt','roh','njpw'):
+            continue
+        date, company = item.get('date'), item.get('company')
+        if not isinstance(date,str) or not re.fullmatch(r'20\d{2}-\d{2}-\d{2}',date):
+            continue
+        def norm(v):
+            return re.sub(r'[^a-z0-9]+','',str(v).lower())
+        name=norm(item.get('title',''))
+        if any(x.get('date')==date and x.get('company')==company and
+               (norm(x.get('title',''))==name or
+                # A single scheduled marquee event on a day may have a shorter catalogue title.
+                (len(name)>8 and norm(x.get('title','')) in name and len(norm(x.get('title','')))>8))
+               for x in saved.values()):
+            continue
+        uid=str(item.get('id',''))
+        if not re.fullmatch(r'[a-zA-Z0-9:_-]{8,180}',uid) or uid in saved:
+            continue
+        saved[uid]={key:value for key,value in item.items() if key in ('id','company','date','year','title','show','official_url','description')}
+        saved[uid].update({'sources':[],'status':'awaiting_video','referenceOnly':True})
+        created += 1
+    return created
+
+
 def run():
     existing = json.loads(DEST.read_text(encoding='utf-8')) if DEST.exists() else {}
     saved = {event['id']: event for event in existing.get('events', []) if 'id' in event}
@@ -256,6 +291,8 @@ def run():
             print(f'{company.upper()}: {len(found)} eventos oficiais encontrados')
         except Exception as exc:
             print(f'AVISO: falha ao consultar {company}: {exc}. Mantendo os anteriores.', file=sys.stderr)
+    seeded=reconcile_verified_ppvs(saved)
+    if seeded: print('PPVs confirmados adicionados sem vídeos:',seeded)
     # This feed is append-only for historical records: a missing official source,
     # old date, or temporary scrape failure must NEVER erase approved associations.
     results = sorted(saved.values(),

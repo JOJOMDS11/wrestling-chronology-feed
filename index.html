@@ -220,6 +220,31 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 /* Editor de fontes/miniatura no próprio player. */
 .eventEditTop{display:flex;align-items:center;gap:9px}.eventEditOpen{background:#5a3a7b;border:1px solid #9c78c3;color:#fff;padding:11px 13px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:750;white-space:nowrap}.eventEditOpen:hover{background:#704896}
 .eventEditDialog{border:1px solid #896ba8;border-radius:19px;background:#1f182a;color:#f6eeff;width:min(95vw,740px);max-height:90vh;box-shadow:0 25px 90px #000a;padding:0}.eventEditDialog::backdrop{background:#06030bdc;backdrop-filter:blur(6px)}.eventEditForm{padding:clamp(15px,2.8vw,27px);display:grid;gap:15px;max-height:88vh;overflow:auto}.eventEditForm h3{margin:0;font-size:clamp(20px,3vw,25px)}.eventEditForm label{font-size:13px;font-weight:650;display:grid;gap:7px}.eventEditForm input[type=url],.eventEditForm input[type=password]{width:100%;min-width:0;box-sizing:border-box;background:#0e0b14;color:#fff;border:1px solid #675280;border-radius:9px;padding:12px;font-size:14px}.eventEditForm input:focus{outline:2px solid #a576e0}.eventEditRow{border:1px solid #564668;border-radius:12px;padding:12px;display:grid;gap:10px;background:#271f33}.eventEditRowHead{display:flex;align-items:center;justify-content:space-between;gap:8px}.eventEditRowHead b{font-size:13px}.eventEditRow button,.eventEditButtons button{border:1px solid #8967ae;border-radius:9px;background:#513669;padding:10px 13px;color:#fff;font-weight:700;cursor:pointer}.eventEditRow button.danger{background:#432638;border-color:#b6758a}.eventEditButtons{display:flex;flex-wrap:wrap;gap:9px;justify-content:flex-end}.eventEditButtons .save{background:#7849ab}.eventEditPreview{display:flex;gap:12px;align-items:center}.eventEditPreview img{width:120px;aspect-ratio:16/9;object-fit:cover;border:1px solid #524364;border-radius:9px;background:#08070e}.eventEditNote{color:#c8bad9;font-size:13px;line-height:1.5}.eventEditFeedback{min-height:22px;font-size:13px;color:#d6bcec}.eventEditForm .eventEditConfirm{display:flex;align-items:flex-start;gap:8px;font-size:12px;font-weight:500}.eventEditConfirm input{margin:2px 0 0}.eventEditEmpty{padding:10px;background:#251a32;border-radius:9px;font-size:13px;color:#cbb9da}@media(max-width:650px){.viewerTop{padding:14px;gap:6px}.eventEditTop{align-items:flex-end;flex-direction:column}.eventEditOpen{font-size:12px;padding:9px}.eventEditRow{padding:10px}.eventEditPreview img{width:95px}}
+
+/* JOJO: audited PPV dates and explicit playback uncertainty */
+.ppvAuditBtn{border:1px solid #9c70ce;background:#38234d;color:#fff;border-radius:10px;padding:11px 13px;font-weight:800;cursor:pointer}
+.ppvAuditDialog{width:min(94vw,780px);max-height:87vh;padding:0;color:#f3e8ff;background:#1e152a;border:1px solid #80639d;border-radius:16px;box-shadow:0 14px 65px #0009}
+.ppvAuditDialog::backdrop{background:#040209d9}
+.ppvAuditInner{padding:19px;max-height:85vh;overflow:auto}
+.ppvAuditHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.ppvAuditHead strong{font-size:19px}
+.ppvAuditHead button,.ppvAuditTools button,.ppvAuditRow button{border:1px solid #786098;border-radius:9px;background:#46315c;color:#fff;padding:9px 12px;cursor:pointer}
+.ppvAuditFilters{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.ppvAuditFilters label{display:grid;gap:5px;min-width:170px;font-size:12px;color:#d8c6ec;flex:1}
+.ppvAuditFilters select{color:#fff;background:#291b38;border:1px solid #7b5b94;padding:10px;border-radius:8px}
+.ppvAuditStats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.ppvAuditStats span{border:1px solid #5b476e;border-radius:8px;background:#2f203d;padding:9px;font-size:12px}
+.ppvAuditStats b{font-size:17px;display:block}
+.ppvAuditRow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:7px 0;border:1px solid #584168;border-radius:10px;padding:11px;background:#2b203a;flex-wrap:wrap}
+.ppvAuditRow strong{font-size:13px}.ppvAuditRow small{display:block;color:#c8b5d6;margin-top:5px}
+.ppvAuditRow.missing{border-color:#c87488}.ppvAuditRow.noVideo{border-color:#bb9556}
+.ppvAuditNote{font-size:12px;color:#d5bfe8;line-height:1.5;margin:12px 0}
+.ppvAuditTools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.ppvAuditRunDialog{border:1px solid #815ca0;background:#23182f;color:#fff;padding:22px;border-radius:13px;width:min(90vw,440px)}
+.ppvAuditRunDialog::backdrop{background:#000b}
+.ppvAuditRunDialog form{display:grid;gap:10px}.ppvAuditRunDialog input{color:#fff;background:#181020;border:1px solid #805fa0;border-radius:9px;padding:10px;width:100%;box-sizing:border-box}
+.ppvAuditRunDialog menu{margin:0;padding:0;display:flex;justify-content:flex-end;gap:8px}.ppvAuditRunDialog button{background:#583675;border:1px solid #8767a4;border-radius:9px;padding:9px 13px;color:#fff}
+@media(max-width:570px){.ppvAuditInner{padding:12px}.ppvAuditBtn{width:100%}.ppvAuditRow{align-items:stretch}.ppvAuditRow button{width:100%}}
 </style>
 </head>
 <body>
@@ -243,8 +268,8 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 
 </details>
 <nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
-<section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="showFilter" id="showFilterWrap" hidden>📺 Programa <select id="showFilter" aria-label="Filtrar programa ou brand"><option value="">Todas as brands</option></select></label><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
-<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 Eventos recentes e próximos shows</strong><small>Eventos oficiais registrados, mesmo sem vídeo cadastrado · fontes exigem confirmação</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
+<section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="showFilter" id="showFilterWrap" hidden>📺 Programa <select id="showFilter" aria-label="Filtrar programa ou brand"><option value="">Todas as brands</option></select></label><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><button type="button" id="ppvAuditOpen" class="ppvAuditBtn">🔎 Auditar PPVs por ano</button><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
+<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 PPVs recentes e próximos shows</strong><small>Eventos cadastrados mesmo após a data, inclusive sem vídeo · fontes exigem confirmação</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
 
 <section class="trustedPanel" aria-label="Sites confiáveis e arquivos cadastrados">
 <details id="trustedDetails">
@@ -287,6 +312,19 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <div class="reviewTools" id="reviewTrashBar" hidden><div id="reviewTrashInfo" class="reviewHint">Lixeira</div><div class="reviewToolBtns"><button type="button" id="reviewTrashBack">← Voltar aos candidatos</button><button type="button" id="reviewTrashRestoreAll">↩ Restaurar todos</button><button type="button" id="reviewTrashEmpty" class="danger">🧨 Esvaziar lixeira</button><button type="button" id="reviewUnpurge">♻ Recuperar excluídos</button></div></div>
  <div id="reviewSubmitted" class="reviewSubmitted" hidden></div>
  <div id="reviewCandidates" class="reviewCards"></div>
+</dialog>
+<dialog id="ppvAuditDialog" class="ppvAuditDialog" aria-label="Auditoria de PPVs por empresa e ano">
+ <div class="ppvAuditInner">
+  <div class="ppvAuditHead"><div><strong>🔎 Auditoria de PPVs / PLEs</strong><p class="ppvAuditNote">Confronta as referências documentadas com os catálogos publicados. Não altera vídeos.</p></div><button type="button" id="ppvAuditClose" aria-label="Fechar auditoria">✕</button></div>
+  <div class="ppvAuditFilters"><label>Empresa<select id="ppvAuditCompany"><option value="">Todas</option></select></label><label>Ano<select id="ppvAuditYear"><option value="">Todos os anos</option></select></label></div>
+  <div id="ppvAuditStats" class="ppvAuditStats" role="status">Carregando auditoria…</div>
+  <p id="ppvAuditNotice" class="ppvAuditNote"></p>
+  <div class="ppvAuditTools"><button type="button" id="ppvAuditRefresh">↻ Conferir dados publicados</button><button type="button" id="ppvAuditRun">🔄 Rodar auditoria oficial agora</button></div>
+  <div id="ppvAuditItems"></div>
+ </div>
+</dialog>
+<dialog id="ppvAuditRunDialog" class="ppvAuditRunDialog" aria-label="Solicitar auditoria oficial com Master Key">
+ <form id="ppvAuditRunForm"><strong>🔄 Buscar PPVs e possíveis fontes</strong><p class="ppvAuditNote">Aciona o GitHub Actions de agenda, auditoria e metadados. Candidatos nunca são aprovados automaticamente.</p><label>Master Key<input type="password" id="ppvAuditKey" required maxlength="128" autocomplete="off"></label><div class="ppvAuditNote" id="ppvAuditRunFeedback" role="status"></div><menu><button type="button" id="ppvAuditRunCancel">Cancelar</button><button type="submit" id="ppvAuditRunSend">Executar busca</button></menu></form>
 </dialog>
 <dialog id="linkHealthDialog" class="linkHealthDialog" aria-label="Confirmar verificação de links">
 <form id="linkHealthForm"><strong>🛡️ Verificar saúde dos links</strong>
@@ -501,32 +539,43 @@ function initLinkHealth(){
   if(!base)return;
   return fetch(base+'/api/jojo-monitor/links/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('Status indisponível');return r.json()}).then(function(d){
    var c=d.counts||{},total=Number(d.totalSources||0),pending=Number(c.nao_verificado||0),checked=Math.max(0,total-pending),pct=total?Math.round(checked/total*100):0;
-   var susp=Number(c.suspeito||0)+Number(c.provavelmente_indisponivel||0),restr=Number(c.acesso_restrito||0),okn=Number(c.pagina_acessivel||0);
+   var susp=Number(c.suspeito||0)+Number(c.provavelmente_indisponivel||0),restr=Number(c.acesso_restrito||0),okn=Number(c.pagina_acessivel||0),uncertain=Number(c.incerto||0),recent=Number(d.recent48h||0);
    function tone(box,cls){box.className='linkHealthStat '+cls;return box}
-   stats.replaceChildren(stat('Fontes cadastradas',String(total)),tone(stat('Páginas acessíveis',String(okn)),okn?'ok':''),tone(stat('Suspeitas',String(susp)),susp?'bad':'ok'),tone(stat('Acesso restrito',String(restr)),restr?'warn':''),tone(stat('Ainda não verificadas',String(pending)),pending?'warn':'ok'));
+   stats.replaceChildren(stat('Fontes cadastradas',String(total)),tone(stat('HTTP 200 (reprodução NÃO testada)',String(okn)),'warn'),tone(stat('Sinais de falha',String(susp)),susp?'bad':''),tone(stat('Respostas incertas / timeout',String(uncertain)),uncertain?'warn':''),tone(stat('Acesso restrito',String(restr)),restr?'warn':''),tone(stat('Sem nenhuma consulta',String(pending)),pending?'warn':''),stat('Reavaliadas nas últimas 48h',String(recent)));
    var bar=el('div','linkHealthBar'),fill=document.createElement('i');fill.style.width=pct+'%';bar.append(fill);bar.setAttribute('role','progressbar');bar.setAttribute('aria-valuenow',String(pct));bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax','100');
-   var lab=el('div','linkHealthBarLabel');lab.append(el('span','','Cobertura: '+checked.toLocaleString('pt-BR')+' de '+total.toLocaleString('pt-BR')+' fontes verificadas ('+pct+'%)'),el('span','',pending?'Faltam '+pending.toLocaleString('pt-BR')+' · ~'+Math.max(1,Math.ceil(pending/Math.max(1,Number(d.batchSize)||360)))+' rodada(s)':'✅ Tudo verificado ao menos uma vez'));
+   var lab=el('div','linkHealthBarLabel');lab.append(el('span','','Histórico: '+checked.toLocaleString('pt-BR')+' de '+total.toLocaleString('pt-BR')+' fontes já consultadas ('+pct+'%); reprodução não avaliada'),el('span','',pending?'Faltam '+pending.toLocaleString('pt-BR')+' · ~'+Math.max(1,Math.ceil(pending/Math.max(1,Number(d.batchSize)||360)))+' rodada(s)':'✅ Todas tiveram pelo menos uma tentativa de consulta; '+uncertain.toLocaleString('pt-BR')+' inconclusivas'));
    stats.append(bar,lab);
    button.disabled=!d.canRequest;
    var lines=el('div','linkHealthLines');
    function line(k,v){var r=el('div','');r.append(el('b','',k+': '),document.createTextNode(v));lines.append(r)}
-   line('Última rodada',date(d.checkedAt)+' · '+(d.batchSize||0)+' fontes testadas');
+   line('Última execução',date(d.checkedAt)+' · '+(d.batchSize||0)+' requisições nesta rodada');
+   line('Último teste de página',date(d.lastProbeAt));
+   if(!Number(d.batchSize||0))line('⚠️ Rodada sem testes','0 fontes testadas; os totais abaixo são registros históricos, NÃO verificações desta execução');
+   line('Reprodução no player','0 fontes verificadas automaticamente; confirme no player ou use o lápis para corrigir');
    line('Situação',d.running?'⏳ Executando na Oracle':d.queued?'⏳ Na fila':'Parado, aguardando a próxima rodada');
    if(d.cooldownSeconds)line('Próxima verificação manual','em '+Math.ceil(d.cooldownSeconds/60)+' min');else if(!d.running&&!d.queued)line('Próxima verificação manual','disponível agora');
    if(d.error)line('⚠️ Aviso',String(d.error));
    if(d.catalogueFailures&&d.catalogueFailures.length)line('⚠️ Catálogos','alguns não puderam ser lidos ('+d.catalogueFailures.length+')');
-   line('Resultado',susp?susp+' link(s) suspeito(s) para você conferir abaixo.':'nenhum suspeito entre as '+checked.toLocaleString('pt-BR')+' verificadas.');
-   var foot=el('div','linkHealthNote','HTTP 200 não garante que o vídeo reproduz. Nenhum link é alterado automaticamente: você aprova qualquer troca.');
+   line('Resultado',susp+' sinais de falha; '+uncertain+' respostas inconclusivas. HTTP 200 jamais conta como vídeo funcionando.');
+   var foot=el('div','linkHealthNote','A checagem é da página, não da reprodução. Erros do player podem ocorrer com HTTP 200. Fontes suspeitas são sugeridas, nunca substituídas automaticamente.');
    info.replaceChildren(lines,foot);
    issues.replaceChildren();
    var rows=Array.isArray(d.issues)?d.issues:[];
-   if(!rows.length){if(!d.hasReport)issues.append(el('p','linkHealthNote','Aguardando a primeira verificação de links.'));return}
+   if(!rows.length){issues.append(el('p','linkHealthNote',!d.hasReport?'Aguardando a primeira verificação de links.':'Nenhum alerta da checagem de página. Vídeos com HTTP 200 ainda exigem conferência manual.'));}
    if(d.issueCount>rows.length)issues.append(el('p','linkHealthNote','Mostrando '+rows.length+' de '+d.issueCount+' alertas; demais ficam preservados na Oracle.'));
+   fetch('./config/broken_sources.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(doc){
+    if(!doc||!doc.sources)return;
+    var keys=Object.keys(doc.sources).filter(function(k){return doc.sources[k]&&doc.sources[k].verifyManually});
+    if(!keys.length)return;
+    stats.append(tone(stat('Relatos manuais de vídeo quebrado',String(keys.length)),'bad'));
+    var title=el('p','linkHealthNote','🚨 Relatos manuais de falha de reprodução ('+keys.length+') · são independentes do HTTP.');issues.prepend(title);
+    keys.slice(0,25).forEach(function(k){var rec=doc.sources[k],box=el('div','linkHealthIssue');box.append(el('strong','','⚠️ '+k),el('small','',String(rec.status||'Vídeo reportado como quebrado')));var link=k.split(':');if(link[0]==='okru'&&/^\d+$/.test(link[1])){var a=el('a','','↗ Conferir no OK.ru');a.href='https://ok.ru/video/'+link[1];a.target='_blank';a.rel='noopener noreferrer';box.append(a)}issues.prepend(box)})
+   }).catch(function(){});
    rows.forEach(function(issue){
     var event=issue.event||{},card=el('div','linkHealthIssue');
     var name=event.title||'Evento sem identificação',company=(event.company||'').toUpperCase();
     card.append(el('strong','',company+' · '+name+' · '+(event.date||'')));
-    var labels={suspeito:'⚠️ Página respondeu 404/410; aguardando confirmações',provavelmente_indisponivel:'❌ Possível remoção após 3 verificações separadas',acesso_restrito:'🔒 Bloqueio regional ou de acesso; não é exclusão'};
+    var labels={suspeito:'⚠️ Indício de falha (404/410 ou mensagem de vídeo removido mesmo com 200)',provavelmente_indisponivel:'❌ Possível remoção após 3 verificações separadas',acesso_restrito:'🔒 Restrição regional ou de acesso; não é prova de remoção',incerto:'❔ Timeout/erro de rede: a reprodução NÃO foi confirmada'};
     card.append(el('small','',labels[issue.state]||issue.state));
     var a=el('a','', '↗ Conferir fonte');a.href=issue.url;a.target='_blank';a.rel='noopener noreferrer';card.append(a);
     (issue.alternatives||[]).forEach(function(candidate){
@@ -943,18 +992,25 @@ function nextWeeklyByShow(){
 }
 function scheduledVisible(r,search){
  if(!r.scheduled)return true;
- if(search)return true; // Pesquisa explícita permite localizar qualquer data para revisão
- if(isPpv(r))return r.date>=localISODate(0)&&r.date===((state.nextPpv||{})[r._company||r.company]||'');
- var today=localISODate(0),key=r._company||r.company;
+ // PPV confirmado permanece na cronologia mesmo depois de ocorrer sem gravação.
+ if(isPpv(r))return true;
+ if(search||$('year').value||$('showFilter').value)return true;
+ var today=localISODate(0),key=r._company||r.company,from=localISODate(-155),label=clean((r.show||'')+' '+(r.title||''));
+ // Backfill de RAW, SmackDown e NXT (especialmente julho-novembro/2026).
+ if(r.date<=today&&r.date>=from&&/\b(raw|smackdown|nxt)\b/.test(label))return true;
+ // Outras grades: mostrar pendentes recentes, sem vender a previsão como confirmação.
+ if(r.date<=today&&r.date>=localISODate(/xplosion/.test(label)?-65:-21))return true;
  return r.date>=today&&r.date===((state.nextWeekly||{})[key]||'');
 }
 function renderUpcoming(){var node=$('upcomingPanel'),box=$('upcomingCards');box.replaceChildren();
- var today=localISODate(0),rows=state.rows.filter(function(r){return r.scheduled&&scheduledVisible(r,false)&&r.date>=today&&
-  (state.company==='all'||r._company===state.company)&&(!$('ppvOnly').checked||isPpv(r))});
+ var today=localISODate(0),rows=state.rows.filter(function(r){return r.scheduled &&
+  (state.company==='all'||r._company===state.company)&&(!$('ppvOnly').checked||isPpv(r)) &&
+  ((isPpv(r)&&r.date>=localISODate(-14)&&r.date<=localISODate(60)) ||
+   (!isPpv(r)&&r.date>=today&&r.date<=localISODate(7)&&scheduledVisible(r,false)))});
  rows.sort(function(a,b){return chronology(a,b)});rows=rows.slice(0,12);
  node.hidden=!rows.length;rows.forEach(function(r){var b=el('button','upcomingCard');b.type='button';
  b.append(el('strong','',r.title));b.append(el('small','',cardDateBR(r.date)+' · '+names[r._company]+' · '+
- (r.provisional?'Previsão semanal':'Agendado')));b.addEventListener('click',function(){open(r)});box.append(b)})
+ (r.date<today?'Já aconteceu · Sem vídeo':r.provisional?'Previsão semanal':'Programado · Aguardando vídeo')));b.addEventListener('click',function(){open(r)});box.append(b)})
 }
 function fetchCompany(code){if(state.cache[code])return Promise.resolve(state.cache[code]);return fetch('./'+code+'.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw Error('HTTP '+r.status+' ao buscar '+code+'.json');return r.json()}).then(function(x){if(!x.catalogue||!Array.isArray(x.catalogue.episodes))throw Error('Arquivo de catálogo incompatível');state.cache[code]=x.catalogue.episodes.map(function(r){r._company=code;return r});return state.cache[code]})}
 function showBucket(r){
@@ -1049,7 +1105,52 @@ function close(){if(state.current&&state.source)saveWatch();var v=$('video');v.p
 function vlc(){var s=state.source,u=sourceUrl(s);if(!u||s.type!=='archive')return;try{var parsed=new URL(u);var fallback=encodeURIComponent(u);location.href='intent://'+parsed.host+parsed.pathname+parsed.search+'#Intent;scheme=https;package=org.videolan.vlc;S.browser_fallback_url='+fallback+';end'}catch(e){txt($('videoInfo'),'Não foi possível abrir o VLC; use Abrir fonte.') }}
 function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.tagName)>=0}
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
-function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('showFilter').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('debugSource').addEventListener('click',function(){updateSourceDebug();$('sourceDebug').open=!$('sourceDebug').open});loadBrokenSources();$('findOtherSource').addEventListener('click',function(){var r=state.current;if(!r)return;close();var query=[names[r._company||r.company||'wwe']||'',r.title,r.date].filter(Boolean).join(' ');$('reviewSearch').value=query;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').focus()});$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}Promise.all([fetchUpdates(),loadEventEdits()]).then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initEventEditor();initAutoMatchSync();initLinkHealth();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
+function initPpvAudit(){
+ var dlg=$('ppvAuditDialog'),stats=$('ppvAuditStats'),rowsEl=$('ppvAuditItems'),notice=$('ppvAuditNotice');
+ var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='';
+ codes.forEach(function(c){company.add(new Option(names[c]||c.toUpperCase(),c))});
+ function render(){
+  if(!report)return;
+  var selected=company.value,yy=year.value,items=(report.references||[]).filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)});
+  var missing=items.filter(function(x){return x.state==='missing'}),empty=items.filter(function(x){return x.state==='without_video'}),ready=items.filter(function(x){return x.state==='with_sources'});
+  stats.replaceChildren();
+  function metric(n,label){var span=el('span','');span.append(el('b','',String(n)),document.createTextNode(label));stats.append(span)}
+  var yearRows=report.years||{},totalCatalogue=0;Object.keys(yearRows).forEach(function(k){if(!yy||k===yy){if(!selected)totalCatalogue+=Number(yearRows[k].cataloguePpvs||0);else totalCatalogue+=Number((yearRows[k].companies||{})[selected]||0)}});
+  metric(totalCatalogue,'PPVs registrados na base');metric(items.length,'Referências verificáveis');metric(missing.length,'Faltando no catálogo');metric(empty.length,'Sem vídeo cadastrado');metric(ready.length,'Com fontes (reprodução não garantida)');
+  var last=report.checkedAt?new Date(report.checkedAt).toLocaleString('pt-BR'):'sem data';
+  txt(notice,'Auditoria gerada em '+last+'. '+(report.notice||'Cobertura parcial das referências oficiais.')+' A busca automática ocorre diariamente; vídeos encontrados continuam pendentes de aprovação.');
+  rowsEl.replaceChildren();
+  items.sort(function(a,b){var rank={missing:0,without_video:1,with_sources:2};return rank[a.state]-rank[b.state]||b.date.localeCompare(a.date)});
+  if(!items.length){rowsEl.append(el('p','ppvAuditNote','Nenhuma referência detalhada cadastrada para essa seleção. Os PPVs existentes aparecem no total, mas não é possível afirmar quais faltam sem calendário oficial desse ano.'));return}
+  items.forEach(function(it){var row=el('div','ppvAuditRow '+(it.state==='missing'?'missing':it.state==='without_video'?'noVideo':''));var group=el('div','');
+   var labels={missing:'🚨 AUSENTE do catálogo',without_video:'🟡 Cadastrado · sem vídeo',with_sources:'✅ Cadastrado · fonte ainda sem reprodução confirmada'};
+   group.append(el('strong','',it.title),el('small','',cardDateBR(it.date)+' · '+(names[it.company]||it.company.toUpperCase())+' · '+labels[it.state]));row.append(group);
+   var buttons=el('div','');
+   if(it.official_url){var a=el('a','', '↗ Site oficial');a.href=it.official_url;a.target='_blank';a.rel='noopener noreferrer';a.style.cssText='display:inline-block;color:#f4ddff;margin:0 8px 8px 0;font-size:12px';buttons.append(a)}
+   var search=el('button','', '🔎 Procurar vídeo');search.type='button';search.addEventListener('click',function(){dlg.close();$('reviewSearch').value=it.title+' '+it.date;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}))});buttons.append(search);
+   row.append(buttons);rowsEl.append(row)
+  })
+ }
+ function load(){txt(notice,'Consultando última auditoria publicada…');return fetch('./ppv_audit.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Auditoria ainda não publicada no site');return r.json()}).then(function(data){report=data;var old=year.value,all=Object.keys(data.years||{}).sort().reverse();year.replaceChildren(new Option('Todos os anos',''));all.forEach(function(y){year.add(new Option(y,y))});if(all.indexOf(old)>=0)year.value=old;render()}).catch(function(e){report=null;stats.replaceChildren();rowsEl.replaceChildren();txt(notice,'⚠️ '+e.message+'. Publique ppv_audit.json junto com o patch ou rode a ação diária no GitHub.')})}
+ $('ppvAuditOpen').addEventListener('click',function(){dlg.showModal();load()});
+ $('ppvAuditClose').addEventListener('click',function(){dlg.close()});
+ $('ppvAuditRefresh').addEventListener('click',load);company.addEventListener('change',render);year.addEventListener('change',render);
+ var sub=$('ppvAuditRunDialog'),key=$('ppvAuditKey'),feedback=$('ppvAuditRunFeedback'),send=$('ppvAuditRunSend');
+ $('ppvAuditRun').addEventListener('click',function(){key.value='';txt(feedback,'');sub.showModal();key.focus()});
+ $('ppvAuditRunCancel').addEventListener('click',function(){sub.close()});
+ sub.addEventListener('close',function(){key.value=''});
+ $('ppvAuditRunForm').addEventListener('submit',function(e){e.preventDefault();send.disabled=true;txt(feedback,'Solicitando auditoria…');
+  var secret=key.value;key.value='';
+  Promise.resolve().then(function(){return base?base:fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){base=String(d.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\/\s?#]+$/.test(base))throw Error('API Oracle sem endereço HTTPS');return base})})
+   .then(function(endpoint){return fetch(endpoint+'/api/jojo-monitor/ppvs/request',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:secret})})})
+   .then(function(r){return r.json().then(function(x){if(!r.ok)throw Error(x.message||'Auditoria recusada');return x})})
+   .then(function(x){txt(feedback,x.message||'Solicitação aceita');setTimeout(function(){sub.close();txt(notice,'Auditoria solicitada; os resultados serão atualizados no GitHub após a execução. Use ↻ Conferir dados publicados.')},1500)})
+   .catch(function(ex){txt(feedback,'⚠️ '+ex.message)})
+   .finally(function(){send.disabled=false})
+ })
+}
+
+function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('showFilter').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('debugSource').addEventListener('click',function(){updateSourceDebug();$('sourceDebug').open=!$('sourceDebug').open});loadBrokenSources();$('findOtherSource').addEventListener('click',function(){var r=state.current;if(!r)return;close();var query=[names[r._company||r.company||'wwe']||'',r.title,r.date].filter(Boolean).join(' ');$('reviewSearch').value=query;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').focus()});$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}Promise.all([fetchUpdates(),loadEventEdits()]).then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initEventEditor();initAutoMatchSync();initLinkHealth();initPpvAudit();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}
