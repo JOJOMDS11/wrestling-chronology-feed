@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T14:30:32.787912Z",
+  "generatedAt": "2026-11-16T14:33:50Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -526,6 +526,25 @@
       ],
       "approvedAt": "2026-11-16T09:18:01Z",
       "provisional": false
+    },
+    {
+      "id": "wwe:2026-11-02:raw",
+      "company": "wwe",
+      "date": "2026-11-02",
+      "year": 2026,
+      "title": "Raw",
+      "show": "Raw",
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16275297405518",
+          "url": "https://ok.ru/video/16275297405518",
+          "label": "OK.ru · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T13:52:24Z"
     },
     {
       "id": "auto:wwe:2026-11-03:nxt",
@@ -1223,25 +1242,6 @@
       "provisional": true,
       "sources": [],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
-    },
-    {
-      "id": "wwe:2026-11-02:raw",
-      "company": "wwe",
-      "date": "2026-11-02",
-      "year": 2026,
-      "title": "Raw",
-      "show": "Raw",
-      "status": "video_available",
-      "sources": [
-        {
-          "type": "okru",
-          "videoId": "16275297405518",
-          "url": "https://ok.ru/video/16275297405518",
-          "label": "OK.ru · Revisão administrativa"
-        }
-      ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T13:52:24Z"
     }
   ],
   "sources": [
