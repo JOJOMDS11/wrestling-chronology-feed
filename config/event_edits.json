@@ -63,6 +63,26 @@
       "sourceThumbnails": {},
       "thumbnailUrl": "",
       "updatedAt": "2026-11-16T15:44:09Z"
+    },
+    "aew:2026-09-26:ppv": {
+      "revision": 3,
+      "removed": [
+        "archive|https://archive.org/download/aewppv2026/AEW%20All%20Out%202026/AEW.All.Out.2026.PPV.1080p.WEB.h264-HEEL.mp4"
+      ],
+      "added": [
+        {
+          "type": "archive",
+          "videoId": "a09bb51d4b3d8991b8b0288f691338163",
+          "url": "https://archive.org/download/aewppv2026/AEW%20All%20Out%202026/AEW.All.Out.2026.PPV.1080p.WEB.h264-HEEL.mp4",
+          "label": "Adição manual · archive"
+        }
+      ],
+      "sourceThumbnails": {
+        "okru|16095663688303": "https://iv.okcdn.ru/videoPreview?id=18210323171925&type=37&idx=3&tkn=WbP4geoqN7Nu-uCsGn6-Jgmg6H0&fn=external_8",
+        "bilibili|4801077654460928": "https://pic.bstarstatic.com/ugc/33b46f1a9cd9ce5926a370275542e3a1.jpg@720w_405h_1e_1c_90q"
+      },
+      "thumbnailUrl": "",
+      "updatedAt": "2026-11-16T17:11:21Z"
     }
   }
 }
