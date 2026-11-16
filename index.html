@@ -84,6 +84,12 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .reviewManual{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 .reviewManual input{min-width:200px;flex:1;padding:10px;border-radius:8px;border:1px solid #72598f;background:#2b2139;color:#fff}
 .reviewManual button{border-radius:8px;border:1px solid #8166a5;background:#493361;color:#fff;cursor:pointer;padding:8px 12px}
+
+.reviewSubmitted{margin:8px 0 12px;padding:10px 12px;border:1px solid #60477b;border-radius:12px;background:#241a31;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px}
+.reviewSubmitted[hidden]{display:none!important}
+.reviewSubmitted span{flex:1 1 230px;color:#e5daf2}
+.reviewSubmitted button{min-height:34px;padding:6px 12px;border:1px solid #9779bd;border-radius:8px;background:#49345d;color:#fff;cursor:pointer}
+
 .reviewCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;max-height:550px;overflow:auto}
 .reviewCard{display:flex;gap:10px;border:1px solid #4d3d61;border-radius:12px;padding:9px;background:#231b2f;min-width:0}
 .reviewCard img{width:120px;height:68px;object-fit:cover;border-radius:8px;background:#130f18;flex-shrink:0}
@@ -275,6 +281,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <div class="reviewRelevance"><select id="reviewRelevance" aria-label="Qualidade dos resultados"><option value="best">✅ Shows completos prováveis</option><option value="recent">🆕 Recentes relevantes</option><option value="classic">📚 Shows antigos</option><option value="extra">🗂 Outros vídeos</option><option value="all">🔎 Todos os candidatos</option></select><small id="reviewQualityCounts">Classificando resultados…</small></div>
  <div class="reviewTools" id="reviewMainTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Lixeira p/ sem título</button><button type="button" id="reviewDismissAll">🗑 Mandar todos p/ lixeira</button><button type="button" id="reviewTrashBtn">🗑 Lixeira (<span id="reviewTrashCount">0</span>)</button><button type="button" id="reviewImportOld" hidden>☁️ Importar lixeira antiga</button></div></div>
  <div class="reviewTools" id="reviewTrashBar" hidden><div id="reviewTrashInfo" class="reviewHint">Lixeira</div><div class="reviewToolBtns"><button type="button" id="reviewTrashBack">← Voltar aos candidatos</button><button type="button" id="reviewTrashRestoreAll">↩ Restaurar todos</button><button type="button" id="reviewTrashEmpty" class="danger">🧨 Esvaziar lixeira</button><button type="button" id="reviewUnpurge">♻ Recuperar excluídos</button></div></div>
+ <div id="reviewSubmitted" class="reviewSubmitted" hidden></div>
  <div id="reviewCandidates" class="reviewCards"></div>
 </dialog>
 <dialog id="linkHealthDialog" class="linkHealthDialog" aria-label="Confirmar verificação de links">
@@ -608,14 +615,32 @@ function initReviewPanel(){
   .then(function(r){return r.ok?r.json():{candidates:[]}})
   .then(function(j){return Array.isArray(j.candidates)?j.candidates.filter(function(c){return c&&c.platform==='archive'&&/^a[0-9a-f]{32}$/.test(c.videoId||'')&&/^https:\/\/archive\.org\/download\//.test(c.url||'')}):[]})
   .catch(function(){return []})}
+ function loadSubmittedCandidates(){
+  return fetch('./config/submitted_candidates.json?t='+Date.now(),{cache:'no-store'})
+   .then(function(r){return r.ok?r.json():{candidates:[]}})
+   .then(function(data){return Array.isArray(data.candidates)?data.candidates.filter(function(c){
+     return c&&c.platform==='okru'&&/^[0-9]{8,20}$/.test(String(c.videoId||''))&&
+       c.url==='https://ok.ru/video/'+c.videoId&&c.submittedForReview===true;
+   }):[]}).catch(function(){return []});
+ }
  function load(silent){
   if(!silent)setMsg('Consultando candidatos e aprovações na Oracle e Internet Archive…');
   return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem configuração');return r.json()}).then(function(conf){
    cfg=String(conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^/\s?#]+$/.test(cfg))throw Error('Endereço HTTPS não configurado');
    loadReviewProfiles();
-   return Promise.all([fetch(cfg+'/api/jojo-monitor/candidates',{cache:'no-store',credentials:'omit'}),fetch(cfg+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'}),loadArchiveSuggestions()]);
-  }).then(function(res){if(!res[0].ok||!res[1].ok)throw Error('API indisponível');return Promise.all([res[0].json(),res[1].json(),Promise.resolve(res[2])])}).then(function(data){
-   candidates=(Array.isArray(data[0].candidates)?data[0].candidates:[]).concat(data[2]||[]);
+   return Promise.all([fetch(cfg+'/api/jojo-monitor/candidates',{cache:'no-store',credentials:'omit'}),fetch(cfg+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'}),loadArchiveSuggestions(),loadSubmittedCandidates()]);
+  }).then(function(res){if(!res[0].ok||!res[1].ok)throw Error('API indisponível');return Promise.all([res[0].json(),res[1].json(),Promise.resolve(res[2]),Promise.resolve(res[3])])}).then(function(data){
+   var mergedCandidates=new Map();
+   (Array.isArray(data[0].candidates)?data[0].candidates:[]).concat(data[2]||[],data[3]||[]).forEach(function(c){
+    var k=candidateKey(c),prev=mergedCandidates.get(k);
+    if(!prev){mergedCandidates.set(k,c);return}
+    // Preserve the real Oracle title/thumbnail while adding an administrator's review hint.
+    var hints=(prev.possibleEventIds||[]).concat(c.possibleEventIds||[]);
+    prev.possibleEventIds=Array.from(new Set(hints));
+    if(c.submittedForReview&&c.url==='https://ok.ru/video/'+c.videoId){prev.submittedForReview=true;prev.url=c.url}
+    if((!prev.title||/^(смотреть|watch|video)$/i.test(prev.title))&&c.title)prev.title=c.title;
+   });
+   candidates=Array.from(mergedCandidates.values());
    var quota=data[0];
    txt($('reviewLinkQuota'),Number.isFinite(Number(quota.linksDailyLimit))&&quota.linksDailyLimit!=null?'🔗 Vinculações hoje: '+Number(quota.linksUsedToday||0)+' / '+Number(quota.linksDailyLimit)+' · restam '+Number(quota.linksRemainingToday||0)+' (reset 00h Brasília)':'🔗 Limite de vinculações: consulte a Oracle após instalar a API atualizada.');
    approvedIds=new Set((data[1].approved||[]).map(candidateKey));
@@ -651,6 +676,14 @@ function initReviewPanel(){
  function render(){
   updateBadge();syncTrashUI();if(trashMode){renderTrash();return}
   grid.replaceChildren();var pending=pendingList(),linkedNow=linkedIds();
+  var submitted=$('reviewSubmitted'),priority=pending.filter(function(c){return c.submittedForReview===true});
+  submitted.replaceChildren();submitted.hidden=!priority.length;
+  if(priority.length){
+   var candidate=priority[0];
+   submitted.append(el('span','','📌 SmackDown 13/11/2026 · link OK.ru enviado por você, aguardando conferência (não aprovado).'));
+   var btn=el('button','','Conferir e vincular');btn.type='button';
+   btn.addEventListener('click',function(){openCandidate(candidate)});submitted.append(btn);
+  }
   var relevance=$('reviewRelevance').value,profileFilter=$('reviewProfile').value;var q=clean(($('reviewSearch').value||'').replace(/&/g,' and ').replace(/[^\p{L}\p{N}]+/gu,' ')).trim(),platform=$('reviewPlatform').value;
   var stats={best:0,classic:0,extra:0};pending.forEach(function(c){stats[quality(c)]++});
   txt($('reviewQualityCounts'),'✅ '+stats.best+' prováveis · 📚 '+stats.classic+' antigos · 🗂 '+stats.extra+' outros');
@@ -785,7 +818,7 @@ function initReviewPanel(){
   }).catch(function(err){txt($('reviewEventHelp'),'Falha ao atualizar calendário: '+err.message)})
  }
  function openCandidate(c,manualUrl){
-  selectedCandidate=c;selectedId=String(c.videoId);selectedPlatform=c.platform||'okru';selectedManualUrl=manualUrl||(selectedPlatform==='archive'?c.url||'':'');
+  selectedCandidate=c;selectedId=String(c.videoId);selectedPlatform=c.platform||'okru';selectedManualUrl=manualUrl||(selectedPlatform==='archive'?c.url||'':(c.submittedForReview===true&&c.url==='https://ok.ru/video/'+selectedId?c.url:''));
   txt($('reviewSummary'),(selectedPlatform==='archive'?'Internet Archive':selectedPlatform==='bilibili'?'Bilibili':'OK.ru')+' · Vídeo '+selectedId+' · '+(c.title||'Sem título identificado'));
   var sel=$('reviewCompany');sel.replaceChildren();codes.forEach(function(k){sel.add(new Option(names[k],k))});
   sel.value=detectedCompany(c);$('reviewShow').value='';$('reviewEventSearch').value=reviewDateFromTitle(c.title);$('reviewOlder').checked=(sel.value==='roh');

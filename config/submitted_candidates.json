@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "notes": "Links enviados manualmente pelo administrador para revisão. Não são fontes aprovadas. Datas sugeridas, sem garantir que o vídeo reproduza.",
+  "candidates": [
+    {
+      "platform": "okru",
+      "videoId": "16414871980622",
+      "url": "https://ok.ru/video/16414871980622",
+      "title": "WWE Friday Night SmackDown 2026.11.13 — link indicado para conferência",
+      "sourceProfiles": [
+        "okru-910148261710"
+      ],
+      "possibleEventIds": [
+        "official:wwe:2026-11-13:smackdown"
+      ],
+      "submittedForReview": true,
+      "review": "pendente",
+      "note": "Link e perfil fornecidos pelo administrador. Identidade do vídeo e reprodução ainda precisam ser confirmadas antes de qualquer vínculo."
+    }
+  ]
+}
