@@ -86,7 +86,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .reviewManual button{border-radius:8px;border:1px solid #8166a5;background:#493361;color:#fff;cursor:pointer;padding:8px 12px}
 .reviewCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;max-height:550px;overflow:auto}
 .reviewCard{display:flex;gap:10px;border:1px solid #4d3d61;border-radius:12px;padding:9px;background:#231b2f;min-width:0}
-.reviewCard img{width:92px;height:77px;object-fit:cover;border-radius:8px;background:#130f18;flex-shrink:0}
+.reviewCard img{width:120px;height:68px;object-fit:cover;border-radius:8px;background:#130f18;flex-shrink:0}
 .reviewInfo{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}
 .reviewInfo strong{font-size:12px;overflow-wrap:anywhere;color:#eee5ff}
 .reviewInfo small{font-size:11px;color:#c0b5d0}
@@ -121,7 +121,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .amBtn{padding:8px 12px;font-size:12px}
 }
 .reviewBtns{display:flex;gap:12px;justify-content:end}
-@media(max-width:620px){.reviewCards{grid-template-columns:1fr}.reviewPanel{padding:10px}.reviewCard img{width:76px;height:68px}}
+@media(max-width:620px){.reviewCards{grid-template-columns:1fr}.reviewPanel{padding:10px}.reviewCard img{width:100%;height:auto;aspect-ratio:16/9}}
 .reviewManual input[type=search]{flex:1 1 260px;min-width:140px}
 .reviewManual select{background:#20182c;color:#f1e8ff;border:1px solid #6c5684;border-radius:9px;padding:10px;max-width:155px}
 .reviewExternalSearch{color:#d8b8ff;text-decoration:underline;font-size:12px;align-self:center;white-space:nowrap}
@@ -167,6 +167,17 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .linkHealthIssue small{display:block;color:#cebfdc;line-height:1.5;margin:4px 0}
 .linkHealthIssue .hint{font-size:11px;color:#e7b9ab}
 .linkHealthIssue a,.linkHealthIssue button{display:inline-block;padding:6px 9px;margin:3px 6px 3px 0;font-size:12px;border:1px solid #796396;border-radius:8px;color:#e8d2ff;background:transparent;text-decoration:none;cursor:pointer}
+.amTrash #reviewMainTools,.amTrash .reviewManual,.amTrash .reviewRelevance,.amTrash .amSyncBar,.amTrash .linkHealth,.amTrash>.reviewHint{display:none}
+#reviewTrashBar[hidden]{display:none}
+.reviewTools button.danger,.reviewRow button.danger{background:#4a2030;border-color:#c0607e}
+.reviewRow .reviewRestoreBtn{background:#2a4132;border-color:#62a87c}
+.reviewCard .trashMeta{font-size:11px;color:#a999b8}
+.linkHealthBar{height:10px;border-radius:99px;background:#392c4a;overflow:hidden;margin:6px 0 4px;flex:1 1 100%}
+.linkHealthBar i{display:block;height:100%;background:linear-gradient(90deg,#7e4fc2,#b58bff);border-radius:99px;transition:width .4s}
+.linkHealthBarLabel{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:#d9cae9;flex:1 1 100%}
+.linkHealthStat.ok strong{color:#7fe3a1}.linkHealthStat.bad{border-color:#c0607e}.linkHealthStat.bad strong{color:#ff8fa8}.linkHealthStat.warn strong{color:#ffd27f}
+.linkHealthLines{display:grid;gap:3px;margin:8px 0;font-size:12px;color:#c9b9d9;line-height:1.5}
+.linkHealthLines b{color:#efe4ff}
 .linkHealthDialog{background:#23192f;color:#f3eaff;border:1px solid #8e6fac;border-radius:14px;width:min(92vw,430px);padding:22px}
 .linkHealthDialog::backdrop{background:#000c}
 .linkHealthDialog form{display:grid;gap:12px}
@@ -225,7 +236,8 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <div class="reviewManual"><input id="reviewManualUrl" type="url" placeholder="Link OK.ru ou bilibili.tv/en/video/..." aria-label="Link de vídeo OK.ru ou Bilibili"><button type="button" id="reviewManualAdd">Vincular link manual</button></div>
  <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Filtrar vídeos encontrados por título, show ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
  <div class="reviewRelevance"><select id="reviewRelevance" aria-label="Qualidade dos resultados"><option value="best">✅ Shows completos prováveis</option><option value="recent">🆕 Recentes relevantes</option><option value="classic">📚 Shows antigos</option><option value="extra">🗂 Outros vídeos</option><option value="all">🔎 Todos os candidatos</option></select><small id="reviewQualityCounts">Classificando resultados…</small></div>
- <div class="reviewTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Dispensar sem título</button><button type="button" id="reviewDismissAll">🗑 Dispensar todos</button><button type="button" id="reviewRestore">↩ Restaurar dispensados</button></div></div>
+ <div class="reviewTools" id="reviewMainTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Lixeira p/ sem título</button><button type="button" id="reviewDismissAll">🗑 Mandar todos p/ lixeira</button><button type="button" id="reviewTrashBtn">🗑 Lixeira (<span id="reviewTrashCount">0</span>)</button></div></div>
+ <div class="reviewTools" id="reviewTrashBar" hidden><div id="reviewTrashInfo" class="reviewHint">Lixeira</div><div class="reviewToolBtns"><button type="button" id="reviewTrashBack">← Voltar aos candidatos</button><button type="button" id="reviewTrashRestoreAll">↩ Restaurar todos</button><button type="button" id="reviewTrashEmpty" class="danger">🧨 Esvaziar lixeira</button><button type="button" id="reviewUnpurge">♻ Recuperar excluídos</button></div></div>
  <div id="reviewCandidates" class="reviewCards"></div>
 </dialog>
 <dialog id="linkHealthDialog" class="linkHealthDialog" aria-label="Confirmar verificação de links">
@@ -288,6 +300,7 @@ function jojoFallbackPoster(title,company){
  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
 }
 function jojoSetPoster(img, url, title, company){
+ img.referrerPolicy='no-referrer';
  var fallback=jojoFallbackPoster(title,company),safe=https(url||'');
  img.onerror=function(){img.onerror=null;img.src=fallback};
  img.src=safe||fallback;
@@ -416,18 +429,27 @@ function initLinkHealth(){
  function update(){
   if(!base)return;
   return fetch(base+'/api/jojo-monitor/links/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('Status indisponível');return r.json()}).then(function(d){
-   stats.replaceChildren(stat('Fontes cadastradas',String(d.totalSources||0)),stat('Páginas acessíveis',String((d.counts||{}).pagina_acessivel||0)),stat('Suspeitas',String(((d.counts||{}).suspeito||0)+((d.counts||{}).provavelmente_indisponivel||0))),stat('Acesso restrito',String((d.counts||{}).acesso_restrito||0)),stat('Ainda não verificadas',String((d.counts||{}).nao_verificado||0)));
+   var c=d.counts||{},total=Number(d.totalSources||0),pending=Number(c.nao_verificado||0),checked=Math.max(0,total-pending),pct=total?Math.round(checked/total*100):0;
+   var susp=Number(c.suspeito||0)+Number(c.provavelmente_indisponivel||0),restr=Number(c.acesso_restrito||0),okn=Number(c.pagina_acessivel||0);
+   function tone(box,cls){box.className='linkHealthStat '+cls;return box}
+   stats.replaceChildren(stat('Fontes cadastradas',String(total)),tone(stat('Páginas acessíveis',String(okn)),okn?'ok':''),tone(stat('Suspeitas',String(susp)),susp?'bad':'ok'),tone(stat('Acesso restrito',String(restr)),restr?'warn':''),tone(stat('Ainda não verificadas',String(pending)),pending?'warn':'ok'));
+   var bar=el('div','linkHealthBar'),fill=document.createElement('i');fill.style.width=pct+'%';bar.append(fill);bar.setAttribute('role','progressbar');bar.setAttribute('aria-valuenow',String(pct));bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax','100');
+   var lab=el('div','linkHealthBarLabel');lab.append(el('span','','Cobertura: '+checked.toLocaleString('pt-BR')+' de '+total.toLocaleString('pt-BR')+' fontes verificadas ('+pct+'%)'),el('span','',pending?'Faltam '+pending.toLocaleString('pt-BR')+' · ~'+Math.max(1,Math.ceil(pending/Math.max(1,Number(d.batchSize)||360)))+' rodada(s)':'✅ Tudo verificado ao menos uma vez'));
+   stats.append(bar,lab);
    button.disabled=!d.canRequest;
-   var msg='Última rodada: '+date(d.checkedAt)+' · '+(d.batchSize||0)+' fontes testadas';
-   if(d.running)msg+=' · ⏳ Executando na Oracle';else if(d.queued)msg+=' · ⏳ Na fila';
-   if(d.cooldownSeconds)msg+=' · Repetir em '+Math.ceil(d.cooldownSeconds/60)+' min';
-   if(d.error)msg+=' · ⚠️ '+d.error;
-   if(d.catalogueFailures&&d.catalogueFailures.length)msg+=' · Alguns catálogos não puderam ser lidos';
-   msg+=' · HTTP 200 não garante que o vídeo reproduz · Nenhum link é alterado automaticamente.';
-   txt(info,msg);
+   var lines=el('div','linkHealthLines');
+   function line(k,v){var r=el('div','');r.append(el('b','',k+': '),document.createTextNode(v));lines.append(r)}
+   line('Última rodada',date(d.checkedAt)+' · '+(d.batchSize||0)+' fontes testadas');
+   line('Situação',d.running?'⏳ Executando na Oracle':d.queued?'⏳ Na fila':'Parado, aguardando a próxima rodada');
+   if(d.cooldownSeconds)line('Próxima verificação manual','em '+Math.ceil(d.cooldownSeconds/60)+' min');else if(!d.running&&!d.queued)line('Próxima verificação manual','disponível agora');
+   if(d.error)line('⚠️ Aviso',String(d.error));
+   if(d.catalogueFailures&&d.catalogueFailures.length)line('⚠️ Catálogos','alguns não puderam ser lidos ('+d.catalogueFailures.length+')');
+   line('Resultado',susp?susp+' link(s) suspeito(s) para você conferir abaixo.':'nenhum suspeito entre as '+checked.toLocaleString('pt-BR')+' verificadas.');
+   var foot=el('div','linkHealthNote','HTTP 200 não garante que o vídeo reproduz. Nenhum link é alterado automaticamente: você aprova qualquer troca.');
+   info.replaceChildren(lines,foot);
    issues.replaceChildren();
    var rows=Array.isArray(d.issues)?d.issues:[];
-   if(!rows.length){issues.append(el('p','linkHealthNote',d.hasReport?'Nenhum link suspeito entre os que já foram verificados.':'Aguardando a primeira verificação de links.'));return}
+   if(!rows.length){if(!d.hasReport)issues.append(el('p','linkHealthNote','Aguardando a primeira verificação de links.'));return}
    if(d.issueCount>rows.length)issues.append(el('p','linkHealthNote','Mostrando '+rows.length+' de '+d.issueCount+' alertas; demais ficam preservados na Oracle.'));
    rows.forEach(function(issue){
     var event=issue.event||{},card=el('div','linkHealthIssue');
@@ -473,8 +495,16 @@ function initLinkHealth(){
 
 function initReviewPanel(){
  var cfg='', candidates=[], approvedIds=new Set(), selectedId='', selectedPlatform='okru', selectedManualUrl='', DKEY='jojo_am_dismissed', AUTO_MS=300000;
- var dismissed=(function(){try{return new Set(JSON.parse(localStorage.getItem(DKEY)||'[]').map(String))}catch(e){return new Set()}})();
- function saveDismissed(){try{localStorage.setItem(DKEY,JSON.stringify(Array.from(dismissed)))}catch(e){}}
+ var TKEY='jojo_am_trash',PKEY='jojo_am_purged',THKEY='jojo_am_thumbs',trashMode=false;
+ function readJ(k,def){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v&&typeof v==='object'?v:def}catch(e){return def}}
+ var trash=readJ(TKEY,{});if(Array.isArray(trash))trash={};
+ var purged=new Set((function(){var a=readJ(PKEY,[]);return Array.isArray(a)?a.map(String):[]})());
+ try{var oldList=JSON.parse(localStorage.getItem(DKEY)||'[]');if(Array.isArray(oldList)){oldList.forEach(function(k){k=String(k);if(k.indexOf(':')<0)k='okru:'+k;if(!trash[k]&&!purged.has(k))trash[k]={ts:Date.now()}});localStorage.removeItem(DKEY)}}catch(e){}
+ function saveTrash(){try{localStorage.setItem(TKEY,JSON.stringify(trash));localStorage.setItem(PKEY,JSON.stringify(Array.from(purged).slice(-3000)))}catch(e){}}
+ var dismissed={has:function(k){return !!trash[k]||purged.has(k)}};
+ function trashKeys(){return Object.keys(trash)}
+ function toTrash(c){trash[candidateKey(c)]={t:String(c.title||'').slice(0,160),d:String(c.duration||''),th:/^https:\/\//.test(c.thumbnailUrl||'')?c.thumbnailUrl:'',ts:Date.now()}}
+ function thumbCache(){var o=readJ(THKEY,{});return Array.isArray(o)?{}:o}
  function candidateKey(c){return String(c.platform||'okru')+':'+String(c.videoId)}
  function linkedIds(){var ids=new Set();function visit(e){(e.sources||[]).forEach(function(x){if(x&&x.videoId)ids.add(candidateKey(x))})} (state.updates||[]).forEach(visit);Object.keys(state.cache||{}).forEach(function(k){var obj=state.cache[k];(Array.isArray(obj)?obj:(obj&&obj.catalogue&&obj.catalogue.episodes||[])).forEach(visit)});return ids}
  function pendingList(){var linked=linkedIds();return candidates.filter(function(c){var id=candidateKey(c);return !approvedIds.has(id)&&!dismissed.has(id)&&!linked.has(id)})}
@@ -509,26 +539,28 @@ function initReviewPanel(){
   return 'extra';
  }
  function applyThumbnailCandidates(list){
-  var byVideo={},byEvent={};
-  list.forEach(function(c){if(c.thumbnailUrl&&/^https:\/\//.test(c.thumbnailUrl)&&c.videoId)byVideo[String(c.platform||'okru')+':'+c.videoId]=c.thumbnailUrl});
-  (state.updates||[]).forEach(function(e){for(var src of (e.sources||[])){var key=String(src.type||'okru')+':'+String(src.videoId||'');if(byVideo[key]){byEvent[e.id]=byVideo[key];if(!e.thumbnail&&!e.poster)e.thumbnail=byVideo[key];break}}});
+  var cache=thumbCache(),byVideo=Object.assign({},cache),byEvent={},dirty=false;
+  list.forEach(function(c){if(c.thumbnailUrl&&/^https:\/\//.test(c.thumbnailUrl)&&c.videoId){var k=String(c.platform||'okru')+':'+c.videoId;byVideo[k]=c.thumbnailUrl;if(cache[k]!==c.thumbnailUrl){cache[k]=c.thumbnailUrl;dirty=true}}});
+  if(dirty){try{var ks=Object.keys(cache);if(ks.length>600)ks.slice(0,ks.length-600).forEach(function(k){delete cache[k]});localStorage.setItem(THKEY,JSON.stringify(cache))}catch(e){}}
+  (state.updates||[]).forEach(function(e){for(var src of (e.sources||[])){var key=String(src.type||'okru')+':'+String(src.videoId||'');var own=/^https:\/\//.test(src.thumbnail||'')?src.thumbnail:'';var url=own||byVideo[key];if(url){byEvent[e.id]=url;if(!e.thumbnail&&!e.poster)e.thumbnail=url;break}}});
   state.thumbByEvent=byEvent;
   Object.keys(state.cache||{}).forEach(function(k){var list=state.cache[k],episodes=Array.isArray(list)?list:(list&&list.catalogue&&list.catalogue.episodes||[]);episodes.forEach(function(e){if(e.thumbnail||e.poster)return;for(var src of (e.sources||[])){var key=String(src.type||'okru')+':'+String(src.videoId||'');if(byVideo[key]){e.thumbnail=byVideo[key];break}}})});
   renderContinue();if(state.company&&state.filtered.length)apply();
  }
  function render(){
-  grid.replaceChildren();var pending=pendingList();updateBadge();
+  updateBadge();syncTrashUI();if(trashMode){renderTrash();return}
+  grid.replaceChildren();var pending=pendingList();
   var relevance=$('reviewRelevance').value;var q=clean(($('reviewSearch').value||'').replace(/&/g,' and ').replace(/[^\p{L}\p{N}]+/gu,' ')).trim(),platform=$('reviewPlatform').value;
   var stats={best:0,classic:0,extra:0};pending.forEach(function(c){stats[quality(c)]++});
   txt($('reviewQualityCounts'),'✅ '+stats.best+' prováveis · 📚 '+stats.classic+' antigos · 🗂 '+stats.extra+' outros');
   var visible=pending.filter(function(c){var text=clean([c.title,c.duration,c.publishedAt,(c.sourceProfiles||[]).join(' '),c.videoId].join(' ').replace(/&/g,' and ').replace(/[^\p{L}\p{N}]+/gu,' '));var category=quality(c);return (relevance==='all'||(relevance==='recent'&&category==='best'&&(!c.publishedAt||String(c.publishedAt).slice(0,10)>='2026-08-01'))||relevance===category)&&(!platform||(c.platform||'okru')===platform)&&(!q||q.split(/\s+/).every(function(w){return text.indexOf(w)>=0}))});
   $('reviewExternalSearch').href='https://www.google.com/search?q='+encodeURIComponent('site:bilibili.tv/en/video/ '+($('reviewSearch').value||'AEW Dynamite'));
 
-  setMsg(visible.length+' exibido(s) neste filtro · '+pending.length+' candidato(s) não revisados'+(dismissed.size?' · '+dismissed.size+' dispensado(s)':'')+' · Sem publicação automática');
+  setMsg(visible.length+' exibido(s) neste filtro · '+pending.length+' candidato(s) não revisados'+(trashKeys().length?' · '+trashKeys().length+' na lixeira':'')+' · Sem publicação automática');
   visible.slice().sort(function(a,b){return String(b.publishedAt||'').localeCompare(String(a.publishedAt||''))}).slice(0,80).forEach(function(c){
    var card=el('div','reviewCard'),info=el('div','reviewInfo'),im=el('img','');
    im.alt='Miniatura do vídeo';im.loading='lazy';im.referrerPolicy='no-referrer';
-   if(/^https:\/\//.test(c.thumbnailUrl||'')){im.src=c.thumbnailUrl;im.onerror=function(){im.style.display='none'}}else im.style.display='none';
+   jojoSetPoster(im,c.thumbnailUrl,c.title||('Vídeo '+c.videoId),c.platform==='bilibili'?'BILIBILI':'OK.RU');
    info.append(el('span','reviewQuality '+(quality(c)==='best'?'best':quality(c)==='extra'?'extra':''),quality(c)==='best'?'✅ Possível show completo':quality(c)==='classic'?'📚 Arquivo antigo':'🗂 Revisão secundária'));
    info.append(el('strong','',(c.platform==='bilibili'?'🟦 Bilibili · ':'🟠 OK.ru · ')+(c.title||'Vídeo '+c.videoId)));
    info.append(el('small','',[(c.duration?'⏱ '+c.duration:''),(c.publishedAt||''),(c.sourceProfiles||[]).join(', ')].filter(Boolean).join(' · ')||'Título ou duração não identificados'));
@@ -536,11 +568,31 @@ function initReviewPanel(){
    var a=el('a','','↗ Conferir no '+(c.platform==='bilibili'?'Bilibili':'OK.ru'));a.href=c.platform==='bilibili'?'https://www.bilibili.tv/en/video/'+encodeURIComponent(c.videoId):'https://ok.ru/video/'+encodeURIComponent(c.videoId);a.target='_blank';a.rel='noopener noreferrer';info.append(a);
    var row=el('div','reviewRow');
    var b=el('button','','Vincular a um evento');b.type='button';b.addEventListener('click',function(){openCandidate(c)});
-   var x=el('button','reviewDismiss','🗑 Dispensar');x.type='button';x.title='Remove da lista (só neste navegador)';x.addEventListener('click',function(){dismissed.add(candidateKey(c));saveDismissed();render()});
+   var x=el('button','reviewDismiss','🗑 Lixeira');x.type='button';x.title='Move para a lixeira (só neste navegador); dá para restaurar';x.addEventListener('click',function(){toTrash(c);saveTrash();render()});
    row.append(b,x);info.append(row);
    card.append(im,info);grid.append(card)
   })
  }
+ function syncTrashUI(){var n=trashKeys().length;txt($('reviewTrashCount'),String(n));panel.classList.toggle('amTrash',trashMode);$('reviewTrashBar').hidden=!trashMode}
+ function renderTrash(){
+  grid.replaceChildren();var keys=trashKeys().sort(function(a,b){return (trash[b].ts||0)-(trash[a].ts||0)});
+  txt($('reviewTrashInfo'),(keys.length?'🗑 '+keys.length+' item(ns) na lixeira':'🗑 Lixeira vazia')+(purged.size?' · '+purged.size+' excluído(s) de vez':'')+' · só neste navegador');
+  if(!keys.length)grid.append(el('p','reviewHint','Nada aqui. Os candidatos que você mandar para a lixeira aparecem nesta lista.'));
+  keys.slice(0,150).forEach(function(k){
+   var t=trash[k],parts=k.split(':'),platform=parts[0]||'okru',vid=parts[1]||'';
+   var card=el('div','reviewCard'),info=el('div','reviewInfo'),im=el('img','');
+   im.alt='Miniatura do vídeo';im.loading='lazy';im.referrerPolicy='no-referrer';
+   var cached=(thumbCache()[k]||'');jojoSetPoster(im,t.th||cached,t.t||('Vídeo '+vid),platform==='bilibili'?'BILIBILI':'OK.RU');
+   info.append(el('strong','',(platform==='bilibili'?'🟦 Bilibili · ':'🟠 OK.ru · ')+(t.t||'Vídeo '+vid)));
+   info.append(el('small','trashMeta',[(t.d?'⏱ '+t.d:''),(t.ts?'Na lixeira desde '+new Date(t.ts).toLocaleDateString('pt-BR'):'')].filter(Boolean).join(' · ')));
+   var a=el('a','','↗ Conferir');a.href=platform==='bilibili'?'https://www.bilibili.tv/en/video/'+encodeURIComponent(vid):'https://ok.ru/video/'+encodeURIComponent(vid);a.target='_blank';a.rel='noopener noreferrer';info.append(a);
+   var row=el('div','reviewRow');
+   var r=el('button','reviewRestoreBtn','↩ Restaurar');r.type='button';r.addEventListener('click',function(){delete trash[k];saveTrash();render()});
+   var d=el('button','danger','🧨 Excluir de vez');d.type='button';d.title='Some da lista e não volta, mesmo que a Oracle encontre de novo';d.addEventListener('click',function(){delete trash[k];purged.add(k);saveTrash();render()});
+   row.append(r,d);info.append(row);card.append(im,info);grid.append(card)
+  })
+ }
+ function openTrash(on){trashMode=!!on;render();var top=panel.querySelector('.reviewHead');if(top&&top.scrollIntoView)top.scrollIntoView({block:'start'})}
  function openCandidate(c,manualUrl){
   selectedId=String(c.videoId);selectedPlatform=c.platform||'okru';selectedManualUrl=manualUrl||'';txt($('reviewSummary'),(selectedPlatform==='bilibili'?'Bilibili':'OK.ru')+' · Vídeo '+selectedId+' · '+(c.title||'Sem título identificado'));
   var select=$('reviewEvent');select.replaceChildren();select.add(new Option('Selecione um evento…',''));
@@ -555,9 +607,13 @@ function initReviewPanel(){
  $('autoMatchOpen').addEventListener('click',function(){if(typeof panel.showModal==='function'){if(!panel.open)panel.showModal()}else panel.setAttribute('open','');load()});
  $('reviewClose').addEventListener('click',function(){panel.close()});
  panel.addEventListener('click',function(e){if(e.target===panel)panel.close()});
- $('reviewDismissUnknown').addEventListener('click',function(){var n=0;pendingList().forEach(function(c){if(unknown(c)){dismissed.add(candidateKey(c));n++}});saveDismissed();render();setMsg(n+' sem título dispensado(s) · '+pendingList().length+' restante(s)')});
- $('reviewDismissAll').addEventListener('click',function(){var l=pendingList();if(!l.length||!confirm('Dispensar '+l.length+' candidato(s) da lista? Isso só afeta este navegador e não apaga nada na Oracle.'))return;l.forEach(function(c){dismissed.add(candidateKey(c))});saveDismissed();render()});
- $('reviewRestore').addEventListener('click',function(){dismissed.clear();saveDismissed();render()});
+$('reviewDismissUnknown').addEventListener('click',function(){var n=0;pendingList().forEach(function(c){if(unknown(c)){toTrash(c);n++}});saveTrash();render();setMsg(n+' sem título na lixeira · '+pendingList().length+' restante(s)')});
+ $('reviewDismissAll').addEventListener('click',function(){var l=pendingList();if(!l.length||!confirm('Mandar '+l.length+' candidato(s) para a lixeira? Dá para restaurar depois. Isso só afeta este navegador.'))return;l.forEach(toTrash);saveTrash();render()});
+ $('reviewTrashBtn').addEventListener('click',function(){openTrash(true)});
+ $('reviewTrashBack').addEventListener('click',function(){openTrash(false)});
+ $('reviewTrashRestoreAll').addEventListener('click',function(){if(!trashKeys().length)return;trash={};saveTrash();render()});
+ $('reviewTrashEmpty').addEventListener('click',function(){var n=trashKeys().length;if(!n||!confirm('Esvaziar a lixeira? Os '+n+' item(ns) somem da lista de vez e não voltam, mesmo que a Oracle encontre de novo. (Dá para recuperar pelo botão "Recuperar excluídos".)'))return;trashKeys().forEach(function(k){purged.add(k)});trash={};saveTrash();render()});
+ $('reviewUnpurge').addEventListener('click',function(){if(!purged.size)return;if(!confirm('Trazer de volta os '+purged.size+' item(ns) excluídos de vez? Eles voltam para a lista de candidatos.'))return;purged.clear();saveTrash();render()});
  setInterval(function(){if(!document.hidden)load(true)},AUTO_MS);
  document.addEventListener('visibilitychange',function(){if(!document.hidden)load(true)});
  $('reviewManualAdd').addEventListener('click',function(){
