@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T11:01:43.857806Z",
+  "generatedAt": "2026-11-16T11:24:13.624739Z",
   "events": [
     {
       "id": "official:aew:2026-08-22:collision",
@@ -612,7 +612,8 @@
       "status": "awaiting_video",
       "provisional": true,
       "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
-      "sources": []
+      "sources": [],
+      "official_url": "https://www.wwe.com/shows/wwenxt/2026-11-10"
     },
     {
       "id": "auto:wwe:2026-11-06:smackdown",
@@ -697,6 +698,66 @@
       "provisional": true,
       "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
       "sources": []
+    },
+    {
+      "id": "aew:2026-10-10:collision",
+      "company": "aew",
+      "date": "2026-10-10",
+      "year": 2026,
+      "title": "AEW Collision: Grand Slam France",
+      "show": "Collision",
+      "status": "awaiting_video",
+      "sources": [],
+      "official_url": "https://www.allelitewrestling.com/post/aew-grand-slam-france-collision-results",
+      "description": "Episódio Collision exibido em 10/10/2026; gravado em Paris em 06/10. Não confundir com a data de gravação."
+    },
+    {
+      "id": "aew:2026-10-06:dynamite",
+      "company": "aew",
+      "date": "2026-10-06",
+      "year": 2026,
+      "title": "AEW Dynamite: Grand Slam France",
+      "show": "Dynamite",
+      "status": "awaiting_video",
+      "sources": [],
+      "official_url": "https://www.allelitewrestling.com/post/aew-grand-slam-france-dynamite-results",
+      "description": "Edição especial Grand Slam France Dynamite realizada em 06/10/2026."
+    },
+    {
+      "id": "official:tna:2026-11-05:impact",
+      "company": "tna",
+      "date": "2026-11-05",
+      "year": 2026,
+      "title": "TNA Thursday Night iMPACT!",
+      "show": "Impact",
+      "official_url": "https://tnawrestling.com/news/tna-thursday-night-impact-on-amc-results-november-5-2026",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado."
+    },
+    {
+      "id": "official:tna:2026-11-12:impact",
+      "company": "tna",
+      "date": "2026-11-12",
+      "year": 2026,
+      "title": "TNA Thursday Night iMPACT!",
+      "show": "Impact",
+      "official_url": "https://tnawrestling.com/news/tna-thursday-night-impact-on-amc-results-november-12-2026",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado."
+    },
+    {
+      "id": "official:tna:2026-11-15:destination-x",
+      "company": "tna",
+      "date": "2026-11-15",
+      "year": 2026,
+      "title": "TNA Destination X 2026",
+      "show": "PPV",
+      "official_url": "https://tnawrestling.com/destinationx",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "PPV de 15/11/2026 oficialmente anunciado pela TNA. Link de vídeo ainda não cadastrado."
     }
   ],
   "sources": [
