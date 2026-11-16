@@ -5,6 +5,8 @@ No token on Oracle. Runs in GitHub Actions with contents:write.
 import datetime as dt
 from zoneinfo import ZoneInfo
 import json
+import hashlib
+from urllib.parse import urlsplit, unquote
 import os
 from pathlib import Path
 import re
@@ -156,6 +158,8 @@ def source_key(src):
     vid = str(src.get('videoId') or '')
     if kind in ('okru', 'bilibili') and re.fullmatch(r'[0-9]{8,20}', vid):
         return kind, vid
+    if kind == 'archive' and re.fullmatch(r'a[0-9a-f]{32}', vid):
+        return kind, vid
     return None
 
 
@@ -163,12 +167,26 @@ def approved_source(a):
     """Only construct canonical HTTPS links; do not trust URLs from approval payload."""
     kind = str(a.get('platform') or 'okru')
     vid = str(a.get('videoId') or '')
-    if kind not in ('okru', 'bilibili') or not re.fullmatch(r'[0-9]{8,20}', vid):
-        return None
-    url = ('https://ok.ru/video/' if kind == 'okru'
-           else 'https://www.bilibili.tv/en/video/') + vid
-    src = {'type':kind, 'videoId':vid, 'url':url,
-           'label':('OK.ru' if kind == 'okru' else 'Bilibili') + ' · Revisão administrativa'}
+    if kind == 'archive':
+        url = str(a.get('url') or '')
+        try:
+            u = urlsplit(url)
+            path = unquote(u.path)
+            if (u.scheme!='https' or u.netloc!='archive.org' or u.query or u.fragment or
+                not re.fullmatch(r'/download/[a-zA-Z0-9_.-]{3,120}/[^?#]{1,300}\.(?:mp4|m4v|webm|ogv)', path, re.I) or
+                any(x in ('', '.', '..') for x in path.split('/')[2:]) or
+                vid != 'a'+hashlib.sha256(url.encode('utf-8')).hexdigest()[:32]):
+                return None
+        except (TypeError, ValueError):
+            return None
+        src = {'type':'archive','videoId':vid,'url':url,'label':'Internet Archive · Revisão administrativa'}
+    else:
+        if kind not in ('okru', 'bilibili') or not re.fullmatch(r'[0-9]{8,20}', vid):
+            return None
+        url = ('https://ok.ru/video/' if kind == 'okru'
+               else 'https://www.bilibili.tv/en/video/') + vid
+        src = {'type':kind, 'videoId':vid, 'url':url,
+               'label':('OK.ru' if kind == 'okru' else 'Bilibili') + ' · Revisão administrativa'}
     thumb = str(a.get('thumbnailUrl') or '')
     if thumb.startswith('https://') and len(thumb) <= 700:
         src['thumbnail'] = thumb
@@ -211,7 +229,7 @@ def consume_approvals(updates, data):
             if key:
                 used.add(key)
     changed = 0
-    for a in data.get('approved', [])[:250]:
+    for a in data.get('approved', [])[-5000:]:
         if not isinstance(a,dict):
             continue
         eid = str(a.get('eventId',''))
@@ -234,7 +252,7 @@ def consume_approvals(updates, data):
         changed += 1
     # Backfill: fontes já publicadas sem miniatura recebem a da fila de aprovação.
     thumbs = {}
-    for a in data.get('approved', [])[:250]:
+    for a in data.get('approved', [])[-5000:]:
         src = approved_source(a) if isinstance(a, dict) else None
         if src and src.get('thumbnail'):
             thumbs[source_key(src)] = src['thumbnail']
@@ -258,8 +276,8 @@ def main():
     try:
         req = urllib.request.Request(API, headers={'User-Agent':'JOJO-GitHub-Action/2.0'})
         with urllib.request.urlopen(req, timeout=18) as response:
-            content = response.read(250_001)
-        if len(content) > 250_000:
+            content = response.read(2_000_001)
+        if len(content) > 2_000_000:
             raise ValueError('Fila grande demais')
         data = json.loads(content.decode('utf-8'))
         if not isinstance(data, dict) or not isinstance(data.get('approved'),list):
