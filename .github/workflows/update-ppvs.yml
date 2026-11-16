@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Baixar repositório
         uses: actions/checkout@v4
@@ -27,6 +27,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Instalar parser da Wikipédia
+        run: python -m pip install 'beautifulsoup4>=4.12,<5'
       - name: Validar os monitores
         run: python -m unittest discover -s scripts/tests -v
       - name: Publicar agenda com sincronização e tentativas
@@ -42,8 +44,9 @@ jobs:
             # Recalculate instead of merging stale or overwriting approved sources.
             python scripts/update_ppvs.py
             python scripts/discover_archive.py || echo 'Internet Archive indisponível: mantendo a última lista de candidatos'
+            python scripts/import_wikipedia_ppvs.py || echo 'Wikipédia indisponível: mantendo referências históricas anteriores'
             python scripts/audit_ppvs.py
-            git add updates.json archive_candidates.json ppv_audit.json
+            git add updates.json archive_candidates.json ppv_audit.json config/ppv_wikipedia_reference.json
             if git diff --cached --quiet; then
               echo 'Nenhuma alteração nova para publicar.'
               exit 0
