@@ -81,47 +81,70 @@ def add_curated_events(updates):
     return changed
 
 
-def add_missing_weeklies(updates, now=None):
-    """Backfill recently missing weekly slots as provisional, never claim broadcast."""
+def add_missing_weeklies(updates, now=None, past_days=35, future_days=30):
+    """Keep weekly episode slots visible 35 days back and 30 days ahead.
+
+    Future weekday occurrences are *provisional placeholders*, not an assertion
+    of confirmed broadcasts. Preserve recorded sources and historical IDs.
+    Videos always require the separate human approval flow.
+    """
     now = now or dt.datetime.now(ZoneInfo('America/New_York'))
     today = now.date()
     current = updates.setdefault('events', [])
     catalogue_days = set()
-    for category in ('wwe','nxt','aew','roh'):
+    for category in ('wwe', 'nxt', 'aew', 'roh', 'tna'):
         try:
-            episodes = read(category+'.json').get('catalogue', {}).get('episodes', [])
+            episodes = read(category + '.json').get('catalogue', {}).get('episodes', [])
             for x in episodes:
                 if isinstance(x, dict):
-                    catalogue_days.add((category, str(x.get('date','')), str(x.get('show','')).lower()))
+                    catalogue_days.add((category, str(x.get('date', '')), str(x.get('show', '')).lower()))
         except (OSError, ValueError):
             continue
-    def existing_on_day(company,date,show):
-        def similar(row):
-            if row.get('date') != date or row.get('company') not in ((company,'nxt') if show=='NXT' else (company,)):
-                return False
-            name = (str(row.get('title',''))+' '+str(row.get('show',''))).lower()
-            needle={'RAW':'raw','SmackDown':'smackdown','NXT':'nxt','Dynamite':'dynamite','Collision':'collision','HonorClub':'honorclub'}[show]
-            return needle in name or (show=='SmackDown' and 'smack down' in name)
-        if any(similar(x) for x in current if isinstance(x,dict)):
-            return True
-        ccs=('wwe','nxt') if show=='NXT' else (company,)
-        return any((cc,date,show.lower()) in catalogue_days for cc in ccs)
-    schedules=[('wwe',0,'RAW'),('wwe',1,'NXT'),('wwe',4,'SmackDown'),('aew',2,'Dynamite'),('aew',5,'Collision'),('roh',3,'HonorClub')]
-    count=0
-    for days in range(1,36):
-        date=today-dt.timedelta(days=days)
-        for co,weekday,show in schedules:
-            if date.weekday()!=weekday:
+
+    schedules = [
+        ('wwe', 0, 'RAW', 'Monday Night RAW', 'raw'),
+        ('wwe', 1, 'NXT', 'WWE NXT', 'nxt'),
+        ('wwe', 4, 'SmackDown', 'Friday Night SmackDown', 'smackdown'),
+        ('aew', 2, 'Dynamite', 'AEW Dynamite', 'dynamite'),
+        ('aew', 5, 'Collision', 'AEW Collision', 'collision'),
+        ('roh', 3, 'HonorClub', 'ROH on HonorClub', 'honorclub'),
+        ('tna', 3, 'Impact', 'TNA Impact', 'impact'),
+    ]
+
+    def has_episode(company, date, show, slug):
+        companies = (company, 'nxt') if show == 'NXT' else (company,)
+        for row in current:
+            if not isinstance(row, dict) or row.get('date') != date or row.get('company') not in companies:
                 continue
-            iso=date.isoformat()
-            if existing_on_day(co,iso,show):
+            # Avoid generic PPV entries on the same date masking the weekly episode.
+            labels = (str(row.get('show', '')) + ' ' + str(row.get('title', ''))).lower()
+            if slug in re.sub(r'[^a-z0-9]+', '', labels):
+                return True
+        for c in companies:
+            for category, iso, label in catalogue_days:
+                if category == c and iso == date and slug in re.sub(r'[^a-z0-9]+', '', label):
+                    return True
+        return False
+
+    count = 0
+    for offset in range(-past_days, future_days + 1):
+        date = today + dt.timedelta(days=offset)
+        iso = date.isoformat()
+        for company, weekday, show, title, slug in schedules:
+            if date.weekday() != weekday or has_episode(company, iso, show, slug):
                 continue
-            slug=re.sub('[^a-z0-9]+','-',show.lower()).strip('-')
-            current.append({'id':'auto:'+co+':'+iso+':'+slug,'company':co,
-                            'date':iso,'year':date.year,'title':show if show!='RAW' else 'Monday Night RAW',
-                            'show':show,'status':'awaiting_video','provisional':True,
-                            'description':'Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.',
-                            'sources':[]})
+            current.append({
+                'id': 'auto:' + company + ':' + iso + ':' + slug,
+                'company': company, 'date': iso, 'year': date.year,
+                'title': title, 'show': show, 'status': 'awaiting_video',
+                'provisional': True, 'sources': [],
+                'description': ('Previsão semanal automática para data futura; '
+                                'não confirma que a emissora realizará o show nesta data. '
+                                'Confirme a programação oficial antes de vincular vídeo.'
+                                if offset > 0 else
+                                'Grade semanal provisória; confira a transmissão oficial '
+                                'antes de aprovar um vídeo.'),
+            })
             count += 1
     return count
 
