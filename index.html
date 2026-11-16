@@ -291,6 +291,13 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .jojoStatusPane[hidden]{display:none!important}
 .jojoEmpty{font-size:12px;color:#c9b9d9;padding:13px 8px}
 .archPanel{margin:8px 0;padding:10px;border:1px solid #5b3f86;border-radius:12px;background:#1a1228}.archRow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid #2d2142;font-size:13px}.archRow small{display:block;opacity:.75;word-break:break-all}.archRights{display:block;margin:8px 0;font-size:13px}
+
+.jojoAddSource{display:grid;gap:8px;padding:12px;border:1px solid #76598b;border-radius:12px;background:#251a32;margin:12px 0}
+.jojoAddSource input,.jojoArchiveFileTools input,.jojoArchiveFileTools select{box-sizing:border-box;max-width:100%;min-width:0;background:#150f20;border:1px solid #73528e;border-radius:8px;color:#fff;padding:10px;font:inherit}
+.jojoSourceActions{display:flex;gap:8px;flex-wrap:wrap}.jojoSourceActions input{flex:1 1 150px}.jojoSourceActions button{white-space:normal}
+.jojoAddSource small{color:#d0bfe0}.jojoArchiveFileTools{display:grid;gap:8px;margin:9px 0;padding:12px;border:1px solid #70568d;background:#251a33;border-radius:12px}
+.jojoArchiveFileTools .lookupRow{display:flex;flex-wrap:wrap;gap:8px}.jojoArchiveFileTools .lookupRow input{flex:1 1 180px}
+.jojoArchiveFileTools small{color:#d7c6ea;overflow-wrap:anywhere}.jojoArchiveFileTools select{width:100%}
 </style>
 </head>
 <body>
@@ -315,7 +322,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 </details>
 <nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
 <section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="showFilter" id="showFilterWrap" hidden>📺 Programa <select id="showFilter" aria-label="Filtrar programa ou brand"><option value="">Todas as brands</option></select></label><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><button type="button" id="ppvAuditOpen" class="ppvAuditBtn">🔎 Auditar PPVs por ano</button><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
-<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 PPVs recentes e próximos shows</strong><small>Eventos cadastrados mesmo após a data, inclusive sem vídeo · fontes exigem confirmação</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
+<section class="upcomingPanel" id="upcomingPanel" aria-label="Novos eventos oficiais" hidden><div class="upcomingHeader"><strong>📅 Próximos shows da semana e PPVs do mês</strong><small>Apenas a próxima edição de cada programa semanal. PPVs futuros só deste mês.</small></div><div id="upcomingCards" class="upcomingCards"></div></section>
 
 <section class="trustedPanel" aria-label="Sites confiáveis e arquivos cadastrados">
 <details id="trustedDetails">
@@ -334,6 +341,13 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
     <summary>📡 Fontes monitoradas no AutoMatch · OK.ru / Bilibili / Internet Archive</summary>
     <p class="reviewSourcesNote" id="reviewSourcesNote">Carregando fontes cadastradas e estado da última leitura…</p>
     <div class="reviewSourcesLinks" id="reviewSourcesLinks"></div>
+    <form id="reviewSourceAddForm" class="jojoAddSource" autocomplete="off">
+     <strong>➕ Cadastrar fonte monitorada</strong>
+     <input id="reviewSourceUrl" type="url" required maxlength="300" placeholder="URL do perfil/grupo OK.ru, perfil Bilibili ou item Archive">
+     <input id="reviewSourceLabel" type="text" required maxlength="90" placeholder="Nome da fonte (ex.: SmackDown — Perfil 4)">
+     <div class="jojoSourceActions"><input id="reviewSourceKey" type="password" required maxlength="128" placeholder="Master Key"><button type="submit" id="reviewSourceSubmit">Cadastrar na busca</button></div>
+     <small id="reviewSourceFeedback" role="status" aria-live="polite">Fontes novas entram na configuração do GitHub; nenhum vídeo será vinculado automaticamente.</small>
+    </form>
     <label for="reviewProfile">Filtrar vídeos por perfil de origem</label>
     <select id="reviewProfile" aria-label="Filtrar candidatos pelo perfil monitorado"><option value="">Todos os perfis</option></select>
   </details>
@@ -640,15 +654,46 @@ function initMonitorManual(){
 function initFillPhotos(){
  var btn=$('fillPhotos');if(!btn)return;
  btn.addEventListener('click',function(){
-  var items=[];(state.rows||[]).forEach(function(r){if(r.thumbnail||r.poster||!r.id)return;var src=(r.sources||[]).filter(function(x){return x&&https(x.thumbnail)})[0];if(src)items.push({eventId:r.id,thumbnailUrl:src.thumbnail})});
-  if(!items.length){alert('Nenhum evento sem foto tem miniatura conhecida nas fontes.');return}
+  if(!state.eventEditApi){alert('API Oracle ainda não conectada.');return}
   var k=jojoPromptMaster('Master Key da Oracle para preencher fotos faltantes:');if(!k)return;
-  btn.disabled=true;
-  fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(c){var base=String(c.apiBase||'').replace(/\/+$/,'');
-   return fetch(base+'/api/jojo-monitor/thumbnails/fill',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,items:items.slice(0,200)})})})
-  .then(function(r){return r.json().then(function(d){if(!r.ok)throw Error(d.message||'Falha');return d})})
-  .then(function(d){alert(d.filled.length+' foto(s) preenchida(s).');return loadEventEdits().then(function(){render()})})
-  .catch(function(e){alert('Não foi possível preencher: '+e.message)}).finally(function(){btn.disabled=false});
+  btn.disabled=true;txt(btn,'🖼 Procurando fotos…');
+  Promise.all(codes.map(function(code){return fetchCompany(code).catch(function(){return []})})).then(function(groups){
+   var all=[].concat.apply([],groups).concat(state.updates||[]);
+   Object.keys(state.manualPpvs||{}).forEach(function(id){all.push(state.manualPpvs[id])});
+   var unique=new Map();all.forEach(function(r){if(r&&r.id&&!unique.has(r.id))unique.set(r.id,r)});
+   var cache={};try{cache=JSON.parse(localStorage.getItem('jojo_am_thumbs')||'{}')||{}}catch(e){}
+   var items=[],missing=0;
+   unique.forEach(function(r){
+    var edit=(state.eventEdits||{})[r.id]||{};
+    // Fontes ligadas pelo lápis ficam no overlay da Oracle, não no catálogo original.
+    var removed=new Set(edit.removed||[]);
+    var sources=(r.sources||[]).concat(edit.added||[]).filter(function(src){return !removed.has(editSourceKey(src))});
+    if(!sources.length||edit.thumbnailUrl)return;
+    var img='';
+    for(var src of sources){
+     img=https(src.thumbnail||src.thumbnailUrl)||https(cache[String(src.type||'okru')+':'+String(src.videoId||'')])||'';
+     if(!img&&src.type==='archive'){
+      var id=archiveId(src.url||((src.urls||[])[0])||'');
+      if(id&&/^[A-Za-z0-9_.-]{3,120}$/.test(id))img='https://archive.org/services/img/'+encodeURIComponent(id);
+     }
+     if(img)break;
+    }
+    if(!img)img=https((state.thumbByEvent||{})[r.id])||'';
+    if(!img){missing++;return}
+    var original=https(r.thumbnail||r.poster)||'';
+    // Already has a known non-derived cover; do not change it.
+    if(original&&original!==img)return;
+    items.push({eventId:r.id,thumbnailUrl:img});
+   });
+   if(!items.length)throw Error('Nenhuma miniatura disponível para preencher agora. '+missing+' evento(s) ainda precisam de imagem na fonte.');
+   if(!confirm('Encontradas '+items.length+' fotos para tentar salvar. '+missing+' evento(s) ainda sem imagem. Confirmar?'))return null;
+   var filled=0,failed=[];
+   var chain=Promise.resolve();
+   for(var i=0;i<items.length;i+=200){let batch=items.slice(i,i+200);chain=chain.then(function(){return fetch(state.eventEditApi+'/api/jojo-monitor/thumbnails/fill',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,items:batch})}).then(function(r){return r.json().then(function(d){if(!r.ok)throw Error(d.message||'Falha na Oracle');filled+=(d.filled||[]).length})}).catch(function(err){failed.push(err.message)})})}
+   return chain.then(function(){return {filled:filled,missing:missing,failed:failed}});
+  }).then(function(d){if(!d)return;return loadEventEdits().then(function(){state.rows.forEach(applyEventEditRow);if(state.company)apply();alert('✅ '+d.filled+' foto(s) salvas na Oracle. '+d.missing+' evento(s) sem miniatura de fonte.'+(d.failed.length?' Falha: '+d.failed.join('; '):''))})})
+  .catch(function(e){alert('🖼 Não foi possível preencher: '+e.message)})
+  .finally(function(){btn.disabled=false;txt(btn,'🖼 Preencher fotos')});
  });
 }
 
@@ -867,11 +912,11 @@ function initReviewPanel(){
    if(profiles.some(function(p){return p.id===old}))filter.value=old;
    function display(report){
     var found=new Map(((report&&report.profiles)||[]).map(function(p){return [p.id,p]}));
-    var status={lista_lida:'Leitura OK',lista_parcial:'Leitura parcial (alguns vídeos não aparecem)',acesso_restrito:'Acesso restrito',sessao_ou_acesso_restrito:'Sessão restrita',sem_links_visiveis:'Sem vídeos detectáveis',consulta_falhou:'Falha na leitura',limite_requisicoes:'Limite do provedor',url_invalida:'URL inválida'};
+    var status={lista_lida:'Leitura OK',lista_parcial:'Leitura parcial (alguns vídeos não aparecem)',acesso_restrito:'Acesso restrito',sessao_ou_acesso_restrito:'Sessão restrita',sem_links_visiveis:'Sem vídeos detectáveis',consulta_falhou:'Falha na leitura',limite_requisicoes:'Limite do provedor',url_invalida:'Configuração não reconhecida (relatório antigo ou endereço sem suporte)',coleta_archive_separada:'Descoberta por metadados no GitHub',coleta_oracle_pendente:'Coleta pelo robô Oracle (aguardando relatório)'};
     links.replaceChildren();profiles.forEach(function(p){
      var a=el('a','',p.label||p.id),check=found.get(p.id);
      a.href=p.url;a.target='_blank';a.rel='noopener noreferrer';
-     a.append(document.createTextNode(' · '+(p.id==='Internet Archive'?'Pesquisa diária de metadados':check?(status[check.state]||check.state||'Aguardando'):'Sem relatório')+(check?' · '+Number(check.found||0)+' links':'')));
+     a.append(document.createTextNode(' · '+(p.id==='Internet Archive'?'Pesquisa diária de metadados':check?(status[check.state]||check.state||'Aguardando'):'Sem relatório')+(check&&check.found!=null?' · '+Number(check.found)+' links':'')));
      links.append(a)
     });
     txt(note,profiles.length+' fonte(s) ativa(s). '+(report&&report.checkedAt?'Última leitura: '+new Date(report.checkedAt).toLocaleString('pt-BR')+'. ':'Ainda sem leitura confirmada. ')+'As fontes são monitoradas; vídeos e reprodução precisam de conferência manual.');
@@ -880,6 +925,17 @@ function initReviewPanel(){
    return fetch(cfg+'/api/jojo-monitor/report',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error();return r.json()}).catch(function(){return fetch('./source_monitor_status.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()})}).then(display).catch(function(){display(null)});
   }).catch(function(){txt(note,'Não foi possível carregar a lista de fontes. Confira o arquivo config/monitored_sources.json.');links.replaceChildren()});
  }
+ var newSourceForm=$('reviewSourceAddForm');
+ if(newSourceForm)newSourceForm.addEventListener('submit',function(e){
+  e.preventDefault();var add=$('reviewSourceSubmit'),feedback=$('reviewSourceFeedback'),key=$('reviewSourceKey').value;
+  if(!cfg){txt(feedback,'API da Oracle indisponível.');return}
+  add.disabled=true;txt(feedback,'Salvando fonte no GitHub…');
+  fetch(cfg+'/api/jojo-monitor/sources/add',{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:key,url:$('reviewSourceUrl').value.trim(),label:$('reviewSourceLabel').value.trim()})})
+  .then(function(r){return r.json().then(function(d){if(!r.ok)throw Error(d.message||'Fonte não cadastrada');return d})})
+  .then(function(d){txt(feedback,'✅ '+d.message);$('reviewSourceKey').value='';$('reviewSourceUrl').value='';$('reviewSourceLabel').value='';loadReviewProfiles()})
+  .catch(function(err){txt(feedback,'⚠️ '+err.message);$('reviewSourceKey').value=''})
+  .finally(function(){add.disabled=false});
+ });
  function loadArchiveSuggestions(){return fetch('./archive_candidates.json?t='+Date.now(),{cache:'no-store'})
   .then(function(r){return r.ok?r.json():{candidates:[]}})
   .then(function(j){return Array.isArray(j.candidates)?j.candidates.filter(function(c){return c&&c.platform==='archive'&&/^a[0-9a-f]{32}$/.test(c.videoId||'')&&/^https:\/\/archive\.org\/download\//.test(c.url||'')}):[]})
@@ -1246,10 +1302,10 @@ function loadMonitorStatus(){
   message+=' · '+Number(c.linksUnavailable||0)+' link(s) sinalizado(s) como indisponível(is)';
   if(report.origin==='oracle')message+=' · Consulta sem publicação automática';
   txt(info,message);txt($('monitorFoldTip'),Number(c.candidatesPendingReview||0)+' candidatos · '+profiles.length+' perfis · '+(report.checkedAt?new Date(report.checkedAt).toLocaleDateString('pt-BR'):'sem leitura'));box.replaceChildren();
-  var labels={lista_lida:'Leitura concluída',lista_parcial:'Leitura parcial (poucos links visíveis)',acesso_restrito:'Acesso restrito no provedor',sessao_ou_acesso_restrito:'Sessão ou acesso restrito',sem_links_visiveis:'Nenhum link detectável',consulta_falhou:'Consulta falhou',limite_requisicoes:'Limite de consultas',pagina_indisponivel:'Página indisponível',aguardando_primeira_execucao:'Aguardando primeira execução',url_invalida:'Configuração inválida'};
+  var labels={lista_lida:'Leitura concluída',lista_parcial:'Leitura parcial (poucos links visíveis)',acesso_restrito:'Acesso restrito no provedor',sessao_ou_acesso_restrito:'Sessão ou acesso restrito',sem_links_visiveis:'Nenhum link detectável',consulta_falhou:'Consulta falhou',limite_requisicoes:'Limite de consultas',pagina_indisponivel:'Página indisponível',aguardando_primeira_execucao:'Aguardando primeira execução',url_invalida:'Configuração não reconhecida',coleta_archive_separada:'Busca de metadados via GitHub',coleta_oracle_pendente:'Aguardando robô Oracle'};
   profiles.forEach(function(p){var a=document.createElement('a'),url=https(p.url);if(!url)return;
    a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.className='monitorProfile';
-   txt(a,(p.label||p.id||'Perfil')+' · '+(labels[p.state]||p.state||'Aguardando')+' · '+Number(p.found||0)+' link(s)');box.append(a);
+   txt(a,(p.label||p.id||'Perfil')+' · '+(labels[p.state]||p.state||'Aguardando')+(p.found==null?'':' · '+Number(p.found)+' link(s)'));box.append(a);
   });
  }).catch(function(){txt(info,'Nenhum relatório disponível na Oracle ou no GitHub.');box.replaceChildren()});
 }
@@ -1279,38 +1335,41 @@ function mergeManualPpvs(code,rows){
   newRow._needle=clean([newRow.title,newRow.date,newRow.show].join(' '));all.push(newRow);seen.set(k,newRow)
  });return all;
 }
-// Weekly placeholders only surface in the next 7 days (or 21 days back).
-// Future PPVs/PLEs remain visible regardless of lead time; historical playable shows remain intact.
+// Agenda: cada programa semanal só mostra o episódio MAIS PRÓXIMO nos próximos 7 dias.
+// PPV/PLE futuro só aparece no mês corrente. Eventos passados e vídeos já ligados são preservados.
 function localISODate(offset){var d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+offset);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function nextWeeklyByShow(){
- var today=localISODate(0),out={},ppvs={};
- (state.rows||[]).forEach(function(r){if(!r.scheduled||r.date<today)return;
-  var key=r._company||r.company;
-  if(isPpv(r)){if(!ppvs[key]||r.date<ppvs[key])ppvs[key]=r.date;return}
-  if(!out[key]||r.date<out[key])out[key]=r.date;
- });state.nextPpv=ppvs;return out;
+function weeklyBucket(r){var title=clean(String(r.show||'')+' '+String(r.title||'')),company=r._company||r.company||'';
+ if(/\bsmack\s*down\b/.test(title))return company+'|smackdown';
+ if(/\braw\b/.test(title))return company+'|raw';
+ if(/\bnxt\b/.test(title))return company+'|nxt';
+ if(/\bdynamite\b/.test(title))return company+'|dynamite';
+ if(/\bcollision\b/.test(title))return company+'|collision';
+ if(/\bxplosion\b/.test(title))return company+'|xplosion';
+ if(/\bimpact\b/.test(title))return company+'|impact';
+ if(/\bhonorclub\b|\broh\b/.test(title))return company+'|honorclub';
+ return company+'|'+clean(r.show||r.title||'semanal').slice(0,35);
 }
-function scheduledVisible(r,search){
- if(!r.scheduled)return true;
- // PPV confirmado permanece na cronologia mesmo depois de ocorrer sem gravação.
- if(isPpv(r))return true;
+function nextWeeklyByShow(){var today=localISODate(0),last=localISODate(7),out={};
+ (state.rows||[]).forEach(function(r){if(!r.scheduled||isPpv(r)||r.date<today||r.date>last)return;var key=weeklyBucket(r);if(!out[key]||r.date<out[key])out[key]=r.date});return out;
+}
+function scheduledVisible(r,search){if(!r.scheduled)return true;
+ var today=localISODate(0),label=clean((r.show||'')+' '+(r.title||''));
+ if(isPpv(r))return r.date<=today||r.date.slice(0,7)===today.slice(0,7);
+ if(r.date>today)return r.date<=localISODate(7)&&r.date===((state.nextWeekly||{})[weeklyBucket(r)]||'');
  if(search||$('year').value||$('showFilter').value)return true;
- var today=localISODate(0),key=r._company||r.company,from=localISODate(-155),label=clean((r.show||'')+' '+(r.title||''));
- // Backfill de RAW, SmackDown e NXT (especialmente julho-novembro/2026).
- if(r.date<=today&&r.date>=from&&/\b(raw|smackdown|nxt)\b/.test(label))return true;
- // Outras grades: mostrar pendentes recentes, sem vender a previsão como confirmação.
- if(r.date<=today&&r.date>=localISODate(/xplosion/.test(label)?-65:-21))return true;
- return r.date>=today&&r.date===((state.nextWeekly||{})[key]||'');
+ // Não ocultar programas já exibidos, ainda sem vídeo, inclusive o histórico do semestre.
+ if(r.date>=localISODate(-155)&&/\b(raw|smackdown|nxt)\b/.test(label))return true;
+ return r.date>=localISODate(/xplosion/.test(label)?-65:-21);
 }
 function renderUpcoming(){var node=$('upcomingPanel'),box=$('upcomingCards');box.replaceChildren();
  var today=localISODate(0),rows=state.rows.filter(function(r){return r.scheduled &&
   (state.company==='all'||r._company===state.company)&&(!$('ppvOnly').checked||isPpv(r)) &&
-  ((isPpv(r)&&r.date>=localISODate(-14)&&r.date<=localISODate(60)) ||
-   (!isPpv(r)&&r.date>=today&&r.date<=localISODate(7)&&scheduledVisible(r,false)))});
+  ((isPpv(r)&&r.date.slice(0,7)===today.slice(0,7)) ||
+   (!isPpv(r)&&r.date>=today&&r.date<=localISODate(7)&&scheduledVisible(r)))});
  rows.sort(function(a,b){return chronology(a,b)});rows=rows.slice(0,12);
  node.hidden=!rows.length;rows.forEach(function(r){var b=el('button','upcomingCard');b.type='button';
  b.append(el('strong','',r.title));b.append(el('small','',cardDateBR(r.date)+' · '+names[r._company]+' · '+
- (r.date<today?'Já aconteceu · Sem vídeo':r.provisional?'Previsão semanal':'Programado · Aguardando vídeo')));b.addEventListener('click',function(){open(r)});box.append(b)})
+ (r.date<today?'Já aconteceu · Sem vídeo':r.provisional?'Previsão semanal':'Programado · Aguardando vídeo')));b.addEventListener('click',function(){open(r)});box.append(b)});
 }
 function fetchCompany(code){if(state.cache[code])return Promise.resolve(state.cache[code]);return fetch('./'+code+'.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw Error('HTTP '+r.status+' ao buscar '+code+'.json');return r.json()}).then(function(x){if(!x.catalogue||!Array.isArray(x.catalogue.episodes))throw Error('Arquivo de catálogo incompatível');state.cache[code]=x.catalogue.episodes.map(function(r){r._company=code;return r});return state.cache[code]})}
 function showBucket(r){
@@ -1386,11 +1445,61 @@ function editKeyForUrl(url){try{var u=new URL(url),h=u.hostname.toLowerCase(),m;
 function applyEventEditRow(r){if(!r||!r.id)return r;if(!r._editBase){r._editBase={sources:Array.isArray(r.sources)?r.sources.map(function(x){return Object.assign({},x)}):[],thumbnail:r.thumbnail||'',poster:r.poster||'',scheduled:!!r.scheduled}}var orig=r._editBase,edit=(state.eventEdits||{})[r.id];r.sources=orig.sources.map(function(x){return Object.assign({},x)});r.thumbnail=orig.thumbnail;r.poster=orig.poster;r.scheduled=orig.scheduled;if(!edit)return r;var removed=new Set(edit.removed||[]);r.sources=r.sources.filter(function(src){return !removed.has(editSourceKey(src))});var seen=new Set(r.sources.map(editSourceKey));(edit.added||[]).forEach(function(src){var k=editSourceKey(src);if(k&&!seen.has(k)){r.sources.push(Object.assign({},src));seen.add(k)}});var th=edit.sourceThumbnails||{};r.sources.forEach(function(src){var img=th[editSourceKey(src)];if(img&&https(img)){src.thumbnail=img;src.thumbnailUrl=img}});if(edit.thumbnailUrl&&https(edit.thumbnailUrl)){r.thumbnail=edit.thumbnailUrl;r.poster=''}r.scheduled=!r.sources.length;return r}
 function loadEventEdits(){return fetch('./config/event_edits.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():{events:{}}}).catch(function(){return {events:{}}}).then(function(staticData){state.eventEdits=staticData&&staticData.events&&typeof staticData.events==='object'?staticData.events:{};state.manualPpvs=staticData&&staticData.manualEvents&&typeof staticData.manualEvents==='object'?staticData.manualEvents:{};return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(conf){var base=String(conf&&conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\s/?#]+$/.test(base))return;state.eventEditApi=base;return fetch(base+'/api/jojo-monitor/event-edits',{cache:'no-store',credentials:'omit'}).then(function(r){return r.ok?r.json():null}).then(function(data){if(data&&data.events&&typeof data.events==='object')state.eventEdits=data.events;if(data&&data.manualEvents&&typeof data.manualEvents==='object')state.manualPpvs=data.manualEvents})}).catch(function(){})})}
 var eventEditor=null;
-function editShowSourceRow(row){var wrap=el('div','eventEditRow'),head=el('div','eventEditRowHead'),name=el('b','',row.label||'Fonte de vídeo'),rem=el('button','danger','🗑 Remover');rem.type='button';rem.setAttribute('aria-label','Remover '+(row.label||'fonte'));head.append(name,rem);var l1=el('label','');l1.append(document.createTextNode('URL do vídeo'));var link=el('input','');link.type='url';link.placeholder='https://archive.org/download/ITEM/arquivo.mp4 ou https://ok.ru/video/123456789';link.maxLength=650;link.value=row.url||'';link.required=true;l1.append(link);var l2=el('label','');l2.append(document.createTextNode('Miniatura desta fonte (opcional)'));var thumb=el('input','');thumb.type='url';thumb.placeholder='https://.../imagem.jpg';thumb.maxLength=700;thumb.value=row.thumb||'';l2.append(thumb);wrap.append(head,l1,l2);$('eventEditSources').append(wrap);link.addEventListener('input',function(){var k=editKeyForUrl(link.value.trim());if(k)name.textContent=({'archive':'Internet Archive','okru':'OK.ru','youtube':'YouTube','bilibili':'Bilibili','dailymotion':'Dailymotion'}[k.split('|')[0]]||'Fonte')+' · editar/remover'});rem.addEventListener('click',function(){wrap.remove();eventEditor.rows=eventEditor.rows.filter(function(x){return x!==row})});row.link=link;row.thumbField=thumb;return wrap}
+function archiveDownloadFromDetails(value){
+ try{var u=new URL(value),host=u.hostname.toLowerCase();if(u.protocol!=='https:'||!['archive.org','www.archive.org'].includes(host)||u.search||u.hash)return '';
+  var parts=u.pathname.split('/').filter(Boolean);if(parts[0]!=='details'||parts.length<3||!/^[A-Za-z0-9_.-]{3,120}$/.test(parts[1]))return '';
+  var filename=decodeURIComponent(parts[parts.length-1]).replace(/\+/g,' ');
+  if(!/\.(mp4|m4v|webm|ogv)$/i.test(filename))return '';
+  var file=parts.slice(2).map(function(x){return decodeURIComponent(x).replace(/\+/g,' ')});
+  if(file.some(function(x){return !x||x==='.'||x==='..'||x.indexOf('/')>=0||x.indexOf('\\')>=0}))return '';
+  return 'https://archive.org/download/'+encodeURIComponent(parts[1])+'/'+file.map(encodeURIComponent).join('/');
+ }catch(e){return ''}
+}
+function archiveQueryApi(route,params){
+ if(!state.eventEditApi)return Promise.reject(Error('API Oracle não configurada.'));
+ return fetch(state.eventEditApi+'/api/jojo-monitor/archive/'+route+'?'+new URLSearchParams(params),{cache:'no-store',credentials:'omit'})
+ .then(function(r){return r.json().then(function(d){if(!r.ok)throw Error(d.message||'Falha no Archive');return d})});
+}
+function editArchivePicker(row,wrap){
+ var area=el('div','jojoArchiveFileTools'),guide=el('small','','Cole um identificador do Archive (wwesd04), um link /details/ ou pesquise por nome. Nada será vinculado sem salvar a edição.');
+ var controls=el('div','lookupRow'),input=el('input',''),find=el('button','','🔎 Buscar'),files=el('select',''),use=el('button','','Usar arquivo selecionado'),info=el('small','','');
+ input.type='text';input.maxLength=180;input.placeholder='wwesd04 ou WWE SmackDown 2026';find.type='button';use.type='button';files.hidden=true;use.hidden=true;
+ var title=/smackdown/i.test(eventEditor.event.title)?'WWE SmackDown '+eventEditor.event.date:(''+eventEditor.event.title+' '+eventEditor.event.date);
+ input.value=archiveId(row.link.value)||title;
+ controls.append(input,find);area.append(guide,controls,files,use,info);wrap.append(area);
+ function loadItem(identifier){files.dataset.mode='files';use.textContent='Usar arquivo selecionado';txt(info,'Buscando lista oficial de arquivos…');files.replaceChildren();files.hidden=true;use.hidden=true;
+  archiveQueryApi('item',{identifier:identifier}).then(function(d){
+   var list=(d.files||[]).filter(function(f){return /\.(mp4|m4v|webm|ogv)$/i.test(f.name||'')});
+   if(!list.length){txt(info,'Esse item não possui vídeos identificáveis. Abra a página do Archive para conferir.');return}
+   // Prefer complete episodes to pre-shows, press scrums and highlights.
+   var negative=/preshow|pre.show|pre[-_ ]show|post.show|media.scrum|scrum|highlights?|recap|trailer|teaser|press.conference|tailgate|kickoff|interview/i;
+   list.sort(function(a,b){var ap=negative.test(a.name)?1:0,bp=negative.test(b.name)?1:0;return ap-bp||Number(b.length||0)-Number(a.length||0)||Number(b.size||0)-Number(a.size||0)});
+   list.forEach(function(f){var seg=f.name.split('/').map(encodeURIComponent).join('/');files.add(new Option((negative.test(f.name)?'⚠️ Extra · ':'🎬 ')+f.name.slice(0,125)+(f.length?' · '+Math.round(Number(f.length)/60)+' min':''),'https://archive.org/download/'+encodeURIComponent(d.identifier)+'/'+seg))});
+   files.hidden=false;use.hidden=false;txt(info,list.length+' arquivo(s) encontrados em '+d.identifier+'. Escolha a gravação certa antes de salvar.');
+  }).catch(function(e){txt(info,'⚠️ '+e.message+' · Abra a página do Archive e confira a lista de arquivos.')});
+ }
+ find.addEventListener('click',function(){var q=input.value.trim(),id=archiveId(q);if(!id&&/^[A-Za-z0-9_.-]{3,120}$/.test(q))id=q;
+  if(id){loadItem(id);return}
+  txt(info,'Pesquisando itens no Archive…');archiveQueryApi('search',{query:q}).then(function(d){
+   var items=d.items||[];if(!items.length){txt(info,'Nenhum item encontrado. Tente o identificador exato ou palavras mais simples.');return}
+   files.replaceChildren();items.forEach(function(x){files.add(new Option(x.title+' · '+x.identifier,x.identifier))});files.hidden=false;use.hidden=false;use.textContent='📂 Ver arquivos deste item';files.dataset.mode='items';txt(info,'Escolha um item e clique para listar os arquivos.');
+  }).catch(function(e){txt(info,'⚠️ '+e.message)});
+ });
+ use.addEventListener('click',function(){if(files.dataset.mode==='items'){
+   var id=files.value;files.dataset.mode='files';use.textContent='Usar arquivo selecionado';loadItem(id);return;
+  }
+  var url=files.value;if(!/^https:\/\/archive\.org\/download\//.test(url))return;
+  row.link.value=url;row.thumbField.value='https://archive.org/services/img/'+encodeURIComponent(archiveId(url));txt(info,'✅ MP4 selecionado. Revise o vídeo e salve com sua Master Key.');
+  row.link.dispatchEvent(new Event('input'));
+ });
+ // Set the mode only after item lookup is done; a new lookup starts clean.
+ return area;
+}
+function editShowSourceRow(row){var wrap=el('div','eventEditRow'),head=el('div','eventEditRowHead'),name=el('b','',row.label||'Fonte de vídeo'),rem=el('button','danger','🗑 Remover');rem.type='button';rem.setAttribute('aria-label','Remover '+(row.label||'fonte'));head.append(name,rem);var l1=el('label','');l1.append(document.createTextNode('URL do vídeo'));var link=el('input','');link.type='url';link.placeholder='https://archive.org/download/ITEM/arquivo.mp4 ou https://ok.ru/video/123456789';link.maxLength=650;link.value=row.url||'';link.required=true;l1.append(link);var l2=el('label','');l2.append(document.createTextNode('Miniatura desta fonte (opcional)'));var thumb=el('input','');thumb.type='url';thumb.placeholder='https://.../imagem.jpg';thumb.maxLength=700;thumb.value=row.thumb||'';l2.append(thumb);wrap.append(head,l1,l2);var archiveBtn=el('button','secondary','📂 Buscar arquivo no Internet Archive');archiveBtn.type='button';wrap.append(archiveBtn);archiveBtn.addEventListener('click',function(){var open=wrap.querySelector('.jojoArchiveFileTools');if(open){open.remove();return}editArchivePicker(row,wrap)});$('eventEditSources').append(wrap);link.addEventListener('input',function(){var k=editKeyForUrl(link.value.trim());if(k)name.textContent=({'archive':'Internet Archive','okru':'OK.ru','youtube':'YouTube','bilibili':'Bilibili','dailymotion':'Dailymotion'}[k.split('|')[0]]||'Fonte')+' · editar/remover'});rem.addEventListener('click',function(){wrap.remove();eventEditor.rows=eventEditor.rows.filter(function(x){return x!==row})});link.addEventListener('change',function(){var direct=archiveDownloadFromDetails(link.value.trim());if(direct){link.value=direct;link.dispatchEvent(new Event('input'))}});row.link=link;row.thumbField=thumb;return wrap}
 function editRefreshPreview(){var e=$('eventEditPreview'),image=https($('eventEditPoster').value);jojoSetPoster(e,image||eventImage(eventEditor.event),eventEditor.event.title,eventEditor.event._company)}
 function openEventEditor(){var r=state.current;if(!r||!r.id){txt($('videoInfo'),'Este evento não possui ID estável para edição.');return}var edited=(state.eventEdits||{})[r.id]||{};eventEditor={event:r,revision:Number(edited.revision||0),rows:[]};$('eventEditEvent').textContent=r.title+' · '+(r.date||'')+' · '+(names[r._company||r.company]||'');$('eventEditPoster').value=edited.thumbnailUrl||'';$('eventEditKey').value='';$('eventEditRights').checked=false;txt($('eventEditFeedback'),'');$('eventEditSources').replaceChildren();var base=new Set(((r._editBase||{}).sources||r.sources||[]).map(editSourceKey));var keys=new Set();(r.sources||[]).forEach(function(src,i){var key=editSourceKey(src);if(!key||keys.has(key))return;keys.add(key);var row={existingKey:key,base:base.has(key),url:editSourceUrl(src),initialUrl:editSourceUrl(src),thumb:src.thumbnail||src.thumbnailUrl||'',label:sourceName(src)+' '+(i+1)};eventEditor.rows.push(row);editShowSourceRow(row)});if(!eventEditor.rows.length)$('eventEditSources').append(el('div','eventEditEmpty','Este evento não tem vídeos. Clique em + Adicionar URL para cadastrar a primeira fonte.'));editRefreshPreview();$('eventEditDialog').showModal();$('eventEditPoster').focus()}
 function initEventEditor(){var dlg=$('eventEditDialog');if(!dlg)return;$('eventEditOpen').addEventListener('click',openEventEditor);$('eventEditCancel').addEventListener('click',function(){dlg.close()});dlg.addEventListener('close',function(){$('eventEditKey').value='';eventEditor=null});$('eventEditPoster').addEventListener('input',function(){if(eventEditor)editRefreshPreview()});$('eventEditAdd').addEventListener('click',function(){if(!eventEditor)return;if(eventEditor.rows.length>=40){txt($('eventEditFeedback'),'Limite de 40 fontes neste editor.');return}var blank=$('eventEditSources').querySelector('.eventEditEmpty');if(blank)blank.remove();var row={base:false,existingKey:'',url:'',thumb:'',label:'Nova fonte '+(eventEditor.rows.length+1)};eventEditor.rows.push(row);editShowSourceRow(row);row.link.focus()});$('eventEditForm').addEventListener('submit',function(e){e.preventDefault();if(!eventEditor||!state.eventEditApi){txt($('eventEditFeedback'),'API Oracle indisponível. Não foi possível salvar.');return}var ctx=eventEditor,r=ctx.event,base=(r._editBase||{}).sources||r.sources||[],desired=[],keptBase=new Set(),added=[],thumbs={},seen=new Set(),errors=[];
-ctx.rows.forEach(function(row){var url=row.link.value.trim(),thumb=row.thumbField.value.trim(),key=editKeyForUrl(url);if(!key){errors.push('URL não reconhecida: '+url.slice(0,90));return}if(seen.has(key)){errors.push('Você repetiu a mesma fonte: '+url.slice(0,90));return}seen.add(key);if(thumb&&!https(thumb)){errors.push('Miniatura deve usar HTTPS');return}desired.push({url:url,thumbnailUrl:thumb,key:key});if(row.base&&(row.existingKey===key||(key.indexOf('archive|')===0&&row.initialUrl===url))){keptBase.add(row.existingKey);if(thumb)thumbs[row.existingKey]=thumb}else added.push({url:url,thumbnailUrl:thumb})});
+ctx.rows.forEach(function(row){var url=archiveDownloadFromDetails(row.link.value.trim())||row.link.value.trim(),thumb=row.thumbField.value.trim(),key=editKeyForUrl(url);if(!key){errors.push('URL não reconhecida: '+url.slice(0,90));return}if(seen.has(key)){errors.push('Você repetiu a mesma fonte: '+url.slice(0,90));return}seen.add(key);if(thumb&&!https(thumb)){errors.push('Miniatura deve usar HTTPS');return}desired.push({url:url,thumbnailUrl:thumb,key:key});if(row.base&&(row.existingKey===key||(key.indexOf('archive|')===0&&row.initialUrl===url))){keptBase.add(row.existingKey);if(thumb)thumbs[row.existingKey]=thumb}else added.push({url:url,thumbnailUrl:thumb})});
 if(errors.length){txt($('eventEditFeedback'),errors[0]);return}var removed=[];base.forEach(function(src){var k=editSourceKey(src);if(k&&!keptBase.has(k)&&removed.indexOf(k)<0)removed.push(k)});var poster=$('eventEditPoster').value.trim();if(poster&&!https(poster)){txt($('eventEditFeedback'),'Miniatura do evento deve começar com HTTPS.');return}
 if(removed.length&&!window.confirm('Remover '+removed.length+' fonte(s) deste evento? Os links serão ocultados, mas o histórico da edição ficará na Oracle.'))return;
 var button=$('eventEditSave');button.disabled=true;txt($('eventEditFeedback'),'Salvando alterações na Oracle…');var payload={key:$('eventEditKey').value,rightsConfirmed:$('eventEditRights').checked,eventId:r.id,expectedRevision:ctx.revision,removed:removed,added:added,sourceThumbnails:thumbs,thumbnailUrl:poster};fetch(state.eventEditApi+'/api/jojo-monitor/event/edit',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(function(resp){return resp.json().then(function(data){return {ok:resp.ok,data:data}})}).then(function(res){if(!res.ok)throw Error(res.data.message||'Erro ao salvar');if(!res.data.event)throw Error('API não retornou dados da edição');state.eventEdits[r.id]=res.data.event;ctx.revision=Number(res.data.event.revision||ctx.revision);$('eventEditKey').value='';dlg.close();applyEventEditRow(r);apply();open(r,true);txt($('videoInfo'),'✅ Fontes e miniatura atualizadas. Selecione outra URL no menu de fontes. As mudanças foram salvas na Oracle.');}).catch(function(err){txt($('eventEditFeedback'),err.message||'Falha de conexão. Tente novamente.')}).finally(function(){button.disabled=false})})}

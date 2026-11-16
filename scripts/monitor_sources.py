@@ -231,8 +231,18 @@ def monitor(config, updates, previous_candidates, previous_status, fetcher=reque
         if not profile.get('enabled'):
             continue
         url = profile.get('url', '')
-        if not re.fullmatch(r'https://ok\.ru/profile/\d+/video', url):
-            profiles.append({'id': profile.get('id'), 'state': 'url_invalida', 'found': 0})
+        platform = str(profile.get('platform') or 'okru')
+        if platform == 'archive' and (url.startswith('https://archive.org/search?') or re.fullmatch(r'https://archive\.org/details/[A-Za-z0-9_.-]{3,120}/?', url)):
+            profiles.append({'id': profile.get('id'), 'label': profile.get('label'), 'url': url,
+                             'state': 'coleta_archive_separada', 'found': None})
+            continue
+        if platform == 'bilibili' and re.fullmatch(r'https://www\.bilibili\.tv/en/space/\d+/?', url):
+            profiles.append({'id': profile.get('id'), 'label': profile.get('label'), 'url': url,
+                             'state': 'coleta_oracle_pendente', 'found': None})
+            continue
+        if not re.fullmatch(r'https://ok\.ru/(?:profile|group)/\d+/video/?', url):
+            profiles.append({'id': profile.get('id'), 'label': profile.get('label'), 'url': url,
+                             'state': 'url_invalida', 'found': 0})
             continue
         try:
             code, page = fetcher(url)

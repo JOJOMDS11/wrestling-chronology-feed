@@ -95,7 +95,7 @@ def targets(now=None, window=75):
 
 def likely_match(text, company, show):
     t = str(text).lower()
-    if re.search(r'\b(?:trailer|teaser|highlights?|recap|reaction|promo|review|podcast|clip|shorts?)\b', t):
+    if re.search(r'\b(?:trailer|teaser|highlights?|recap|reaction|promo|review|podcast|clip|shorts?|post[ ._-]?show|pre[ ._-]?show|media[ ._-]?scrum|press[ ._-]?conference|tailgate|kickoff|interview)\b', t):
         return False
     patterns = {'raw': r'\braw\b', 'smackdown': r'smack[ ._-]?down', 'nxt': r'\bnxt\b',
                 'honorclub': r'\broh\b|honor.?club|ring of honor', 'dynamite': r'dynamite',
@@ -114,7 +114,8 @@ def discover(fetch=get_json, now=None):
     result = {}
     successful = 0
     for company, show, label in TOPICS:
-        query = 'mediatype:movies AND title:("' + label + '")'
+        query = ('mediatype:movies AND (title:("WWE SmackDown") OR title:("Friday Night SmackDown") OR title:("SmackDown"))'
+                 if show == 'SmackDown' else 'mediatype:movies AND title:("' + label + '")')
         args = urlencode({'q': query, 'output': 'json', 'rows': 40, 'page': 1,
                           'fl[]': ['identifier','title','date','publicdate'],
                           'sort[]': 'publicdate desc'}, doseq=True)
@@ -126,7 +127,7 @@ def discover(fetch=get_json, now=None):
             continue
         requests = 0
         for doc in docs:
-            if requests >= 4:
+            if requests >= (9 if show == 'SmackDown' else 4):
                 break
             identifier = str(doc.get('identifier') or '')
             title = str(doc.get('title') or '')
@@ -325,7 +326,7 @@ def discover_missing_ppvs(fetch=get_json, now=None):
                 url=archive_url(identifier,filename)
                 if not url:continue
                 combined=(doc_title+' '+filename).lower()
-                if any(x in combined for x in ('trailer','teaser','highlights','countdown','buy in','press conference')):
+                if any(x in combined for x in ('trailer','teaser','highlights','countdown','buy in','press conference','post.show','pre.show','media scrum','tailgate','kickoff')):
                     continue
                 date=episode_date(combined)
                 # Exact date OR name+year is enough for review, NOT approval.
@@ -424,7 +425,7 @@ def discover_configured(fetch=get_json, now=None, config=None, sleep=time.sleep)
             if not url or not day:
                 continue
             low = (title + ' ' + filename).lower()
-            if re.search(r'sample|trailer|teaser|highlights?|recap|clip', low):
+            if re.search(r'sample|trailer|teaser|highlights?|recap|clip|post[ ._-]?show|pre[ ._-]?show|media[ ._-]?scrum|press[ ._-]?conference|tailgate|kickoff|interview', low):
                 continue
             try:
                 if file.get('length') is not None and float(file['length']) < 25 * 60:
