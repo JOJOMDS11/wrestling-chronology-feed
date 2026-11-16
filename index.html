@@ -248,6 +248,12 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .ppvAuditRunDialog form{display:grid;gap:10px}.ppvAuditRunDialog input{color:#fff;background:#181020;border:1px solid #805fa0;border-radius:9px;padding:10px;width:100%;box-sizing:border-box}
 .ppvAuditRunDialog menu{margin:0;padding:0;display:flex;justify-content:flex-end;gap:8px}.ppvAuditRunDialog button{background:#583675;border:1px solid #8767a4;border-radius:9px;padding:9px 13px;color:#fff}
 @media(max-width:570px){.ppvAuditInner{padding:12px}.ppvAuditBtn{width:100%}.ppvAuditRow{align-items:stretch}.ppvAuditRow button{width:100%}}
+
+/* Marcacao manual para pendencias da auditoria; nao altera status oficial */
+.ppvAuditRow.manuallyResolved{border-color:#3d9d70!important;background:rgba(21,100,67,.16)!important}
+.ppvAuditResolve{margin:0 0 6px 6px;padding:11px 13px;border-radius:10px;background:#236b47;color:#f2fff7;border:1px solid #5bd39b;font-weight:750;cursor:pointer}
+.ppvAuditReopen{margin:0 0 6px 6px;padding:11px 13px;border-radius:10px;background:#34313a;color:#eae4f6;border:1px solid #877b9b;cursor:pointer}
+.ppvAuditResolve:disabled,.ppvAuditReopen:disabled{opacity:.55;cursor:wait}
 </style>
 </head>
 <body>
@@ -1166,8 +1172,29 @@ function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
 function initPpvAudit(){
  var dlg=$('ppvAuditDialog'),stats=$('ppvAuditStats'),rowsEl=$('ppvAuditItems'),notice=$('ppvAuditNotice');
- var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='';
+ var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='',ppvResolved={};
  codes.forEach(function(c){company.add(new Option(names[c]||c.toUpperCase(),c))});
+ function refKey(it){
+  var label=String(it.title||'').normalize('NFKC').trim().toLowerCase(),h=2166136261;
+  for(var i=0;i<label.length;i++){h^=label.charCodeAt(i);h=Math.imul(h,16777619)}
+  return String(it.company||'').toLowerCase()+'|'+String(it.date||'')+'|'+('00000000'+(h>>>0).toString(16)).slice(-8);
+ }
+ function getBase(){
+  if(base)return Promise.resolve(base);
+  return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('API indisponivel');return r.json()}).then(function(x){var url=String(x.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\/\s?#]+$/.test(url))throw Error('API Oracle sem endereco HTTPS');base=url;return url});
+ }
+ function refreshResolved(){
+  return getBase().then(function(url){return fetch(url+'/api/jojo-monitor/ppvs/resolved',{cache:'no-store',credentials:'omit'})}).then(function(r){if(!r.ok)throw Error('Estado da Oracle indisponivel');return r.json()}).then(function(x){ppvResolved=x.resolved||{};render()}).catch(function(e){txt(notice,(notice.textContent||'')+' · ⚠️ Marcacoes manuais indisponiveis: '+e.message)});
+ }
+ function changeResolved(it,isResolved,button){
+  if(!isResolved&&!confirm('Marcar este PPV como resolvido manualmente? Isso NAO comprova que existe video ou que ele reproduz.'))return;
+  var secret=prompt('Master Key para '+(isResolved?'reabrir':'marcar resolvido')+' este PPV:');if(!secret)return;
+  button.disabled=true;
+  getBase().then(function(url){return fetch(url+'/api/jojo-monitor/ppvs/resolve',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:secret,referenceKey:refKey(it),action:isResolved?'reopen':'resolve'})})})
+  .then(function(r){return r.json().then(function(x){if(!r.ok)throw Error(x.message||'Erro ao salvar');return x})})
+  .then(function(){return refreshResolved()}).catch(function(e){alert('Nao foi possivel salvar: '+e.message)})
+  .finally(function(){button.disabled=false});
+ }
  function render(){
   if(!report)return;
   var selected=company.value,yy=year.value,items=(report.references||[]).filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)});
@@ -1183,15 +1210,18 @@ function initPpvAudit(){
   if(!items.length){rowsEl.append(el('p','ppvAuditNote','Nenhuma referência histórica carregada para esta seleção. A Wikipédia será consultada pela ação diária; enquanto não houver referências, não é possível determinar quais PPVs faltam.'));return}
   items.forEach(function(it){var row=el('div','ppvAuditRow '+(it.state==='missing'?'missing':it.state==='without_video'?'noVideo':''));var group=el('div','');
    var labels={missing:'🚨 AUSENTE do catálogo',without_video:'🟡 Cadastrado · sem vídeo',with_sources:'✅ Cadastrado · fonte ainda sem reprodução confirmada',upcoming:'📅 Futuro · aguardar evento'};
-   group.append(el('strong','',it.title),el('small','',cardDateBR(it.date)+' · '+(names[it.company]||it.company.toUpperCase())+' · '+labels[it.state]));row.append(group);
+   var done=!!ppvResolved[refKey(it)];if(done)row.classList.add('manuallyResolved');
+   group.append(el('strong','',it.title),el('small','',cardDateBR(it.date)+' · '+(names[it.company]||it.company.toUpperCase())+' · '+labels[it.state]));
+   if(done)group.append(el('small','', '✅ Marcado resolvido manualmente · reprodução não verificada'));row.append(group);
    var buttons=el('div','');
    if(it.official_url){var a=el('a','',it.referenceType==='wikipedia'?'↗ Referência: Wikipédia':'↗ Site oficial');a.href=it.official_url;a.target='_blank';a.rel='noopener noreferrer';a.style.cssText='display:inline-block;color:#f4ddff;margin:0 8px 8px 0;font-size:12px';buttons.append(a)}
    var search=el('button','', '🔎 Procurar vídeo');search.type='button';search.addEventListener('click',function(){dlg.close();$('reviewSearch').value=it.title+' '+it.date;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}))});buttons.append(search);
+   if(it.state!=='upcoming'){var green=el('button',done?'ppvAuditReopen':'ppvAuditResolve',done?'↩ Reabrir':'✅ Arrumado');green.type='button';green.title=done?'Reabrir a pendencia':'Marcacao manual, sem confirmar reproducao';green.addEventListener('click',function(){changeResolved(it,done,green)});buttons.append(green)}
    row.append(buttons);rowsEl.append(row)
   })
  }
  function load(){txt(notice,'Consultando última auditoria publicada…');return fetch('./ppv_audit.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Auditoria ainda não publicada no site');return r.json()}).then(function(data){report=data;var old=year.value,all=Object.keys(data.years||{}).sort().reverse();year.replaceChildren(new Option('Todos os anos',''));all.forEach(function(y){year.add(new Option(y,y))});if(all.indexOf(old)>=0)year.value=old;render()}).catch(function(e){report=null;stats.replaceChildren();rowsEl.replaceChildren();txt(notice,'⚠️ '+e.message+'. Publique ppv_audit.json junto com o patch ou rode a ação diária no GitHub.')})}
- $('ppvAuditOpen').addEventListener('click',function(){dlg.showModal();load()});
+ $('ppvAuditOpen').addEventListener('click',function(){dlg.showModal();load();refreshResolved()});
  $('ppvAuditClose').addEventListener('click',function(){dlg.close()});
  $('ppvAuditRefresh').addEventListener('click',load);company.addEventListener('change',render);year.addEventListener('change',render);
  var sub=$('ppvAuditRunDialog'),key=$('ppvAuditKey'),feedback=$('ppvAuditRunFeedback'),send=$('ppvAuditRunSend');
