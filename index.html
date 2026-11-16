@@ -236,7 +236,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .ppvCoverageTable td:not(:first-child){font-variant-numeric:tabular-nums}
 .ppvCoverageWarn{color:#ffce8b}.ppvCoverageGood{color:#b2e2c9}
 .ppvCoverageFoot{font-size:11px;color:#c3add6;line-height:1.45;margin:8px 0}
-.ppvCoverageMore{background:#48315f;border:1px solid #85679d;color:#fff;border-radius:8px;padding:8px 12px;margin:8px 0;cursor:pointer}
+.ppvCoverageMissing{background:#52305c;border:1px solid #a985bf;color:#fff;border-radius:6px;padding:5px 9px;cursor:pointer}.ppvCoverageDetail{padding:6px 0;border-bottom:1px solid #594466;font-size:12px}.ppvCoverageDetail a{margin-left:9px;color:#e3c5ff}.ppvCoverageControls select{background:#2b2038;color:#fff;border:1px solid #80639b;border-radius:8px;padding:9px}.ppvCoverageMore{background:#48315f;border:1px solid #85679d;color:#fff;border-radius:8px;padding:8px 12px;margin:8px 0;cursor:pointer}
 .jojoMasterSessionNote{font-size:12px;margin:8px 0;color:#a3ebc7}
 
 .ppvAuditBtn{border:1px solid #9c70ce;background:#38234d;color:#fff;border-radius:10px;padding:11px 13px;font-weight:800;cursor:pointer}
@@ -1279,7 +1279,7 @@ function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
 function initPpvAudit(){
  var dlg=$('ppvAuditDialog'),stats=$('ppvAuditStats'),rowsEl=$('ppvAuditItems'),notice=$('ppvAuditNotice');
- var coverageBody=$('ppvAuditCoverageBody'),coverageShowAll=false;
+ var coverageBody=$('ppvAuditCoverageBody'),coverageShowAll=false,coverageFilter='all',coverageDetails=null;
  var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='',ppvResolved={},ppvTab='pending';
  codes.forEach(function(c){company.add(new Option(names[c]||c.toUpperCase(),c))});
  function refKey(it){
@@ -1312,17 +1312,32 @@ function initPpvAudit(){
    return
   }
   var companies=report.companyCoverage||{},selected=company.value,yy=year.value;
+  var controls=el('div','ppvCoverageControls');controls.style.cssText='display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0';
+  var filter=el('select','');filter.setAttribute('aria-label','Filtrar cobertura da auditoria');
+  [['all','Todos os estados'],['missing','🚨 Faltando'],['without_video','🟡 Sem vídeo'],['not_audited','⚠️ Não auditados'],['partial','📚 Referência parcial'],['complete','Sem faltas apontadas']].forEach(function(a){filter.add(new Option(a[1],a[0]))});filter.value=coverageFilter;
+  filter.addEventListener('change',function(){coverageFilter=this.value;coverageShowAll=false;coverageDetails=null;renderCoverage()});
+  var copy=el('button','ppvCoverageMore','📋 Copiar relatório');copy.type='button';copy.addEventListener('click',function(){
+   var filtered=filteredCoverageRows();var lines=['Auditoria PPVs — relatório parcial','Brand\tAno\tNa base\tReferências\tComparados\tFaltando\tSem vídeo\tEstado'];
+   filtered.forEach(function(x){lines.push([String(x.company).toUpperCase(),x.year,x.cataloguePpvs||0,x.references||0,x.matched||0,x.missing||0,x.withoutVideo||0,x.coverage||'not_audited'].join('\t'))});
+   lines.push('','Eventos ausentes identificados nas referências (revisão necessária):');
+   (report.references||[]).filter(function(x){return x.state==='missing'&&filtered.some(function(r){return r.company===x.company&&String(r.year)===String(x.year)})}).forEach(function(x){lines.push([String(x.company).toUpperCase(),x.date,x.title,x.official_url||''].join('\t'))});
+   var content=lines.join('\n');var result=window.GenUI&&GenUI.copy?Promise.resolve(GenUI.copy(content)):navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(content):Promise.reject(Error('Copie manualmente usando um navegador HTTPS'));
+   result.then(function(){copy.textContent='✅ Copiado';setTimeout(function(){copy.textContent='📋 Copiar relatório'},1800)}).catch(function(){var box=el('textarea','');box.value=content;box.style.cssText='width:100%;height:180px';controls.after(box);box.select();try{document.execCommand('copy');box.remove();copy.textContent='✅ Copiado'}catch(e){copy.textContent='Selecione e copie o texto abaixo'}})
+  });controls.append(filter,copy);coverageBody.append(controls);
+  function filteredCoverageRows(){return all.filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)&&(
+   coverageFilter==='all'||coverageFilter==='missing'&&Number(x.missing)>0||coverageFilter==='without_video'&&Number(x.withoutVideo)>0||coverageFilter==='not_audited'&&(!x.wikipediaRowsInYear||x.coverage==='not_audited'||x.coverage==='curated_only')||coverageFilter==='partial'&&String(x.coverage).indexOf('partial')>=0||coverageFilter==='complete'&&Number(x.missing)===0&&Number(x.wikipediaRowsInYear)>0
+  )})}
   var source=el('p','ppvCoverageIntro','Fontes históricas por brand: ');
   var parts=codes.filter(function(c){return !selected||c===selected}).map(function(c){
    var info=companies[c]||{},label=info.sourceStatus==='updated'?'consultada':info.sourceStatus==='cached'?'cache (desatualizado)':'indisponível';
    return (names[c]||c.toUpperCase())+': '+Number(info.sourceCount||0)+' registros · '+label
   });source.textContent+=parts.join('  |  ');coverageBody.append(source);
-  var list=all.filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)}).sort(function(a,b){
+  var list=filteredCoverageRows().sort(function(a,b){
    var zeroA=a.wikipediaRowsInYear===0?1:0,zeroB=b.wikipediaRowsInYear===0?1:0;
    if(zeroA!==zeroB)return zeroB-zeroA;
    return b.year-a.year || codes.indexOf(a.company)-codes.indexOf(b.company)
   });
-  if(!list.length){coverageBody.append(el('p','ppvCoverageIntro','Nenhum registro disponível para esta brand/ano: a cobertura não pode ser determinada.'));return}
+  if(!list.length){coverageBody.append(el('p','ppvCoverageIntro','Nenhum registro corresponde ao filtro escolhido.'));return}
   var shown=(coverageShowAll||selected&&yy)?list:list.slice(0,30);
   var wrap=el('div','ppvCoverageScroll'),table=el('table','ppvCoverageTable'),thead=el('thead',''),head=el('tr','');
   ['Brand','Ano','Na base','Referências','Comparados','Faltando','Sem vídeo','Estado da referência'].forEach(function(k){head.append(el('th','',k))});thead.append(head);table.append(thead);
@@ -1330,7 +1345,13 @@ function initPpvAudit(){
   shown.forEach(function(x){var tr=el('tr','');
    var status=x.coverage==='partial'?'Parcial · Wikipédia consultada':x.coverage==='cached_partial'?'Parcial · cache':x.coverage==='curated_only'?'Apenas referências manuais':'Não auditado';
    var vals=[names[x.company]||String(x.company).toUpperCase(),x.year,x.cataloguePpvs||0,x.references||0,x.matched||0,x.missing||0,x.withoutVideo||0,status];
-   vals.forEach(function(v,i){var cell=el('td',i===7?(x.coverage==='partial'?'ppvCoverageGood':'ppvCoverageWarn'):'',String(v));tr.append(cell)});tbody.append(tr)
+   vals.forEach(function(v,i){var cell=el('td',i===7?(x.coverage==='partial'?'ppvCoverageGood':'ppvCoverageWarn'):'',String(v));
+    if(i===5&&Number(x.missing)>0){var detail=el('button','ppvCoverageMissing',String(v)+' ▾');detail.type='button';detail.title='Mostrar quais PPVs estão faltando';detail.setAttribute('aria-label','Mostrar PPVs faltantes de '+String(x.company).toUpperCase()+' '+x.year);detail.addEventListener('click',function(){coverageDetails=coverageDetails===x.company+'|'+x.year?null:x.company+'|'+x.year;renderCoverage()});cell.replaceChildren(detail)}tr.append(cell)});tbody.append(tr);
+   if(coverageDetails===x.company+'|'+x.year){var drow=el('tr',''),dcell=el('td','');dcell.colSpan=8;var matches=(report.references||[]).filter(function(it){return it.company===x.company&&String(it.year)===String(x.year)&&it.state==='missing'});var heading=el('strong','','🚨 '+String(x.company).toUpperCase()+' '+x.year+' — '+matches.length+' referências ausentes identificadas');dcell.append(heading);
+    if(!matches.length)dcell.append(el('p','','O resumo aponta '+x.missing+' faltas, mas os nomes não estão presentes no relatório publicado. Rode novamente a auditoria para obter os detalhes.'));
+    matches.forEach(function(it){var line=el('div','ppvCoverageDetail',cardDateBR(it.date)+' · '+it.title+' ');if(it.official_url){var a=el('a','','↗ Referência');a.href=it.official_url;a.target='_blank';a.rel='noopener noreferrer';line.append(a)}dcell.append(line)});
+    dcell.append(el('p','ppvCoverageFoot','Comparação automática: confirme nomes e datas antes de cadastrar como evento ausente.'));drow.append(dcell);tbody.append(drow)
+   }
   });table.append(tbody);wrap.append(table);coverageBody.append(wrap);
   if(list.length>30&&!coverageShowAll&&!(selected&&yy)){var btn=el('button','ppvCoverageMore','Ver todas as '+list.length+' linhas por brand/ano');btn.type='button';btn.addEventListener('click',function(){coverageShowAll=true;renderCoverage()});coverageBody.append(btn)}
   var noRef=list.filter(function(x){return !x.wikipediaRowsInYear}).length;
