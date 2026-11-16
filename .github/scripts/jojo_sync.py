@@ -53,6 +53,79 @@ def add_weekly_raw(updates, now=None):
     return 1
 
 
+def add_curated_events(updates):
+    """Merge verified special dates without touching previous reviewed videos."""
+    data = read('config/verified_events.json')
+    existing = {x.get('id'): x for x in updates.get('events', []) if isinstance(x, dict)}
+    changed = 0
+    for item in data.get('events', []):
+        eid = str(item.get('id', ''))
+        if not re.fullmatch(r'[A-Za-z0-9:_-]{8,180}', eid):
+            continue
+        if item.get('company') not in ('wwe','aew','roh','nxt','njpw','tna'):
+            continue
+        if eid in existing:
+            old = existing[eid]
+            # Only replace title/source reference for an already known event.
+            for field in ('title', 'show', 'official_url', 'description'):
+                if item.get(field) and not old.get(field):
+                    old[field] = item[field]
+                    changed += 1
+            continue
+        event = {k:v for k,v in item.items() if k in ('id','company','date','year','title','show','official_url','description','provisional','status','sources')}
+        event['sources'] = []
+        event['status'] = 'awaiting_video'
+        updates.setdefault('events', []).append(event)
+        existing[eid] = event
+        changed += 1
+    return changed
+
+
+def add_missing_weeklies(updates, now=None):
+    """Backfill recently missing weekly slots as provisional, never claim broadcast."""
+    now = now or dt.datetime.now(ZoneInfo('America/New_York'))
+    today = now.date()
+    current = updates.setdefault('events', [])
+    catalogue_days = set()
+    for category in ('wwe','nxt','aew','roh'):
+        try:
+            episodes = read(category+'.json').get('catalogue', {}).get('episodes', [])
+            for x in episodes:
+                if isinstance(x, dict):
+                    catalogue_days.add((category, str(x.get('date','')), str(x.get('show','')).lower()))
+        except (OSError, ValueError):
+            continue
+    def existing_on_day(company,date,show):
+        def similar(row):
+            if row.get('date') != date or row.get('company') not in ((company,'nxt') if show=='NXT' else (company,)):
+                return False
+            name = (str(row.get('title',''))+' '+str(row.get('show',''))).lower()
+            needle={'RAW':'raw','SmackDown':'smackdown','NXT':'nxt','Dynamite':'dynamite','Collision':'collision','HonorClub':'honorclub'}[show]
+            return needle in name or (show=='SmackDown' and 'smack down' in name)
+        if any(similar(x) for x in current if isinstance(x,dict)):
+            return True
+        ccs=('wwe','nxt') if show=='NXT' else (company,)
+        return any((cc,date,show.lower()) in catalogue_days for cc in ccs)
+    schedules=[('wwe',0,'RAW'),('wwe',1,'NXT'),('wwe',4,'SmackDown'),('aew',2,'Dynamite'),('aew',5,'Collision'),('roh',3,'HonorClub')]
+    count=0
+    for days in range(1,36):
+        date=today-dt.timedelta(days=days)
+        for co,weekday,show in schedules:
+            if date.weekday()!=weekday:
+                continue
+            iso=date.isoformat()
+            if existing_on_day(co,iso,show):
+                continue
+            slug=re.sub('[^a-z0-9]+','-',show.lower()).strip('-')
+            current.append({'id':'auto:'+co+':'+iso+':'+slug,'company':co,
+                            'date':iso,'year':date.year,'title':show if show!='RAW' else 'Monday Night RAW',
+                            'show':show,'status':'awaiting_video','provisional':True,
+                            'description':'Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.',
+                            'sources':[]})
+            count += 1
+    return count
+
+
 def source_key(src):
     if not isinstance(src, dict):
         return None
@@ -82,6 +155,9 @@ def approved_source(a):
 def consume_approvals(updates, data):
     """Append up to 3 administratively confirmed sources, retaining all existing links."""
     events = {str(x.get('id')): x for x in updates.get('events', []) if isinstance(x, dict) and x.get('id')}
+    # Catalogue sources remain intact. Only a reviewed video may add an overlay entry.
+    approved_target_ids = {str(a.get('eventId','')) for a in data.get('approved', []) if isinstance(a, dict)}
+    materialized = 0
     used = set()
     for cat in ('wwe','aew','nxt','tna','roh','njpw','wcw','ecw'):
         try:
@@ -89,6 +165,19 @@ def consume_approvals(updates, data):
         except (OSError, ValueError):
             continue
         for ep in episodes:
+            if not isinstance(ep,dict):
+                continue
+            eid=str(ep.get('id') or '')
+            if eid in approved_target_ids and eid not in events and re.fullmatch(r'[A-Za-z0-9:_-]{8,180}',eid):
+                # Overlay keyed by the catalogue's stable ID; do not modify originals.
+                overlay={'id':eid,'company':cat,'date':ep.get('date'),
+                         'year':ep.get('year'),'title':str(ep.get('title') or 'Evento')[:160],
+                         'show':str(ep.get('show') or '')[:60],'status':'awaiting_video',
+                         'sources':[]}
+                if re.fullmatch(r'\d{4}-\d{2}-\d{2}',str(overlay['date'] or '')):
+                    updates.setdefault('events',[]).append(overlay)
+                    events[eid]=overlay
+                    materialized += 1
             for src in ep.get('sources', []) if isinstance(ep,dict) else []:
                 key=source_key(src)
                 if key:
@@ -134,12 +223,14 @@ def consume_approvals(updates, data):
                 if not e.get('thumbnail') and not e.get('poster'):
                     e['thumbnail'] = thumbs[key]
                 changed += 1
-    return changed
+    return changed + materialized
 
 
 def main():
     updates = read('updates.json')
     nraw = add_weekly_raw(updates)
+    curated = add_curated_events(updates)
+    weeklies = add_missing_weeklies(updates)
     approved = 0
     try:
         req = urllib.request.Request(API, headers={'User-Agent':'JOJO-GitHub-Action/2.0'})
@@ -154,10 +245,10 @@ def main():
     except Exception as ex:
         # Never destroy existing catalogues or print tokens. RAW can still be added.
         print('Fila de aprovações temporariamente indisponível:',type(ex).__name__)
-    if nraw or approved:
+    if nraw or curated or weeklies or approved:
         updates['generatedAt'] = dt.datetime.now(dt.timezone.utc).isoformat().replace('+00:00','Z')
         save('updates.json',updates)
-    print('RAW provisórias adicionadas:',nraw,'Aprovações publicadas:',approved)
+    print('RAW provisórias:',nraw,'Eventos especiais:',curated,'Semanais pendentes:',weeklies,'Vínculos publicados:',approved)
 
 
 if __name__ == '__main__':
