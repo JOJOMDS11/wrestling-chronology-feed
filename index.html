@@ -290,6 +290,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .jojoStatusTabs button.jojoDoneTab[aria-selected="true"]{background:#245b42;border-color:#5dcf92}
 .jojoStatusPane[hidden]{display:none!important}
 .jojoEmpty{font-size:12px;color:#c9b9d9;padding:13px 8px}
+.archPanel{margin:8px 0;padding:10px;border:1px solid #5b3f86;border-radius:12px;background:#1a1228}.archRow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid #2d2142;font-size:13px}.archRow small{display:block;opacity:.75;word-break:break-all}.archRights{display:block;margin:8px 0;font-size:13px}
 </style>
 </head>
 <body>
@@ -352,6 +353,8 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <div id="linkHealthIssues"></div>
  </details>
  <div class="reviewManual"><input id="reviewManualUrl" type="url" placeholder="Link OK.ru ou bilibili.tv/en/video/..." aria-label="Link de vídeo OK.ru ou Bilibili"><button type="button" id="reviewManualAdd">Vincular link manual</button></div>
+ <div class="reviewManual archBox"><input id="archInput" type="text" placeholder="Archive: identificador (wwesd04), link archive.org/details/... ou uploader" aria-label="Buscar no Internet Archive"><button type="button" id="archGo">Buscar no Archive</button></div>
+ <div id="archPanel" class="archPanel" hidden><div id="archMsg" class="reviewHint" role="status"></div><div id="archRows"></div><label class="archRights"><input type="checkbox" id="archRights"> Confirmo que cada vídeo corresponde ao show e posso compartilhar o link</label><div class="reviewToolBtns"><button type="button" id="archLink" disabled>Vincular selecionados</button></div></div>
  <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Buscar vídeos por título, programa ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option><option value="archive">Internet Archive</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
  <div class="reviewRelevance"><select id="reviewRelevance" aria-label="Qualidade dos resultados"><option value="best">✅ Shows completos prováveis</option><option value="recent">🆕 Recentes relevantes</option><option value="classic">📚 Shows antigos</option><option value="extra">🗂 Outros vídeos</option><option value="all">🔎 Todos os candidatos</option></select><small id="reviewQualityCounts">Classificando resultados…</small></div>
  <div class="reviewTools" id="reviewMainTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Lixeira p/ sem título</button><button type="button" id="reviewDismissAll">🗑 Mandar todos p/ lixeira</button><button type="button" id="reviewTrashBtn">🗑 Lixeira (<span id="reviewTrashCount">0</span>)</button><button type="button" id="reviewImportOld" hidden>☁️ Importar lixeira antiga</button></div></div>
@@ -1144,6 +1147,73 @@ $('reviewDismissUnknown').addEventListener('click',function(){changeReview('tras
    var platform=bili?'bilibili':'okru',id=(bili||ok)[1],canonical=platform==='bilibili'?'https://www.bilibili.tv/en/video/'+id:'https://ok.ru/video/'+id;
    openCandidate({videoId:id,platform:platform,title:'Link informado manualmente'},canonical);
  });
+
+ var ARCH=[[/smack[ ._-]?down/i,'wwe','SmackDown','Friday Night SmackDown'],[/(^|[^a-z0-9])raw([^a-z0-9]|$)/i,'wwe','RAW','Monday Night RAW'],[/(^|[^a-z0-9])nxt([^a-z0-9]|$)/i,'nxt','NXT','NXT'],[/dynamite/i,'aew','Dynamite','AEW Dynamite'],[/collision/i,'aew','Collision','AEW Collision'],[/rampage/i,'aew','Rampage','AEW Rampage'],[/(^|[^a-z0-9])(tna|impact)([^a-z0-9]|$)/i,'tna','Impact','TNA Impact'],[/honor.?club|ring.of.honor|(^|[^a-z0-9])roh([^a-z0-9]|$)/i,'roh','HonorClub','ROH HonorClub']];
+ var ARCH_SKIP=/sample|trailer|teaser|b[-. _]?roll|promo|preview|highlights?|recap|clip/i,archItems=[],archBusy=false;
+ function archMsg(v){txt($('archMsg'),v)}
+ function archEnc(v){return encodeURIComponent(v).replace(/[!'()*]/g,function(c){return '%'+c.charCodeAt(0).toString(16).toUpperCase()})}
+ function archFileUrl(id,f){return 'https://archive.org/download/'+archEnc(id)+'/'+String(f).split('/').map(archEnc).join('/')}
+ function archHash(u){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(u)).then(function(b){return 'a'+Array.from(new Uint8Array(b)).map(function(x){return ('0'+x.toString(16)).slice(-2)}).join('').slice(0,32)})}
+ function archRank(n){n=n.toLowerCase();var r={mp4:30,m4v:20,webm:10}[n.split('.').pop()]||0;if(/h[ ._-]?265|hevc|x265/.test(n))r-=12;else if(/h[ ._-]?264|x264|avc/.test(n))r+=12;if(n.indexOf('1080')>=0)r+=6;else if(n.indexOf('720')>=0)r+=4;else if(n.indexOf('480')>=0)r+=2;return r}
+ function archShow(t){for(var i=0;i<ARCH.length;i++)if(ARCH[i][0].test(t))return ARCH[i];return null}
+ function archPause(ms){return new Promise(function(r){setTimeout(r,ms)})}
+ function archJson(u){return fetch(u,{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('Archive HTTP '+r.status);return r.json()})}
+ function archIds(input){
+  var v=String(input||'').trim(),m=v.match(/^https:\/\/(?:www\.)?archive\.org\/(?:details|download|embed)\/([a-zA-Z0-9_.-]{3,120})/i);
+  if(m)return Promise.resolve([m[1]]);
+  if(/^[a-zA-Z0-9_.-]{3,120}$/.test(v)&&/\d/.test(v))return Promise.resolve([v]);
+  if(v.length<3)return Promise.reject(Error('Informe um identificador, link ou uploader'));
+  var q=v.replace(/"/g,''),query='mediatype:movies AND (uploader:"'+q+'" OR creator:"'+q+'" OR title:("'+q+'"))';
+  return archJson('https://archive.org/advancedsearch.php?'+['q='+encodeURIComponent(query),'fl[]=identifier','rows=12','output=json','sort[]='+encodeURIComponent('publicdate desc')].join('&')).then(function(d){return ((d.response||{}).docs||[]).map(function(x){return String(x.identifier||'')}).filter(function(x){return /^[a-zA-Z0-9_.-]{3,120}$/.test(x)})});
+ }
+ function archScan(ids){
+  var best={},n=0;
+  return ids.slice(0,10).reduce(function(chain,id){return chain.then(function(){return archPause(400)}).then(function(){return archJson('https://archive.org/metadata/'+archEnc(id))}).then(function(info){
+   n++;if(!info||info.is_dark||!info.metadata)return;
+   var title=String(info.metadata.title||'');
+   (info.files||[]).slice(0,800).forEach(function(f){
+    var name=String(f.name||'');if(!/\.(mp4|m4v|webm|ogv)$/i.test(name)||name.length>240||ARCH_SKIP.test(name))return;
+    var day=reviewDateFromTitle(name)||reviewDateFromTitle(title),sh=archShow(title+' '+name);if(!day||!sh)return;
+    if(f.length&&Number(f.length)<1500)return;
+    var k=sh[1]+'|'+day+'|'+sh[2],r=archRank(name);
+    if(!best[k]||best[k].rank<r)best[k]={rank:r,id:id,name:name,day:day,company:sh[1],show:sh[2],title:sh[3],size:Number(f.size)||0,url:archFileUrl(id,name)};
+   });
+  }).catch(function(){})},Promise.resolve()).then(function(){return {scanned:n,items:Object.keys(best).map(function(k){return best[k]}).sort(function(a,b){return a.day<b.day?1:-1})}});
+ }
+ function archEvents(items){
+  var companies=Array.from(new Set(items.map(function(i){return i.company})));
+  return fetchUpdates().then(function(){return Promise.all(companies.map(fetchCompany))}).then(function(){
+   var byCo={};companies.forEach(function(c){byCo[c]=reviewListForCompany(c)});
+   items.forEach(function(it){var sh=archShow(it.show);it.event=(byCo[it.company]||[]).filter(function(e){return e.date===it.day&&sh&&sh[0].test((e.show||'')+' '+(e.title||''))})[0]||null});
+  });
+ }
+ function archRender(){
+  var box=$('archRows');box.replaceChildren();
+  archItems.forEach(function(it,i){
+   var e=it.event,have=e&&(e.sources||[]).some(function(x){return x&&(x.type==='archive'&&x.url===it.url)}),full=e&&(e.sources||[]).length>=3;
+   var row=el('label','archRow'),cb=el('input');cb.type='checkbox';cb.dataset.i=i;cb.checked=!have&&!full&&!(e&&(e.sources||[]).length);cb.disabled=!!(have||full);
+   var info=el('div');info.append(el('div','',it.day.split('-').reverse().join('/')+' · '+it.show+' · '+(have?'já vinculado':full?'evento com 3 fontes':e?(e.sources||[]).length?'evento já tem fonte, vincula como extra':'vincular ao evento existente':'criar evento novo e vincular')+(it.size?' · '+Math.round(it.size/1e6)+' MB':'')));
+   info.append(el('small','',it.id+'/'+it.name));row.append(cb,info);box.append(row);
+  });
+  $('archLink').disabled=!archItems.length;
+ }
+ $('archGo').addEventListener('click',function(){
+  if(archBusy)return;archBusy=true;$('archPanel').hidden=false;$('archRows').replaceChildren();$('archLink').disabled=true;archMsg('Consultando o Internet Archive (somente metadados)…');
+  archIds($('archInput').value).then(function(ids){if(!ids.length)throw Error('Nenhum item encontrado');archMsg('Lendo '+Math.min(ids.length,10)+' item(ns)…');return archScan(ids)}).then(function(res){archItems=res.items;return archEvents(archItems).then(function(){archMsg(res.scanned+' item(ns) lido(s) · '+archItems.length+' episódio(s) reconhecido(s). Revise antes de vincular.');archRender()})}).catch(function(err){archMsg('⚠ '+err.message)}).finally(function(){archBusy=false});
+ });
+ $('archLink').addEventListener('click',function(){
+  var picked=Array.prototype.filter.call($('archRows').querySelectorAll('input[type=checkbox]'),function(c){return c.checked}).map(function(c){return archItems[Number(c.dataset.i)]});
+  if(!picked.length){archMsg('Selecione ao menos um episódio.');return}
+  if(!$('archRights').checked){archMsg('Confirme a autorização antes de vincular.');return}
+  var k=jojoPromptMaster('Master Key da Oracle para vincular os vídeos do Archive:');if(!k)return;
+  var btn=$('archLink'),ok=0,fail=[];btn.disabled=true;
+  picked.reduce(function(chain,it){return chain.then(function(){
+   var thumb='https://archive.org/services/img/'+archEnc(it.id),req;
+   if(it.event){req=archHash(it.url).then(function(id){return fetch(cfg+'/api/jojo-monitor/approve',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,videoId:id,platform:'archive',eventId:it.event.id,rightsConfirmed:true,manualUrl:it.url,thumbnailUrl:thumb})})})}
+   else{req=fetch(cfg+'/api/jojo-monitor/ppvs/create',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:k,company:it.company,date:it.day,title:it.title,show:it.show,sources:[it.url],thumbnailUrl:thumb,rightsConfirmed:true})})}
+   return req.then(function(r){return r.json().then(function(d){if(!r.ok)throw Error(d.message||'Falha');if(d.event){state.manualPpvs[d.event.id]=d.event}ok++})}).catch(function(e){fail.push(it.day+' '+it.show+': '+e.message)}).then(function(){return archPause(300)});
+  })},Promise.resolve()).then(function(){archMsg(ok+' vinculado(s)'+(fail.length?' · '+fail.length+' falha(s): '+fail.join(' | '):'')+'. Vínculos aprovados entram no site após a próxima sincronização.');if(typeof window.render==='function')window.render();archEvents(archItems).then(archRender)}).finally(function(){btn.disabled=false});
+ });
  $('reviewCancel').addEventListener('click',function(){dialog.close()});
  $('reviewForm').addEventListener('submit',function(ev){ev.preventDefault();
   var eventId=$('reviewEvent').value,key=$('reviewKey').value,rights=$('reviewRights').checked,btn=$('reviewApprove');
@@ -1205,7 +1275,7 @@ function mergeManualPpvs(code,rows){
  Object.keys(state.manualPpvs||{}).forEach(function(id){var r=state.manualPpvs[id];if(!r||codes.indexOf(r.company)<0||r.company!==code||!/^\d{4}-\d{2}-\d{2}$/.test(r.date||''))return;
   var k=r.company+'|'+r.date+'|'+clean(r.title),existing=seen.get(k);
   if(existing){var keys=new Set((existing.sources||[]).map(editSourceKey));(r.sources||[]).forEach(function(src){var sk=editSourceKey(src);if(sk&&!keys.has(sk)){existing.sources.push(Object.assign({},src));keys.add(sk)}});existing.scheduled=!(existing.sources||[]).length;return}
-  var newRow=Object.assign({},r,{_company:code,year:Number(r.date.slice(0,4)),show:'PPV',sources:(r.sources||[]).map(function(src){return Object.assign({},src)}),scheduled:!(r.sources||[]).length});
+  var newRow=Object.assign({},r,{_company:code,year:Number(r.date.slice(0,4)),show:r.show||'PPV',sources:(r.sources||[]).map(function(src){return Object.assign({},src)}),scheduled:!(r.sources||[]).length});
   newRow._needle=clean([newRow.title,newRow.date,newRow.show].join(' '));all.push(newRow);seen.set(k,newRow)
  });return all;
 }
