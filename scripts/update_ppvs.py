@@ -232,7 +232,7 @@ def merge_preserving_sources(existing, discovered):
         result['status'] = old.get('status', 'video_available')
         if 'sourceReview' in old:
             result['sourceReview'] = old['sourceReview']
-    for field in ('description','approvedAt','provisional'):
+    for field in ('description','approvedAt','provisional','thumbnail','poster','sourceReview'):
         if field in old:
             result[field] = old[field]
     return result
@@ -256,10 +256,10 @@ def run():
             print(f'{company.upper()}: {len(found)} eventos oficiais encontrados')
         except Exception as exc:
             print(f'AVISO: falha ao consultar {company}: {exc}. Mantendo os anteriores.', file=sys.stderr)
-    # Preserve discovered events for the most recent year; never purge on fetch error.
-    cutoff = (now - dt.timedelta(days=365)).date().isoformat()
-    results = sorted((event for event in saved.values() if event.get('date', '0000') >= cutoff),
-                     key=lambda e: (e['date'], e['company'], e['title']))
+    # This feed is append-only for historical records: a missing official source,
+    # old date, or temporary scrape failure must NEVER erase approved associations.
+    results = sorted(saved.values(),
+                     key=lambda e: (e.get('date',''), e.get('company',''), e.get('title','')))
     if results == existing.get('events', []):
         print('Nenhuma mudança na agenda. Arquivo preservado.')
         return
