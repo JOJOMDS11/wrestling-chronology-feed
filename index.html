@@ -151,6 +151,29 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .amSyncDialog button{background:#5c3b82;border:1px solid #906ac2;border-radius:9px;color:#fff;padding:10px 13px}
 .amSyncDialog button:disabled{opacity:.5}
 @media(max-width:570px){.amSyncBar button{width:100%}}
+
+/* JOJO Library V5 — painel de saúde dos links */
+.linkHealth{border:1px solid #635075;border-radius:12px;margin:12px 0 16px;padding:12px;background:#211a30}
+.linkHealth summary{cursor:pointer;font-weight:800;color:#efe4ff;display:flex;align-items:center;gap:8px}
+.linkHealthStats{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.linkHealthStat{border:1px solid #534667;border-radius:8px;background:#30253e;padding:8px 10px;font-size:12px;color:#e5d8f4;flex:1 1 105px}
+.linkHealthStat strong{font-size:17px;display:block;color:#fff}
+.linkHealthActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:9px 0}
+.linkHealthActions button{background:#513776;color:#fff;border:1px solid #8b69b0;padding:9px 11px;border-radius:9px;cursor:pointer}
+.linkHealthActions button:disabled{opacity:.5;cursor:not-allowed}
+.linkHealthNote{font-size:12px;color:#c9b9d9;line-height:1.5}
+.linkHealthIssue{border:1px solid #514562;border-radius:9px;padding:11px;margin:8px 0;background:#2e233c}
+.linkHealthIssue strong{color:#f5edff;font-size:13px}
+.linkHealthIssue small{display:block;color:#cebfdc;line-height:1.5;margin:4px 0}
+.linkHealthIssue .hint{font-size:11px;color:#e7b9ab}
+.linkHealthIssue a,.linkHealthIssue button{display:inline-block;padding:6px 9px;margin:3px 6px 3px 0;font-size:12px;border:1px solid #796396;border-radius:8px;color:#e8d2ff;background:transparent;text-decoration:none;cursor:pointer}
+.linkHealthDialog{background:#23192f;color:#f3eaff;border:1px solid #8e6fac;border-radius:14px;width:min(92vw,430px);padding:22px}
+.linkHealthDialog::backdrop{background:#000c}
+.linkHealthDialog form{display:grid;gap:12px}
+.linkHealthDialog input{font-size:16px;padding:11px;border-radius:9px;background:#120e1c;color:white;border:1px solid #7d5d9c;box-sizing:border-box;width:100%}
+.linkHealthDialog menu{padding:0;margin:0;display:flex;justify-content:flex-end;gap:9px}
+.linkHealthDialog button{background:#573777;color:white;border:1px solid #9271b4;border-radius:9px;padding:10px 12px}
+
 </style>
 </head>
 <body>
@@ -192,12 +215,26 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
    <div class="amSyncInfo" id="amSyncStatus" role="status" aria-live="polite">Consultando sincronização…</div>
    <button type="button" id="amSyncRefresh">↻ Ver status</button>
  </div>
+ <details class="linkHealth" id="linkHealthPanel">
+ <summary>🛡️ Saúde dos links · detectar falhas e sugerir substituições</summary>
+ <div id="linkHealthStats" class="linkHealthStats"><div class="linkHealthStat">Carregando status…</div></div>
+ <div class="linkHealthActions"><button type="button" id="linkHealthRefresh">↻ Atualizar resultado</button><button type="button" id="linkHealthRun" disabled>🔎 Verificar links agora</button></div>
+ <div id="linkHealthInfo" class="linkHealthNote" role="status">As verificações automáticas rodam a cada 12h. Nenhum link é removido ou substituído sem sua aprovação.</div>
+ <div id="linkHealthIssues"></div>
+ </details>
  <div class="reviewManual"><input id="reviewManualUrl" type="url" placeholder="Link OK.ru ou bilibili.tv/en/video/..." aria-label="Link de vídeo OK.ru ou Bilibili"><button type="button" id="reviewManualAdd">Vincular link manual</button></div>
  <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Filtrar vídeos encontrados por título, show ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
  <div class="reviewRelevance"><select id="reviewRelevance" aria-label="Qualidade dos resultados"><option value="best">✅ Shows completos prováveis</option><option value="recent">🆕 Recentes relevantes</option><option value="classic">📚 Shows antigos</option><option value="extra">🗂 Outros vídeos</option><option value="all">🔎 Todos os candidatos</option></select><small id="reviewQualityCounts">Classificando resultados…</small></div>
  <div class="reviewTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Dispensar sem título</button><button type="button" id="reviewDismissAll">🗑 Dispensar todos</button><button type="button" id="reviewRestore">↩ Restaurar dispensados</button></div></div>
  <div id="reviewCandidates" class="reviewCards"></div>
 </dialog>
+<dialog id="linkHealthDialog" class="linkHealthDialog" aria-label="Confirmar verificação de links">
+<form id="linkHealthForm"><strong>🛡️ Verificar saúde dos links</strong>
+<p class="reviewHint">Verifica até 360 fontes nesta rodada. Não altera vídeos e não publica substituições automaticamente.</p>
+<label>Master Key<input id="linkHealthKey" type="password" autocomplete="off" maxlength="128" required></label>
+<div id="linkHealthFeedback" class="reviewHint" role="status"></div>
+<menu><button type="button" id="linkHealthCancel">Cancelar</button><button type="submit" id="linkHealthSend">Iniciar verificação</button></menu>
+</form></dialog>
 <dialog id="amSyncDialog" class="amSyncDialog" aria-label="Sincronizar aprovações com GitHub">
 <form id="amSyncForm"><strong>🔄 Sincronizar AutoMatch</strong>
 <p class="reviewHint">Dispara o GitHub Actions para publicar somente os vínculos já aprovados. Não aprova vídeos novos.</p>
@@ -369,6 +406,69 @@ function initAutoMatchSync(){
  });
  document.addEventListener('visibilitychange',function(){if(!document.hidden)syncStatus()});
  setInterval(function(){if(!document.hidden)syncStatus()},20000);
+}
+
+function initLinkHealth(){
+ var base='',button=$('linkHealthRun'),info=$('linkHealthInfo'),stats=$('linkHealthStats'),issues=$('linkHealthIssues');
+ var dlg=$('linkHealthDialog'),key=$('linkHealthKey'),feedback=$('linkHealthFeedback'),send=$('linkHealthSend');
+ function stat(label,value){var b=el('div','linkHealthStat');b.append(el('strong','',value),document.createTextNode(label));return b}
+ function date(s){if(!s)return 'Ainda não executado';var d=new Date(s);return isNaN(d.getTime())?'Data indisponível':d.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})}
+ function update(){
+  if(!base)return;
+  return fetch(base+'/api/jojo-monitor/links/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('Status indisponível');return r.json()}).then(function(d){
+   stats.replaceChildren(stat('Fontes cadastradas',String(d.totalSources||0)),stat('Páginas acessíveis',String((d.counts||{}).pagina_acessivel||0)),stat('Suspeitas',String(((d.counts||{}).suspeito||0)+((d.counts||{}).provavelmente_indisponivel||0))),stat('Acesso restrito',String((d.counts||{}).acesso_restrito||0)),stat('Ainda não verificadas',String((d.counts||{}).nao_verificado||0)));
+   button.disabled=!d.canRequest;
+   var msg='Última rodada: '+date(d.checkedAt)+' · '+(d.batchSize||0)+' fontes testadas';
+   if(d.running)msg+=' · ⏳ Executando na Oracle';else if(d.queued)msg+=' · ⏳ Na fila';
+   if(d.cooldownSeconds)msg+=' · Repetir em '+Math.ceil(d.cooldownSeconds/60)+' min';
+   if(d.error)msg+=' · ⚠️ '+d.error;
+   if(d.catalogueFailures&&d.catalogueFailures.length)msg+=' · Alguns catálogos não puderam ser lidos';
+   msg+=' · HTTP 200 não garante que o vídeo reproduz · Nenhum link é alterado automaticamente.';
+   txt(info,msg);
+   issues.replaceChildren();
+   var rows=Array.isArray(d.issues)?d.issues:[];
+   if(!rows.length){issues.append(el('p','linkHealthNote',d.hasReport?'Nenhum link suspeito entre os que já foram verificados.':'Aguardando a primeira verificação de links.'));return}
+   if(d.issueCount>rows.length)issues.append(el('p','linkHealthNote','Mostrando '+rows.length+' de '+d.issueCount+' alertas; demais ficam preservados na Oracle.'));
+   rows.forEach(function(issue){
+    var event=issue.event||{},card=el('div','linkHealthIssue');
+    var name=event.title||'Evento sem identificação',company=(event.company||'').toUpperCase();
+    card.append(el('strong','',company+' · '+name+' · '+(event.date||'')));
+    var labels={suspeito:'⚠️ Página respondeu 404/410; aguardando confirmações',provavelmente_indisponivel:'❌ Possível remoção após 3 verificações separadas',acesso_restrito:'🔒 Bloqueio regional ou de acesso; não é exclusão'};
+    card.append(el('small','',labels[issue.state]||issue.state));
+    var a=el('a','', '↗ Conferir fonte');a.href=issue.url;a.target='_blank';a.rel='noopener noreferrer';card.append(a);
+    (issue.alternatives||[]).forEach(function(candidate){
+      var row=el('div','');row.append(el('small','hint','💡 Possível substituto: '+candidate.title+' · '+candidate.reason));
+      var open=el('a','','↗ Conferir alternativa');open.href=candidate.url;open.target='_blank';open.rel='noopener noreferrer';row.append(open);
+      var review=el('button','','🔎 Encontrar no AutoMatch');review.type='button';review.addEventListener('click',function(){
+       $('linkHealthPanel').open=false;
+       $('reviewSearch').value=candidate.title||candidate.videoId;
+       $('reviewRelevance').value='all';
+       $('reviewPlatform').value=candidate.platform;
+       $('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}));
+      });row.append(review);card.append(row)
+    });
+    issues.append(card)
+   });
+  }).catch(function(){button.disabled=true;txt(info,'Não foi possível consultar a saúde dos links na Oracle. Os vídeos não foram alterados.')})
+ }
+ fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()}).then(function(d){
+  base=String(d.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\/\s?#]+$/.test(base))throw Error();return update();
+ }).catch(function(){button.disabled=true;txt(info,'API Oracle indisponível. O verificador automático é independente do site.')});
+ $('linkHealthRefresh').addEventListener('click',update);
+ $('linkHealthPanel').addEventListener('toggle',function(){if(this.open)update()});
+ button.addEventListener('click',function(){if(button.disabled)return;key.value='';txt(feedback,'');dlg.showModal();key.focus()});
+ $('linkHealthCancel').addEventListener('click',function(){dlg.close()});
+ dlg.addEventListener('close',function(){key.value='';txt(feedback,'')});
+ $('linkHealthForm').addEventListener('submit',function(e){
+  e.preventDefault();if(!base)return;send.disabled=true;txt(feedback,'Solicitando verificação…');
+  fetch(base+'/api/jojo-monitor/links/request',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:key.value})})
+   .then(function(r){return r.json().then(function(data){return {ok:r.ok,data:data}})})
+   .then(function(result){key.value='';txt(feedback,result.data.message||'Resposta recebida');update();if(result.ok){dlg.close();setTimeout(update,1500);setTimeout(update,18000)}})
+   .catch(function(){key.value='';txt(feedback,'Falha na conexão com a Oracle.')})
+   .finally(function(){send.disabled=false})
+ });
+ document.addEventListener('visibilitychange',function(){if(!document.hidden&&$('linkHealthPanel').open)update()});
+ setInterval(function(){if(!document.hidden&&$('linkHealthPanel').open)update()},30000);
 }
 
 function initReviewPanel(){
@@ -550,7 +650,7 @@ function close(){if(state.current&&state.source)saveWatch();var v=$('video');v.p
 function vlc(){var s=state.source,u=sourceUrl(s);if(!u||s.type!=='archive')return;try{var parsed=new URL(u);var fallback=encodeURIComponent(u);location.href='intent://'+parsed.host+parsed.pathname+parsed.search+'#Intent;scheme=https;package=org.videolan.vlc;S.browser_fallback_url='+fallback+';end'}catch(e){txt($('videoInfo'),'Não foi possível abrir o VLC; use Abrir fonte.') }}
 function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.tagName)>=0}
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
-function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initAutoMatchSync();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
+function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initAutoMatchSync();initLinkHealth();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}
