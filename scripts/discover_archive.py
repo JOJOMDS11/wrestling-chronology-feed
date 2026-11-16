@@ -8,12 +8,14 @@ import datetime as dt
 import hashlib
 import json
 import re
+import time
 from pathlib import Path
 from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / 'archive_candidates.json'
+CONFIG = ROOT / 'config' / 'archive_sources.json'
 SEARCH = 'https://archive.org/advancedsearch.php'
 META = 'https://archive.org/metadata/'
 TOPICS = (
@@ -70,9 +72,9 @@ def candidate_id(url):
     return 'a' + hashlib.sha256(url.encode('utf-8')).hexdigest()[:32]
 
 
-def targets(now=None):
+def targets(now=None, window=75):
     now = now or dt.datetime.now(dt.timezone.utc).date()
-    earliest = now - dt.timedelta(days=75)
+    earliest = now - dt.timedelta(days=window)
     ids = {}
     for company in ('wwe', 'nxt', 'roh', 'aew', 'tna'):
         path = ROOT / (company + '.json')
@@ -345,6 +347,121 @@ def discover_missing_ppvs(fetch=get_json, now=None):
     return done,list(candidates.values())
 
 
+SHOW_PATTERNS = (('SmackDown', 'wwe', r'smack[ ._-]?down'), ('RAW', 'wwe', r'(?<![a-z0-9])raw(?![a-z0-9])'),
+                 ('NXT', 'wwe', r'(?<![a-z0-9])nxt(?![a-z0-9])'), ('Dynamite', 'aew', r'dynamite'),
+                 ('Collision', 'aew', r'collision'), ('Impact', 'tna', r'(?<![a-z0-9])(?:tna|impact)(?![a-z0-9])'))
+
+
+def file_rank(name):
+    n = name.lower()
+    score = {'mp4': 30, 'm4v': 20, 'webm': 10}.get(n.rsplit('.', 1)[-1], 0)
+    if re.search(r'h[ ._-]?265|hevc|x265', n):
+        score -= 12
+    elif re.search(r'h[ ._-]?264|x264|avc', n):
+        score += 12
+    for res, pts in (('1080', 6), ('720', 4), ('480', 2)):
+        if res in n:
+            score += pts
+            break
+    return score
+
+
+def load_config():
+    try:
+        data = json.loads(CONFIG.read_text(encoding='utf-8'))
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def discover_configured(fetch=get_json, now=None, config=None, sleep=time.sleep):
+    """Scan Archive items listed in config/archive_sources.json (plus same-prefix siblings).
+
+    Metadata only; every candidate stays 'pendente' until an administrator approves it.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc).date()
+    cfg = config if config is not None else load_config()
+    ids = [str(i) for i in cfg.get('identifiers', []) if re.fullmatch(r'[a-zA-Z0-9_.-]{3,120}', str(i))]
+    if not ids:
+        return 0, []
+    budget = int(cfg.get('maxRequests', 40))
+    pause = float(cfg.get('throttleSeconds', 0.6))
+    tgt = targets(now, int(cfg.get('windowDays', 420)))
+    queue = list(ids)
+    if cfg.get('siblingSearch'):
+        for prefix in dict.fromkeys(re.sub(r'\d+$', '', i) for i in ids):
+            if len(prefix) < 4:
+                continue
+            try:
+                docs = fetch(SEARCH + '?' + urlencode({'q': 'identifier:' + prefix + '* AND mediatype:movies', 'output': 'json',
+                             'rows': 20, 'fl[]': ['identifier'], 'sort[]': 'publicdate desc'}, doseq=True)).get('response', {}).get('docs', [])
+                budget -= 1
+            except (OSError, ValueError, KeyError, TimeoutError):
+                continue
+            for d in docs:
+                i = str(d.get('identifier') or '')
+                if re.fullmatch(r'[a-zA-Z0-9_.-]{3,120}', i) and i not in queue:
+                    queue.append(i)
+    best = {}
+    scanned = 0
+    for identifier in queue[:int(cfg.get('maxItems', 14))]:
+        if budget <= 0:
+            break
+        try:
+            info = fetch(META + quote(identifier, safe=''))
+            budget -= 1
+            scanned += 1
+        except (OSError, ValueError, KeyError, TimeoutError):
+            continue
+        sleep(pause)
+        if str(info.get('is_dark') or '') in ('True', '1') or not info.get('metadata'):
+            continue
+        title = str((info.get('metadata') or {}).get('title') or '')
+        for file in info.get('files', [])[:600]:
+            filename = str(file.get('name') or '')
+            url = archive_url(identifier, filename)
+            day = episode_date(filename) or episode_date(title)
+            if not url or not day:
+                continue
+            low = (title + ' ' + filename).lower()
+            if re.search(r'sample|trailer|teaser|highlights?|recap|clip', low):
+                continue
+            try:
+                if file.get('length') is not None and float(file['length']) < 25 * 60:
+                    continue
+            except (ValueError, TypeError, OverflowError):
+                pass
+            for show, company, pattern in SHOW_PATTERNS:
+                if not re.search(pattern, low):
+                    continue
+                matches = [str(e['id']) for e in tgt.get((company, day), [])
+                           if e.get('id') and re.search(pattern, (str(e.get('show', '')) + ' ' + str(e.get('title', ''))).lower())]
+                if not matches:
+                    continue
+                key = (day, show)
+                rank = file_rank(filename)
+                if key in best and best[key][0] >= rank:
+                    break
+                length = file.get('length')
+                duration = ''
+                try:
+                    sec = int(float(length))
+                    if 0 < sec < 86400:
+                        duration = '{}:{:02d}:{:02d}'.format(sec // 3600, sec % 3600 // 60, sec % 60)
+                except (ValueError, TypeError, OverflowError):
+                    pass
+                uid = candidate_id(url)
+                best[key] = (rank, {'videoId': uid, 'platform': 'archive', 'url': url, 'duration': duration,
+                    'detail': 'https://archive.org/details/' + quote(identifier, safe=''),
+                    'title': (title or filename)[:220], 'filename': filename[:240],
+                    'publishedAt': day, 'thumbnailUrl': 'https://archive.org/services/img/' + quote(identifier, safe=''),
+                    'possibleEventIds': list(dict.fromkeys(matches))[:8],
+                    'confidence': 'item configurado; título e data; reprodução e direitos não verificados',
+                    'review': 'pendente', 'sourceProfiles': ['Internet Archive · ' + identifier]})
+                break
+    return scanned, [v[1] for v in best.values()]
+
+
 def main():
     existing = []
     if DEST.exists():
@@ -355,15 +472,17 @@ def main():
     success, rows = discover()
     roh_success, roh_rows = discover_roh_subject()
     rows += roh_rows
+    cfg_scanned, cfg_rows = discover_configured()
+    rows += cfg_rows
     ppv_queries, ppv_rows = discover_missing_ppvs()
     rows += ppv_rows
-    if not success and not roh_success and not ppv_queries:
+    if not success and not roh_success and not ppv_queries and not cfg_scanned:
         print('Nenhuma consulta respondida; preservando os candidatos já cadastrados.')
         return
     merged = {x['videoId']: x for x in existing if isinstance(x, dict) and x.get('videoId')}
     merged.update({x['videoId']: x for x in rows})
     output={'schemaVersion': 1, 'source': 'Internet Archive (metadados sem aprovação automática)',
-            'candidates': list(merged.values())[-500:]}
+            'candidates': list(merged.values())[-800:]}
     if not existing and not output['candidates'] and DEST.exists():
         return
     blob=json.dumps(output, ensure_ascii=False, indent=2)+'\n'

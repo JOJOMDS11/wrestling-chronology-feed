@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "about": "Itens do Internet Archive varridos diariamente. Só metadados: nada é aprovado sem revisão.",
+  "identifiers": ["wwesd04"],
+  "siblingSearch": true,
+  "maxItems": 14,
+  "maxRequests": 40,
+  "throttleSeconds": 0.6,
+  "windowDays": 420
+}
