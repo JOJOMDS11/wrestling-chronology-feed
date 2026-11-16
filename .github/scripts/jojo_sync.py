@@ -81,8 +81,8 @@ def add_curated_events(updates):
     return changed
 
 
-def add_missing_weeklies(updates, now=None, past_days=35, future_days=30):
-    """Keep weekly episode slots visible 35 days back and 30 days ahead.
+def add_missing_weeklies(updates, now=None, past_days=35, future_days=7):
+    """Keep weekly episode slots visible 35 days back and 7 days ahead.
 
     Future weekday occurrences are *provisional placeholders*, not an assertion
     of confirmed broadcasts. Preserve recorded sources and historical IDs.
