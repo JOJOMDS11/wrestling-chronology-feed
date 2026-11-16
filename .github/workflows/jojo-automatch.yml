@@ -12,7 +12,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: jojo-feed-write
+  group: jojo-updates-json
   cancel-in-progress: false
 jobs:
   sync:
