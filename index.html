@@ -253,7 +253,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <div id="linkHealthIssues"></div>
  </details>
  <div class="reviewManual"><input id="reviewManualUrl" type="url" placeholder="Link OK.ru ou bilibili.tv/en/video/..." aria-label="Link de vídeo OK.ru ou Bilibili"><button type="button" id="reviewManualAdd">Vincular link manual</button></div>
- <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Filtrar vídeos encontrados por título, show ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
+ <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Buscar vídeos por título, programa ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
  <div class="reviewRelevance"><select id="reviewRelevance" aria-label="Qualidade dos resultados"><option value="best">✅ Shows completos prováveis</option><option value="recent">🆕 Recentes relevantes</option><option value="classic">📚 Shows antigos</option><option value="extra">🗂 Outros vídeos</option><option value="all">🔎 Todos os candidatos</option></select><small id="reviewQualityCounts">Classificando resultados…</small></div>
  <div class="reviewTools" id="reviewMainTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Lixeira p/ sem título</button><button type="button" id="reviewDismissAll">🗑 Mandar todos p/ lixeira</button><button type="button" id="reviewTrashBtn">🗑 Lixeira (<span id="reviewTrashCount">0</span>)</button><button type="button" id="reviewImportOld" hidden>☁️ Importar lixeira antiga</button></div></div>
  <div class="reviewTools" id="reviewTrashBar" hidden><div id="reviewTrashInfo" class="reviewHint">Lixeira</div><div class="reviewToolBtns"><button type="button" id="reviewTrashBack">← Voltar aos candidatos</button><button type="button" id="reviewTrashRestoreAll">↩ Restaurar todos</button><button type="button" id="reviewTrashEmpty" class="danger">🧨 Esvaziar lixeira</button><button type="button" id="reviewUnpurge">♻ Recuperar excluídos</button></div></div>
@@ -651,26 +651,67 @@ function initReviewPanel(){
   if(/\bwwe\b|\bwwf\b|smackdown|smack down|\braw\b|wrestlemania|crown jewel/.test(name))return 'wwe';
   return 'wwe';
  }
+ // V7: título e DATA DO EPISÓDIO são a referência do vínculo; data da gravação ou upload pode diferir.
+ function reviewDateFromTitle(title){
+  var t=String(title||''), m=t.match(/\b(20\d{2})[.\/-](0?[1-9]|1[0-2])[.\/-]([0-2]?\d|3[01])\b/);
+  if(m)return m[1]+'-'+m[2].padStart(2,'0')+'-'+m[3].padStart(2,'0');
+  m=t.match(/\b(0?[1-9]|[12]\d|3[01])[.\/-](0?[1-9]|1[0-2])[.\/-](20\d{2})\b/);
+  if(m)return m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0');
+  m=t.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:st|nd|rd|th)?\s*,?\s*(20\d{2})\b/i);
+  if(m){var months=['january','february','march','april','may','june','july','august','september','october','november','december'];return m[3]+'-'+String(months.indexOf(m[1].toLowerCase())+1).padStart(2,'0')+'-'+m[2].padStart(2,'0')}
+  return '';
+ }
+ function reviewSuggestedProgramme(c,company){
+  var t=clean(c.title||'');
+  if(/collision/.test(t))return 'Collision';
+  if(/dynamite/.test(t))return 'Dynamite';
+  if(/smack[ -]?down/.test(t))return 'SmackDown';
+  if(/\bnxt\b/.test(t))return 'NXT';
+  if(/\braw\b/.test(t))return 'RAW';
+  if(/honorclub|ring of honor|\broh\b/.test(t)&&company==='roh')return 'HonorClub / ROH TV';
+  if(/impact/.test(t)&&company==='tna')return 'Impact';
+  if(/grand slam/.test(t)&&company==='aew')return 'Outros / Especiais';
+  return '';
+ }
+ function reviewIdentity(e,company){
+  var group=showBucket(e), co=(e._company==='nxt'?'wwe':company),dt=e.date||'';
+  // Eventos especiais e PPVs diferentes podem ocorrer na mesma data; não juntá-los.
+  return co+'|'+dt+'|'+((group==='PPVs / PLEs'||group==='Outros / Especiais')?group+'|'+clean(e.title).replace(/[^a-z0-9]+/g,'-'):group);
+ }
  function reviewListForCompany(code){
-  var map=new Map();(state.updates||[]).filter(function(e){return e.company===code}).forEach(function(e){map.set(e.id,e)});
-  var catalog=(state.cache[code]||[]);if(!Array.isArray(catalog))catalog=(catalog&&catalog.catalogue&&catalog.catalogue.episodes)||[];
-  catalog.forEach(function(e){if(e&&e.id&&!map.has(e.id))map.set(e.id,e)});
-  // Other NXT entries can appear in the separate NXT catalogue.
-  if(code==='wwe'){
-   var nxt=state.cache.nxt||[];if(!Array.isArray(nxt))nxt=(nxt&&nxt.catalogue&&nxt.catalogue.episodes)||[];
-   nxt.forEach(function(e){if(e&&e.id&&!map.has(e.id))map.set(e.id,Object.assign({_company:'nxt'},e))})
+  var unique=new Map(),byId=new Map();
+  function sourceKey(src){return String(src.type||'')+'|'+String(src.videoId||src.url||'')}
+  function add(e,fromUpdates){
+   if(!e||!e.id||!/^\d{4}-\d{2}-\d{2}$/.test(e.date||''))return;
+   var key=reviewIdentity(e,code),old=unique.get(key);
+   if(!old){var clone=Object.assign({},e,{sources:(e.sources||[]).slice(),_reviewUpdate:!!fromUpdates});unique.set(key,clone);byId.set(clone.id,clone);return}
+   var seen=new Set((old.sources||[]).map(sourceKey));(e.sources||[]).forEach(function(src){var sk=sourceKey(src);if(sk&&!seen.has(sk)){old.sources.push(src);seen.add(sk)}});
+   // Preferir o ID já publicado em updates.json, sem perder fontes do catálogo histórico.
+   if(fromUpdates&&!old._reviewUpdate){old.id=e.id;old._reviewUpdate=true}
+   if((!old.title||/^(collision|dynamite|raw|smackdown)$/i.test(old.title))&&/grand slam|blood.?guts/i.test(e.title||''))old.title=e.title;
   }
-  return Array.from(map.values()).filter(function(e){return e.id&&/^\d{4}-\d{2}-\d{2}$/.test(e.date||'')&&(e.sources||[]).length<3}).sort(function(a,b){return String(b.date).localeCompare(String(a.date))});
+  (state.updates||[]).filter(function(e){return e.company===code}).forEach(function(e){add(e,true)});
+  var catalog=state.cache[code]||[];if(!Array.isArray(catalog))catalog=(catalog.catalogue&&catalog.catalogue.episodes)||[];
+  catalog.forEach(function(e){add(e,false)});
+  if(code==='wwe'){
+   var nxt=state.cache.nxt||[];if(!Array.isArray(nxt))nxt=(nxt.catalogue&&nxt.catalogue.episodes)||[];
+   nxt.forEach(function(e){add(Object.assign({},e,{_company:'nxt'}),false)});
+  }
+  return Array.from(unique.values()).filter(function(e){return (e.sources||[]).length<3}).sort(function(a,b){return String(b.date).localeCompare(String(a.date))});
  }
  function updateReviewEvents(){
   var company=$('reviewCompany').value,search=clean($('reviewEventSearch').value.trim()),older=$('reviewOlder').checked,show=$('reviewShow').value,sel=$('reviewEvent'),old=sel.value;
   var cutoff=new Date(Date.now()-120*86400000).toISOString().slice(0,10);
-  var rows=reviewEvents.filter(function(e){var n=clean([e.title,e.show,e.date].join(' '));return(!show||showBucket(e)===show)&&(!search||n.indexOf(search)>=0)&&(!older&&!search?e.date>=cutoff:true)}).slice(0,300);
+  var rows=reviewEvents.filter(function(e){var n=clean([e.title,e.show,e.date].join(' '));return(!show||showBucket(e)===show)&&(!search||n.indexOf(search)>=0)&&(!older&&!search?e.date>=cutoff:true)}).slice(0,350);
   sel.replaceChildren(new Option('Selecione o show…',''));
   rows.forEach(function(e){sel.add(new Option(e.date+' · '+(names[e._company||e.company||company]||company.toUpperCase())+' · '+e.title+' ('+(e.sources||[]).length+'/3)',e.id))});
   if(rows.some(function(e){return e.id===old}))sel.value=old;
-  else if(selectedCandidate){var hint=(selectedCandidate.possibleEventIds||[]).find(function(id){return rows.some(function(e){return e.id===id})});if(hint)sel.value=hint;}
-  txt($('reviewEventHelp'),rows.length?rows.length+' eventos disponíveis. Use a busca ou marque “eventos antigos” para ampliar.':'Não encontramos esse evento nesta empresa. Confirme o calendário oficial; shows especiais novos precisam ser cadastrados antes da aprovação.');
+  else if(selectedCandidate){var hint=(selectedCandidate.possibleEventIds||[]).find(function(id){return rows.some(function(e){return e.id===id})});if(hint)sel.value=hint;
+   else if(reviewDateFromTitle(selectedCandidate.title)){var d=reviewDateFromTitle(selectedCandidate.title),exact=rows.filter(function(e){return e.date===d});if(exact.length===1)sel.value=exact[0].id}
+  }
+  var help=rows.length?rows.length+' eventos disponíveis. Selecione o episódio correspondente à data de exibição.':'Evento não encontrado. Verifique a data e o programa; não confirme um vídeo em um evento diferente.';
+  if(selectedCandidate&&/grand slam.*france|france.*grand slam/i.test(selectedCandidate.title||''))help+=' · Grand Slam France: gravação 06/10, Collision exibido em 10/10. Para o vídeo Collision de 10/10, escolha Collision, não a gravação de 06/10.';
+  txt($('reviewEventHelp'),help);
  }
  function updateReviewShows(){
   var v=$('reviewShow').value,sel=$('reviewShow'),counts={};reviewEvents.forEach(function(e){var k=showBucket(e);counts[k]=(counts[k]||0)+1});
@@ -678,19 +719,25 @@ function initReviewPanel(){
   Object.keys(counts).sort().forEach(function(k){sel.add(new Option(k+' ('+counts[k]+')',k))});
   if(counts[v])sel.value=v;
  }
- function changeReviewCompany(code){
-  $('reviewEvent').replaceChildren(new Option('Carregando calendário de '+(names[code]||code)+'…',''));
+ function changeReviewCompany(code,autoProgramme){
+  $('reviewEvent').replaceChildren(new Option('Atualizando calendário de '+(names[code]||code)+'…',''));
   var needed=code==='wwe'?['wwe','nxt']:[code];
-  return Promise.all(needed.map(fetchCompany)).then(function(){reviewEvents=reviewListForCompany(code);updateReviewShows();updateReviewEvents()}).catch(function(err){txt($('reviewEventHelp'),'Não foi possível carregar '+code+': '+err.message)})
+  // Atualizar updates.json SEM CACHE a cada abertura do seletor: evita shows ausentes após sincronizar.
+  return Promise.all([fetchUpdates()].concat(needed.map(fetchCompany))).then(function(){
+   if($('reviewCompany').value!==code)return;
+   reviewEvents=reviewListForCompany(code);updateReviewShows();
+   if(autoProgramme&&Array.prototype.some.call($('reviewShow').options,function(x){return x.value===autoProgramme}))$('reviewShow').value=autoProgramme;
+   updateReviewEvents();
+  }).catch(function(err){txt($('reviewEventHelp'),'Falha ao atualizar calendário: '+err.message)})
  }
  function openCandidate(c,manualUrl){
   selectedCandidate=c;selectedId=String(c.videoId);selectedPlatform=c.platform||'okru';selectedManualUrl=manualUrl||'';
   txt($('reviewSummary'),(selectedPlatform==='bilibili'?'Bilibili':'OK.ru')+' · Vídeo '+selectedId+' · '+(c.title||'Sem título identificado'));
   var sel=$('reviewCompany');sel.replaceChildren();codes.forEach(function(k){sel.add(new Option(names[k],k))});
-  sel.value=detectedCompany(c);$('reviewShow').value='';$('reviewEventSearch').value='';$('reviewOlder').checked=false;
+  sel.value=detectedCompany(c);$('reviewShow').value='';$('reviewEventSearch').value=reviewDateFromTitle(c.title);$('reviewOlder').checked=false;
   $('reviewKey').value='';$('reviewRights').checked=false;txt($('reviewFeedback'),'');
   if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
-  changeReviewCompany(sel.value);
+  changeReviewCompany(sel.value,reviewSuggestedProgramme(c,sel.value));
  }
  $('reviewCompany').addEventListener('change',function(){$('reviewShow').value='';changeReviewCompany(this.value)});
  $('reviewShow').addEventListener('change',updateReviewEvents);
@@ -756,7 +803,7 @@ function loadMonitorStatus(){
   });
  }).catch(function(){txt(info,'Nenhum relatório disponível na Oracle ou no GitHub.');box.replaceChildren()});
 }
-function fetchUpdates(){return fetch('./updates.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem arquivo de atualizações');return r.json()}).then(function(p){state.updates=Array.isArray(p.events)?p.events.filter(function(x){return codes.indexOf(x.company)>=0&&/^\d{4}-\d{2}-\d{2}$/.test(x.date||'')}):[]}).catch(function(){state.updates=[]})}
+function fetchUpdates(){return fetch('./updates.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem arquivo de atualizações');return r.json()}).then(function(p){state.updates=Array.isArray(p.events)?p.events.filter(function(x){return codes.indexOf(x.company)>=0&&/^\d{4}-\d{2}-\d{2}$/.test(x.date||'')}):[]}).catch(function(){if(!Array.isArray(state.updates))state.updates=[]})}
 function isPpv(r){return /^(PPV|PLE|Weekly PPV|Premium Live Event)$/i.test(String(r.show||'').trim())}
 function mergeUpdates(code,rows){var all=rows.slice(),seen={};
  function sourceKey(s){return (s.type||'')+'|'+(s.videoId||s.url||'')}
@@ -781,6 +828,8 @@ function showBucket(r){
  if(/dynamite/.test(n))return 'Dynamite';
  if(/collision/.test(n))return 'Collision';
  if(/rampage/.test(n))return 'Rampage';
+ if(/honorclub|ring of honor|\broh tv\b/.test(n))return 'HonorClub / ROH TV';
+ if(/\bimpact\b/.test(n))return 'Impact';
  return 'Outros / Especiais';
 }
 function updateShowFilter(){

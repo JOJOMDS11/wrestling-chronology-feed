@@ -18,25 +18,97 @@
       "company": "aew",
       "date": "2026-10-06",
       "year": 2026,
-      "title": "AEW Grand Slam: France 2026",
+      "title": "AEW Grand Slam France — Evento em Paris (06/10)",
       "show": "Especial",
       "official_url": "https://www.allelitewrestling.com/post/all-elite-wrestling-to-make-paris-debut-with-aew-grand-slam-france-tuesday-october-6",
       "status": "awaiting_video",
       "sources": [],
-      "description": "Evento e gravações em Paris em 06/10/2026; os programas Dynamite e Collision podem ter datas de exibição diferentes. Confirmar qual gravação corresponde ao vídeo."
+      "description": "Registro da apresentação/gravação de 06/10/2026. Episódios Dynamite (06/10) e Collision (exibido 10/10) possuem entradas próprias para evitar vínculos errados."
     },
     {
       "id": "provisional:roh:2026-11-05:honorclub",
       "company": "roh",
       "date": "2026-11-05",
       "year": 2026,
-      "title": "ROH on HonorClub — 05/11/2026",
+      "title": "ROH on HonorClub #191 — 05/11/2026",
       "show": "HonorClub",
       "status": "awaiting_video",
       "sources": [],
-      "provisional": true,
-      "description": "Cadastro provisório para revisão. Data informada no título de vídeo encontrado; confirmar episódio e autorização antes de publicar fonte."
+      "provisional": false,
+      "description": "ROH on HonorClub episódio 191 exibido em 05/11/2026; registro do evento confirmado, fonte de vídeo não verificada."
+    },
+    {
+      "id": "aew:2026-10-10:collision",
+      "company": "aew",
+      "date": "2026-10-10",
+      "year": 2026,
+      "title": "AEW Collision: Grand Slam France",
+      "show": "Collision",
+      "status": "awaiting_video",
+      "sources": [],
+      "official_url": "https://www.allelitewrestling.com/post/aew-grand-slam-france-collision-results",
+      "description": "Episódio Collision exibido em 10/10/2026; gravado em Paris em 06/10. Não confundir com a data de gravação."
+    },
+    {
+      "id": "aew:2026-10-06:dynamite",
+      "company": "aew",
+      "date": "2026-10-06",
+      "year": 2026,
+      "title": "AEW Dynamite: Grand Slam France",
+      "show": "Dynamite",
+      "status": "awaiting_video",
+      "sources": [],
+      "official_url": "https://www.allelitewrestling.com/post/aew-grand-slam-france-dynamite-results",
+      "description": "Edição especial Grand Slam France Dynamite realizada em 06/10/2026."
+    },
+    {
+      "id": "auto:wwe:2026-11-10:nxt",
+      "company": "wwe",
+      "date": "2026-11-10",
+      "year": 2026,
+      "title": "WWE NXT — 10/11/2026",
+      "show": "NXT",
+      "status": "awaiting_video",
+      "sources": [],
+      "official_url": "https://www.wwe.com/shows/wwenxt/2026-11-10",
+      "description": "NXT exibido em 10/11/2026; confirmado pela WWE. Vídeo não verificado."
+    },
+    {
+      "id": "official:tna:2026-11-05:impact",
+      "company": "tna",
+      "date": "2026-11-05",
+      "year": 2026,
+      "title": "TNA Thursday Night iMPACT!",
+      "show": "Impact",
+      "official_url": "https://tnawrestling.com/news/tna-thursday-night-impact-on-amc-results-november-5-2026",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado."
+    },
+    {
+      "id": "official:tna:2026-11-12:impact",
+      "company": "tna",
+      "date": "2026-11-12",
+      "year": 2026,
+      "title": "TNA Thursday Night iMPACT!",
+      "show": "Impact",
+      "official_url": "https://tnawrestling.com/news/tna-thursday-night-impact-on-amc-results-november-12-2026",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Programa confirmado pelo site oficial TNA. Nenhum link de vídeo verificado."
+    },
+    {
+      "id": "official:tna:2026-11-15:destination-x",
+      "company": "tna",
+      "date": "2026-11-15",
+      "year": 2026,
+      "title": "TNA Destination X 2026",
+      "show": "PPV",
+      "official_url": "https://tnawrestling.com/destinationx",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "PPV de 15/11/2026 oficialmente anunciado pela TNA. Link de vídeo ainda não cadastrado."
     }
   ],
-  "notes": "Registros selecionados e identificados com fontes oficiais; ROH marcado provisório por não ter fonte oficial individual confirmada."
+  "notes": "Eventos com data verificável. Datas de exibição distintas das de gravação. Links de vídeo exigem revisão; o arquivo não adiciona fontes."
 }
