@@ -71,8 +71,12 @@ def approved_source(a):
         return None
     url = ('https://ok.ru/video/' if kind == 'okru'
            else 'https://www.bilibili.tv/en/video/') + vid
-    return {'type':kind, 'videoId':vid, 'url':url,
-            'label':('OK.ru' if kind == 'okru' else 'Bilibili') + ' · Revisão administrativa'}
+    src = {'type':kind, 'videoId':vid, 'url':url,
+           'label':('OK.ru' if kind == 'okru' else 'Bilibili') + ' · Revisão administrativa'}
+    thumb = str(a.get('thumbnailUrl') or '')
+    if thumb.startswith('https://') and len(thumb) <= 700:
+        src['thumbnail'] = thumb
+    return src
 
 
 def consume_approvals(updates, data):
@@ -112,8 +116,24 @@ def consume_approvals(updates, data):
         event['status'] = 'video_available'
         event['provisional'] = False
         event['approvedAt'] = str(a.get('approvedAt',''))[:40]
+        if source.get('thumbnail') and not event.get('thumbnail') and not event.get('poster'):
+            event['thumbnail'] = source['thumbnail']
         used.add(key)
         changed += 1
+    # Backfill: fontes já publicadas sem miniatura recebem a da fila de aprovação.
+    thumbs = {}
+    for a in data.get('approved', [])[:250]:
+        src = approved_source(a) if isinstance(a, dict) else None
+        if src and src.get('thumbnail'):
+            thumbs[source_key(src)] = src['thumbnail']
+    for e in events.values():
+        for src in e.get('sources', []) or []:
+            key = source_key(src)
+            if key and key in thumbs and not src.get('thumbnail'):
+                src['thumbnail'] = thumbs[key]
+                if not e.get('thumbnail') and not e.get('poster'):
+                    e['thumbnail'] = thumbs[key]
+                changed += 1
     return changed
 
 
