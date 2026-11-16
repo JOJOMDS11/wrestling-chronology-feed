@@ -180,6 +180,9 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .linkHealthIssue strong{color:#f5edff;font-size:13px}
 .linkHealthIssue small{display:block;color:#cebfdc;line-height:1.5;margin:4px 0}
 .linkHealthIssue .hint{font-size:11px;color:#e7b9ab}
+.linkHealthIssue.manuallyResolved{border-color:#478963;background:#1c352c}.linkHealthIssue.manuallyResolved strong{color:#a2efbf}
+.linkHealthIssue button.linkResolved{background:#24563e;color:#e5ffe9;border-color:#62b983;font-weight:800}.linkHealthIssue button.linkReopen{border-color:#7a9c83;color:#c7e8d0}
+.candidateMetaDialog{width:min(94vw,510px)}.candidateMetaDialog menu{padding:0;margin:0;display:flex;gap:8px;justify-content:flex-end}.candidateMetaDialog button{border:1px solid #906ac2;border-radius:9px;background:#533777;color:#fff;padding:10px 12px}.candidateMetaDialog input,.candidateMetaDialog select{font-size:16px;min-height:42px}
 .linkHealthIssue a,.linkHealthIssue button{display:inline-block;padding:6px 9px;margin:3px 6px 3px 0;font-size:12px;border:1px solid #796396;border-radius:8px;color:#e8d2ff;background:transparent;text-decoration:none;cursor:pointer}
 .amTrash #reviewMainTools,.amTrash .reviewManual,.amTrash .reviewRelevance,.amTrash .amSyncBar,.amTrash .linkHealth,.amTrash>.reviewHint{display:none}
 #reviewTrashBar[hidden]{display:none}
@@ -339,6 +342,17 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <label>Master Key<input id="amSyncKey" type="password" autocomplete="off" maxlength="128" required></label>
 <div id="amSyncFeedback" class="reviewHint" role="status"></div>
 <menu><button type="button" id="amSyncCancel">Cancelar</button><button type="submit" id="amSyncSend">Confirmar sincronização</button></menu>
+</form></dialog>
+<dialog id="candidateMetaDialog" class="reviewDialog candidateMetaDialog" aria-label="Editar dados da revisao">
+<form id="candidateMetaForm" class="reviewForm">
+<h3>✏️ Editar revisão do candidato</h3><p class="reviewHint" id="candidateMetaSource"></p>
+<label>Título exibido<input id="candidateMetaTitle" maxlength="220" required autocomplete="off"></label>
+<label>Classificação da revisão<select id="candidateMetaQuality"><option value="extra">🗂 Revisão secundária</option><option value="best">✅ Possível show completo (não verificado)</option><option value="classic">📚 Arquivo antigo (não verificado)</option></select></label>
+<label>Duração, se conhecida (MM:SS ou HH:MM:SS)<input id="candidateMetaDuration" placeholder="01:30:00" maxlength="9"></label>
+<label>Miniatura original (opcional)<input id="candidateMetaThumb" type="url" maxlength="700" placeholder="https://..."></label>
+<label>Master Key<input id="candidateMetaKey" type="password" maxlength="128" required autocomplete="off"></label>
+<p class="reviewHint" id="candidateMetaFeedback" role="status">Editar o título ou a classificação não aprova o vídeo nem confirma a reprodução.</p>
+<menu><button type="button" id="candidateMetaCancel">Cancelar</button><button type="submit" id="candidateMetaSave">💾 Salvar revisão</button></menu>
 </form></dialog>
 <dialog id="reviewDialog" class="reviewDialog" aria-label="Confirmar vídeo do evento">
 <form id="reviewForm" class="reviewForm">
@@ -535,9 +549,27 @@ function initLinkHealth(){
  var dlg=$('linkHealthDialog'),key=$('linkHealthKey'),feedback=$('linkHealthFeedback'),send=$('linkHealthSend');
  function stat(label,value){var b=el('div','linkHealthStat');b.append(el('strong','',value),document.createTextNode(label));return b}
  function date(s){if(!s)return 'Ainda não executado';var d=new Date(s);return isNaN(d.getTime())?'Data indisponível':d.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})}
+ function editHealth(box,sourceKey,isResolved){
+  if(!sourceKey)return;
+  var action=isResolved?'reopen':'resolve';
+  var b=el('button',isResolved?'linkReopen':'linkResolved',isResolved?'↩ Reabrir alerta':'✅ Marcar arrumado');b.type='button';
+  b.title=isResolved?'Reabrir marcacao manual':'Somente arquiva o alerta manualmente; nao prova que o video funciona';
+  b.addEventListener('click',function(){
+   if(!isResolved&&!confirm('Voce conferiu ou corrigiu esta fonte? A marcacao e manual e NAO confirma reproducao automaticamente.'))return;
+   var pass=prompt('Master Key para '+(isResolved?'reabrir':'marcar como arrumado')+' esta fonte (nao sera armazenada):');
+   if(!pass)return;
+   b.disabled=true;
+   fetch(base+'/api/jojo-monitor/links/resolve',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:pass,sourceKey:sourceKey,action:action})})
+    .then(function(r){return r.json().then(function(d){if(!r.ok)throw Error(d.message||'Falha ao salvar');return d})})
+    .then(function(){update()})
+    .catch(function(e){alert('Nao foi possivel salvar na Oracle: '+e.message)})
+    .finally(function(){b.disabled=false});
+  });box.append(b)
+ }
  function update(){
   if(!base)return;
   return fetch(base+'/api/jojo-monitor/links/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('Status indisponível');return r.json()}).then(function(d){
+   var manualResolved=d.manualResolutions||{};
    var c=d.counts||{},total=Number(d.totalSources||0),pending=Number(c.nao_verificado||0),checked=Math.max(0,total-pending),pct=total?Math.round(checked/total*100):0;
    var susp=Number(c.suspeito||0)+Number(c.provavelmente_indisponivel||0),restr=Number(c.acesso_restrito||0),okn=Number(c.pagina_acessivel||0),uncertain=Number(c.incerto||0),recent=Number(d.recent48h||0);
    function tone(box,cls){box.className='linkHealthStat '+cls;return box}
@@ -566,18 +598,19 @@ function initLinkHealth(){
    fetch('./config/broken_sources.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(doc){
     if(!doc||!doc.sources)return;
     var keys=Object.keys(doc.sources).filter(function(k){return doc.sources[k]&&doc.sources[k].verifyManually});
+    var unresolved=keys.filter(function(k){return !manualResolved[k]});
     if(!keys.length)return;
-    stats.append(tone(stat('Relatos manuais de vídeo quebrado',String(keys.length)),'bad'));
-    var title=el('p','linkHealthNote','🚨 Relatos manuais de falha de reprodução ('+keys.length+') · são independentes do HTTP.');issues.prepend(title);
-    keys.slice(0,25).forEach(function(k){var rec=doc.sources[k],box=el('div','linkHealthIssue');box.append(el('strong','','⚠️ '+k),el('small','',String(rec.status||'Vídeo reportado como quebrado')));var link=k.split(':');if(link[0]==='okru'&&/^\d+$/.test(link[1])){var a=el('a','','↗ Conferir no OK.ru');a.href='https://ok.ru/video/'+link[1];a.target='_blank';a.rel='noopener noreferrer';box.append(a)}issues.prepend(box)})
+    stats.append(tone(stat('Relatos manuais em aberto',String(unresolved.length)),unresolved.length?'bad':'ok'));
+    var title=el('p','linkHealthNote','🚨 Relatos manuais ('+unresolved.length+' em aberto · '+(keys.length-unresolved.length)+' marcados arrumados). Não é teste de reprodução.');issues.prepend(title);
+    keys.slice(0,25).forEach(function(k){var rec=doc.sources[k],fixed=!!manualResolved[k],box=el('div','linkHealthIssue'+(fixed?' manuallyResolved':''));box.append(el('strong','',(fixed?'✅ ARRUMADO · ':'⚠️ ')+k),el('small','',fixed?'Marcado manualmente como arrumado. Reabra caso o erro volte.':String(rec.status||'Vídeo reportado como quebrado')));var link=k.split(':');if(link[0]==='okru'&&/^\d+$/.test(link[1])){var a=el('a','','↗ Conferir no OK.ru');a.href='https://ok.ru/video/'+link[1];a.target='_blank';a.rel='noopener noreferrer';box.append(a)}editHealth(box,k,fixed);issues.prepend(box)})
    }).catch(function(){});
    rows.forEach(function(issue){
-    var event=issue.event||{},card=el('div','linkHealthIssue');
+    var event=issue.event||{},fixed=!!manualResolved[issue.sourceKey],card=el('div','linkHealthIssue'+(fixed?' manuallyResolved':''));
     var name=event.title||'Evento sem identificação',company=(event.company||'').toUpperCase();
-    card.append(el('strong','',company+' · '+name+' · '+(event.date||'')));
+    card.append(el('strong','',(fixed?'✅ ARRUMADO · ':'')+company+' · '+name+' · '+(event.date||'')));
     var labels={suspeito:'⚠️ Indício de falha (404/410 ou mensagem de vídeo removido mesmo com 200)',provavelmente_indisponivel:'❌ Possível remoção após 3 verificações separadas',acesso_restrito:'🔒 Restrição regional ou de acesso; não é prova de remoção',incerto:'❔ Timeout/erro de rede: a reprodução NÃO foi confirmada'};
-    card.append(el('small','',labels[issue.state]||issue.state));
-    var a=el('a','', '↗ Conferir fonte');a.href=issue.url;a.target='_blank';a.rel='noopener noreferrer';card.append(a);
+    card.append(el('small','',fixed?'Marcado manualmente como arrumado. O resultado automático anterior está preservado.':(labels[issue.state]||issue.state)));
+    var a=el('a','', '↗ Conferir fonte');a.href=issue.url;a.target='_blank';a.rel='noopener noreferrer';card.append(a);editHealth(card,issue.sourceKey,fixed);
     (issue.alternatives||[]).forEach(function(candidate){
       var row=el('div','');row.append(el('small','hint','💡 Possível substituto: '+candidate.title+' · '+candidate.reason));
       var open=el('a','','↗ Conferir alternativa');open.href=candidate.url;open.target='_blank';open.rel='noopener noreferrer';row.append(open);
@@ -614,6 +647,7 @@ function initLinkHealth(){
 }
 
 function initReviewPanel(){
+ var metaSelected=null;
  var cfg='', candidates=[], approvedIds=new Set(), selectedId='', selectedPlatform='okru', selectedManualUrl='', DKEY='jojo_am_dismissed', AUTO_MS=300000;
  var TKEY='jojo_am_trash',PKEY='jojo_am_purged',THKEY='jojo_am_thumbs',trashMode=false,reviewKeySession='';
  function readJ(k,def){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v&&typeof v==='object'?v:def}catch(e){return def}}
@@ -696,13 +730,35 @@ function initReviewPanel(){
        c.url==='https://ok.ru/video/'+c.videoId&&c.submittedForReview===true;
    }):[]}).catch(function(){return []});
  }
+ function openCandidateMeta(c){
+  metaSelected=c;
+  txt($('candidateMetaSource'),(c.platform||'okru')+':'+c.videoId+' · Alteracoes apenas da ficha de revisao');
+  $('candidateMetaTitle').value=c.title||'Video '+c.videoId;
+  $('candidateMetaQuality').value=quality(c);
+  $('candidateMetaDuration').value=c.duration||'';
+  $('candidateMetaThumb').value=c.thumbnailUrl||'';
+  $('candidateMetaKey').value='';txt($('candidateMetaFeedback'),'Nao altera o video, nao vincula e nao confirma reproducao.');
+  $('candidateMetaDialog').showModal();
+ }
+ $('candidateMetaCancel').addEventListener('click',function(){$('candidateMetaDialog').close()});
+ $('candidateMetaDialog').addEventListener('close',function(){$('candidateMetaKey').value='';metaSelected=null});
+ $('candidateMetaForm').addEventListener('submit',function(e){
+  e.preventDefault();if(!metaSelected||!cfg)return;
+  var submit=$('candidateMetaSave');submit.disabled=true;
+  txt($('candidateMetaFeedback'),'Salvando na Oracle...');
+  fetch(cfg+'/api/jojo-monitor/review/metadata',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:$('candidateMetaKey').value,sourceKey:candidateKey(metaSelected),title:$('candidateMetaTitle').value.trim(),quality:$('candidateMetaQuality').value,duration:$('candidateMetaDuration').value.trim(),thumbnailUrl:$('candidateMetaThumb').value.trim()})})
+   .then(function(r){return r.json().then(function(d){if(!r.ok)throw Error(d.message||'Nao foi possivel editar');return d})})
+   .then(function(){ $('candidateMetaKey').value='';$('candidateMetaDialog').close();return load(true)})
+   .catch(function(err){$('candidateMetaKey').value='';txt($('candidateMetaFeedback'),err.message)})
+   .finally(function(){submit.disabled=false});
+ });
  function load(silent){
   if(!silent)setMsg('Consultando candidatos e aprovações na Oracle e Internet Archive…');
   return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem configuração');return r.json()}).then(function(conf){
    cfg=String(conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^/\s?#]+$/.test(cfg))throw Error('Endereço HTTPS não configurado');
    loadReviewProfiles();
-   return Promise.all([fetch(cfg+'/api/jojo-monitor/candidates',{cache:'no-store',credentials:'omit'}),fetch(cfg+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'}),loadArchiveSuggestions(),loadSubmittedCandidates()]);
-  }).then(function(res){if(!res[0].ok||!res[1].ok)throw Error('API indisponível');return Promise.all([res[0].json(),res[1].json(),Promise.resolve(res[2]),Promise.resolve(res[3])])}).then(function(data){
+   return Promise.all([fetch(cfg+'/api/jojo-monitor/candidates',{cache:'no-store',credentials:'omit'}),fetch(cfg+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'}),loadArchiveSuggestions(),loadSubmittedCandidates(),fetch(cfg+'/api/jojo-monitor/review/metadata',{cache:'no-store',credentials:'omit'}).then(function(r){return r.ok?r.json():{items:{}}}).catch(function(){return {items:{}}})]);
+  }).then(function(res){if(!res[0].ok||!res[1].ok)throw Error('API indisponível');return Promise.all([res[0].json(),res[1].json(),Promise.resolve(res[2]),Promise.resolve(res[3]),Promise.resolve(res[4])])}).then(function(data){
    var mergedCandidates=new Map();
    (Array.isArray(data[0].candidates)?data[0].candidates:[]).concat(data[2]||[],data[3]||[]).forEach(function(c){
     var k=candidateKey(c),prev=mergedCandidates.get(k);
@@ -713,7 +769,8 @@ function initReviewPanel(){
     if(c.submittedForReview&&c.url==='https://ok.ru/video/'+c.videoId){prev.submittedForReview=true;prev.url=c.url}
     if((!prev.title||/^(смотреть|watch|video)$/i.test(prev.title))&&c.title)prev.title=c.title;
    });
-   candidates=Array.from(mergedCandidates.values());
+   var metadata=(data[4]&&data[4].items)||{};
+   candidates=Array.from(mergedCandidates.values()).map(function(c){var record=metadata[candidateKey(c)];if(record){c.title=record.title||c.title;c.manualQuality=record.quality;c.duration=record.duration||'';if(record.thumbnailUrl)c.thumbnailUrl=record.thumbnailUrl;}return c});
    var quota=data[0];
    txt($('reviewLinkQuota'),Number.isFinite(Number(quota.linksDailyLimit))&&quota.linksDailyLimit!=null?'🔗 Vinculações hoje: '+Number(quota.linksUsedToday||0)+' / '+Number(quota.linksDailyLimit)+' · restam '+Number(quota.linksRemainingToday||0)+' (reset 00h Brasília)':'🔗 Limite de vinculações: consulte a Oracle após instalar a API atualizada.');
    approvedIds=new Set((data[1].approved||[]).map(candidateKey));
@@ -723,6 +780,7 @@ function initReviewPanel(){
 
  function durationMinutes(c){var v=String(c.duration||'').trim();if(!v)return 0;var p=v.split(':').map(Number);if(p.some(function(n){return !Number.isFinite(n)}))return 0;return p.reduce(function(t,n){return t*60+n},0)/60}
  function quality(c){
+  if(['extra','best','classic'].indexOf(c.manualQuality)>=0)return c.manualQuality;
   var name=clean(String(c.title||'')),m=durationMinutes(c),year=(name.match(/\b(20[0-3][0-9]|19[89][0-9])\b/)||[])[0];
   var archive=year&&Number(year)<2025;
   var excluded=/(trailer|teaser|preview|promo|highlights?|recap|review|reaction|press conference|podcast|interview|top 10|best moments|shorts?|compilation|watchalong|пресс.?конференц|подкаст|интервью|трейлер|нарезк|превью|обзор|реакци|промо|хайлайт)/i.test(name);
@@ -777,7 +835,8 @@ function initReviewPanel(){
    var row=el('div','reviewRow');
    var isLinked=linkedNow.has(candidateKey(c))||approvedIds.has(candidateKey(c));var b=el('button','',isLinked?'✓ Já vinculado':'Vincular a um evento');b.type='button';b.disabled=isLinked;if(!isLinked)b.addEventListener('click',function(){openCandidate(c)});
    var x=el('button','reviewDismiss','🗑 Lixeira');x.type='button';x.title='Dispensar para todos os navegadores pela Oracle';x.addEventListener('click',function(){changeReview('trash',[asItem(c)])});
-   row.append(b,x);info.append(row);
+   var edit=el('button','','✏️ Editar revisão');edit.type='button';edit.title='Editar o título, duração, miniatura e classificação sem aprovar a fonte';edit.addEventListener('click',function(){openCandidateMeta(c)});
+   row.append(b,edit,x);info.append(row);
    card.append(im,info);grid.append(card)
   })
  }
