@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T12:37:09Z",
+  "generatedAt": "2026-11-16T13:46:04.316302Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -655,10 +655,20 @@
       "year": 2026,
       "title": "Monday Night RAW",
       "show": "RAW",
-      "status": "awaiting_video",
-      "provisional": true,
+      "status": "video_available",
+      "provisional": false,
       "description": "Registro semanal provisório; confirmar a programação oficial.",
-      "sources": []
+      "sources": [
+        {
+          "type": "archive",
+          "videoId": "af4d8488ae62ea5c3dee6e4c34b84603b",
+          "url": "https://archive.org/download/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel/pTgARYuBF7bswLfk%20saveclips.org-6af399ec45e55.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel"
+        }
+      ],
+      "approvedAt": "2026-11-16T13:33:55Z",
+      "thumbnail": "https://archive.org/services/img/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel"
     },
     {
       "id": "auto:wwe:2026-11-10:nxt",
