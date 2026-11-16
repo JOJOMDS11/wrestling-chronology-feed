@@ -112,6 +112,14 @@ def fetch_page(url, timeout=18):
         return response.read(4_500_001).decode('utf-8', errors='replace')
 
 
+def count_years(events):
+    out={}
+    for event in events:
+        year=str(event.get('year',''))
+        if YEAR.fullmatch(year):out[year]=out.get(year,0)+1
+    return dict(sorted(out.items()))
+
+
 def update(fetch=fetch_page, now=None):
     now = now or dt.datetime.now(dt.timezone.utc)
     try:
@@ -129,14 +137,14 @@ def update(fetch=fetch_page, now=None):
             fetched = extract(fetch(url),company,url,now.date())
             if not fetched:
                 raise ValueError('Página não apresentou tabela de eventos com datas reconhecíveis')
-            state[company] = {'status':'updated','count':len(fetched), 'url':url, 'checkedAt':now.isoformat()}
+            state[company] = {'status':'updated','count':len(fetched), 'yearCounts':count_years(fetched), 'url':url, 'checkedAt':now.isoformat(), 'lastSuccessAt':now.isoformat()}
             all_events.extend(fetched)
         except Exception as exc:
             # Explicitly report failure; never silently change this year's zero
             # reference count into a false claim of no missing PPVs.
             last = prior_status.get(company, {})
             state[company] = {'status':'cached' if cached else 'unavailable',
-                              'count':len(cached),'url':url,'checkedAt':now.isoformat(),
+                              'count':len(cached),'yearCounts':count_years(cached),'url':url,'checkedAt':now.isoformat(),
                               'lastSuccessAt':last.get('lastSuccessAt') or last.get('checkedAt') if cached else None,
                               'error':type(exc).__name__}
             all_events.extend(cached)

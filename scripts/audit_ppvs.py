@@ -91,10 +91,66 @@ def report(now=None):
         obj['references']+=1
         name={'missing':'missing','without_video':'withoutVideo','with_sources':'withSources','upcoming':'upcoming'}[row['state']]
         obj[name]+=1
+    # Coverage is deliberately measured by company/year. A source that was
+    # fetched is NOT proof that its full yearly calendar was extracted.
+    coverage = {}
+    catalogue_keys = set()
+    for row in rows:
+        day = str(row.get('date', ''))
+        co = str(row.get('company', '')).lower()
+        if co not in CATS or not relevant(row) or not re.fullmatch(r'(?:19|20)\d{2}-\d{2}-\d{2}', day):
+            continue
+        k=(co, day[:4]); ck=(co, day, norm(row.get('title', '')))
+        if ck in catalogue_keys:
+            continue
+        catalogue_keys.add(ck)
+        ob=coverage.setdefault(k,{'company':co,'year':int(day[:4]),'cataloguePpvs':0,
+            'references':0,'wikipediaReferences':0,'matched':0,'missing':0,'withoutVideo':0,
+            'withSources':0,'upcoming':0,'coverage':'not_audited'})
+        ob['cataloguePpvs']+=1
+    for row in out:
+        co=row['company']; y=int(row['year']); k=(co,str(y))
+        ob=coverage.setdefault(k,{'company':co,'year':y,'cataloguePpvs':0,
+            'references':0,'wikipediaReferences':0,'matched':0,'missing':0,'withoutVideo':0,
+            'withSources':0,'upcoming':0,'coverage':'not_audited'})
+        ob['references']+=1
+        if row['referenceType']=='wikipedia':
+            ob['wikipediaReferences']+=1
+        if row['state']=='missing': ob['missing']+=1
+        elif row['state']=='without_video':ob['withoutVideo']+=1;ob['matched']+=1
+        elif row['state']=='with_sources':ob['withSources']+=1;ob['matched']+=1
+        elif row['state']=='upcoming':ob['upcoming']+=1
+    for ob in coverage.values():
+        src=wiki_sources.get(ob['company']) or {}
+        status=str(src.get('status','unavailable'))
+        ob['sourceStatus']=status
+        ob['sourceUrl']=src.get('url') or ''
+        ob['sourceCheckedAt']=src.get('checkedAt') or None
+        ob['lastSuccessAt']=src.get('lastSuccessAt') or (src.get('checkedAt') if status=='updated' else None)
+        year_count=src.get('yearCounts',{}) if isinstance(src.get('yearCounts'),dict) else {}
+        ob['wikipediaRowsInYear']=int(year_count.get(str(ob['year']),0) or 0) if year_count else ob['wikipediaReferences']
+        if status in ('updated','cached') and ob['wikipediaRowsInYear']>0:
+            ob['coverage']='partial' if status=='updated' else 'cached_partial'
+        elif ob['references']>0:
+            ob['coverage']='curated_only' if ob['wikipediaRowsInYear']==0 else 'partial'
+        else:
+            ob['coverage']='not_audited'
+        # A year with no references cannot be cleared of omissions.
+        ob['unverifiedYear']=ob['wikipediaRowsInYear']==0
+    coverage_rows=sorted(coverage.values(),key=lambda x:(-x['year'],CATS.index(x['company'])))
+    company_coverage={}
+    for co in CATS:
+        src=wiki_sources.get(co) or {}
+        company_coverage[co]={'sourceStatus':str(src.get('status','unavailable')),
+            'sourceCount':int(src.get('count',0) or 0),'sourceUrl':src.get('url',''),
+            'checkedAt':src.get('checkedAt'),
+            'lastSuccessAt':src.get('lastSuccessAt') or (src.get('checkedAt') if src.get('status')=='updated' else None),
+            'yearsWithReferences':sum(x['wikipediaRowsInYear']>0 for x in coverage_rows if x['company']==co)}
     return {'schemaVersion':2,'checkedAt':now.isoformat().replace('+00:00','Z'),'referenceCoverage':'partial',
             'notice':'Referências da Wikipédia são listas históricas independentes; não substituem calendários oficiais. Anos com fonte indisponível não estão completos. A auditoria não altera vídeos.',
             'wikipediaSources':wiki_sources,
-            'catalogueFailures':sources_failed,'years':years,'references':out}
+            'catalogueFailures':sources_failed,'years':years,'references':out,
+            'coverageByCompanyYear':coverage_rows,'companyCoverage':company_coverage}
 
 def main():
     data=report()

@@ -225,6 +225,20 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .eventEditDialog{border:1px solid #896ba8;border-radius:19px;background:#1f182a;color:#f6eeff;width:min(95vw,740px);max-height:90vh;box-shadow:0 25px 90px #000a;padding:0}.eventEditDialog::backdrop{background:#06030bdc;backdrop-filter:blur(6px)}.eventEditForm{padding:clamp(15px,2.8vw,27px);display:grid;gap:15px;max-height:88vh;overflow:auto}.eventEditForm h3{margin:0;font-size:clamp(20px,3vw,25px)}.eventEditForm label{font-size:13px;font-weight:650;display:grid;gap:7px}.eventEditForm input[type=url],.eventEditForm input[type=password]{width:100%;min-width:0;box-sizing:border-box;background:#0e0b14;color:#fff;border:1px solid #675280;border-radius:9px;padding:12px;font-size:14px}.eventEditForm input:focus{outline:2px solid #a576e0}.eventEditRow{border:1px solid #564668;border-radius:12px;padding:12px;display:grid;gap:10px;background:#271f33}.eventEditRowHead{display:flex;align-items:center;justify-content:space-between;gap:8px}.eventEditRowHead b{font-size:13px}.eventEditRow button,.eventEditButtons button{border:1px solid #8967ae;border-radius:9px;background:#513669;padding:10px 13px;color:#fff;font-weight:700;cursor:pointer}.eventEditRow button.danger{background:#432638;border-color:#b6758a}.eventEditButtons{display:flex;flex-wrap:wrap;gap:9px;justify-content:flex-end}.eventEditButtons .save{background:#7849ab}.eventEditPreview{display:flex;gap:12px;align-items:center}.eventEditPreview img{width:120px;aspect-ratio:16/9;object-fit:cover;border:1px solid #524364;border-radius:9px;background:#08070e}.eventEditNote{color:#c8bad9;font-size:13px;line-height:1.5}.eventEditFeedback{min-height:22px;font-size:13px;color:#d6bcec}.eventEditForm .eventEditConfirm{display:flex;align-items:flex-start;gap:8px;font-size:12px;font-weight:500}.eventEditConfirm input{margin:2px 0 0}.eventEditEmpty{padding:10px;background:#251a32;border-radius:9px;font-size:13px;color:#cbb9da}@media(max-width:650px){.viewerTop{padding:14px;gap:6px}.eventEditTop{align-items:flex-end;flex-direction:column}.eventEditOpen{font-size:12px;padding:9px}.eventEditRow{padding:10px}.eventEditPreview img{width:95px}}
 
 /* JOJO: audited PPV dates and explicit playback uncertainty */
+
+.ppvAuditCoverage{border:1px solid #6b527d;background:#261b35;border-radius:12px;padding:10px 12px;margin:10px 0}
+.ppvAuditCoverage summary{cursor:pointer;font-size:13px;font-weight:750;color:#ebd9fb}
+.ppvCoverageIntro{font-size:12px;color:#d6bee9;line-height:1.45;margin:9px 0}
+.ppvCoverageScroll{max-height:340px;overflow:auto;border-radius:8px;border:1px solid #4c3b5e}
+.ppvCoverageTable{width:100%;border-collapse:collapse;font-size:12px;min-width:610px}
+.ppvCoverageTable th{position:sticky;top:0;background:#372547;color:#f4e7ff;text-align:left;z-index:1}
+.ppvCoverageTable td,.ppvCoverageTable th{padding:8px 9px;border-bottom:1px solid #4c3b5e;text-align:left}
+.ppvCoverageTable td:not(:first-child){font-variant-numeric:tabular-nums}
+.ppvCoverageWarn{color:#ffce8b}.ppvCoverageGood{color:#b2e2c9}
+.ppvCoverageFoot{font-size:11px;color:#c3add6;line-height:1.45;margin:8px 0}
+.ppvCoverageMore{background:#48315f;border:1px solid #85679d;color:#fff;border-radius:8px;padding:8px 12px;margin:8px 0;cursor:pointer}
+.jojoMasterSessionNote{font-size:12px;margin:8px 0;color:#a3ebc7}
+
 .ppvAuditBtn{border:1px solid #9c70ce;background:#38234d;color:#fff;border-radius:10px;padding:11px 13px;font-weight:800;cursor:pointer}
 .ppvAuditDialog{width:min(94vw,780px);max-height:87vh;padding:0;color:#f3e8ff;background:#1e152a;border:1px solid #80639d;border-radius:16px;box-shadow:0 14px 65px #0009}
 .ppvAuditDialog::backdrop{background:#040209d9}
@@ -335,6 +349,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
   <div class="ppvAuditHead"><div><strong>🔎 Auditoria de PPVs / PLEs</strong><p class="ppvAuditNote">Confronta as referências documentadas com os catálogos publicados. Não altera vídeos.</p></div><button type="button" id="ppvAuditClose" aria-label="Fechar auditoria">✕</button></div>
   <div class="ppvAuditFilters"><label>Empresa<select id="ppvAuditCompany"><option value="">Todas</option></select></label><label>Ano<select id="ppvAuditYear"><option value="">Todos os anos</option></select></label></div>
   <div id="ppvAuditStats" class="ppvAuditStats" role="status">Carregando auditoria…</div>
+  <details id="ppvAuditCoverage" class="ppvAuditCoverage" open><summary>📊 Cobertura por brand e ano — referências, faltantes e lacunas</summary><div id="ppvAuditCoverageBody" aria-live="polite">Aguardando os dados publicados…</div></details>
   <p id="ppvAuditNotice" class="ppvAuditNote"></p>
   <div class="ppvAuditTools"><button type="button" id="ppvAuditRefresh">↻ Conferir dados publicados</button><button type="button" id="ppvAuditRun">🔄 Rodar auditoria oficial agora</button></div>
   <div id="ppvAuditItems"></div>
@@ -410,7 +425,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <label class="eventEditConfirm"><input id="eventEditRights" type="checkbox" required> Confirmo que as fontes correspondem ao evento e que tenho autorização para compartilhar ou incorporar seus links.</label>
  <div id="eventEditFeedback" class="eventEditFeedback" role="status" aria-live="polite"></div>
  <div class="eventEditButtons"><button id="eventEditCancel" type="button">Cancelar</button><button id="eventEditSave" class="save" type="submit">💾 Salvar alterações</button></div>
- <div class="eventEditNote">Alterações exigem Master Key e ficam registradas na Oracle. A remoção ou substituição de um vínculo só ocorre quando você salva. HTTP 200 não comprova reprodução.</div>
+ <div class="eventEditNote">Digite a Master Key uma vez por sessão administrativa (máximo 12 horas). As edições ficam registradas na Oracle; Sair encerra a sessão. HTTP 200 não comprova reprodução.</div>
 </form>
 </dialog>
 
@@ -425,6 +440,71 @@ var $companies=$('companies'),$results=$('results'),$status=$('status');
 function txt(el,value){el.textContent=String(value==null?'':value);return el}
 function el(tag,className,value){var e=document.createElement(tag);if(className)e.className=className;if(value!==undefined)txt(e,value);return e}
 function https(url){try{var u=new URL(url,location.href);return u.protocol==='https:'?u.href:''}catch(e){return ''}}
+// Admin session: short-lived random bearer stored per browser tab, not the Master Key.
+// The server validates this bearer for the existing admin routes and revokes it on Sair.
+var JOJO_ADMIN_SESSION_KEY='jojo_master_admin_session_v1';
+var jojoNativeFetch=window.fetch.bind(window);
+var jojoAuthRoutes=new Set(['/request','/approve','/sync/request','/links/request',
+ '/review/action','/event/edit','/ppvs/request','/links/resolve','/review/metadata','/ppvs/resolve']);
+function jojoGetMasterSession(){
+ try{if(sessionStorage.getItem('wc_access_v2')!=='ok')return null;
+ var s=JSON.parse(sessionStorage.getItem(JOJO_ADMIN_SESSION_KEY)||'null');
+ if(s&&typeof s.token==='string'&&/^js1_[A-Za-z0-9_-]{40,90}$/.test(s.token)&&
+ Number(s.expiresAt)>Date.now()+3000&&/^https:\/\/[^\s/?#]+$/.test(s.base||''))return s;
+ }catch(e){}return null
+}
+function jojoClearMasterSession(revoke){
+ var s=jojoGetMasterSession();
+ try{sessionStorage.removeItem(JOJO_ADMIN_SESSION_KEY)}catch(e){}
+ if(revoke&&s){jojoNativeFetch(s.base+'/api/jojo-monitor/auth/logout',{method:'POST',
+  cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({token:s.token})}).catch(function(){})}
+ jojoRefreshMasterSessionUI();
+}
+function jojoPromptMaster(message){var s=jojoGetMasterSession();return s?s.token:(window.prompt(message)||'')}
+function jojoRefreshMasterSessionUI(){
+ var active=jojoGetMasterSession();
+ ['monitorKey','amSyncKey','linkHealthKey','candidateMetaKey','reviewKey','eventEditKey','ppvAuditKey'].forEach(function(id){
+  var input=$(id);if(!input)return;var label=input.closest('label'),dlg=input.closest('dialog');
+  if(label){label.hidden=!!active;label.style.display=active?'none':'';}
+  if(active&&dlg&&dlg.open)input.value=active.token;
+  var note=dlg&&dlg.querySelector('.jojoMasterSessionNote');
+  if(!note&&dlg&&label){note=el('div','jojoMasterSessionNote');label.after(note)}
+  if(note){note.hidden=!active;note.textContent=active?'🔓 Master Key autorizada nesta sessão · nenhuma senha será solicitada novamente.':''}
+ });
+}
+// Watch dialogs opening AFTER their existing click handlers clear the password input.
+if(window.MutationObserver){var jojoMasterObserver=new MutationObserver(jojoRefreshMasterSessionUI);
+ ['monitorAuthDialog','amSyncDialog','linkHealthDialog','candidateMetaDialog','reviewDialog','eventEditDialog','ppvAuditRunDialog'].forEach(function(id){
+  var dlg=$(id);if(dlg)jojoMasterObserver.observe(dlg,{attributes:true,attributeFilter:['open']})
+ })}
+window.fetch=function(resource,opts){
+ if(!opts||String(opts.method||'GET').toUpperCase()!=='POST'||typeof resource!=='string')return jojoNativeFetch(resource,opts);
+ var uri,body;
+ try{uri=new URL(resource,location.href);
+ if(uri.protocol!=='https:'||!uri.pathname.startsWith('/api/jojo-monitor/'))return jojoNativeFetch(resource,opts);
+ if(!jojoAuthRoutes.has(uri.pathname.slice('/api/jojo-monitor'.length)))return jojoNativeFetch(resource,opts);
+ body=JSON.parse(opts.body||'');if(!body||typeof body!=='object'||!Object.prototype.hasOwnProperty.call(body,'key'))return jojoNativeFetch(resource,opts)
+ }catch(e){return jojoNativeFetch(resource,opts)}
+ var saved=jojoGetMasterSession(),plain=typeof body.key==='string'?body.key:'';
+ function execute(token){body.key=token;return jojoNativeFetch(resource,Object.assign({},opts,{body:JSON.stringify(body)})).then(function(resp){
+  if(resp.status===401&&jojoGetMasterSession())jojoClearMasterSession(false);
+  return resp
+ })}
+ if(saved&&saved.base===uri.origin)return execute(saved.token);
+ if(!plain)return jojoNativeFetch(resource,opts);
+ return jojoNativeFetch(uri.origin+'/api/jojo-monitor/auth/session',{method:'POST',cache:'no-store',credentials:'omit',
+  headers:{'Content-Type':'application/json'},body:JSON.stringify({key:plain})}).then(function(resp){
+  if(!resp.ok)return resp;
+  return resp.json().then(function(data){
+   if(!data||!/^js1_[A-Za-z0-9_-]{40,90}$/.test(data.sessionToken||''))throw Error('Servidor não retornou uma sessão administrativa válida');
+   var until=Number(data.expiresAt);
+   if(!Number.isFinite(until)||until<=Date.now())throw Error('Sessão administrativa expirou');
+   try{sessionStorage.setItem(JOJO_ADMIN_SESSION_KEY,JSON.stringify({token:data.sessionToken,expiresAt:until,base:uri.origin}))}catch(e){}
+   jojoRefreshMasterSessionUI();return execute(data.sessionToken)
+  })
+ })
+};
 /* Never leave a black, empty poster. This is an original typographic placeholder,
    replaced by a source thumbnail when one is available. */
 function jojoFallbackPoster(title,company){
@@ -571,7 +651,7 @@ function initLinkHealth(){
   b.title=isResolved?'Reabrir marcacao manual':'Somente arquiva o alerta manualmente; nao prova que o video funciona';
   b.addEventListener('click',function(){
    if(!isResolved&&!confirm('Voce conferiu ou corrigiu esta fonte? A marcacao e manual e NAO confirma reproducao automaticamente.'))return;
-   var pass=prompt('Master Key para '+(isResolved?'reabrir':'marcar como arrumado')+' esta fonte (nao sera armazenada):');
+   var pass=jojoPromptMaster('Master Key para '+(isResolved?'reabrir':'marcar como arrumado')+' esta fonte:');
    if(!pass)return;
    b.disabled=true;
    fetch(base+'/api/jojo-monitor/links/resolve',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:pass,sourceKey:sourceKey,action:action})})
@@ -697,7 +777,7 @@ function initReviewPanel(){
   showLegacyButton();render();
  }
  function refreshRemoteReview(){if(!cfg)return Promise.resolve();return fetch(cfg+'/api/jojo-monitor/review/state',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('Não foi possível consultar lixeira compartilhada');return r.json()}).then(setRemoteState).catch(function(e){setMsg('⚠️ Lixeira na Oracle indisponível: '+e.message)})}
- function adminKey(){if(reviewKeySession)return reviewKeySession;var k=prompt('Master Key da Oracle para alterar a lixeira compartilhada (não será salva):');if(!k)return '';reviewKeySession=k;return k}
+ function adminKey(){return jojoPromptMaster('Master Key da Oracle para alterar a lixeira compartilhada:')}
  function remoteAction(action,items){
   if(!cfg)return Promise.reject(Error('API Oracle não conectada'));
   var k=adminKey();if(!k)return Promise.reject(Error('Operação cancelada'));
@@ -1199,6 +1279,7 @@ function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
 function initPpvAudit(){
  var dlg=$('ppvAuditDialog'),stats=$('ppvAuditStats'),rowsEl=$('ppvAuditItems'),notice=$('ppvAuditNotice');
+ var coverageBody=$('ppvAuditCoverageBody'),coverageShowAll=false;
  var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='',ppvResolved={},ppvTab='pending';
  codes.forEach(function(c){company.add(new Option(names[c]||c.toUpperCase(),c))});
  function refKey(it){
@@ -1215,21 +1296,54 @@ function initPpvAudit(){
  }
  function changeResolved(it,isResolved,button){
   if(!isResolved&&!confirm('Marcar este PPV como resolvido manualmente? Isso NAO comprova que existe video ou que ele reproduz.'))return;
-  var secret=prompt('Master Key para '+(isResolved?'reabrir':'marcar resolvido')+' este PPV:');if(!secret)return;
+  var secret=jojoPromptMaster('Master Key para '+(isResolved?'reabrir':'marcar resolvido')+' este PPV:');if(!secret)return;
   button.disabled=true;
   getBase().then(function(url){return fetch(url+'/api/jojo-monitor/ppvs/resolve',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:secret,referenceKey:refKey(it),action:isResolved?'reopen':'resolve'})})})
   .then(function(r){return r.json().then(function(x){if(!r.ok)throw Error(x.message||'Erro ao salvar');return x})})
   .then(function(){return refreshResolved()}).catch(function(e){alert('Nao foi possivel salvar: '+e.message)})
   .finally(function(){button.disabled=false});
  }
+ function renderCoverage(){
+  if(!coverageBody||!report)return;
+  coverageBody.replaceChildren();
+  var all=report.coverageByCompanyYear;
+  if(!Array.isArray(all)){
+   coverageBody.append(el('p','ppvCoverageIntro','⚠️ Este relatório ainda não possui cobertura por brand/ano. Execute o workflow “Atualizar agenda oficial” e publique o novo ppv_audit.json.'));
+   return
+  }
+  var companies=report.companyCoverage||{},selected=company.value,yy=year.value;
+  var source=el('p','ppvCoverageIntro','Fontes históricas por brand: ');
+  var parts=codes.filter(function(c){return !selected||c===selected}).map(function(c){
+   var info=companies[c]||{},label=info.sourceStatus==='updated'?'consultada':info.sourceStatus==='cached'?'cache (desatualizado)':'indisponível';
+   return (names[c]||c.toUpperCase())+': '+Number(info.sourceCount||0)+' registros · '+label
+  });source.textContent+=parts.join('  |  ');coverageBody.append(source);
+  var list=all.filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)}).sort(function(a,b){
+   var zeroA=a.wikipediaRowsInYear===0?1:0,zeroB=b.wikipediaRowsInYear===0?1:0;
+   if(zeroA!==zeroB)return zeroB-zeroA;
+   return b.year-a.year || codes.indexOf(a.company)-codes.indexOf(b.company)
+  });
+  if(!list.length){coverageBody.append(el('p','ppvCoverageIntro','Nenhum registro disponível para esta brand/ano: a cobertura não pode ser determinada.'));return}
+  var shown=(coverageShowAll||selected&&yy)?list:list.slice(0,30);
+  var wrap=el('div','ppvCoverageScroll'),table=el('table','ppvCoverageTable'),thead=el('thead',''),head=el('tr','');
+  ['Brand','Ano','Na base','Referências','Comparados','Faltando','Sem vídeo','Estado da referência'].forEach(function(k){head.append(el('th','',k))});thead.append(head);table.append(thead);
+  var tbody=el('tbody','');
+  shown.forEach(function(x){var tr=el('tr','');
+   var status=x.coverage==='partial'?'Parcial · Wikipédia consultada':x.coverage==='cached_partial'?'Parcial · cache':x.coverage==='curated_only'?'Apenas referências manuais':'Não auditado';
+   var vals=[names[x.company]||String(x.company).toUpperCase(),x.year,x.cataloguePpvs||0,x.references||0,x.matched||0,x.missing||0,x.withoutVideo||0,status];
+   vals.forEach(function(v,i){var cell=el('td',i===7?(x.coverage==='partial'?'ppvCoverageGood':'ppvCoverageWarn'):'',String(v));tr.append(cell)});tbody.append(tr)
+  });table.append(tbody);wrap.append(table);coverageBody.append(wrap);
+  if(list.length>30&&!coverageShowAll&&!(selected&&yy)){var btn=el('button','ppvCoverageMore','Ver todas as '+list.length+' linhas por brand/ano');btn.type='button';btn.addEventListener('click',function(){coverageShowAll=true;renderCoverage()});coverageBody.append(btn)}
+  var noRef=list.filter(function(x){return !x.wikipediaRowsInYear}).length;
+  coverageBody.append(el('p','ppvCoverageFoot',String(noRef)+' de '+list.length+' combinações não possuem referência histórica da Wikipédia para aquele ano. “0 faltando” nesses anos NÃO significa catálogo completo. Uma página consultada tampouco garante que a Wikipédia liste todos os eventos.'))
+ }
  function render(){
   if(!report)return;
   var selected=company.value,yy=year.value,items=(report.references||[]).filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)});
   var missing=items.filter(function(x){return x.state==='missing'}),empty=items.filter(function(x){return x.state==='without_video'}),ready=items.filter(function(x){return x.state==='with_sources'}),future=items.filter(function(x){return x.state==='upcoming'});
-  stats.replaceChildren();
+  stats.replaceChildren();renderCoverage();
   function metric(n,label){var span=el('span','');span.append(el('b','',String(n)),document.createTextNode(label));stats.append(span)}
   var yearRows=report.years||{},totalCatalogue=0;Object.keys(yearRows).forEach(function(k){if(!yy||k===yy){if(!selected)totalCatalogue+=Number(yearRows[k].cataloguePpvs||0);else totalCatalogue+=Number((yearRows[k].companies||{})[selected]||0)}});
-  metric(totalCatalogue,'PPVs registrados na base');metric(items.length,'Referências históricas');metric(missing.length,'Faltando no catálogo');metric(empty.length,'Sem vídeo cadastrado');metric(ready.length,'Com fontes (reprodução não garantida)');metric(future.length,'Futuros (não ausentes)');
+  metric(totalCatalogue,'PPVs registrados na base');metric(items.length,'Referências localizadas (parcial)');metric(missing.length,'Ausentes identificados nas referências');metric(empty.length,'Sem vídeo cadastrado');metric(ready.length,'Com fontes (reprodução não garantida)');metric(future.length,'Futuros (não ausentes)');
   var last=report.checkedAt?new Date(report.checkedAt).toLocaleString('pt-BR'):'sem data';
   var wikiState=report.wikipediaSources||{},wikiKeys=Object.keys(wikiState),wikiOk=wikiKeys.filter(function(k){return wikiState[k].status==='updated'||wikiState[k].status==='cached'}),wikiFailed=wikiKeys.filter(function(k){return wikiState[k].status==='unavailable'});txt(notice,'Auditoria gerada em '+last+'. '+(report.notice||'Cobertura parcial das referências oficiais.')+' Wikipédias consultadas: '+wikiOk.length+'/'+wikiKeys.length+(wikiFailed.length?' · sem dados: '+wikiFailed.join(', ').toUpperCase():'')+(wikiKeys.length===0?' · Wikipédia ainda não importada; rode a auditoria oficial uma vez':'')+'. Vídeos encontrados aguardam aprovação manual.');
   rowsEl.replaceChildren();
@@ -1279,7 +1393,7 @@ function init(){var all=el('button','choice','TODAS');all.dataset.company='all';
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}
-function lock(){if($('shade').classList.contains('show'))close();try{sessionStorage.removeItem('wc_access_v2')}catch(e){}$('gate').hidden=false;$('gatePassword').value='';txt($('gateError'),'');document.body.style.overflow='hidden';$('gatePassword').focus()}
+function lock(){jojoClearMasterSession(true);if($('shade').classList.contains('show'))close();try{sessionStorage.removeItem('wc_access_v2')}catch(e){}$('gate').hidden=false;$('gatePassword').value='';txt($('gateError'),'');document.body.style.overflow='hidden';$('gatePassword').focus()}
 function toHex(buffer){return Array.from(new Uint8Array(buffer)).map(function(b){return b.toString(16).padStart(2,'0')}).join('')}
 function verify(p){if(!window.crypto||!crypto.subtle){return Promise.reject(Error('Navegador incompatível com verificação de senha. Tente atualizar o navegador.'))}return crypto.subtle.digest('SHA-256',new TextEncoder().encode("wc-library-2026-v2:"+p)).then(function(d){return toHex(d)===ACCESS_HASH})}
 $('gateForm').addEventListener('submit',function(e){e.preventDefault();var code=$('gatePassword').value,button=$('gateSubmit');button.disabled=true;txt($('gateError'),'Verificando…');verify(code).then(function(valid){if(!valid){txt($('gateError'),'Senha incorreta. Confira e tente novamente.');$('gatePassword').select();return}try{sessionStorage.setItem('wc_access_v2','ok')}catch(e){}start()}).catch(function(err){txt($('gateError'),err.message||'Não foi possível verificar a senha.')}).finally(function(){button.disabled=false})});
