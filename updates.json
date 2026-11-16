@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T14:33:50Z",
+  "generatedAt": "2026-11-16T15:38:12Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -22,6 +22,102 @@
       "provisional": false,
       "approvedAt": "2026-11-16T11:26:04Z",
       "thumbnail": "https://pic.bstarstatic.com/ugc/e3d770eab248bbffc0f21248ef119c4c.jpg@720w_405h_1e_1c_90q"
+    },
+    {
+      "id": "reference:wwe:2026-01-31:royal-rumble-2026",
+      "company": "wwe",
+      "date": "2026-01-31",
+      "year": 2026,
+      "title": "Royal Rumble 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/royalrumble/2026",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-04-18:wrestlemania-42---noite-1",
+      "company": "wwe",
+      "date": "2026-04-18",
+      "year": 2026,
+      "title": "WrestleMania 42 — Noite 1",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/wrestlemania/42",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-04-19:wrestlemania-42---noite-2",
+      "company": "wwe",
+      "date": "2026-04-19",
+      "year": 2026,
+      "title": "WrestleMania 42 — Noite 2",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/wrestlemania/42",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-05-09:backlash-2026",
+      "company": "wwe",
+      "date": "2026-05-09",
+      "year": 2026,
+      "title": "Backlash 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/backlash/2026",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-05-31:clash-in-italy-2026",
+      "company": "wwe",
+      "date": "2026-05-31",
+      "year": 2026,
+      "title": "Clash in Italy 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-06-27:night-of-champions-2026",
+      "company": "wwe",
+      "date": "2026-06-27",
+      "year": 2026,
+      "title": "Night of Champions 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-08-01:summerslam-2026---noite-1",
+      "company": "wwe",
+      "date": "2026-08-01",
+      "year": 2026,
+      "title": "SummerSlam 2026 — Noite 1",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/summerslam",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
+      "id": "reference:wwe:2026-08-02:summerslam-2026---noite-2",
+      "company": "wwe",
+      "date": "2026-08-02",
+      "year": 2026,
+      "title": "SummerSlam 2026 — Noite 2",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/summerslam",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
     },
     {
       "id": "official:aew:2026-08-22:collision",
@@ -295,6 +391,18 @@
       "description": "Episódio Collision exibido em 10/10/2026; gravado em Paris em 06/10. Não confundir com a data de gravação."
     },
     {
+      "id": "reference:wwe:2026-10-10:money-in-the-bank-2026",
+      "company": "wwe",
+      "date": "2026-10-10",
+      "year": 2026,
+      "title": "Money in the Bank 2026",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/moneyinthebank",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
+    },
+    {
       "id": "auto:wwe:2026-10-12:raw",
       "company": "wwe",
       "date": "2026-10-12",
@@ -526,6 +634,18 @@
       ],
       "approvedAt": "2026-11-16T09:18:01Z",
       "provisional": false
+    },
+    {
+      "id": "reference:nxt:2026-10-31:nxt-halloween-havoc",
+      "company": "nxt",
+      "date": "2026-10-31",
+      "year": 2026,
+      "title": "NXT Halloween Havoc",
+      "show": "PPV",
+      "official_url": "https://www.wwe.com/shows/wwenxt",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
     },
     {
       "id": "wwe:2026-11-02:raw",
@@ -791,6 +911,18 @@
       "description": "Edição de SmackDown em 13/11/2026, confirmada no site oficial WWE. Vídeo não verificado.",
       "provisional": false,
       "approvedAt": "2026-11-16T13:51:32Z"
+    },
+    {
+      "id": "reference:aew:2026-11-14:aew-full-gear-2026",
+      "company": "aew",
+      "date": "2026-11-14",
+      "year": 2026,
+      "title": "AEW Full Gear 2026",
+      "show": "PPV",
+      "official_url": "https://www.allelitewrestling.com/post/aew-full-gear-2026-preview",
+      "sources": [],
+      "status": "awaiting_video",
+      "referenceOnly": true
     },
     {
       "id": "auto:aew:2026-11-14:collision",

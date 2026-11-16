@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-16T15:21:45.077129Z",
+  "checkedAt": "2026-11-16T15:38:33.789058Z",
   "referenceCoverage": "partial",
   "notice": "Ausências significam apenas referências documentadas não localizadas; anos sem calendário de referência NÃO estão completos.",
   "catalogueFailures": [],
@@ -355,18 +355,18 @@
     },
     "2026": {
       "companies": {
-        "wwe": 15,
-        "nxt": 5,
+        "wwe": 24,
+        "nxt": 6,
         "tna": 7,
-        "aew": 18,
+        "aew": 19,
         "roh": 2,
         "njpw": 106
       },
-      "cataloguePpvs": 153,
+      "cataloguePpvs": 164,
       "references": 15,
-      "missing": 1,
-      "withoutVideo": 3,
-      "withSources": 11
+      "missing": 0,
+      "withoutVideo": 6,
+      "withSources": 9
     }
   },
   "references": [
@@ -410,9 +410,9 @@
       "year": 2026,
       "title": "Backlash 2026",
       "official_url": "https://www.wwe.com/shows/backlash/2026",
-      "state": "with_sources",
-      "eventId": "wwe:2026-05-09:ppv",
-      "sourcesCount": 3
+      "state": "without_video",
+      "eventId": "reference:wwe:2026-05-09:backlash-2026",
+      "sourcesCount": 0
     },
     {
       "id": "reference:wwe:2026-05-31:clash-in-italy-2026",
@@ -465,8 +465,8 @@
       "year": 2026,
       "title": "Money in the Bank 2026",
       "official_url": "https://www.wwe.com/shows/moneyinthebank",
-      "state": "missing",
-      "eventId": null,
+      "state": "without_video",
+      "eventId": "reference:wwe:2026-10-10:money-in-the-bank-2026",
       "sourcesCount": 0
     },
     {
@@ -498,9 +498,9 @@
       "year": 2026,
       "title": "AEW Full Gear 2026",
       "official_url": "https://www.allelitewrestling.com/post/aew-full-gear-2026-preview",
-      "state": "with_sources",
-      "eventId": "official:aew:2026-11-14:full-gear",
-      "sourcesCount": 3
+      "state": "without_video",
+      "eventId": "reference:aew:2026-11-14:aew-full-gear-2026",
+      "sourcesCount": 0
     },
     {
       "id": "reference:tna:2026-11-15:tna-destination-x-2026",
