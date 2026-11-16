@@ -254,6 +254,14 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .ppvAuditResolve{margin:0 0 6px 6px;padding:11px 13px;border-radius:10px;background:#236b47;color:#f2fff7;border:1px solid #5bd39b;font-weight:750;cursor:pointer}
 .ppvAuditReopen{margin:0 0 6px 6px;padding:11px 13px;border-radius:10px;background:#34313a;color:#eae4f6;border:1px solid #877b9b;cursor:pointer}
 .ppvAuditResolve:disabled,.ppvAuditReopen:disabled{opacity:.55;cursor:wait}
+
+/* Pendencias e concluidos ficam em abas separadas; estado vem da Oracle */
+.jojoStatusTabs{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 8px}
+.jojoStatusTabs button{background:#31233f;border:1px solid #705486;border-radius:9px;padding:9px 12px;color:#e5d6f3;cursor:pointer;font-weight:700;font-size:12px}
+.jojoStatusTabs button[aria-selected="true"]{background:#60407b;color:#fff;border-color:#aa83d1}
+.jojoStatusTabs button.jojoDoneTab[aria-selected="true"]{background:#245b42;border-color:#5dcf92}
+.jojoStatusPane[hidden]{display:none!important}
+.jojoEmpty{font-size:12px;color:#c9b9d9;padding:13px 8px}
 </style>
 </head>
 <body>
@@ -553,6 +561,7 @@ function initAutoMatchSync(){
 function initLinkHealth(){
  var base='',button=$('linkHealthRun'),info=$('linkHealthInfo'),stats=$('linkHealthStats'),issues=$('linkHealthIssues');
  var dlg=$('linkHealthDialog'),key=$('linkHealthKey'),feedback=$('linkHealthFeedback'),send=$('linkHealthSend');
+ var healthTab='pending';
  function stat(label,value){var b=el('div','linkHealthStat');b.append(el('strong','',value),document.createTextNode(label));return b}
  function date(s){if(!s)return 'Ainda não executado';var d=new Date(s);return isNaN(d.getTime())?'Data indisponível':d.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})}
  function editHealth(box,sourceKey,isResolved){
@@ -598,17 +607,34 @@ function initLinkHealth(){
    var foot=el('div','linkHealthNote','A checagem é da página, não da reprodução. Erros do player podem ocorrer com HTTP 200. Fontes suspeitas são sugeridas, nunca substituídas automaticamente.');
    info.replaceChildren(lines,foot);
    issues.replaceChildren();
+   var tabs=el('div','jojoStatusTabs'),pendingBtn=el('button','','⚠️ Pendentes'),doneBtn=el('button','jojoDoneTab','✅ Concluídos');
+   pendingBtn.type=doneBtn.type='button';tabs.setAttribute('role','tablist');pendingBtn.setAttribute('role','tab');doneBtn.setAttribute('role','tab');
+   var pendingBox=el('div','jojoStatusPane'),doneBox=el('div','jojoStatusPane');
+   function refreshTabs(){
+    var pendingCount=pendingBox.querySelectorAll('.linkHealthIssue').length,doneCount=doneBox.querySelectorAll('.linkHealthIssue').length;
+    txt(pendingBtn,'⚠️ Pendentes ('+pendingCount+')');txt(doneBtn,'✅ Concluídos ('+doneCount+')');
+    if(pendingCount)pendingBox.querySelectorAll('.jojoEmpty').forEach(function(n){n.remove()});
+    if(doneCount)doneBox.querySelectorAll('.jojoEmpty').forEach(function(n){n.remove()});
+    pendingBtn.setAttribute('aria-selected',String(healthTab==='pending'));doneBtn.setAttribute('aria-selected',String(healthTab==='done'));
+    pendingBox.hidden=healthTab!=='pending';doneBox.hidden=healthTab!=='done';
+    if(healthTab==='done'&&!doneCount&&!doneBox.querySelector('.jojoEmpty'))doneBox.append(el('p','jojoEmpty','Nenhum alerta marcado como arrumado.'));
+    if(healthTab==='pending'&&!pendingCount&&!pendingBox.querySelector('.jojoEmpty'))pendingBox.append(el('p','jojoEmpty','Nenhuma pendência nesta lista.'));
+   }
+   pendingBtn.addEventListener('click',function(){healthTab='pending';refreshTabs()});
+   doneBtn.addEventListener('click',function(){healthTab='done';refreshTabs()});
+   tabs.append(pendingBtn,doneBtn);issues.append(tabs,pendingBox,doneBox);
    var rows=Array.isArray(d.issues)?d.issues:[];
-   if(!rows.length){issues.append(el('p','linkHealthNote',!d.hasReport?'Aguardando a primeira verificação de links.':'Nenhum alerta da checagem de página. Vídeos com HTTP 200 ainda exigem conferência manual.'));}
-   if(d.issueCount>rows.length)issues.append(el('p','linkHealthNote','Mostrando '+rows.length+' de '+d.issueCount+' alertas; demais ficam preservados na Oracle.'));
+   if(!rows.length){pendingBox.append(el('p','linkHealthNote',!d.hasReport?'Aguardando a primeira verificação de links.':'Nenhum alerta da checagem de página. Vídeos com HTTP 200 ainda exigem conferência manual.'));}
+   if(d.issueCount>rows.length)pendingBox.append(el('p','linkHealthNote','Mostrando '+rows.length+' de '+d.issueCount+' alertas; demais ficam preservados na Oracle.'));
    fetch('./config/broken_sources.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(doc){
     if(!doc||!doc.sources)return;
     var keys=Object.keys(doc.sources).filter(function(k){return doc.sources[k]&&doc.sources[k].verifyManually});
     var unresolved=keys.filter(function(k){return !manualResolved[k]});
     if(!keys.length)return;
     stats.append(tone(stat('Relatos manuais em aberto',String(unresolved.length)),unresolved.length?'bad':'ok'));
-    var title=el('p','linkHealthNote','🚨 Relatos manuais ('+unresolved.length+' em aberto · '+(keys.length-unresolved.length)+' marcados arrumados). Não é teste de reprodução.');issues.prepend(title);
-    keys.slice(0,25).forEach(function(k){var rec=doc.sources[k],fixed=!!manualResolved[k],box=el('div','linkHealthIssue'+(fixed?' manuallyResolved':''));box.append(el('strong','',(fixed?'✅ ARRUMADO · ':'⚠️ ')+k),el('small','',fixed?'Marcado manualmente como arrumado. Reabra caso o erro volte.':String(rec.status||'Vídeo reportado como quebrado')));var link=k.split(':');if(link[0]==='okru'&&/^\d+$/.test(link[1])){var a=el('a','','↗ Conferir no OK.ru');a.href='https://ok.ru/video/'+link[1];a.target='_blank';a.rel='noopener noreferrer';box.append(a)}editHealth(box,k,fixed);issues.prepend(box)})
+    var title=el('p','linkHealthNote','🚨 Relatos manuais ('+unresolved.length+' em aberto · '+(keys.length-unresolved.length)+' marcados arrumados). Não é teste de reprodução.');pendingBox.prepend(title);
+    keys.slice(0,25).forEach(function(k){var rec=doc.sources[k],fixed=!!manualResolved[k],box=el('div','linkHealthIssue'+(fixed?' manuallyResolved':''));box.append(el('strong','',(fixed?'✅ ARRUMADO · ':'⚠️ ')+k),el('small','',fixed?'Marcado manualmente como arrumado. Reabra caso o erro volte.':String(rec.status||'Vídeo reportado como quebrado')));var link=k.split(':');if(link[0]==='okru'&&/^\d+$/.test(link[1])){var a=el('a','','↗ Conferir no OK.ru');a.href='https://ok.ru/video/'+link[1];a.target='_blank';a.rel='noopener noreferrer';box.append(a)}editHealth(box,k,fixed);(fixed?doneBox:pendingBox).append(box)})
+    refreshTabs();
    }).catch(function(){});
    rows.forEach(function(issue){
     var event=issue.event||{},fixed=!!manualResolved[issue.sourceKey],card=el('div','linkHealthIssue'+(fixed?' manuallyResolved':''));
@@ -628,8 +654,9 @@ function initLinkHealth(){
        $('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}));
       });row.append(review);card.append(row)
     });
-    issues.append(card)
+    (fixed?doneBox:pendingBox).append(card)
    });
+   refreshTabs();
   }).catch(function(){button.disabled=true;txt(info,'Não foi possível consultar a saúde dos links na Oracle. Os vídeos não foram alterados.')})
  }
  fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()}).then(function(d){
@@ -1172,7 +1199,7 @@ function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
 function initPpvAudit(){
  var dlg=$('ppvAuditDialog'),stats=$('ppvAuditStats'),rowsEl=$('ppvAuditItems'),notice=$('ppvAuditNotice');
- var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='',ppvResolved={};
+ var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='',ppvResolved={},ppvTab='pending';
  codes.forEach(function(c){company.add(new Option(names[c]||c.toUpperCase(),c))});
  function refKey(it){
   var label=String(it.title||'').normalize('NFKC').trim().toLowerCase(),h=2166136261;
@@ -1206,8 +1233,17 @@ function initPpvAudit(){
   var last=report.checkedAt?new Date(report.checkedAt).toLocaleString('pt-BR'):'sem data';
   var wikiState=report.wikipediaSources||{},wikiKeys=Object.keys(wikiState),wikiOk=wikiKeys.filter(function(k){return wikiState[k].status==='updated'||wikiState[k].status==='cached'}),wikiFailed=wikiKeys.filter(function(k){return wikiState[k].status==='unavailable'});txt(notice,'Auditoria gerada em '+last+'. '+(report.notice||'Cobertura parcial das referências oficiais.')+' Wikipédias consultadas: '+wikiOk.length+'/'+wikiKeys.length+(wikiFailed.length?' · sem dados: '+wikiFailed.join(', ').toUpperCase():'')+(wikiKeys.length===0?' · Wikipédia ainda não importada; rode a auditoria oficial uma vez':'')+'. Vídeos encontrados aguardam aprovação manual.');
   rowsEl.replaceChildren();
+  var pending=items.filter(function(it){return !ppvResolved[refKey(it)]}),doneList=items.filter(function(it){return !!ppvResolved[refKey(it)]});
+  var tabBar=el('div','jojoStatusTabs'),pendingTab=el('button','','⚠️ Pendentes ('+pending.length+')'),doneTab=el('button','jojoDoneTab','✅ Concluídos ('+doneList.length+')');
+  tabBar.setAttribute('role','tablist');pendingTab.type=doneTab.type='button';pendingTab.setAttribute('role','tab');doneTab.setAttribute('role','tab');
+  var pendingPane=el('div','jojoStatusPane'),donePane=el('div','jojoStatusPane');
+  function selectPpvTab(next){ppvTab=next;pendingTab.setAttribute('aria-selected',String(next==='pending'));doneTab.setAttribute('aria-selected',String(next==='done'));pendingPane.hidden=next!=='pending';donePane.hidden=next!=='done'}
+  pendingTab.addEventListener('click',function(){selectPpvTab('pending')});doneTab.addEventListener('click',function(){selectPpvTab('done')});
+  tabBar.append(pendingTab,doneTab);rowsEl.append(tabBar,pendingPane,donePane);selectPpvTab(ppvTab);
+  if(!pending.length)pendingPane.append(el('p','jojoEmpty','Nenhum PPV pendente nesta seleção.'));
+  if(!doneList.length)donePane.append(el('p','jojoEmpty','Nenhum PPV concluído nesta seleção.'));
   items.sort(function(a,b){var rank={missing:0,without_video:1,with_sources:2,upcoming:3};return rank[a.state]-rank[b.state]||b.date.localeCompare(a.date)});
-  if(!items.length){rowsEl.append(el('p','ppvAuditNote','Nenhuma referência histórica carregada para esta seleção. A Wikipédia será consultada pela ação diária; enquanto não houver referências, não é possível determinar quais PPVs faltam.'));return}
+  if(!items.length){pendingPane.replaceChildren(el('p','ppvAuditNote','Nenhuma referência histórica carregada para esta seleção. A Wikipédia será consultada pela ação diária; enquanto não houver referências, não é possível determinar quais PPVs faltam.'));return}
   items.forEach(function(it){var row=el('div','ppvAuditRow '+(it.state==='missing'?'missing':it.state==='without_video'?'noVideo':''));var group=el('div','');
    var labels={missing:'🚨 AUSENTE do catálogo',without_video:'🟡 Cadastrado · sem vídeo',with_sources:'✅ Cadastrado · fonte ainda sem reprodução confirmada',upcoming:'📅 Futuro · aguardar evento'};
    var done=!!ppvResolved[refKey(it)];if(done)row.classList.add('manuallyResolved');
@@ -1217,11 +1253,11 @@ function initPpvAudit(){
    if(it.official_url){var a=el('a','',it.referenceType==='wikipedia'?'↗ Referência: Wikipédia':'↗ Site oficial');a.href=it.official_url;a.target='_blank';a.rel='noopener noreferrer';a.style.cssText='display:inline-block;color:#f4ddff;margin:0 8px 8px 0;font-size:12px';buttons.append(a)}
    var search=el('button','', '🔎 Procurar vídeo');search.type='button';search.addEventListener('click',function(){dlg.close();$('reviewSearch').value=it.title+' '+it.date;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}))});buttons.append(search);
    if(it.state!=='upcoming'){var green=el('button',done?'ppvAuditReopen':'ppvAuditResolve',done?'↩ Reabrir':'✅ Arrumado');green.type='button';green.title=done?'Reabrir a pendencia':'Marcacao manual, sem confirmar reproducao';green.addEventListener('click',function(){changeResolved(it,done,green)});buttons.append(green)}
-   row.append(buttons);rowsEl.append(row)
+   row.append(buttons);(done?donePane:pendingPane).append(row)
   })
  }
  function load(){txt(notice,'Consultando última auditoria publicada…');return fetch('./ppv_audit.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Auditoria ainda não publicada no site');return r.json()}).then(function(data){report=data;var old=year.value,all=Object.keys(data.years||{}).sort().reverse();year.replaceChildren(new Option('Todos os anos',''));all.forEach(function(y){year.add(new Option(y,y))});if(all.indexOf(old)>=0)year.value=old;render()}).catch(function(e){report=null;stats.replaceChildren();rowsEl.replaceChildren();txt(notice,'⚠️ '+e.message+'. Publique ppv_audit.json junto com o patch ou rode a ação diária no GitHub.')})}
- $('ppvAuditOpen').addEventListener('click',function(){dlg.showModal();load();refreshResolved()});
+ $('ppvAuditOpen').addEventListener('click',function(){ppvTab='pending';dlg.showModal();load();refreshResolved()});
  $('ppvAuditClose').addEventListener('click',function(){dlg.close()});
  $('ppvAuditRefresh').addEventListener('click',load);company.addEventListener('change',render);year.addEventListener('change',render);
  var sub=$('ppvAuditRunDialog'),key=$('ppvAuditKey'),feedback=$('ppvAuditRunFeedback'),send=$('ppvAuditRunSend');
