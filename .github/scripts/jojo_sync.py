@@ -59,6 +59,8 @@ def add_weekly_raw(updates, now=None):
 def add_curated_events(updates):
     """Merge verified special dates without touching previous reviewed videos."""
     data = read('config/verified_events.json')
+    references = read('config/ppv_reference.json').get('events', [])
+    data['events'] = data.get('events', []) + [x for x in references if isinstance(x, dict)]
     existing = {x.get('id'): x for x in updates.get('events', []) if isinstance(x, dict)}
     changed = 0
     for item in data.get('events', []):
@@ -66,6 +68,12 @@ def add_curated_events(updates):
         if not re.fullmatch(r'[A-Za-z0-9:_-]{8,180}', eid):
             continue
         if item.get('company') not in ('wwe','aew','roh','nxt','njpw','tna'):
+            continue
+        # Avoid creating a duplicate placeholder for an official PPV with a different ID.
+        if item.get('referenceOnly') and any(str(e.get('date'))==str(item.get('date')) and e.get('company')==item.get('company') and (
+             (lambda x,y: x==y or (len(x)>8 and len(y)>8 and (x in y or y in x)))(
+               re.sub(r'[^a-z0-9]+','',str(e.get('title','')).lower()),
+               re.sub(r'[^a-z0-9]+','',str(item.get('title','')).lower()))) for e in existing.values()):
             continue
         if eid in existing:
             old = existing[eid]
@@ -84,8 +92,8 @@ def add_curated_events(updates):
     return changed
 
 
-def add_missing_weeklies(updates, now=None, past_days=35, future_days=7):
-    """Keep weekly episode slots visible 35 days back and 7 days ahead.
+def add_missing_weeklies(updates, now=None, past_days=155, future_days=7):
+    """Backfill WWE weekly gaps for 155 days, while other shows use 35-65 days.
 
     Future weekday occurrences are *provisional placeholders*, not an assertion
     of confirmed broadcasts. Preserve recorded sources and historical IDs.
@@ -112,10 +120,11 @@ def add_missing_weeklies(updates, now=None, past_days=35, future_days=7):
         ('aew', 5, 'Collision', 'AEW Collision', 'collision'),
         ('roh', 3, 'HonorClub', 'ROH on HonorClub', 'honorclub'),
         ('tna', 3, 'Impact', 'TNA Impact', 'impact'),
+        ('tna', 4, 'Xplosion', 'TNA Xplosion', 'xplosion'),
     ]
 
     def has_episode(company, date, show, slug):
-        companies = (company, 'nxt') if show == 'NXT' else (company,)
+        companies = ('wwe', 'nxt') if show == 'NXT' else (company,)
         for row in current:
             if not isinstance(row, dict) or row.get('date') != date or row.get('company') not in companies:
                 continue
@@ -134,7 +143,8 @@ def add_missing_weeklies(updates, now=None, past_days=35, future_days=7):
         date = today + dt.timedelta(days=offset)
         iso = date.isoformat()
         for company, weekday, show, title, slug in schedules:
-            if date.weekday() != weekday or has_episode(company, iso, show, slug):
+            lookback = past_days if (company in ('wwe', 'nxt') and show in ('RAW','NXT','SmackDown')) else (65 if show == 'Xplosion' else 35)
+            if offset < -lookback or date.weekday() != weekday or has_episode(company, iso, show, slug):
                 continue
             current.append({
                 'id': 'auto:' + company + ':' + iso + ':' + slug,
