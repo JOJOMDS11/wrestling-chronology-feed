@@ -263,6 +263,20 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .ppvAuditRunDialog menu{margin:0;padding:0;display:flex;justify-content:flex-end;gap:8px}.ppvAuditRunDialog button{background:#583675;border:1px solid #8767a4;border-radius:9px;padding:9px 13px;color:#fff}
 @media(max-width:570px){.ppvAuditInner{padding:12px}.ppvAuditBtn{width:100%}.ppvAuditRow{align-items:stretch}.ppvAuditRow button{width:100%}}
 
+/* JOJO: faltantes com cadastro rápido e paginação de 20 */
+.ppvAuditListTools{display:flex;flex-wrap:wrap;gap:9px;align-items:end;margin:10px 0 12px}
+.ppvAuditListTools label{display:grid;gap:5px;flex:1;min-width:150px;color:#d9c9e9;font-size:12px}
+.ppvAuditListTools input,.ppvAuditListTools select{border:1px solid #80649c;background:#281b36;color:#fff;border-radius:9px;padding:10px;width:100%;box-sizing:border-box}
+.ppvAuditPages{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:13px 0;padding:9px;border:1px solid #504064;border-radius:10px}
+.ppvAuditPages button{border:1px solid #8166a2;border-radius:9px;background:#46315c;padding:8px 12px;color:#fff;cursor:pointer}
+.ppvAuditPages button:disabled{opacity:.45;cursor:default}
+.ppvAuditPages small{color:#d8c5e8}
+.ppvAuditPencil{border:1px solid #b08adb!important;background:#5b3874!important}
+.ppvMissingCreateDialog{width:min(95vw,560px)}
+.ppvMissingReadOnly{padding:11px 12px;border:1px solid #6e5087;background:#312341;border-radius:10px;line-height:1.5}
+.ppvMissingCreateDialog textarea{border:1px solid #80649c;background:#170f20;color:#fff;border-radius:9px;padding:10px;min-width:100%;max-width:100%;box-sizing:border-box}
+.ppvMissingRights{display:flex!important;gap:8px;align-items:flex-start}
+.ppvMissingRights input{width:auto!important}
 /* Marcacao manual para pendencias da auditoria; nao altera status oficial */
 .ppvAuditRow.manuallyResolved{border-color:#3d9d70!important;background:rgba(21,100,67,.16)!important}
 .ppvAuditResolve{margin:0 0 6px 6px;padding:11px 13px;border-radius:10px;background:#236b47;color:#f2fff7;border:1px solid #5bd39b;font-weight:750;cursor:pointer}
@@ -349,11 +363,27 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
   <div class="ppvAuditHead"><div><strong>🔎 Auditoria de PPVs / PLEs</strong><p class="ppvAuditNote">Confronta as referências documentadas com os catálogos publicados. Não altera vídeos.</p></div><button type="button" id="ppvAuditClose" aria-label="Fechar auditoria">✕</button></div>
   <div class="ppvAuditFilters"><label>Empresa<select id="ppvAuditCompany"><option value="">Todas</option></select></label><label>Ano<select id="ppvAuditYear"><option value="">Todos os anos</option></select></label></div>
   <div id="ppvAuditStats" class="ppvAuditStats" role="status">Carregando auditoria…</div>
+  <div id="ppvAuditListTools" class="ppvAuditListTools"><label>Buscar PPV por nome ou data<input id="ppvAuditSearch" type="search" placeholder="Nome do show, data…"></label><label>Situação<select id="ppvAuditStatus"><option value="all">Todas as situações</option><option value="missing">🚨 Ausentes do catálogo</option><option value="without_video">🟡 Sem vídeo</option><option value="with_sources">✅ Com fonte cadastrada</option><option value="upcoming">📅 Futuros</option></select></label></div>
   <details id="ppvAuditCoverage" class="ppvAuditCoverage" open><summary>📊 Cobertura por brand e ano — referências, faltantes e lacunas</summary><div id="ppvAuditCoverageBody" aria-live="polite">Aguardando os dados publicados…</div></details>
   <p id="ppvAuditNotice" class="ppvAuditNote"></p>
   <div class="ppvAuditTools"><button type="button" id="ppvAuditRefresh">↻ Conferir dados publicados</button><button type="button" id="ppvAuditRun">🔄 Rodar auditoria oficial agora</button></div>
   <div id="ppvAuditItems"></div>
  </div>
+</dialog>
+<dialog id="ppvMissingCreateDialog" class="ppvAuditRunDialog ppvMissingCreateDialog" aria-label="Cadastrar PPV ausente">
+ <form id="ppvMissingCreateForm" autocomplete="off">
+  <strong>✏️ Cadastrar PPV ausente</strong>
+  <p class="ppvAuditNote">Nome, brand e data já vêm da auditoria. Confirme que a referência corresponde ao show antes de cadastrar a gravação.</p>
+  <div id="ppvMissingCreateTitle" class="ppvMissingReadOnly"></div>
+  <label>URL do vídeo (uma por linha, até 6)
+   <textarea id="ppvMissingCreateUrls" rows="3" maxlength="4000" required placeholder="https://ok.ru/video/123456789\nhttps://archive.org/details/identificador"></textarea>
+  </label>
+  <label>Miniatura HTTPS (opcional)<input id="ppvMissingCreateThumb" type="url" maxlength="700" autocomplete="off" placeholder="https://.../capa.jpg"></label>
+  <label>Master Key<input id="ppvMissingCreateKey" type="password" maxlength="128" autocomplete="off" required></label>
+  <label class="ppvMissingRights"><input id="ppvMissingCreateRights" type="checkbox" required> Confirmo que as fontes correspondem a este evento e tenho autorização para compartilhá-las.</label>
+  <div id="ppvMissingCreateFeedback" role="status" class="ppvAuditNote" aria-live="polite"></div>
+  <menu><button id="ppvMissingCreateCancel" type="button">Cancelar</button><button id="ppvMissingCreateSave" type="submit">💾 Cadastrar show</button></menu>
+ </form>
 </dialog>
 <dialog id="ppvAuditRunDialog" class="ppvAuditRunDialog" aria-label="Solicitar auditoria oficial com Master Key">
  <form id="ppvAuditRunForm"><strong>🔄 Buscar PPVs e possíveis fontes</strong><p class="ppvAuditNote">Aciona o GitHub Actions de agenda, auditoria e metadados. Candidatos nunca são aprovados automaticamente.</p><label>Master Key<input type="password" id="ppvAuditKey" required maxlength="128" autocomplete="off"></label><div class="ppvAuditNote" id="ppvAuditRunFeedback" role="status"></div><menu><button type="button" id="ppvAuditRunCancel">Cancelar</button><button type="submit" id="ppvAuditRunSend">Executar busca</button></menu></form>
@@ -435,7 +465,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 var codes=['wwe','wcw','ecw','tna','roh','njpw','nxt','aew'];
 var names={all:'TODAS',wwe:'WWE',wcw:'WCW',ecw:'ECW',tna:'TNA',roh:'ROH',njpw:'NJPW',nxt:'NXT',aew:'AEW'};
 var $=function(id){return document.getElementById(id)};
-var state={company:'',rows:[],filtered:[],queue:[],limit:80,current:null,source:null,partIndex:0,cache:{},lastFocus:null,autoNext:true,updates:[],resumeSeconds:0,lastWatchSave:0,brokenSources:{},eventEdits:{},eventEditApi:''};
+var state={company:'',rows:[],filtered:[],queue:[],limit:80,current:null,source:null,partIndex:0,cache:{},lastFocus:null,autoNext:true,updates:[],resumeSeconds:0,lastWatchSave:0,brokenSources:{},eventEdits:{},manualPpvs:{},eventEditApi:''};
 var $companies=$('companies'),$results=$('results'),$status=$('status');
 function txt(el,value){el.textContent=String(value==null?'':value);return el}
 function el(tag,className,value){var e=document.createElement(tag);if(className)e.className=className;if(value!==undefined)txt(e,value);return e}
@@ -445,7 +475,7 @@ function https(url){try{var u=new URL(url,location.href);return u.protocol==='ht
 var JOJO_ADMIN_SESSION_KEY='jojo_master_admin_session_v1';
 var jojoNativeFetch=window.fetch.bind(window);
 var jojoAuthRoutes=new Set(['/request','/approve','/sync/request','/links/request',
- '/review/action','/event/edit','/ppvs/request','/links/resolve','/review/metadata','/ppvs/resolve']);
+ '/review/action','/event/edit','/ppvs/request','/links/resolve','/review/metadata','/ppvs/resolve','/ppvs/create']);
 function jojoGetMasterSession(){
  try{if(sessionStorage.getItem('wc_access_v2')!=='ok')return null;
  var s=JSON.parse(sessionStorage.getItem(JOJO_ADMIN_SESSION_KEY)||'null');
@@ -464,7 +494,7 @@ function jojoClearMasterSession(revoke){
 function jojoPromptMaster(message){var s=jojoGetMasterSession();return s?s.token:(window.prompt(message)||'')}
 function jojoRefreshMasterSessionUI(){
  var active=jojoGetMasterSession();
- ['monitorKey','amSyncKey','linkHealthKey','candidateMetaKey','reviewKey','eventEditKey','ppvAuditKey'].forEach(function(id){
+ ['monitorKey','amSyncKey','linkHealthKey','candidateMetaKey','reviewKey','eventEditKey','ppvAuditKey','ppvMissingCreateKey'].forEach(function(id){
   var input=$(id);if(!input)return;var label=input.closest('label'),dlg=input.closest('dialog');
   if(label){label.hidden=!!active;label.style.display=active?'none':'';}
   if(active&&dlg&&dlg.open)input.value=active.token;
@@ -475,7 +505,7 @@ function jojoRefreshMasterSessionUI(){
 }
 // Watch dialogs opening AFTER their existing click handlers clear the password input.
 if(window.MutationObserver){var jojoMasterObserver=new MutationObserver(jojoRefreshMasterSessionUI);
- ['monitorAuthDialog','amSyncDialog','linkHealthDialog','candidateMetaDialog','reviewDialog','eventEditDialog','ppvAuditRunDialog'].forEach(function(id){
+ ['monitorAuthDialog','amSyncDialog','linkHealthDialog','candidateMetaDialog','reviewDialog','eventEditDialog','ppvAuditRunDialog','ppvMissingCreateDialog'].forEach(function(id){
   var dlg=$(id);if(dlg)jojoMasterObserver.observe(dlg,{attributes:true,attributeFilter:['open']})
  })}
 window.fetch=function(resource,opts){
@@ -1151,6 +1181,16 @@ function mergeUpdates(code,rows){var all=rows.map(function(r){return Object.assi
   var o=Object.assign({},r,{_company:code,show:r.show||'PPV',sources:available?r.sources:[],year:Number(r.date.slice(0,4)),scheduled:!available});
   o._needle=clean([o.title,o.show,o.date].join(' '));all.push(o);seen[k]=o
  });return all} 
+function mergeManualPpvs(code,rows){
+ var all=rows.slice(),seen=new Map();
+ all.forEach(function(r){seen.set((r._company||r.company)+'|'+r.date+'|'+clean(r.title),r)});
+ Object.keys(state.manualPpvs||{}).forEach(function(id){var r=state.manualPpvs[id];if(!r||codes.indexOf(r.company)<0||r.company!==code||!/^\d{4}-\d{2}-\d{2}$/.test(r.date||''))return;
+  var k=r.company+'|'+r.date+'|'+clean(r.title),existing=seen.get(k);
+  if(existing){var keys=new Set((existing.sources||[]).map(editSourceKey));(r.sources||[]).forEach(function(src){var sk=editSourceKey(src);if(sk&&!keys.has(sk)){existing.sources.push(Object.assign({},src));keys.add(sk)}});existing.scheduled=!(existing.sources||[]).length;return}
+  var newRow=Object.assign({},r,{_company:code,year:Number(r.date.slice(0,4)),show:'PPV',sources:(r.sources||[]).map(function(src){return Object.assign({},src)}),scheduled:!(r.sources||[]).length});
+  newRow._needle=clean([newRow.title,newRow.date,newRow.show].join(' '));all.push(newRow);seen.set(k,newRow)
+ });return all;
+}
 // Weekly placeholders only surface in the next 7 days (or 21 days back).
 // Future PPVs/PLEs remain visible regardless of lead time; historical playable shows remain intact.
 function localISODate(offset){var d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+offset);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
@@ -1207,7 +1247,7 @@ function updateShowFilter(){
  var order=code==='wwe'?['RAW','SmackDown','NXT','Main Event','PPVs / PLEs','Outros / Especiais']:['Dynamite','Collision','Rampage','PPVs / PLEs','Outros / Especiais'];
  order.forEach(function(k){if(counts[k])sel.add(new Option(k+' ('+counts[k]+')',k))});sel.value='';
 }
-function pick(code){state.company=code;state.rows=[];state.filtered=[];state.queue=[];state.limit=80;saveCompany(code);Array.prototype.forEach.call($companies.children,function(c){c.classList.toggle('active',c.dataset.company===code);c.setAttribute('aria-pressed',c.dataset.company===code?'true':'false')});$results.replaceChildren(el('div','empty','Carregando '+names[code]+'…'));txt($('count'),'Carregando…');status('Buscando '+names[code]+' no seu GitHub…');var job=code==='all'?Promise.all(codes.map(fetchCompany)).then(function(sets){return [].concat.apply([],sets.map(function(rows,i){return mergeUpdates(codes[i],rows)}))}):fetchCompany(code).then(function(rows){return mergeUpdates(code,rows)});return job.then(function(rows){if(state.company!==code)return;state.rows=rows;rows.forEach(applyEventEditRow);rows.forEach(function(r){if(!r._needle)r._needle=clean([r.title,r.show,r.description,r.date].join(' '))});setYearOptions(rows);$('year').value='';$('search').value='';updateShowFilter();apply();status(names[code]+': '+rows.length.toLocaleString('pt-BR')+' eventos carregados.');}).catch(function(err){$results.replaceChildren(el('div','empty','Não foi possível carregar os eventos. '+err.message));status('Falha no catálogo. Verifique se os arquivos JSON estão no GitHub Pages.');txt($('count'),'Erro de carregamento')})}
+function pick(code){state.company=code;state.rows=[];state.filtered=[];state.queue=[];state.limit=80;saveCompany(code);Array.prototype.forEach.call($companies.children,function(c){c.classList.toggle('active',c.dataset.company===code);c.setAttribute('aria-pressed',c.dataset.company===code?'true':'false')});$results.replaceChildren(el('div','empty','Carregando '+names[code]+'…'));txt($('count'),'Carregando…');status('Buscando '+names[code]+' no seu GitHub…');var job=code==='all'?Promise.all(codes.map(fetchCompany)).then(function(sets){return [].concat.apply([],sets.map(function(rows,i){return mergeManualPpvs(codes[i],mergeUpdates(codes[i],rows))}))}):fetchCompany(code).then(function(rows){return mergeManualPpvs(code,mergeUpdates(code,rows))});return job.then(function(rows){if(state.company!==code)return;state.rows=rows;rows.forEach(applyEventEditRow);rows.forEach(function(r){if(!r._needle)r._needle=clean([r.title,r.show,r.description,r.date].join(' '))});setYearOptions(rows);$('year').value='';$('search').value='';updateShowFilter();apply();status(names[code]+': '+rows.length.toLocaleString('pt-BR')+' eventos carregados.');}).catch(function(err){$results.replaceChildren(el('div','empty','Não foi possível carregar os eventos. '+err.message));status('Falha no catálogo. Verifique se os arquivos JSON estão no GitHub Pages.');txt($('count'),'Erro de carregamento')})}
 function chronology(a,b){var x=String(a.date||''),y=String(b.date||'');return x.localeCompare(y)||String(a._company||'').localeCompare(String(b._company||''))||String(a.title||'').localeCompare(String(b.title||''))}
 function apply(){if(!state.company)return;state.nextWeekly=nextWeeklyByShow();var term=clean($('search').value.trim()),year=$('year').value;state.filtered=state.rows.filter(function(r){return scheduledVisible(r,!!term)&&(!year||String(r.year)===year)&&(!$('showFilter').value||showBucket(r)===$('showFilter').value)&&(!$('ppvOnly').checked||isPpv(r))&&(!term||r._needle.indexOf(term)>=0)}).slice();state.queue=state.filtered.slice().sort(chronology);state.filtered.sort(function(a,b){return $('order').value==='old'?chronology(a,b):-chronology(a,b)});state.limit=80;updateYearRail();txt($('timelineLabel'),year?'Ano '+year+' · '+names[state.company]:'Linha do tempo completa · '+names[state.company]);render();renderUpcoming()}
 function sourceName(s){if(s.type==='archive')return 'Internet Archive'+(s.height?' · '+s.height+'p':'');if(s.type==='youtube')return 'YouTube';if(s.type==='okru')return 'OK.ru';if(s.type==='bilibili')return 'Bilibili';if(s.type==='dailymotion')return 'Dailymotion';return s.label||s.type||'Fonte'}
@@ -1256,7 +1296,7 @@ function editSourceKey(s){if(!s)return '';var t=String(s.type||s.platform||''),i
 function editSourceUrl(s){if(!s)return '';if(s.type==='archive')return String(s.url||((s.urls||[])[0])||'');if(s.type==='okru'&&s.videoId)return 'https://ok.ru/video/'+s.videoId;if(s.type==='bilibili'&&s.videoId)return 'https://www.bilibili.tv/en/video/'+s.videoId;if(s.type==='youtube'&&s.videoId)return 'https://www.youtube.com/watch?v='+s.videoId;if(s.type==='dailymotion'&&s.videoId)return 'https://www.dailymotion.com/video/'+s.videoId;return String(s.url||'')}
 function editKeyForUrl(url){try{var u=new URL(url),h=u.hostname.toLowerCase(),m;if(u.protocol!=='https:')return '';if(h==='ok.ru'&&(m=u.pathname.match(/^\/video(?:embed)?\/([0-9]{8,20})\/?$/)))return 'okru|'+m[1];if(h==='www.bilibili.tv'&&(m=u.pathname.match(/^\/en\/video\/([0-9]{8,20})\/?$/)))return 'bilibili|'+m[1];if(['youtube.com','www.youtube.com'].indexOf(h)>=0&&u.pathname==='/watch'&&/^[A-Za-z0-9_-]{11}$/.test(u.searchParams.get('v')||''))return 'youtube|'+u.searchParams.get('v');if(h==='youtu.be'&&(m=u.pathname.match(/^\/([A-Za-z0-9_-]{11})\/?$/)))return 'youtube|'+m[1];if(h==='www.dailymotion.com'&&(m=u.pathname.match(/^\/video\/([a-zA-Z0-9]+)\/?$/)))return 'dailymotion|'+m[1];if(h==='archive.org'||h==='www.archive.org'){if(u.username||u.password||u.hash)return '';var parts=u.pathname.match(/^\/(details|embed|download)\/([a-zA-Z0-9_.-]{3,120})(?:\/(.*))?\/?$/);if(!parts||parts[2].indexOf('..')>=0)return '';if(parts[1]==='download'){if(u.search||!parts[3]||!/^.+\.(mp4|m4v|webm|ogv)$/i.test(parts[3])||parts[3].split('/').some(function(t){return !t||t==='.'||t==='..'}))return ''}else{if(parts[3]||(!/^\/?$/.test(u.pathname.slice(('/'+parts[1]+'/'+parts[2]).length)))||Array.from(u.searchParams.keys()).some(function(x){return x!=='start'})||((u.searchParams.get('start')||'')&&!/^\d{1,7}(?:\.\d{1,3})?$/.test(u.searchParams.get('start'))))return ''}return 'archive|'+url}return ''}catch(e){return ''}}
 function applyEventEditRow(r){if(!r||!r.id)return r;if(!r._editBase){r._editBase={sources:Array.isArray(r.sources)?r.sources.map(function(x){return Object.assign({},x)}):[],thumbnail:r.thumbnail||'',poster:r.poster||'',scheduled:!!r.scheduled}}var orig=r._editBase,edit=(state.eventEdits||{})[r.id];r.sources=orig.sources.map(function(x){return Object.assign({},x)});r.thumbnail=orig.thumbnail;r.poster=orig.poster;r.scheduled=orig.scheduled;if(!edit)return r;var removed=new Set(edit.removed||[]);r.sources=r.sources.filter(function(src){return !removed.has(editSourceKey(src))});var seen=new Set(r.sources.map(editSourceKey));(edit.added||[]).forEach(function(src){var k=editSourceKey(src);if(k&&!seen.has(k)){r.sources.push(Object.assign({},src));seen.add(k)}});var th=edit.sourceThumbnails||{};r.sources.forEach(function(src){var img=th[editSourceKey(src)];if(img&&https(img)){src.thumbnail=img;src.thumbnailUrl=img}});if(edit.thumbnailUrl&&https(edit.thumbnailUrl)){r.thumbnail=edit.thumbnailUrl;r.poster=''}r.scheduled=!r.sources.length;return r}
-function loadEventEdits(){return fetch('./config/event_edits.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():{events:{}}}).catch(function(){return {events:{}}}).then(function(staticData){state.eventEdits=staticData&&staticData.events&&typeof staticData.events==='object'?staticData.events:{};return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(conf){var base=String(conf&&conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\s/?#]+$/.test(base))return;state.eventEditApi=base;return fetch(base+'/api/jojo-monitor/event-edits',{cache:'no-store',credentials:'omit'}).then(function(r){return r.ok?r.json():null}).then(function(data){if(data&&data.events&&typeof data.events==='object')state.eventEdits=data.events})}).catch(function(){})})}
+function loadEventEdits(){return fetch('./config/event_edits.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():{events:{}}}).catch(function(){return {events:{}}}).then(function(staticData){state.eventEdits=staticData&&staticData.events&&typeof staticData.events==='object'?staticData.events:{};state.manualPpvs=staticData&&staticData.manualEvents&&typeof staticData.manualEvents==='object'?staticData.manualEvents:{};return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(conf){var base=String(conf&&conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\s/?#]+$/.test(base))return;state.eventEditApi=base;return fetch(base+'/api/jojo-monitor/event-edits',{cache:'no-store',credentials:'omit'}).then(function(r){return r.ok?r.json():null}).then(function(data){if(data&&data.events&&typeof data.events==='object')state.eventEdits=data.events;if(data&&data.manualEvents&&typeof data.manualEvents==='object')state.manualPpvs=data.manualEvents})}).catch(function(){})})}
 var eventEditor=null;
 function editShowSourceRow(row){var wrap=el('div','eventEditRow'),head=el('div','eventEditRowHead'),name=el('b','',row.label||'Fonte de vídeo'),rem=el('button','danger','🗑 Remover');rem.type='button';rem.setAttribute('aria-label','Remover '+(row.label||'fonte'));head.append(name,rem);var l1=el('label','');l1.append(document.createTextNode('URL do vídeo'));var link=el('input','');link.type='url';link.placeholder='https://archive.org/download/ITEM/arquivo.mp4 ou https://ok.ru/video/123456789';link.maxLength=650;link.value=row.url||'';link.required=true;l1.append(link);var l2=el('label','');l2.append(document.createTextNode('Miniatura desta fonte (opcional)'));var thumb=el('input','');thumb.type='url';thumb.placeholder='https://.../imagem.jpg';thumb.maxLength=700;thumb.value=row.thumb||'';l2.append(thumb);wrap.append(head,l1,l2);$('eventEditSources').append(wrap);link.addEventListener('input',function(){var k=editKeyForUrl(link.value.trim());if(k)name.textContent=({'archive':'Internet Archive','okru':'OK.ru','youtube':'YouTube','bilibili':'Bilibili','dailymotion':'Dailymotion'}[k.split('|')[0]]||'Fonte')+' · editar/remover'});rem.addEventListener('click',function(){wrap.remove();eventEditor.rows=eventEditor.rows.filter(function(x){return x!==row})});row.link=link;row.thumbField=thumb;return wrap}
 function editRefreshPreview(){var e=$('eventEditPreview'),image=https($('eventEditPoster').value);jojoSetPoster(e,image||eventImage(eventEditor.event),eventEditor.event.title,eventEditor.event._company)}
@@ -1280,7 +1320,7 @@ function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','Arrow
 function initPpvAudit(){
  var dlg=$('ppvAuditDialog'),stats=$('ppvAuditStats'),rowsEl=$('ppvAuditItems'),notice=$('ppvAuditNotice');
  var coverageBody=$('ppvAuditCoverageBody'),coverageShowAll=false,coverageFilter='all',coverageDetails=null;
- var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='',ppvResolved={},ppvTab='pending';
+ var company=$('ppvAuditCompany'),year=$('ppvAuditYear'),report=null,base='',ppvResolved={},ppvTab='pending',ppvSearch='',ppvStatus='all',ppvPages={pending:1,done:1},missingTarget=null;
  codes.forEach(function(c){company.add(new Option(names[c]||c.toUpperCase(),c))});
  function refKey(it){
   var label=String(it.title||'').normalize('NFKC').trim().toLowerCase(),h=2166136261;
@@ -1303,10 +1343,29 @@ function initPpvAudit(){
   .then(function(){return refreshResolved()}).catch(function(e){alert('Nao foi possivel salvar: '+e.message)})
   .finally(function(){button.disabled=false});
  }
+ function manualForReference(it){
+  var label=clean(it.title||'');
+  return Object.keys(state.manualPpvs||{}).map(function(k){return state.manualPpvs[k]}).find(function(r){return r&&r.company===it.company&&r.date===it.date&&clean(r.title)===label})||null;
+ }
+ function auditEffective(it){
+  var found=it.state==='missing'?manualForReference(it):null;
+  if(!found)return it;
+  return Object.assign({},it,{state:(found.sources||[]).length?'with_sources':'without_video',registeredManually:true});
+ }
+ function openMissingCreate(it){
+  missingTarget=it;
+  txt($('ppvMissingCreateTitle'),it.title+' · '+cardDateBR(it.date)+' · '+(names[it.company]||it.company));
+  $('ppvMissingCreateUrls').value='';$('ppvMissingCreateThumb').value='';$('ppvMissingCreateKey').value='';$('ppvMissingCreateRights').checked=false;
+  txt($('ppvMissingCreateFeedback'),'');$('ppvMissingCreateDialog').showModal();$('ppvMissingCreateUrls').focus();
+ }
  function renderCoverage(){
   if(!coverageBody||!report)return;
   coverageBody.replaceChildren();
   var all=report.coverageByCompanyYear;
+  if(Array.isArray(all))all=all.map(function(x){
+   var created=(report.references||[]).filter(function(it){return it.company===x.company&&String(it.year)===String(x.year)&&it.state==='missing'&&manualForReference(it)}).length;
+   return created?Object.assign({},x,{missing:Math.max(0,Number(x.missing||0)-created),matched:Number(x.matched||0)+created,cataloguePpvs:Number(x.cataloguePpvs||0)+created}):x
+  });
   if(!Array.isArray(all)){
    coverageBody.append(el('p','ppvCoverageIntro','⚠️ Este relatório ainda não possui cobertura por brand/ano. Execute o workflow “Atualizar agenda oficial” e publique o novo ppv_audit.json.'));
    return
@@ -1320,7 +1379,7 @@ function initPpvAudit(){
    var filtered=filteredCoverageRows();var lines=['Auditoria PPVs — relatório parcial','Brand\tAno\tNa base\tReferências\tComparados\tFaltando\tSem vídeo\tEstado'];
    filtered.forEach(function(x){lines.push([String(x.company).toUpperCase(),x.year,x.cataloguePpvs||0,x.references||0,x.matched||0,x.missing||0,x.withoutVideo||0,x.coverage||'not_audited'].join('\t'))});
    lines.push('','Eventos ausentes identificados nas referências (revisão necessária):');
-   (report.references||[]).filter(function(x){return x.state==='missing'&&filtered.some(function(r){return r.company===x.company&&String(r.year)===String(x.year)})}).forEach(function(x){lines.push([String(x.company).toUpperCase(),x.date,x.title,x.official_url||''].join('\t'))});
+   (report.references||[]).map(auditEffective).filter(function(x){return x.state==='missing'&&filtered.some(function(r){return r.company===x.company&&String(r.year)===String(x.year)})}).forEach(function(x){lines.push([String(x.company).toUpperCase(),x.date,x.title,x.official_url||''].join('\t'))});
    var content=lines.join('\n');var result=window.GenUI&&GenUI.copy?Promise.resolve(GenUI.copy(content)):navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(content):Promise.reject(Error('Copie manualmente usando um navegador HTTPS'));
    result.then(function(){copy.textContent='✅ Copiado';setTimeout(function(){copy.textContent='📋 Copiar relatório'},1800)}).catch(function(){var box=el('textarea','');box.value=content;box.style.cssText='width:100%;height:180px';controls.after(box);box.select();try{document.execCommand('copy');box.remove();copy.textContent='✅ Copiado'}catch(e){copy.textContent='Selecione e copie o texto abaixo'}})
   });controls.append(filter,copy);coverageBody.append(controls);
@@ -1347,7 +1406,7 @@ function initPpvAudit(){
    var vals=[names[x.company]||String(x.company).toUpperCase(),x.year,x.cataloguePpvs||0,x.references||0,x.matched||0,x.missing||0,x.withoutVideo||0,status];
    vals.forEach(function(v,i){var cell=el('td',i===7?(x.coverage==='partial'?'ppvCoverageGood':'ppvCoverageWarn'):'',String(v));
     if(i===5&&Number(x.missing)>0){var detail=el('button','ppvCoverageMissing',String(v)+' ▾');detail.type='button';detail.title='Mostrar quais PPVs estão faltando';detail.setAttribute('aria-label','Mostrar PPVs faltantes de '+String(x.company).toUpperCase()+' '+x.year);detail.addEventListener('click',function(){coverageDetails=coverageDetails===x.company+'|'+x.year?null:x.company+'|'+x.year;renderCoverage()});cell.replaceChildren(detail)}tr.append(cell)});tbody.append(tr);
-   if(coverageDetails===x.company+'|'+x.year){var drow=el('tr',''),dcell=el('td','');dcell.colSpan=8;var matches=(report.references||[]).filter(function(it){return it.company===x.company&&String(it.year)===String(x.year)&&it.state==='missing'});var heading=el('strong','','🚨 '+String(x.company).toUpperCase()+' '+x.year+' — '+matches.length+' referências ausentes identificadas');dcell.append(heading);
+   if(coverageDetails===x.company+'|'+x.year){var drow=el('tr',''),dcell=el('td','');dcell.colSpan=8;var matches=(report.references||[]).map(auditEffective).filter(function(it){return it.company===x.company&&String(it.year)===String(x.year)&&it.state==='missing'});var heading=el('strong','','🚨 '+String(x.company).toUpperCase()+' '+x.year+' — '+matches.length+' referências ausentes identificadas');dcell.append(heading);
     if(!matches.length)dcell.append(el('p','','O resumo aponta '+x.missing+' faltas, mas os nomes não estão presentes no relatório publicado. Rode novamente a auditoria para obter os detalhes.'));
     matches.forEach(function(it){var line=el('div','ppvCoverageDetail',cardDateBR(it.date)+' · '+it.title+' ');if(it.official_url){var a=el('a','','↗ Referência');a.href=it.official_url;a.target='_blank';a.rel='noopener noreferrer';line.append(a)}dcell.append(line)});
     dcell.append(el('p','ppvCoverageFoot','Comparação automática: confirme nomes e datas antes de cadastrar como evento ausente.'));drow.append(dcell);tbody.append(drow)
@@ -1359,42 +1418,73 @@ function initPpvAudit(){
  }
  function render(){
   if(!report)return;
-  var selected=company.value,yy=year.value,items=(report.references||[]).filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)});
+  var selected=company.value,yy=year.value,items=(report.references||[]).filter(function(x){return (!selected||x.company===selected)&&(!yy||String(x.year)===yy)}).map(auditEffective);
   var missing=items.filter(function(x){return x.state==='missing'}),empty=items.filter(function(x){return x.state==='without_video'}),ready=items.filter(function(x){return x.state==='with_sources'}),future=items.filter(function(x){return x.state==='upcoming'});
   stats.replaceChildren();renderCoverage();
   function metric(n,label){var span=el('span','');span.append(el('b','',String(n)),document.createTextNode(label));stats.append(span)}
   var yearRows=report.years||{},totalCatalogue=0;Object.keys(yearRows).forEach(function(k){if(!yy||k===yy){if(!selected)totalCatalogue+=Number(yearRows[k].cataloguePpvs||0);else totalCatalogue+=Number((yearRows[k].companies||{})[selected]||0)}});
+  totalCatalogue+=(report.references||[]).filter(function(it){return it.state==='missing'&&(!selected||it.company===selected)&&(!yy||String(it.year)===yy)&&manualForReference(it)}).length;
   metric(totalCatalogue,'PPVs registrados na base');metric(items.length,'Referências localizadas (parcial)');metric(missing.length,'Ausentes identificados nas referências');metric(empty.length,'Sem vídeo cadastrado');metric(ready.length,'Com fontes (reprodução não garantida)');metric(future.length,'Futuros (não ausentes)');
   var last=report.checkedAt?new Date(report.checkedAt).toLocaleString('pt-BR'):'sem data';
   var wikiState=report.wikipediaSources||{},wikiKeys=Object.keys(wikiState),wikiOk=wikiKeys.filter(function(k){return wikiState[k].status==='updated'||wikiState[k].status==='cached'}),wikiFailed=wikiKeys.filter(function(k){return wikiState[k].status==='unavailable'});txt(notice,'Auditoria gerada em '+last+'. '+(report.notice||'Cobertura parcial das referências oficiais.')+' Wikipédias consultadas: '+wikiOk.length+'/'+wikiKeys.length+(wikiFailed.length?' · sem dados: '+wikiFailed.join(', ').toUpperCase():'')+(wikiKeys.length===0?' · Wikipédia ainda não importada; rode a auditoria oficial uma vez':'')+'. Vídeos encontrados aguardam aprovação manual.');
   rowsEl.replaceChildren();
-  var pending=items.filter(function(it){return !ppvResolved[refKey(it)]}),doneList=items.filter(function(it){return !!ppvResolved[refKey(it)]});
+  items.sort(function(a,b){var rank={missing:0,without_video:1,with_sources:2,upcoming:3};return rank[a.state]-rank[b.state]||b.date.localeCompare(a.date)});
+  var active=items.filter(function(it){return (ppvStatus==='all'||it.state===ppvStatus)&&(!ppvSearch||clean([it.title,it.date,it.company].join(' ')).indexOf(clean(ppvSearch))>=0)});
+  var pending=active.filter(function(it){return !ppvResolved[refKey(it)]}),doneList=active.filter(function(it){return !!ppvResolved[refKey(it)]});
   var tabBar=el('div','jojoStatusTabs'),pendingTab=el('button','','⚠️ Pendentes ('+pending.length+')'),doneTab=el('button','jojoDoneTab','✅ Concluídos ('+doneList.length+')');
   tabBar.setAttribute('role','tablist');pendingTab.type=doneTab.type='button';pendingTab.setAttribute('role','tab');doneTab.setAttribute('role','tab');
   var pendingPane=el('div','jojoStatusPane'),donePane=el('div','jojoStatusPane');
-  function selectPpvTab(next){ppvTab=next;pendingTab.setAttribute('aria-selected',String(next==='pending'));doneTab.setAttribute('aria-selected',String(next==='done'));pendingPane.hidden=next!=='pending';donePane.hidden=next!=='done'}
+  function selectPpvTab(next){ppvTab=next;render()}
   pendingTab.addEventListener('click',function(){selectPpvTab('pending')});doneTab.addEventListener('click',function(){selectPpvTab('done')});
-  tabBar.append(pendingTab,doneTab);rowsEl.append(tabBar,pendingPane,donePane);selectPpvTab(ppvTab);
-  if(!pending.length)pendingPane.append(el('p','jojoEmpty','Nenhum PPV pendente nesta seleção.'));
-  if(!doneList.length)donePane.append(el('p','jojoEmpty','Nenhum PPV concluído nesta seleção.'));
-  items.sort(function(a,b){var rank={missing:0,without_video:1,with_sources:2,upcoming:3};return rank[a.state]-rank[b.state]||b.date.localeCompare(a.date)});
-  if(!items.length){pendingPane.replaceChildren(el('p','ppvAuditNote','Nenhuma referência histórica carregada para esta seleção. A Wikipédia será consultada pela ação diária; enquanto não houver referências, não é possível determinar quais PPVs faltam.'));return}
-  items.forEach(function(it){var row=el('div','ppvAuditRow '+(it.state==='missing'?'missing':it.state==='without_video'?'noVideo':''));var group=el('div','');
-   var labels={missing:'🚨 AUSENTE do catálogo',without_video:'🟡 Cadastrado · sem vídeo',with_sources:'✅ Cadastrado · fonte ainda sem reprodução confirmada',upcoming:'📅 Futuro · aguardar evento'};
-   var done=!!ppvResolved[refKey(it)];if(done)row.classList.add('manuallyResolved');
-   group.append(el('strong','',it.title),el('small','',cardDateBR(it.date)+' · '+(names[it.company]||it.company.toUpperCase())+' · '+labels[it.state]));
-   if(done)group.append(el('small','', '✅ Marcado resolvido manualmente · reprodução não verificada'));row.append(group);
-   var buttons=el('div','');
-   if(it.official_url){var a=el('a','',it.referenceType==='wikipedia'?'↗ Referência: Wikipédia':'↗ Site oficial');a.href=it.official_url;a.target='_blank';a.rel='noopener noreferrer';a.style.cssText='display:inline-block;color:#f4ddff;margin:0 8px 8px 0;font-size:12px';buttons.append(a)}
-   var search=el('button','', '🔎 Procurar vídeo');search.type='button';search.addEventListener('click',function(){dlg.close();$('reviewSearch').value=it.title+' '+it.date;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}))});buttons.append(search);
-   if(it.state!=='upcoming'){var green=el('button',done?'ppvAuditReopen':'ppvAuditResolve',done?'↩ Reabrir':'✅ Arrumado');green.type='button';green.title=done?'Reabrir a pendencia':'Marcacao manual, sem confirmar reproducao';green.addEventListener('click',function(){changeResolved(it,done,green)});buttons.append(green)}
-   row.append(buttons);(done?donePane:pendingPane).append(row)
-  })
+  tabBar.append(pendingTab,doneTab);rowsEl.append(tabBar,pendingPane,donePane);
+  pendingTab.setAttribute('aria-selected',String(ppvTab==='pending'));doneTab.setAttribute('aria-selected',String(ppvTab==='done'));
+  pendingPane.hidden=ppvTab!=='pending';donePane.hidden=ppvTab!=='done';
+  function renderPage(pane,collection,tab){
+   if(!collection.length){pane.append(el('p','jojoEmpty',tab==='pending'?'Nenhum PPV pendente neste filtro.':'Nenhum PPV concluído neste filtro.'));return}
+   var totalPages=Math.ceil(collection.length/20);ppvPages[tab]=Math.max(1,Math.min(totalPages,ppvPages[tab]||1));var current=ppvPages[tab];
+   collection.slice((current-1)*20,current*20).forEach(function(it){
+    var row=el('div','ppvAuditRow '+(it.state==='missing'?'missing':it.state==='without_video'?'noVideo':''));var group=el('div','');
+    var labels={missing:'🚨 AUSENTE do catálogo',without_video:'🟡 Cadastrado · sem vídeo',with_sources:'✅ Cadastrado · fonte ainda sem reprodução confirmada',upcoming:'📅 Futuro · aguardar evento'};
+    var done=!!ppvResolved[refKey(it)];if(done)row.classList.add('manuallyResolved');
+    group.append(el('strong','',it.title),el('small','',cardDateBR(it.date)+' · '+(names[it.company]||it.company.toUpperCase())+' · '+labels[it.state]));
+    if(it.registeredManually)group.append(el('small','','✏️ Cadastrado manualmente na Oracle'));
+    if(done)group.append(el('small','','✅ Marcado resolvido manualmente · reprodução não verificada'));row.append(group);
+    var buttons=el('div','');
+    if(it.official_url){var a=el('a','',it.referenceType==='wikipedia'?'↗ Referência: Wikipédia':'↗ Site oficial');a.href=it.official_url;a.target='_blank';a.rel='noopener noreferrer';a.style.cssText='display:inline-block;color:#f4ddff;margin:0 8px 8px 0;font-size:12px';buttons.append(a)}
+    if(it.state==='missing'){var pencil=el('button','ppvAuditPencil','✏️ Adicionar show');pencil.type='button';pencil.title='Cadastrar o show com nome, data e empresa pré-preenchidos';pencil.addEventListener('click',function(){openMissingCreate(it)});buttons.append(pencil)}
+    else if(it.registeredManually){var openCard=el('button','ppvAuditPencil','✏️ Abrir no catálogo');openCard.type='button';openCard.addEventListener('click',function(){dlg.close();pick(it.company).then(function(){var item=state.rows.find(function(r){return r.date===it.date&&clean(r.title)===clean(it.title)});if(item)open(item)})});buttons.append(openCard)}
+    var search=el('button','','🔎 Procurar vídeo');search.type='button';search.addEventListener('click',function(){dlg.close();$('reviewSearch').value=it.title+' '+it.date;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}))});buttons.append(search);
+    if(it.state!=='upcoming'){var green=el('button',done?'ppvAuditReopen':'ppvAuditResolve',done?'↩ Reabrir':'✅ Arrumado');green.type='button';green.title=done?'Reabrir a pendencia':'Marcacao manual, sem confirmar reproducao';green.addEventListener('click',function(){changeResolved(it,done,green)});buttons.append(green)}
+    row.append(buttons);pane.append(row)
+   });
+   var nav=el('div','ppvAuditPages'),prev=el('button','','← Anterior'),next=el('button','','Próxima →');prev.type=next.type='button';prev.disabled=current===1;next.disabled=current===totalPages;
+   prev.addEventListener('click',function(){ppvPages[tab]--;render()});next.addEventListener('click',function(){ppvPages[tab]++;render()});
+   nav.append(prev,el('small','','Página '+current+' de '+totalPages+' · '+collection.length+' itens · 20 por página'),next);pane.append(nav)
+  }
+  renderPage(pendingPane,pending,'pending');renderPage(donePane,doneList,'done');
  }
  function load(){txt(notice,'Consultando última auditoria publicada…');return fetch('./ppv_audit.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Auditoria ainda não publicada no site');return r.json()}).then(function(data){report=data;var old=year.value,all=Object.keys(data.years||{}).sort().reverse();year.replaceChildren(new Option('Todos os anos',''));all.forEach(function(y){year.add(new Option(y,y))});if(all.indexOf(old)>=0)year.value=old;render()}).catch(function(e){report=null;stats.replaceChildren();rowsEl.replaceChildren();txt(notice,'⚠️ '+e.message+'. Publique ppv_audit.json junto com o patch ou rode a ação diária no GitHub.')})}
  $('ppvAuditOpen').addEventListener('click',function(){ppvTab='pending';dlg.showModal();load();refreshResolved()});
  $('ppvAuditClose').addEventListener('click',function(){dlg.close()});
- $('ppvAuditRefresh').addEventListener('click',load);company.addEventListener('change',render);year.addEventListener('change',render);
+ $('ppvAuditRefresh').addEventListener('click',load);
+ company.addEventListener('change',function(){ppvPages={pending:1,done:1};render()});year.addEventListener('change',function(){ppvPages={pending:1,done:1};render()});
+ $('ppvAuditSearch').addEventListener('input',function(){ppvSearch=this.value.trim();ppvPages={pending:1,done:1};render()});
+ $('ppvAuditStatus').addEventListener('change',function(){ppvStatus=this.value;ppvPages={pending:1,done:1};render()});
+ var createDlg=$('ppvMissingCreateDialog');
+ $('ppvMissingCreateCancel').addEventListener('click',function(){createDlg.close()});
+ createDlg.addEventListener('close',function(){missingTarget=null;$('ppvMissingCreateKey').value=''});
+ $('ppvMissingCreateForm').addEventListener('submit',function(e){e.preventDefault();var it=missingTarget;if(!it)return;
+  var urls=$('ppvMissingCreateUrls').value.split(/\r?\n/).map(function(x){return x.trim()}).filter(Boolean),thumb=$('ppvMissingCreateThumb').value.trim();
+  if(urls.length<1||urls.length>6){txt($('ppvMissingCreateFeedback'),'Informe de 1 a 6 URLs (uma por linha).');return}
+  if(urls.some(function(url){return !editKeyForUrl(url)})){txt($('ppvMissingCreateFeedback'),'Uma das URLs não é de um provedor permitido. Use OK.ru, Archive, YouTube, Bilibili ou Dailymotion.');return}
+  if(thumb&&!https(thumb)){txt($('ppvMissingCreateFeedback'),'A miniatura precisa usar HTTPS.');return}
+  var key=$('ppvMissingCreateKey').value,save=$('ppvMissingCreateSave');save.disabled=true;txt($('ppvMissingCreateFeedback'),'Salvando show na Oracle…');
+  getBase().then(function(url){return fetch(url+'/api/jojo-monitor/ppvs/create',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:key,company:it.company,date:it.date,title:it.title,sources:urls,thumbnailUrl:thumb,rightsConfirmed:$('ppvMissingCreateRights').checked})})})
+   .then(function(resp){return resp.json().then(function(data){if(!resp.ok)throw Error(data.message||'Erro ao cadastrar');return data})})
+   .then(function(data){if(!data.event)throw Error('API não confirmou o cadastro');state.manualPpvs[data.event.id]=data.event;createDlg.close();render();txt(notice,'✅ '+data.event.title+' foi salvo na Oracle e já pode ser aberto na cronologia. O vídeo ainda precisa ser conferido no player.')})
+   .catch(function(err){txt($('ppvMissingCreateFeedback'),'⚠️ '+err.message)})
+   .finally(function(){save.disabled=false})
+ });
  var sub=$('ppvAuditRunDialog'),key=$('ppvAuditKey'),feedback=$('ppvAuditRunFeedback'),send=$('ppvAuditRunSend');
  $('ppvAuditRun').addEventListener('click',function(){key.value='';txt(feedback,'');sub.showModal();key.focus()});
  $('ppvAuditRunCancel').addEventListener('click',function(){sub.close()});
