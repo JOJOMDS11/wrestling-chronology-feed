@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T22:35:01.108375Z",
+  "generatedAt": "2026-11-16T09:40:55.076145Z",
   "events": [
     {
       "id": "official:aew:2026-08-22:collision",
@@ -76,8 +76,17 @@
       "title": "Dynamite",
       "show": "Dynamite",
       "official_url": "https://www.allelitewrestling.com/post/aew-rebel-heart-dynamite-results-september-9-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4800882533210624",
+          "url": "https://www.bilibili.tv/en/video/4800882533210624",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:09:50Z"
     },
     {
       "id": "official:aew:2026-09-12:collision",
@@ -87,8 +96,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-collision-results-september-12-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4800916851792896",
+          "url": "https://www.bilibili.tv/en/video/4800916851792896",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:11:09Z"
     },
     {
       "id": "official:aew:2026-09-16:dynamite",
@@ -98,8 +116,17 @@
       "title": "Dynamite",
       "show": "Dynamite",
       "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-results-september-16-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4800963395984384",
+          "url": "https://www.bilibili.tv/en/video/4800963395984384",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:11:24Z"
     },
     {
       "id": "official:aew:2026-09-19:collision",
@@ -109,8 +136,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-collision-results-september-19-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4800996423769088",
+          "url": "https://www.bilibili.tv/en/video/4800996423769088",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:15:13Z"
     },
     {
       "id": "official:aew:2026-09-23:collision",
@@ -120,8 +156,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-collision-results-september-23-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801043134028800",
+          "url": "https://www.bilibili.tv/en/video/4801043134028800",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:13:49Z"
     },
     {
       "id": "official:aew:2026-09-23:dynamite",
@@ -142,8 +187,17 @@
       "title": "all out",
       "show": "PPV",
       "official_url": "https://www.allelitewrestling.com/post/aew-all-out-results-september-26-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801077654460928",
+          "url": "https://www.bilibili.tv/en/video/4801077654460928",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:14:00Z"
     },
     {
       "id": "official:aew:2026-10-03:collision",
@@ -153,8 +207,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-collision-results-october-3-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801157977872896",
+          "url": "https://www.bilibili.tv/en/video/4801157977872896",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:15:26Z"
     },
     {
       "id": "official:aew:2026-10-14:collision",
@@ -164,8 +227,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-collision-results-october-14-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801279938141184",
+          "url": "https://www.bilibili.tv/en/video/4801279938141184",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:16:08Z"
     },
     {
       "id": "official:aew:2026-10-14:dynamite",
@@ -186,8 +258,17 @@
       "title": "wrestledream",
       "show": "PPV",
       "official_url": "https://www.allelitewrestling.com/post/aew-wrestledream-results-october-17-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801314323176448",
+          "url": "https://www.bilibili.tv/en/video/4801314323176448",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:19:08Z"
     },
     {
       "id": "official:aew:2026-10-21:dynamite",
@@ -197,8 +278,17 @@
       "title": "Dynamite",
       "show": "Dynamite",
       "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-results-october-21-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801359188073472",
+          "url": "https://www.bilibili.tv/en/video/4801359188073472",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:18:53Z"
     },
     {
       "id": "official:aew:2026-10-24:collision",
@@ -208,8 +298,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-collision-results-october-24-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801397508938240",
+          "url": "https://www.bilibili.tv/en/video/4801397508938240",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:18:38Z"
     },
     {
       "id": "official:aew:2026-10-28:dynamite",
@@ -219,8 +318,17 @@
       "title": "Dynamite",
       "show": "Dynamite",
       "official_url": "https://www.allelitewrestling.com/post/aew-fright-night-dynamite-results-october-28-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801445950265856",
+          "url": "https://www.bilibili.tv/en/video/4801445950265856",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:18:27Z"
     },
     {
       "id": "official:aew:2026-10-31:collision",
@@ -230,8 +338,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-fright-night-collision-results-october-31-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801474752682496",
+          "url": "https://www.bilibili.tv/en/video/4801474752682496",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:18:01Z"
     },
     {
       "id": "official:aew:2026-11-04:dynamite",
@@ -262,8 +379,17 @@
       "title": "Collision",
       "show": "Collision",
       "official_url": "https://www.allelitewrestling.com/post/aew-collision-rock-n-wrestling-rager-results-november-7-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801555413473792",
+          "url": "https://www.bilibili.tv/en/video/4801555413473792",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:17:44Z"
     },
     {
       "id": "official:wwe:2026-11-07:crown-jewel-2026",
@@ -304,8 +430,17 @@
       "title": "Dynamite",
       "show": "Dynamite",
       "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-collision-results-november-11-2026",
-      "status": "awaiting_video",
-      "sources": []
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801597688650752",
+          "url": "https://www.bilibili.tv/en/video/4801597688650752",
+          "label": "Bilibili · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T09:17:30Z"
     },
     {
       "id": "official:aew:2026-11-14:full-gear",
@@ -322,10 +457,22 @@
           "videoId": "17022650223353",
           "url": "https://ok.ru/video/17022650223353",
           "label": "OK.ru · Revisão administrativa"
+        },
+        {
+          "type": "okru",
+          "videoId": "16428225137230",
+          "url": "https://ok.ru/video/16428225137230",
+          "label": "OK.ru · Revisão administrativa"
+        },
+        {
+          "type": "okru",
+          "videoId": "16690073045615",
+          "url": "https://ok.ru/video/16690073045615",
+          "label": "OK.ru · Revisão administrativa"
         }
       ],
       "provisional": false,
-      "approvedAt": "2026-11-15T21:43:46Z"
+      "approvedAt": "2026-11-16T09:13:04Z"
     },
     {
       "id": "official:wwe:2026-11-28:survivor-series-wargames-2026",
