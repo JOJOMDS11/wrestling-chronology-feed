@@ -36,11 +36,11 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             python3 .github/scripts/jojo_sync.py
-            if git diff --quiet -- updates.json; then
+            if git diff --quiet -- updates.json config/event_edits.json; then
               echo 'Nenhuma alteração nova para publicar.'
               exit 0
             fi
-            git add updates.json
+            git add updates.json config/event_edits.json
             git commit -m 'JOJO: revisar videos aprovados e atualizar RAW provisoria'
             if git push origin HEAD:main; then
               echo 'Alterações publicadas com sucesso.'
