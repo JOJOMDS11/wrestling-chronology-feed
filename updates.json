@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T16:48:25.879477Z",
+  "generatedAt": "2026-11-16T16:59:10Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -84,6 +84,18 @@
       "referenceOnly": true
     },
     {
+      "id": "auto:wwe:2026-06-15:raw",
+      "company": "wwe",
+      "date": "2026-06-15",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
       "id": "reference:wwe:2026-06-27:night-of-champions-2026",
       "company": "wwe",
       "date": "2026-06-27",
@@ -94,6 +106,18 @@
       "sources": [],
       "status": "awaiting_video",
       "referenceOnly": true
+    },
+    {
+      "id": "auto:wwe:2026-07-20:raw",
+      "company": "wwe",
+      "date": "2026-07-20",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "reference:wwe:2026-08-01:summerslam-2026---noite-1",
@@ -120,6 +144,54 @@
       "referenceOnly": true
     },
     {
+      "id": "auto:wwe:2026-08-07:smackdown",
+      "company": "wwe",
+      "date": "2026-08-07",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
+      "id": "auto:wwe:2026-08-10:raw",
+      "company": "wwe",
+      "date": "2026-08-10",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
+      "id": "auto:wwe:2026-08-14:smackdown",
+      "company": "wwe",
+      "date": "2026-08-14",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
+      "id": "auto:wwe:2026-08-21:smackdown",
+      "company": "wwe",
+      "date": "2026-08-21",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
       "id": "official:aew:2026-08-22:collision",
       "company": "aew",
       "date": "2026-08-22",
@@ -140,6 +212,18 @@
       "official_url": "https://www.allelitewrestling.com/post/aew-dynamite-results-august-26-2026",
       "status": "awaiting_video",
       "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-08-28:smackdown",
+      "company": "wwe",
+      "date": "2026-08-28",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "official:aew:2026-08-29:collision",
@@ -175,6 +259,18 @@
       "sources": []
     },
     {
+      "id": "auto:wwe:2026-09-04:smackdown",
+      "company": "wwe",
+      "date": "2026-09-04",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
       "id": "official:aew:2026-09-05:collision",
       "company": "aew",
       "date": "2026-09-05",
@@ -205,6 +301,18 @@
       ],
       "approvedAt": "2026-11-16T09:09:50Z",
       "provisional": false
+    },
+    {
+      "id": "auto:wwe:2026-09-11:smackdown",
+      "company": "wwe",
+      "date": "2026-09-11",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "official:aew:2026-09-12:collision",
@@ -247,6 +355,18 @@
       ],
       "approvedAt": "2026-11-16T09:11:24Z",
       "provisional": false
+    },
+    {
+      "id": "auto:wwe:2026-09-18:smackdown",
+      "company": "wwe",
+      "date": "2026-09-18",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "official:aew:2026-09-19:collision",
@@ -302,6 +422,18 @@
       "sources": []
     },
     {
+      "id": "auto:wwe:2026-09-25:smackdown",
+      "company": "wwe",
+      "date": "2026-09-25",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
       "id": "official:aew:2026-09-26:all-out",
       "company": "aew",
       "date": "2026-09-26",
@@ -323,6 +455,30 @@
       "provisional": false
     },
     {
+      "id": "auto:tna:2026-10-02:xplosion",
+      "company": "tna",
+      "date": "2026-10-02",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
+      "id": "auto:wwe:2026-10-02:smackdown",
+      "company": "wwe",
+      "date": "2026-10-02",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
       "id": "official:aew:2026-10-03:collision",
       "company": "aew",
       "date": "2026-10-03",
@@ -342,6 +498,18 @@
       ],
       "approvedAt": "2026-11-16T09:15:26Z",
       "provisional": false
+    },
+    {
+      "id": "auto:wwe:2026-10-05:raw",
+      "company": "wwe",
+      "date": "2026-10-05",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "aew:2026-10-06:dynamite",
@@ -377,6 +545,30 @@
       "status": "awaiting_video",
       "sources": [],
       "description": "Evento e gravações em Paris em 06/10/2026; os programas Dynamite e Collision podem ter datas de exibição diferentes. Confirmar qual gravação corresponde ao vídeo."
+    },
+    {
+      "id": "auto:tna:2026-10-09:xplosion",
+      "company": "tna",
+      "date": "2026-10-09",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
+      "id": "auto:wwe:2026-10-09:smackdown",
+      "company": "wwe",
+      "date": "2026-10-09",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "aew:2026-10-10:collision",
@@ -459,6 +651,18 @@
       "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
+      "id": "auto:tna:2026-10-16:xplosion",
+      "company": "tna",
+      "date": "2026-10-16",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
       "id": "auto:wwe:2026-10-16:smackdown",
       "company": "wwe",
       "date": "2026-10-16",
@@ -531,6 +735,18 @@
       "year": 2026,
       "title": "TNA Impact",
       "show": "Impact",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
+      "id": "auto:tna:2026-10-23:xplosion",
+      "company": "tna",
+      "date": "2026-10-23",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
       "status": "awaiting_video",
       "provisional": true,
       "sources": [],
@@ -623,6 +839,18 @@
       "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo.",
       "approvedAt": "2026-11-16T16:48:04Z",
       "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-29-10-26"
+    },
+    {
+      "id": "auto:tna:2026-10-30:xplosion",
+      "company": "tna",
+      "date": "2026-10-30",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "official:aew:2026-10-31:collision",
@@ -761,6 +989,18 @@
       "provisional": false,
       "approvedAt": "2026-11-16T16:47:58Z",
       "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-05-11-26"
+    },
+    {
+      "id": "auto:tna:2026-11-06:xplosion",
+      "company": "tna",
+      "date": "2026-11-06",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
     },
     {
       "id": "auto:wwe:2026-11-06:smackdown",
@@ -951,6 +1191,18 @@
       "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-12-11-26"
     },
     {
+      "id": "auto:tna:2026-11-13:xplosion",
+      "company": "tna",
+      "date": "2026-11-13",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+    },
+    {
       "id": "official:wwe:2026-11-13:smackdown",
       "company": "wwe",
       "date": "2026-11-13",
@@ -1113,6 +1365,18 @@
       "year": 2026,
       "title": "TNA Impact",
       "show": "Impact",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+    },
+    {
+      "id": "auto:tna:2026-11-20:xplosion",
+      "company": "tna",
+      "date": "2026-11-20",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
       "status": "awaiting_video",
       "provisional": true,
       "sources": [],
@@ -1447,270 +1711,6 @@
       "year": 2026,
       "title": "AEW Dynamite",
       "show": "Dynamite",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-06-15:raw",
-      "company": "wwe",
-      "date": "2026-06-15",
-      "year": 2026,
-      "title": "Monday Night RAW",
-      "show": "RAW",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-07-20:raw",
-      "company": "wwe",
-      "date": "2026-07-20",
-      "year": 2026,
-      "title": "Monday Night RAW",
-      "show": "RAW",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-08-07:smackdown",
-      "company": "wwe",
-      "date": "2026-08-07",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-08-10:raw",
-      "company": "wwe",
-      "date": "2026-08-10",
-      "year": 2026,
-      "title": "Monday Night RAW",
-      "show": "RAW",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-08-14:smackdown",
-      "company": "wwe",
-      "date": "2026-08-14",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-08-21:smackdown",
-      "company": "wwe",
-      "date": "2026-08-21",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-08-28:smackdown",
-      "company": "wwe",
-      "date": "2026-08-28",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-09-04:smackdown",
-      "company": "wwe",
-      "date": "2026-09-04",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-09-11:smackdown",
-      "company": "wwe",
-      "date": "2026-09-11",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-09-18:smackdown",
-      "company": "wwe",
-      "date": "2026-09-18",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-09-25:smackdown",
-      "company": "wwe",
-      "date": "2026-09-25",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-10-02:smackdown",
-      "company": "wwe",
-      "date": "2026-10-02",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-10-02:xplosion",
-      "company": "tna",
-      "date": "2026-10-02",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-10-05:raw",
-      "company": "wwe",
-      "date": "2026-10-05",
-      "year": 2026,
-      "title": "Monday Night RAW",
-      "show": "RAW",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:wwe:2026-10-09:smackdown",
-      "company": "wwe",
-      "date": "2026-10-09",
-      "year": 2026,
-      "title": "Friday Night SmackDown",
-      "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-10-09:xplosion",
-      "company": "tna",
-      "date": "2026-10-09",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-10-16:xplosion",
-      "company": "tna",
-      "date": "2026-10-16",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-10-23:xplosion",
-      "company": "tna",
-      "date": "2026-10-23",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-10-30:xplosion",
-      "company": "tna",
-      "date": "2026-10-30",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-11-06:xplosion",
-      "company": "tna",
-      "date": "2026-11-06",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-11-13:xplosion",
-      "company": "tna",
-      "date": "2026-11-13",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
-    },
-    {
-      "id": "auto:tna:2026-11-20:xplosion",
-      "company": "tna",
-      "date": "2026-11-20",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
       "status": "awaiting_video",
       "provisional": true,
       "sources": [],
