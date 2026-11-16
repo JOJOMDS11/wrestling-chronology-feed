@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T09:40:55.076145Z",
+  "generatedAt": "2026-11-16T10:55:16Z",
   "events": [
     {
       "id": "official:aew:2026-08-22:collision",
@@ -85,8 +85,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:09:50Z"
+      "approvedAt": "2026-11-16T09:09:50Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-09-12:collision",
@@ -105,8 +105,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:11:09Z"
+      "approvedAt": "2026-11-16T09:11:09Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-09-16:dynamite",
@@ -125,8 +125,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:11:24Z"
+      "approvedAt": "2026-11-16T09:11:24Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-09-19:collision",
@@ -145,8 +145,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:15:13Z"
+      "approvedAt": "2026-11-16T09:15:13Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-09-23:collision",
@@ -165,8 +165,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:13:49Z"
+      "approvedAt": "2026-11-16T09:13:49Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-09-23:dynamite",
@@ -196,8 +196,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:14:00Z"
+      "approvedAt": "2026-11-16T09:14:00Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-10-03:collision",
@@ -216,8 +216,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:15:26Z"
+      "approvedAt": "2026-11-16T09:15:26Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-10-14:collision",
@@ -236,8 +236,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:16:08Z"
+      "approvedAt": "2026-11-16T09:16:08Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-10-14:dynamite",
@@ -267,8 +267,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:19:08Z"
+      "approvedAt": "2026-11-16T09:19:08Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-10-21:dynamite",
@@ -287,8 +287,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:18:53Z"
+      "approvedAt": "2026-11-16T09:18:53Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-10-24:collision",
@@ -307,8 +307,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:18:38Z"
+      "approvedAt": "2026-11-16T09:18:38Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-10-28:dynamite",
@@ -327,8 +327,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:18:27Z"
+      "approvedAt": "2026-11-16T09:18:27Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-10-31:collision",
@@ -347,8 +347,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:18:01Z"
+      "approvedAt": "2026-11-16T09:18:01Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-11-04:dynamite",
@@ -368,8 +368,8 @@
         }
       ],
       "description": "Edição especial Blood & Guts, em 4 de novembro de 2026. Evento confirmado oficialmente pela AEW; fonte de vídeo ainda não verificada.",
-      "provisional": false,
-      "approvedAt": "2026-11-15T22:34:01Z"
+      "approvedAt": "2026-11-15T22:34:01Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-11-07:collision",
@@ -388,8 +388,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:17:44Z"
+      "approvedAt": "2026-11-16T09:17:44Z",
+      "provisional": false
     },
     {
       "id": "official:wwe:2026-11-07:crown-jewel-2026",
@@ -408,8 +408,20 @@
           "label": "OK.ru · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-15T21:53:09Z"
+      "approvedAt": "2026-11-15T21:53:09Z",
+      "provisional": false
+    },
+    {
+      "id": "auto:wwe:2026-11-09:raw",
+      "company": "wwe",
+      "date": "2026-11-09",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Registro semanal provisório; confirmar a programação oficial.",
+      "sources": []
     },
     {
       "id": "official:aew:2026-11-11:collision",
@@ -439,8 +451,8 @@
           "label": "Bilibili · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:17:30Z"
+      "approvedAt": "2026-11-16T09:17:30Z",
+      "provisional": false
     },
     {
       "id": "official:aew:2026-11-14:full-gear",
@@ -471,8 +483,8 @@
           "label": "OK.ru · Revisão administrativa"
         }
       ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T09:13:04Z"
+      "approvedAt": "2026-11-16T09:13:04Z",
+      "provisional": false
     },
     {
       "id": "official:wwe:2026-11-28:survivor-series-wargames-2026",
@@ -494,18 +506,6 @@
       "show": "PPV",
       "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
       "status": "awaiting_video",
-      "sources": []
-    },
-    {
-      "id": "auto:wwe:2026-11-09:raw",
-      "company": "wwe",
-      "date": "2026-11-09",
-      "year": 2026,
-      "title": "Monday Night RAW",
-      "show": "RAW",
-      "status": "awaiting_video",
-      "provisional": true,
-      "description": "Registro semanal provisório; confirmar a programação oficial.",
       "sources": []
     }
   ],
