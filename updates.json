@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T10:55:16Z",
+  "generatedAt": "2026-11-16T11:01:43.857806Z",
   "events": [
     {
       "id": "official:aew:2026-08-22:collision",
@@ -82,11 +82,13 @@
           "type": "bilibili",
           "videoId": "4800882533210624",
           "url": "https://www.bilibili.tv/en/video/4800882533210624",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/1b998f7a483287e427b9ddd171e6fa11.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:09:50Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/1b998f7a483287e427b9ddd171e6fa11.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-09-12:collision",
@@ -102,11 +104,13 @@
           "type": "bilibili",
           "videoId": "4800916851792896",
           "url": "https://www.bilibili.tv/en/video/4800916851792896",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/5e6963db71221c3ef491c9c07535df68.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:11:09Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/5e6963db71221c3ef491c9c07535df68.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-09-16:dynamite",
@@ -122,11 +126,13 @@
           "type": "bilibili",
           "videoId": "4800963395984384",
           "url": "https://www.bilibili.tv/en/video/4800963395984384",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/175909369325315f3d646a5273da766c.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:11:24Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/175909369325315f3d646a5273da766c.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-09-19:collision",
@@ -142,11 +148,13 @@
           "type": "bilibili",
           "videoId": "4800996423769088",
           "url": "https://www.bilibili.tv/en/video/4800996423769088",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/3530f30026fe800066508fba35665f62.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:15:13Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/3530f30026fe800066508fba35665f62.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-09-23:collision",
@@ -162,11 +170,13 @@
           "type": "bilibili",
           "videoId": "4801043134028800",
           "url": "https://www.bilibili.tv/en/video/4801043134028800",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/aea38dc7d5997d40ef61ee57b978ae90.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:13:49Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/aea38dc7d5997d40ef61ee57b978ae90.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-09-23:dynamite",
@@ -193,11 +203,13 @@
           "type": "bilibili",
           "videoId": "4801077654460928",
           "url": "https://www.bilibili.tv/en/video/4801077654460928",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/33b46f1a9cd9ce5926a370275542e3a1.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:14:00Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/33b46f1a9cd9ce5926a370275542e3a1.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-10-03:collision",
@@ -213,11 +225,13 @@
           "type": "bilibili",
           "videoId": "4801157977872896",
           "url": "https://www.bilibili.tv/en/video/4801157977872896",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/a14f74d80855b103c926974907c5191a.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:15:26Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/a14f74d80855b103c926974907c5191a.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-10-14:collision",
@@ -233,11 +247,13 @@
           "type": "bilibili",
           "videoId": "4801279938141184",
           "url": "https://www.bilibili.tv/en/video/4801279938141184",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/74a7a16d6768e44768c445e32f7e8d29.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:16:08Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/74a7a16d6768e44768c445e32f7e8d29.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-10-14:dynamite",
@@ -264,11 +280,13 @@
           "type": "bilibili",
           "videoId": "4801314323176448",
           "url": "https://www.bilibili.tv/en/video/4801314323176448",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/1250ed8e2d0e827d1b6e0d682d3c4e2c.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:19:08Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/1250ed8e2d0e827d1b6e0d682d3c4e2c.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-10-21:dynamite",
@@ -284,11 +302,13 @@
           "type": "bilibili",
           "videoId": "4801359188073472",
           "url": "https://www.bilibili.tv/en/video/4801359188073472",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/b080edb335381e9cff779322ca9e1421.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:18:53Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/b080edb335381e9cff779322ca9e1421.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-10-24:collision",
@@ -304,11 +324,13 @@
           "type": "bilibili",
           "videoId": "4801397508938240",
           "url": "https://www.bilibili.tv/en/video/4801397508938240",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/703daf0ead0fbe2138fffde5c1cf0972.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:18:38Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/703daf0ead0fbe2138fffde5c1cf0972.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-10-28:dynamite",
@@ -324,11 +346,13 @@
           "type": "bilibili",
           "videoId": "4801445950265856",
           "url": "https://www.bilibili.tv/en/video/4801445950265856",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/239fc85efa7f60ccfb093761b20b2ba2.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:18:27Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/239fc85efa7f60ccfb093761b20b2ba2.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-10-31:collision",
@@ -344,11 +368,13 @@
           "type": "bilibili",
           "videoId": "4801474752682496",
           "url": "https://www.bilibili.tv/en/video/4801474752682496",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/2d65b3cf7ab9d40e08ca558a7450a646.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:18:01Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/2d65b3cf7ab9d40e08ca558a7450a646.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-11-04:dynamite",
@@ -364,12 +390,14 @@
           "type": "bilibili",
           "videoId": "4801522259991552",
           "url": "https://www.bilibili.tv/en/video/4801522259991552",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/794a5f6fa5cef5119248e11e502ca325.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "description": "Edição especial Blood & Guts, em 4 de novembro de 2026. Evento confirmado oficialmente pela AEW; fonte de vídeo ainda não verificada.",
       "approvedAt": "2026-11-15T22:34:01Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/794a5f6fa5cef5119248e11e502ca325.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-11-07:collision",
@@ -385,11 +413,13 @@
           "type": "bilibili",
           "videoId": "4801555413473792",
           "url": "https://www.bilibili.tv/en/video/4801555413473792",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/7b067682f6f8e1efb4823d2493943545.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:17:44Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/7b067682f6f8e1efb4823d2493943545.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:wwe:2026-11-07:crown-jewel-2026",
@@ -448,11 +478,13 @@
           "type": "bilibili",
           "videoId": "4801597688650752",
           "url": "https://www.bilibili.tv/en/video/4801597688650752",
-          "label": "Bilibili · Revisão administrativa"
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/09dea1a3a44065660ada81cdd941aef1.jpg@720w_405h_1e_1c_90q"
         }
       ],
       "approvedAt": "2026-11-16T09:17:30Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://pic.bstarstatic.com/ugc/09dea1a3a44065660ada81cdd941aef1.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-11-14:full-gear",
@@ -480,11 +512,13 @@
           "type": "okru",
           "videoId": "16690073045615",
           "url": "https://ok.ru/video/16690073045615",
-          "label": "OK.ru · Revisão administrativa"
+          "label": "OK.ru · Revisão administrativa",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=18968704387662&type=37&idx=1&scl=4&tkn=NBXgZyAwzC83U0YD54oEPA5X7zs&fn=external_8"
         }
       ],
       "approvedAt": "2026-11-16T09:13:04Z",
-      "provisional": false
+      "provisional": false,
+      "thumbnail": "https://iv.okcdn.ru/videoPreview?id=18968704387662&type=37&idx=1&scl=4&tkn=NBXgZyAwzC83U0YD54oEPA5X7zs&fn=external_8"
     },
     {
       "id": "official:wwe:2026-11-28:survivor-series-wargames-2026",
@@ -506,6 +540,162 @@
       "show": "PPV",
       "official_url": "https://www.wwe.com/article/wwe-upcoming-events",
       "status": "awaiting_video",
+      "sources": []
+    },
+    {
+      "id": "official:wwe:2026-11-13:smackdown",
+      "company": "wwe",
+      "date": "2026-11-13",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "official_url": "https://www.wwe.com/shows/smackdown/2026-11-13",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Edição de SmackDown em 13/11/2026, confirmada no site oficial WWE. Vídeo não verificado."
+    },
+    {
+      "id": "official:aew:2026-10-06:grand-slam-france",
+      "company": "aew",
+      "date": "2026-10-06",
+      "year": 2026,
+      "title": "AEW Grand Slam: France 2026",
+      "show": "Especial",
+      "official_url": "https://www.allelitewrestling.com/post/all-elite-wrestling-to-make-paris-debut-with-aew-grand-slam-france-tuesday-october-6",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Evento e gravações em Paris em 06/10/2026; os programas Dynamite e Collision podem ter datas de exibição diferentes. Confirmar qual gravação corresponde ao vídeo."
+    },
+    {
+      "id": "provisional:roh:2026-11-05:honorclub",
+      "company": "roh",
+      "date": "2026-11-05",
+      "year": 2026,
+      "title": "ROH on HonorClub — 05/11/2026",
+      "show": "HonorClub",
+      "status": "awaiting_video",
+      "sources": [],
+      "provisional": true,
+      "description": "Cadastro provisório para revisão. Data informada no título de vídeo encontrado; confirmar episódio e autorização antes de publicar fonte."
+    },
+    {
+      "id": "auto:aew:2026-11-14:collision",
+      "company": "aew",
+      "date": "2026-11-14",
+      "year": 2026,
+      "title": "Collision",
+      "show": "Collision",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:roh:2026-11-12:honorclub",
+      "company": "roh",
+      "date": "2026-11-12",
+      "year": 2026,
+      "title": "HonorClub",
+      "show": "HonorClub",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-11-10:nxt",
+      "company": "wwe",
+      "date": "2026-11-10",
+      "year": 2026,
+      "title": "NXT",
+      "show": "NXT",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-11-06:smackdown",
+      "company": "wwe",
+      "date": "2026-11-06",
+      "year": 2026,
+      "title": "SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-11-03:nxt",
+      "company": "wwe",
+      "date": "2026-11-03",
+      "year": 2026,
+      "title": "NXT",
+      "show": "NXT",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-10-26:raw",
+      "company": "wwe",
+      "date": "2026-10-26",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-10-23:smackdown",
+      "company": "wwe",
+      "date": "2026-10-23",
+      "year": 2026,
+      "title": "SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:aew:2026-10-17:collision",
+      "company": "aew",
+      "date": "2026-10-17",
+      "year": 2026,
+      "title": "Collision",
+      "show": "Collision",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-10-16:smackdown",
+      "company": "wwe",
+      "date": "2026-10-16",
+      "year": 2026,
+      "title": "SmackDown",
+      "show": "SmackDown",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
+      "sources": []
+    },
+    {
+      "id": "auto:wwe:2026-10-12:raw",
+      "company": "wwe",
+      "date": "2026-10-12",
+      "year": 2026,
+      "title": "Monday Night RAW",
+      "show": "RAW",
+      "status": "awaiting_video",
+      "provisional": true,
+      "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
       "sources": []
     }
   ],
