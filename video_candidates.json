@@ -50,6 +50,106 @@
       "origin": "okru-910420669433",
       "review": "pendente",
       "possibleEventIds": []
+    },
+    {
+      "videoId": "16275297405518",
+      "url": "https://ok.ru/video/16275297405518",
+      "origin": "exemplo_fornecido",
+      "title": "WWE.RAW.2026.11.02.NF.iNT.1080p.H.264",
+      "note": "Vídeo enviado pelo administrador; inclusão apenas como candidato. Verificação de reprodução e aprovação manual obrigatórias.",
+      "review": "pendente",
+      "possibleEventIds": [
+        "wwe:2026-11-02:raw"
+      ],
+      "sourceProfiles": [
+        "okru-910148261710"
+      ]
+    },
+    {
+      "videoId": "16414871980622",
+      "url": "https://ok.ru/video/16414871980622",
+      "origin": "exemplo_fornecido",
+      "title": "SmackDown 13/11/2026 — vídeo indicado para conferir",
+      "note": "Vídeo enviado pelo administrador; inclusão apenas como candidato. Verificação de reprodução e aprovação manual obrigatórias.",
+      "review": "pendente",
+      "possibleEventIds": [
+        "wwe:2026-11-13:smackdown"
+      ],
+      "sourceProfiles": [
+        "okru-910148261710"
+      ]
+    },
+    {
+      "videoId": "16443377846862",
+      "url": "https://ok.ru/video/16443377846862",
+      "title": "TNA.Destination.X.2026.Countdown.TNAP.1080p",
+      "origin": "okru-910148261710",
+      "review": "pendente",
+      "sourceProfiles": [
+        "okru-910148261710"
+      ],
+      "thumbnailUrl": "https://iv.okcdn.ru/videoPreview?id=18988354439758&type=37&idx=1&scl=4&tkn=hKilQf3Z7O2AQpO19bOfDCtOdpo&fn=external_8",
+      "possibleEventIds": []
+    },
+    {
+      "videoId": "16444091075150",
+      "url": "https://ok.ru/video/16444091075150",
+      "title": "TNA.Destination.X.2026.PPV.TNAP.720p",
+      "origin": "okru-910148261710",
+      "review": "pendente",
+      "sourceProfiles": [
+        "okru-910148261710"
+      ],
+      "thumbnailUrl": "https://iv.okcdn.ru/videoPreview?id=18988212030030&type=37&idx=1&scl=4&tkn=saBQKPknrT0oOIu7C5QTXZxSqC8&fn=external_8",
+      "possibleEventIds": []
+    },
+    {
+      "videoId": "16690073045615",
+      "url": "https://ok.ru/video/16690073045615",
+      "title": "Full.Gear.2026.",
+      "origin": "okru-579391530351",
+      "review": "pendente",
+      "sourceProfiles": [
+        "okru-579391530351"
+      ],
+      "thumbnailUrl": "https://iv.okcdn.ru/videoPreview?id=18968704387662&type=37&idx=1&scl=4&tkn=NBXgZyAwzC83U0YD54oEPA5X7zs&fn=external_8",
+      "possibleEventIds": []
+    },
+    {
+      "videoId": "16690073569903",
+      "url": "https://ok.ru/video/16690073569903",
+      "title": "Full.Gear.2026.Buy.In.",
+      "origin": "okru-579391530351",
+      "review": "pendente",
+      "sourceProfiles": [
+        "okru-579391530351"
+      ],
+      "thumbnailUrl": "https://iv.okcdn.ru/videoPreview?id=19054907034223&type=37&idx=2&scl=4&tkn=_iSmIHe9J3pf1Xwt4xM6EHxuEJ4&fn=external_8",
+      "possibleEventIds": []
+    },
+    {
+      "videoId": "17034282797817",
+      "url": "https://ok.ru/video/17034282797817",
+      "title": "si9Nn3njQf2XPiyR",
+      "origin": "okru-910420669433",
+      "review": "pendente",
+      "sourceProfiles": [
+        "okru-910420669433"
+      ],
+      "thumbnailUrl": "https://iv.okcdn.ru/videoPreview?id=20436018006777&type=37&idx=0&scl=4&tkn=iAbDSrIbakd5kJ0O3wzG8aVjwWE&fn=external_8",
+      "possibleEventIds": []
+    },
+    {
+      "videoId": "17035794320121",
+      "url": "https://ok.ru/video/17035794320121",
+      "title": "i5inw6EPSirGAp54",
+      "origin": "okru-910420669433",
+      "review": "pendente",
+      "sourceProfiles": [
+        "okru-910420669433"
+      ],
+      "thumbnailUrl": "https://iv.okcdn.ru/videoPreview?id=20438527773433&type=37&idx=1&scl=4&tkn=EonuaHF8qpE7hlOKDXGePjGE7cA&fn=external_8",
+      "possibleEventIds": []
     }
   ]
 }
