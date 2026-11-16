@@ -1,7 +1,28 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T12:04:10.659344Z",
+  "generatedAt": "2026-11-16T12:37:09Z",
   "events": [
+    {
+      "id": "aew:2025-10-22:dynamite",
+      "company": "aew",
+      "date": "2025-10-22",
+      "year": 2025,
+      "title": "Dynamite",
+      "show": "Dynamite",
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4797237039994368",
+          "url": "https://www.bilibili.tv/en/video/4797237039994368",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/e3d770eab248bbffc0f21248ef119c4c.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T11:26:04Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/e3d770eab248bbffc0f21248ef119c4c.jpg@720w_405h_1e_1c_90q"
+    },
     {
       "id": "official:aew:2026-08-22:collision",
       "company": "aew",
@@ -1170,27 +1191,6 @@
       "provisional": true,
       "sources": [],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
-    },
-    {
-      "id": "aew:2025-10-22:dynamite",
-      "company": "aew",
-      "date": "2025-10-22",
-      "year": 2025,
-      "title": "Dynamite",
-      "show": "Dynamite",
-      "status": "video_available",
-      "sources": [
-        {
-          "type": "bilibili",
-          "videoId": "4797237039994368",
-          "url": "https://www.bilibili.tv/en/video/4797237039994368",
-          "label": "Bilibili · Revisão administrativa",
-          "thumbnail": "https://pic.bstarstatic.com/ugc/e3d770eab248bbffc0f21248ef119c4c.jpg@720w_405h_1e_1c_90q"
-        }
-      ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T11:26:04Z",
-      "thumbnail": "https://pic.bstarstatic.com/ugc/e3d770eab248bbffc0f21248ef119c4c.jpg@720w_405h_1e_1c_90q"
     }
   ],
   "sources": [
