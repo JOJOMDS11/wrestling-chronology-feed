@@ -1,8 +1,9 @@
+
 name: Atualizar agenda oficial (JOJO Library)
 
 on:
   schedule:
-    - cron: '17 9 * * *' # Atualização diária de agendas oficiais em UTC
+    - cron: '17 9 * * *'
   workflow_dispatch:
 
 permissions:
@@ -16,23 +17,58 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
     steps:
       - name: Baixar repositório
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
       - name: Preparar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Validar os monitores
         run: python -m unittest discover -s scripts/tests -v
-      - name: Atualizar somente agendas oficiais (sem monitor OK.ru público)
-        run: python scripts/update_ppvs.py
-      - name: Publicar somente a agenda
+
+      - name: Publicar agenda com sincronização e tentativas
+        shell: bash
         run: |
-          git add updates.json
-          if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Atualizar agenda de eventos JOJO Library'
-            git push
-          else
-            echo 'Sem mudanças na agenda'
-          fi
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for tentativa in 1 2 3 4 5; do
+            echo "=== Tentativa $tentativa de 5 ==="
+
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "Atualizando agenda sobre a versão mais recente..."
+            python scripts/update_ppvs.py
+
+            git add updates.json
+
+            if git diff --cached --quiet; then
+              echo "Sem mudanças na agenda."
+              exit 0
+            fi
+
+            git commit -m "Atualizar agenda de eventos JOJO Library"
+
+            if git push origin HEAD:main; then
+              echo "Agenda publicada com sucesso!"
+              exit 0
+            fi
+
+            echo "Outra atualização chegou ao GitHub."
+            echo "Recalculando a agenda antes de tentar novamente."
+            sleep 5
+          done
+
+          echo "ERRO: Não foi possível publicar após 5 tentativas."
+          exit 1
