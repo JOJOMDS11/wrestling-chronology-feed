@@ -55,12 +55,27 @@ def report(now=None):
     except (OSError,ValueError):
         sources_failed.append('updates.json')
     refs=load('config/ppv_reference.json')['events']
+    wiki_sources={}
+    try:
+        wiki=load('config/ppv_wikipedia_reference.json')
+        wiki_sources=wiki.get('sources',{})
+        # A curated reference takes precedence on identical company/date/title.
+        seen={(str(e.get('company')),str(e.get('date')),norm(e.get('title'))) for e in refs}
+        for e in wiki.get('events',[]):
+            if not isinstance(e,dict):continue
+            k=(str(e.get('company')),str(e.get('date')),norm(e.get('title')))
+            if k not in seen and e.get('company') in CATS and not find_match(e,refs):
+                refs.append(e);seen.add(k)
+    except (OSError, ValueError, TypeError):
+        pass
     out=[]
     for e in refs:
         match=find_match(e,rows)
-        state='missing' if match is None else ('with_sources' if match.get('sources') else 'without_video')
+        future=str(e.get('date',''))>now.date().isoformat()
+        state='upcoming' if future else ('missing' if match is None else ('with_sources' if match.get('sources') else 'without_video'))
         out.append({'id':e['id'],'company':e['company'],'date':e['date'],'year':e['year'],
                     'title':e['title'],'official_url':e.get('official_url'),
+                    'referenceType':e.get('referenceType','curated'),
                     'state':state,'eventId':match.get('id') if match else None,
                     'sourcesCount':len(match.get('sources') or []) if match else 0})
     out.sort(key=lambda x:(x['date'],x['company'],x['title']))
@@ -68,16 +83,17 @@ def report(now=None):
     for row in rows:
         if relevant(row) and re.fullmatch(r'20\d{2}-\d{2}-\d{2}', str(row.get('date',''))):
             code=str(row.get('date',''))[:4]
-            obj=years.setdefault(code, {'companies':{},'cataloguePpvs':0,'references':0,'missing':0,'withoutVideo':0,'withSources':0})
+            obj=years.setdefault(code, {'companies':{},'cataloguePpvs':0,'references':0,'missing':0,'withoutVideo':0,'withSources':0,'upcoming':0})
             obj['cataloguePpvs']+=1
             obj['companies'][row['company']]=obj['companies'].get(row['company'],0)+1
     for row in out:
-        obj=years.setdefault(str(row['year']), {'companies':{},'cataloguePpvs':0,'references':0,'missing':0,'withoutVideo':0,'withSources':0})
+        obj=years.setdefault(str(row['year']), {'companies':{},'cataloguePpvs':0,'references':0,'missing':0,'withoutVideo':0,'withSources':0,'upcoming':0})
         obj['references']+=1
-        name={'missing':'missing','without_video':'withoutVideo','with_sources':'withSources'}[row['state']]
+        name={'missing':'missing','without_video':'withoutVideo','with_sources':'withSources','upcoming':'upcoming'}[row['state']]
         obj[name]+=1
-    return {'schemaVersion':1,'checkedAt':now.isoformat().replace('+00:00','Z'),'referenceCoverage':'partial',
-            'notice':'Ausências significam apenas referências documentadas não localizadas; anos sem calendário de referência NÃO estão completos.',
+    return {'schemaVersion':2,'checkedAt':now.isoformat().replace('+00:00','Z'),'referenceCoverage':'partial',
+            'notice':'Referências da Wikipédia são listas históricas independentes; não substituem calendários oficiais. Anos com fonte indisponível não estão completos. A auditoria não altera vídeos.',
+            'wikipediaSources':wiki_sources,
             'catalogueFailures':sources_failed,'years':years,'references':out}
 
 def main():

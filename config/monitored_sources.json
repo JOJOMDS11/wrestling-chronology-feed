@@ -43,6 +43,14 @@
       "url": "https://www.bilibili.tv/en/space/2027368045",
       "label": "Bilibili · EliteOfHonor2 (AEW / ROH)",
       "enabled": true
+    },
+    {
+      "id": "Internet Archive · ROH Wrestling",
+      "platform": "archive",
+      "url": "https://archive.org/search?query=subject%3A%22ROH+Wrestling%22&sort=-addeddate",
+      "label": "Internet Archive · ROH Wrestling · busca diária por assunto",
+      "enabled": true,
+      "note": "Pesquisa metadados de vídeos públicos para revisão; nunca os aprova automaticamente"
     }
   ],
   "video_examples_for_review": [

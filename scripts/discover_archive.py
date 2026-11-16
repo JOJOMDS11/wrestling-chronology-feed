@@ -27,6 +27,9 @@ TOPICS = (
 )
 VIDEO = re.compile(r'\.(?:mp4|m4v|webm|ogv)$', re.I)
 DATE = re.compile(r'(?<!\d)(20\d\d)[.\-_ ](0?[1-9]|1[0-2])[.\-_ ]([0-2]?\d|3[01])(?!\d)')
+DATE_EU = re.compile(r'(?<!\d)([0-3]?\d)[.\-_ ]([01]?\d)[.\-_ ](20\d\d|2\d)(?!\d)')
+ROH_ARCHIVE_QUERY = 'subject:"ROH Wrestling" AND mediatype:movies'
+ROH_ARCHIVE_PROFILE = 'https://archive.org/search?query=subject%3A%22ROH+Wrestling%22&sort=-addeddate'
 
 
 def get_json(url, timeout=9):
@@ -37,12 +40,20 @@ def get_json(url, timeout=9):
 
 def episode_date(text):
     m = DATE.search(str(text))
-    if not m:
-        return ''
-    try:
-        return dt.date(int(m[1]), int(m[2]), int(m[3])).isoformat()
-    except ValueError:
-        return ''
+    if m:
+        try:
+            return dt.date(int(m[1]), int(m[2]), int(m[3])).isoformat()
+        except ValueError:
+            return ''
+    # ROH uploaders commonly use DD-MM-YY, e.g. 29-10-26.
+    eu = DATE_EU.search(str(text))
+    if eu:
+        try:
+            year=int(eu[3]);year=year+2000 if year<100 else year
+            return dt.date(year,int(eu[2]),int(eu[1])).isoformat()
+        except ValueError:
+            pass
+    return ''
 
 
 def archive_url(identifier, filename):
@@ -171,6 +182,70 @@ def discover(fetch=get_json, now=None):
     return successful, list(result.values())
 
 
+def discover_roh_subject(fetch=get_json, now=None):
+    """Monitor the exact ROH Wrestling subject page using Archive's public API.
+
+    Result may include non-ROH recordings; match by title, date AND an existing
+    event before suggesting a candidate. Never auto-approve.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc).date()
+    target = targets(now)
+    args = urlencode({'q':ROH_ARCHIVE_QUERY,'output':'json','rows':65,'page':1,
+                      'fl[]':['identifier','title','publicdate','date'],
+                      'sort[]':'publicdate desc'},doseq=True)
+    try:
+        docs=fetch(SEARCH+'?'+args).get('response',{}).get('docs',[])
+    except (OSError,ValueError,KeyError,TimeoutError) as ex:
+        print('ROH Archive (assunto) não consultado:',type(ex).__name__)
+        return False, []
+    candidates={}
+    inspected=0
+    for doc in docs:
+        if inspected>=7:
+            break
+        identifier=str(doc.get('identifier') or '')
+        title=str(doc.get('title') or '')
+        if not re.fullmatch(r'[a-zA-Z0-9_.-]{3,120}',identifier):
+            continue
+        if not likely_match(title,'roh','HonorClub'):
+            continue
+        inspected+=1
+        try:
+            info=fetch(META+quote(identifier,safe=''))
+        except (OSError,ValueError,KeyError,TimeoutError):
+            continue
+        if str(info.get('is_dark') or '') in ('True','1') or not info.get('metadata'):
+            continue
+        for file in (info.get('files') or [])[:150]:
+            filename=str(file.get('name') or '')
+            url=archive_url(identifier,filename)
+            if not url:
+                continue
+            combined=title+' '+filename
+            day=episode_date(combined)
+            if not day or not likely_match(combined,'roh','HonorClub'):
+                continue
+            matched=[]
+            for ev in target.get(('roh',day),[]):
+                if 'honorclub' in (str(ev.get('show',''))+' '+str(ev.get('title',''))).lower() and ev.get('id'):
+                    matched.append(str(ev['id']))
+            if not matched:
+                continue
+            try:
+                if file.get('length') is not None and float(file['length'])<25*60:
+                    continue
+            except (ValueError,TypeError,OverflowError):
+                pass
+            cid=candidate_id(url)
+            candidates[cid]={'videoId':cid,'platform':'archive','url':url,
+                             'detail':'https://archive.org/details/'+quote(identifier,safe=''),
+                             'title':(title or filename)[:220], 'filename':filename[:240],
+                             'thumbnailUrl':'https://archive.org/services/img/'+quote(identifier,safe=''),
+                             'possibleEventIds':list(dict.fromkeys(matched))[:8],
+                             'confidence':'ROH Wrestling: assunto, título e data; reprodução/direitos não verificados',
+                             'review':'pendente','sourceProfiles':['Internet Archive · ROH Wrestling']}
+    return True, list(candidates.values())
+
 def recent_ppvs_without_video(now=None):
     """Recent, already documented specials with no approved source in any catalogue.
 
@@ -278,9 +353,11 @@ def main():
         except (OSError, ValueError):
             pass
     success, rows = discover()
+    roh_success, roh_rows = discover_roh_subject()
+    rows += roh_rows
     ppv_queries, ppv_rows = discover_missing_ppvs()
     rows += ppv_rows
-    if not success and not ppv_queries:
+    if not success and not roh_success and not ppv_queries:
         print('Nenhuma consulta respondida; preservando os candidatos já cadastrados.')
         return
     merged = {x['videoId']: x for x in existing if isinstance(x, dict) and x.get('videoId')}
@@ -292,7 +369,7 @@ def main():
     blob=json.dumps(output, ensure_ascii=False, indent=2)+'\n'
     if not DEST.exists() or DEST.read_text(encoding='utf-8')!=blob:
         DEST.write_text(blob,encoding='utf-8')
-    print('Internet Archive:',success,'consultas semanais;',ppv_queries,'consultas de PPV;',len(rows),'candidatos para revisão')
+    print('Internet Archive:',success,'consultas semanais;',int(roh_success),'consulta ROH Wrestling;',ppv_queries,'consultas de PPV;',len(rows),'candidatos para revisão')
 
 if __name__ == '__main__':
     main()
