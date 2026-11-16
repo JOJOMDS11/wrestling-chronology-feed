@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: jojo-library-schedule
+  group: jojo-updates-json
   cancel-in-progress: false
 
 jobs:
