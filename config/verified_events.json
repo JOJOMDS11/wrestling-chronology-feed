@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "official:wwe:2026-11-13:smackdown",
+      "company": "wwe",
+      "date": "2026-11-13",
+      "year": 2026,
+      "title": "Friday Night SmackDown",
+      "show": "SmackDown",
+      "official_url": "https://www.wwe.com/shows/smackdown/2026-11-13",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Edição de SmackDown em 13/11/2026, confirmada no site oficial WWE. Vídeo não verificado."
+    },
+    {
+      "id": "official:aew:2026-10-06:grand-slam-france",
+      "company": "aew",
+      "date": "2026-10-06",
+      "year": 2026,
+      "title": "AEW Grand Slam: France 2026",
+      "show": "Especial",
+      "official_url": "https://www.allelitewrestling.com/post/all-elite-wrestling-to-make-paris-debut-with-aew-grand-slam-france-tuesday-october-6",
+      "status": "awaiting_video",
+      "sources": [],
+      "description": "Evento e gravações em Paris em 06/10/2026; os programas Dynamite e Collision podem ter datas de exibição diferentes. Confirmar qual gravação corresponde ao vídeo."
+    },
+    {
+      "id": "provisional:roh:2026-11-05:honorclub",
+      "company": "roh",
+      "date": "2026-11-05",
+      "year": 2026,
+      "title": "ROH on HonorClub — 05/11/2026",
+      "show": "HonorClub",
+      "status": "awaiting_video",
+      "sources": [],
+      "provisional": true,
+      "description": "Cadastro provisório para revisão. Data informada no título de vídeo encontrado; confirmar episódio e autorização antes de publicar fonte."
+    }
+  ],
+  "notes": "Registros selecionados e identificados com fontes oficiais; ROH marcado provisório por não ter fonte oficial individual confirmada."
+}
