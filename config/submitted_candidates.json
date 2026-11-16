@@ -16,6 +16,21 @@
       "submittedForReview": true,
       "review": "pendente",
       "note": "Link e perfil fornecidos pelo administrador. Identidade do vídeo e reprodução ainda precisam ser confirmadas antes de qualquer vínculo."
+    },
+    {
+      "platform": "okru",
+      "videoId": "16275297405518",
+      "url": "https://ok.ru/video/16275297405518",
+      "title": "WWE.RAW.2026.11.02.NF.iNT.1080p.H.264 — indicação para revisão",
+      "sourceProfiles": [
+        "okru-910148261710"
+      ],
+      "possibleEventIds": [
+        "wwe:2026-11-02:raw"
+      ],
+      "submittedForReview": true,
+      "review": "pendente",
+      "note": "Link informado pelo administrador como possível alternativa ao RAW 02/11 quebrado. Conferir conteúdo, reprodução e autorização antes de aprovar; NÃO substitui automaticamente."
     }
   ]
 }

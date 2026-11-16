@@ -13,7 +13,7 @@
       "id": "okru-910148261710",
       "platform": "okru",
       "url": "https://ok.ru/profile/910148261710/video",
-      "label": "OK.ru · perfil 910148261710 · acompanhar SmackDown/NXT",
+      "label": "OK.ru · perfil 910148261710 · RAW, SmackDown e NXT",
       "enabled": true
     },
     {
@@ -55,6 +55,26 @@
       "id": "16916107430649",
       "url": "https://ok.ru/video/16916107430649",
       "note": "Exemplo associado pelo usuário ao Crown Jewel; título publicado não confirma identidade"
+    },
+    {
+      "id": "16275297405518",
+      "url": "https://ok.ru/video/16275297405518",
+      "title": "WWE.RAW.2026.11.02.NF.iNT.1080p.H.264",
+      "sourceProfile": "okru-910148261710",
+      "possibleEventIds": [
+        "wwe:2026-11-02:raw"
+      ],
+      "note": "Vídeo enviado pelo administrador; inclusão apenas como candidato. Verificação de reprodução e aprovação manual obrigatórias."
+    },
+    {
+      "id": "16414871980622",
+      "url": "https://ok.ru/video/16414871980622",
+      "title": "SmackDown 13/11/2026 — vídeo indicado para conferir",
+      "sourceProfile": "okru-910148261710",
+      "possibleEventIds": [
+        "wwe:2026-11-13:smackdown"
+      ],
+      "note": "Vídeo enviado pelo administrador; inclusão apenas como candidato. Verificação de reprodução e aprovação manual obrigatórias."
     }
   ]
 }
