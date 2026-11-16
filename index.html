@@ -209,6 +209,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 #reviewEventSearch{width:100%}
 .reviewActionHint{color:#ffce96;font-size:12px}
 @media(max-width:650px){.monitorFold>summary{flex-wrap:wrap}.monitorFoldTip{margin-left:0}.reviewEventFilters{grid-template-columns:1fr}.showFilter{width:100%;justify-content:space-between}}
+.sourceDebug{margin:10px 20px;border:1px solid #67517c;border-radius:12px;padding:12px;color:#ddd}.sourceDebug pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.5}.sourceDebug a{color:#ceacff}.reviewHint input[type="checkbox"]{accent-color:#a67ce9}
 </style>
 </head>
 <body>
@@ -249,12 +250,13 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <div class="reviewHead"><strong>🎬 AutoMatch · Revisar vídeos encontrados</strong><div class="reviewHeadBtns"><button type="button" id="reviewReload">↻ Atualizar candidatos</button><button type="button" id="reviewClose" aria-label="Fechar">✕ Fechar</button></div></div>
  <p class="reviewHint">A Oracle sugere pistas; confira o vídeo antes de vincular ao evento. Somente confirmações administrativas seguem para publicação. Atualização automática a cada 5 min enquanto o site está aberto.</p>
   <details class="reviewSources" id="reviewSourcesPanel" open>
-    <summary>📡 Fontes monitoradas no AutoMatch · OK.ru / Bilibili</summary>
+    <summary>📡 Fontes monitoradas no AutoMatch · OK.ru / Bilibili / Internet Archive</summary>
     <p class="reviewSourcesNote" id="reviewSourcesNote">Carregando fontes cadastradas e estado da última leitura…</p>
     <div class="reviewSourcesLinks" id="reviewSourcesLinks"></div>
     <label for="reviewProfile">Filtrar vídeos por perfil de origem</label>
     <select id="reviewProfile" aria-label="Filtrar candidatos pelo perfil monitorado"><option value="">Todos os perfis</option></select>
   </details>
+  <label class="reviewHint"><input type="checkbox" id="reviewShowLinked"> Mostrar também candidatos já vinculados (somente consulta)</label>
   <p class="reviewQuota" id="reviewLinkQuota" role="status">Vinculações hoje: consultando limite da Oracle…</p>
  <div class="amSyncBar" aria-label="Sincronização do AutoMatch">
    <button type="button" id="amSyncNow" disabled>🔄 Sincronizar agora</button>
@@ -269,7 +271,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
  <div id="linkHealthIssues"></div>
  </details>
  <div class="reviewManual"><input id="reviewManualUrl" type="url" placeholder="Link OK.ru ou bilibili.tv/en/video/..." aria-label="Link de vídeo OK.ru ou Bilibili"><button type="button" id="reviewManualAdd">Vincular link manual</button></div>
- <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Buscar vídeos por título, programa ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
+ <div class="reviewManual"><input id="reviewSearch" type="search" placeholder="🔎 Buscar vídeos por título, programa ou data…" aria-label="Buscar vídeos por título"><select id="reviewPlatform" aria-label="Filtrar plataforma"><option value="">Todas as fontes</option><option value="okru">OK.ru</option><option value="bilibili">Bilibili</option><option value="archive">Internet Archive</option></select><a id="reviewExternalSearch" class="reviewExternalSearch" href="https://www.google.com/search?q=site%3Abilibili.tv%2Fen%2Fvideo%2F%20AEW" target="_blank" rel="noopener noreferrer">↗ Buscar título na web</a></div>
  <div class="reviewRelevance"><select id="reviewRelevance" aria-label="Qualidade dos resultados"><option value="best">✅ Shows completos prováveis</option><option value="recent">🆕 Recentes relevantes</option><option value="classic">📚 Shows antigos</option><option value="extra">🗂 Outros vídeos</option><option value="all">🔎 Todos os candidatos</option></select><small id="reviewQualityCounts">Classificando resultados…</small></div>
  <div class="reviewTools" id="reviewMainTools"><div id="reviewMessage" class="reviewHint">Carregando candidatos...</div><div class="reviewToolBtns"><button type="button" id="reviewDismissUnknown">🧹 Lixeira p/ sem título</button><button type="button" id="reviewDismissAll">🗑 Mandar todos p/ lixeira</button><button type="button" id="reviewTrashBtn">🗑 Lixeira (<span id="reviewTrashCount">0</span>)</button><button type="button" id="reviewImportOld" hidden>☁️ Importar lixeira antiga</button></div></div>
  <div class="reviewTools" id="reviewTrashBar" hidden><div id="reviewTrashInfo" class="reviewHint">Lixeira</div><div class="reviewToolBtns"><button type="button" id="reviewTrashBack">← Voltar aos candidatos</button><button type="button" id="reviewTrashRestoreAll">↩ Restaurar todos</button><button type="button" id="reviewTrashEmpty" class="danger">🧨 Esvaziar lixeira</button><button type="button" id="reviewUnpurge">♻ Recuperar excluídos</button></div></div>
@@ -293,6 +295,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 <form id="reviewForm" class="reviewForm">
 <h3>✅ Confirmar fonte de vídeo</h3><p id="reviewSummary"></p>
 <div class="reviewEventFilters"><label>Empresa<select id="reviewCompany" required></select></label><label>Programa<select id="reviewShow"><option value="">Todos os programas</option></select></label></div><label>Encontrar evento (nome ou data)<input id="reviewEventSearch" type="search" placeholder="Ex.: 2026-11-13, SmackDown, Grand Slam"></label><label class="reviewEventOlder"><input id="reviewOlder" type="checkbox"> Ver também os eventos antigos</label><label>Evento da cronologia<select id="reviewEvent" required></select></label><p id="reviewEventHelp" class="reviewHint"></p>
+<label>Miniatura do vídeo (opcional, URL da imagem original)<input type="url" id="reviewThumbUrl" placeholder="https://... (imagem OK.ru / Bilibili / Archive)" maxlength="700" autocomplete="off"></label>
 <label>Master Key<input id="reviewKey" type="password" autocomplete="off" required maxlength="128" /></label>
 <label class="reviewConsent"><input id="reviewRights" type="checkbox" required /> Confirmei que este vídeo corresponde ao evento e que tenho autorização para compartilhar/incorporar essa fonte.</label>
 <p id="reviewFeedback" class="reviewHint"></p>
@@ -314,13 +317,13 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 </form>
 </dialog>
 
-<div id="shade" class="shade" aria-hidden="true"><section class="viewer" role="dialog" aria-modal="true" aria-label="Reprodução"><div class="viewerTop"><div><h2 id="videoTitle">Evento</h2><p id="videoSubtitle"></p></div><button id="close" class="close" aria-label="Fechar reprodução">✕</button></div><div class="screen"><video id="video" controls playsinline preload="metadata"></video><iframe id="embed" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" title="Player incorporado"></iframe></div><div id="videoInfo" class="videoInfo" role="status"></div><div class="actions"><label class="autoControl" title="Quando o MP4 acabar, iniciar automaticamente o próximo evento cronológico"><input id="autoplayNext" type="checkbox" checked> ▶ Autoplay próximo evento</label><select id="sourceChoice" class="sourceChoice" aria-label="Escolher fonte"></select><button id="playDirect" class="act primary">▶ MP4 direto</button><button id="playEmbed" class="act secondary">▣ Player incorporado</button><a id="sourceLink" class="act secondary" target="_blank" rel="noopener noreferrer">↗ Abrir fonte</a><button id="vlcBtn" class="act secondary">▶ Tentar VLC</button><button id="findOtherSource" type="button" class="act secondary">⚠️ Vídeo não abre? Procurar alternativa</button></div><div class="episodeNav"><button id="prevEvent" type="button">◀ Evento anterior</button><button id="nextEvent" type="button">Próximo evento ▶</button><span class="upNext" id="upNext">Próximo da cronologia</span></div><div class="help">O autoplay e a retomada do minuto exato funcionam para MP4 direto; no OK.ru, salvamos apenas o episódio e o player externo pode exigir ▶ e não informa quando termina. Arquivos divididos em partes são reproduzidos na ordem antes de passar para o próximo evento. O MP4 abre direto no navegador. O player alternativo usa a página incorporada do Internet Archive. O botão VLC tenta abrir o arquivo no aplicativo VLC instalado no Android; alguns navegadores podem bloquear essa função. Vídeos podem deixar de estar disponíveis por decisão de seus provedores.</div></section></div>
+<div id="shade" class="shade" aria-hidden="true"><section class="viewer" role="dialog" aria-modal="true" aria-label="Reprodução"><div class="viewerTop"><div><h2 id="videoTitle">Evento</h2><p id="videoSubtitle"></p></div><button id="close" class="close" aria-label="Fechar reprodução">✕</button></div><div class="screen"><video id="video" controls playsinline preload="metadata"></video><iframe id="embed" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" title="Player incorporado"></iframe></div><div id="videoInfo" class="videoInfo" role="status"></div><div class="actions"><label class="autoControl" title="Quando o MP4 acabar, iniciar automaticamente o próximo evento cronológico"><input id="autoplayNext" type="checkbox" checked> ▶ Autoplay próximo evento</label><select id="sourceChoice" class="sourceChoice" aria-label="Escolher fonte"></select><button id="playDirect" class="act primary">▶ MP4 direto</button><button id="playEmbed" class="act secondary">▣ Player incorporado</button><a id="sourceLink" class="act secondary" target="_blank" rel="noopener noreferrer">↗ Abrir fonte</a><button id="vlcBtn" class="act secondary">▶ Tentar VLC</button><button id="findOtherSource" type="button" class="act secondary">⚠️ Vídeo não abre? Procurar alternativa</button><button id="debugSource" type="button" class="act secondary">🛠 Depurar fonte</button></div><details id="sourceDebug" class="sourceDebug"><summary>Detalhes técnicos da fonte</summary><pre id="sourceDebugText"></pre><a id="sourceDebugOpen" href="#" target="_blank" rel="noopener noreferrer">↗ Conferir no provedor</a></details><div class="episodeNav"><button id="prevEvent" type="button">◀ Evento anterior</button><button id="nextEvent" type="button">Próximo evento ▶</button><span class="upNext" id="upNext">Próximo da cronologia</span></div><div class="help">O autoplay e a retomada do minuto exato funcionam para MP4 direto; no OK.ru, salvamos apenas o episódio e o player externo pode exigir ▶ e não informa quando termina. Arquivos divididos em partes são reproduzidos na ordem antes de passar para o próximo evento. O MP4 abre direto no navegador. O player alternativo usa a página incorporada do Internet Archive. O botão VLC tenta abrir o arquivo no aplicativo VLC instalado no Android; alguns navegadores podem bloquear essa função. Vídeos podem deixar de estar disponíveis por decisão de seus provedores.</div></section></div>
 <script>
 (function(){'use strict';
 var codes=['wwe','wcw','ecw','tna','roh','njpw','nxt','aew'];
 var names={all:'TODAS',wwe:'WWE',wcw:'WCW',ecw:'ECW',tna:'TNA',roh:'ROH',njpw:'NJPW',nxt:'NXT',aew:'AEW'};
 var $=function(id){return document.getElementById(id)};
-var state={company:'',rows:[],filtered:[],queue:[],limit:80,current:null,source:null,partIndex:0,cache:{},lastFocus:null,autoNext:true,updates:[],resumeSeconds:0,lastWatchSave:0};
+var state={company:'',rows:[],filtered:[],queue:[],limit:80,current:null,source:null,partIndex:0,cache:{},lastFocus:null,autoNext:true,updates:[],resumeSeconds:0,lastWatchSave:0,brokenSources:{}};
 var $companies=$('companies'),$results=$('results'),$status=$('status');
 function txt(el,value){el.textContent=String(value==null?'':value);return el}
 function el(tag,className,value){var e=document.createElement(tag);if(className)e.className=className;if(value!==undefined)txt(e,value);return e}
@@ -336,9 +339,11 @@ function jojoFallbackPoster(title,company){
 }
 function jojoSetPoster(img, url, title, company){
  img.referrerPolicy='no-referrer';
- var fallback=jojoFallbackPoster(title,company),safe=https(url||'');
- img.onerror=function(){img.onerror=null;img.src=fallback};
- img.src=safe||fallback;
+ var fallback=jojoFallbackPoster(title,company);
+ var options=(Array.isArray(url)?url:[url]).map(function(x){return https(x||'')}).filter(Boolean);
+ var dedup=Array.from(new Set(options)),i=0;
+ img.onerror=function(){img.src=(i<dedup.length?dedup[i++]:fallback);if(i>dedup.length)img.onerror=null};
+ img.src=dedup.length?dedup[i++]:fallback;
 }
 
 function clean(str){return String(str||'').toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
@@ -571,7 +576,7 @@ function initReviewPanel(){
  function thumbCache(){var o=readJ(THKEY,{});return Array.isArray(o)?{}:o}
  function candidateKey(c){return String(c.platform||'okru')+':'+String(c.videoId)}
  function linkedIds(){var ids=new Set();function visit(e){(e.sources||[]).forEach(function(x){if(x&&x.videoId)ids.add(candidateKey(x))})} (state.updates||[]).forEach(visit);Object.keys(state.cache||{}).forEach(function(k){var obj=state.cache[k];(Array.isArray(obj)?obj:(obj&&obj.catalogue&&obj.catalogue.episodes||[])).forEach(visit)});return ids}
- function pendingList(){var linked=linkedIds();return candidates.filter(function(c){var id=candidateKey(c);return !approvedIds.has(id)&&!dismissed.has(id)&&!linked.has(id)})}
+ function pendingList(){var linked=linkedIds(),showLinked=$('reviewShowLinked')&&$('reviewShowLinked').checked;return candidates.filter(function(c){var id=candidateKey(c);return !dismissed.has(id)&&(showLinked||(!approvedIds.has(id)&&!linked.has(id)))})}
  function unknown(c){return !c.title&&!c.duration}
  function updateBadge(){var n=pendingList().length,b=$('autoMatchBadge');txt(b,String(n));b.hidden=!n}
  var panel=$('reviewPanel'),grid=$('reviewCandidates'),message=$('reviewMessage'),dialog=$('reviewDialog');
@@ -580,16 +585,17 @@ function initReviewPanel(){
   var links=$('reviewSourcesLinks'),note=$('reviewSourcesNote'),filter=$('reviewProfile');
   return fetch('./config/monitored_sources.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Configuração das fontes indisponível');return r.json()}).then(function(config){
    var profiles=(config.profiles||[]).filter(function(p){return p&&p.enabled&&/^https:\/\//.test(p.url||'')});
+   profiles.push({id:'Internet Archive',platform:'archive',url:'https://archive.org/',label:'Internet Archive · API pública de metadados',enabled:true});
    var old=filter.value;filter.replaceChildren(new Option('Todos os perfis',''));
    profiles.forEach(function(p){filter.add(new Option(p.label||p.id,p.id))});
    if(profiles.some(function(p){return p.id===old}))filter.value=old;
    function display(report){
     var found=new Map(((report&&report.profiles)||[]).map(function(p){return [p.id,p]}));
-    var status={lista_lida:'Leitura OK',acesso_restrito:'Acesso restrito',sessao_ou_acesso_restrito:'Sessão restrita',sem_links_visiveis:'Sem vídeos detectáveis',consulta_falhou:'Falha na leitura',limite_requisicoes:'Limite do provedor',url_invalida:'URL inválida'};
+    var status={lista_lida:'Leitura OK',lista_parcial:'Leitura parcial (alguns vídeos não aparecem)',acesso_restrito:'Acesso restrito',sessao_ou_acesso_restrito:'Sessão restrita',sem_links_visiveis:'Sem vídeos detectáveis',consulta_falhou:'Falha na leitura',limite_requisicoes:'Limite do provedor',url_invalida:'URL inválida'};
     links.replaceChildren();profiles.forEach(function(p){
      var a=el('a','',p.label||p.id),check=found.get(p.id);
      a.href=p.url;a.target='_blank';a.rel='noopener noreferrer';
-     a.append(document.createTextNode(' · '+(check?(status[check.state]||check.state||'Aguardando'):'Sem relatório')+(check?' · '+Number(check.found||0)+' links':'')));
+     a.append(document.createTextNode(' · '+(p.id==='Internet Archive'?'Pesquisa diária de metadados':check?(status[check.state]||check.state||'Aguardando'):'Sem relatório')+(check?' · '+Number(check.found||0)+' links':'')));
      links.append(a)
     });
     txt(note,profiles.length+' fonte(s) ativa(s). '+(report&&report.checkedAt?'Última leitura: '+new Date(report.checkedAt).toLocaleString('pt-BR')+'. ':'Ainda sem leitura confirmada. ')+'As fontes são monitoradas; vídeos e reprodução precisam de conferência manual.');
@@ -598,14 +604,18 @@ function initReviewPanel(){
    return fetch(cfg+'/api/jojo-monitor/report',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error();return r.json()}).catch(function(){return fetch('./source_monitor_status.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()})}).then(display).catch(function(){display(null)});
   }).catch(function(){txt(note,'Não foi possível carregar a lista de fontes. Confira o arquivo config/monitored_sources.json.');links.replaceChildren()});
  }
+ function loadArchiveSuggestions(){return fetch('./archive_candidates.json?t='+Date.now(),{cache:'no-store'})
+  .then(function(r){return r.ok?r.json():{candidates:[]}})
+  .then(function(j){return Array.isArray(j.candidates)?j.candidates.filter(function(c){return c&&c.platform==='archive'&&/^a[0-9a-f]{32}$/.test(c.videoId||'')&&/^https:\/\/archive\.org\/download\//.test(c.url||'')}):[]})
+  .catch(function(){return []})}
  function load(silent){
-  if(!silent)setMsg('Consultando candidatos e aprovações na Oracle…');
+  if(!silent)setMsg('Consultando candidatos e aprovações na Oracle e Internet Archive…');
   return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Sem configuração');return r.json()}).then(function(conf){
    cfg=String(conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^/\s?#]+$/.test(cfg))throw Error('Endereço HTTPS não configurado');
    loadReviewProfiles();
-   return Promise.all([fetch(cfg+'/api/jojo-monitor/candidates',{cache:'no-store',credentials:'omit'}),fetch(cfg+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'})]);
-  }).then(function(res){if(!res[0].ok||!res[1].ok)throw Error('API indisponível');return Promise.all(res.map(function(r){return r.json()}))}).then(function(data){
-   candidates=Array.isArray(data[0].candidates)?data[0].candidates:[];
+   return Promise.all([fetch(cfg+'/api/jojo-monitor/candidates',{cache:'no-store',credentials:'omit'}),fetch(cfg+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'}),loadArchiveSuggestions()]);
+  }).then(function(res){if(!res[0].ok||!res[1].ok)throw Error('API indisponível');return Promise.all([res[0].json(),res[1].json(),Promise.resolve(res[2])])}).then(function(data){
+   candidates=(Array.isArray(data[0].candidates)?data[0].candidates:[]).concat(data[2]||[]);
    var quota=data[0];
    txt($('reviewLinkQuota'),Number.isFinite(Number(quota.linksDailyLimit))&&quota.linksDailyLimit!=null?'🔗 Vinculações hoje: '+Number(quota.linksUsedToday||0)+' / '+Number(quota.linksDailyLimit)+' · restam '+Number(quota.linksRemainingToday||0)+' (reset 00h Brasília)':'🔗 Limite de vinculações: consulte a Oracle após instalar a API atualizada.');
    approvedIds=new Set((data[1].approved||[]).map(candidateKey));
@@ -623,6 +633,8 @@ function initReviewPanel(){
   // A clip can have show names in the title; duration and negative terms matter.
   var best=!excluded && (m>=55 || (m>=28 && (suggested||titleShow))) && (titleShow||suggested);
   if(m>0&&m<24)best=false;
+  // Archive suggestions are ranked from matching show/date metadata; full playback is still unverified.
+  if(c.platform==='archive'&&suggested&&!excluded&&m===0)best=true;
   if(archive&&best)return 'classic';
   if(best)return 'best';
   return 'extra';
@@ -638,7 +650,7 @@ function initReviewPanel(){
  }
  function render(){
   updateBadge();syncTrashUI();if(trashMode){renderTrash();return}
-  grid.replaceChildren();var pending=pendingList();
+  grid.replaceChildren();var pending=pendingList(),linkedNow=linkedIds();
   var relevance=$('reviewRelevance').value,profileFilter=$('reviewProfile').value;var q=clean(($('reviewSearch').value||'').replace(/&/g,' and ').replace(/[^\p{L}\p{N}]+/gu,' ')).trim(),platform=$('reviewPlatform').value;
   var stats={best:0,classic:0,extra:0};pending.forEach(function(c){stats[quality(c)]++});
   txt($('reviewQualityCounts'),'✅ '+stats.best+' prováveis · 📚 '+stats.classic+' antigos · 🗂 '+stats.extra+' outros');
@@ -649,14 +661,15 @@ function initReviewPanel(){
   visible.slice().sort(function(a,b){return String(b.publishedAt||'').localeCompare(String(a.publishedAt||''))}).slice(0,80).forEach(function(c){
    var card=el('div','reviewCard'),info=el('div','reviewInfo'),im=el('img','');
    im.alt='Miniatura do vídeo';im.loading='lazy';im.referrerPolicy='no-referrer';
-   jojoSetPoster(im,c.thumbnailUrl,c.title||('Vídeo '+c.videoId),c.platform==='bilibili'?'BILIBILI':'OK.RU');
+   jojoSetPoster(im,c.thumbnailUrl,c.title||('Vídeo '+c.videoId),c.platform==='archive'?'ARCHIVE':c.platform==='bilibili'?'BILIBILI':'OK.RU');
    info.append(el('span','reviewQuality '+(quality(c)==='best'?'best':quality(c)==='extra'?'extra':''),quality(c)==='best'?'✅ Possível show completo':quality(c)==='classic'?'📚 Arquivo antigo':'🗂 Revisão secundária'));
-   info.append(el('strong','',(c.platform==='bilibili'?'🟦 Bilibili · ':'🟠 OK.ru · ')+(c.title||'Vídeo '+c.videoId)));
+   info.append(el('strong','',(c.platform==='archive'?'🟪 Internet Archive · ':c.platform==='bilibili'?'🟦 Bilibili · ':'🟠 OK.ru · ')+(c.title||'Vídeo '+c.videoId)));
    info.append(el('small','',[(c.duration?'⏱ '+c.duration:''),(c.publishedAt||''),(c.sourceProfiles||[]).join(', ')].filter(Boolean).join(' · ')||'Título ou duração não identificados'));
+   if(c.platform==='archive')info.append(el('small','','⚠ Metadados do Archive: confira vídeo, direitos e correspondência antes de aprovar.'));
    if((c.possibleEventIds||[]).length){var hints=(c.possibleEventIds||[]).map(function(id){var e=(state.updates||[]).find(function(x){return x.id===id});return e?(e.date+' '+e.title):''}).filter(Boolean);if(hints.length)info.append(el('small','','💡 Sugestão por nome e data: '+hints.slice(0,2).join(' / ')))}
-   var a=el('a','','↗ Conferir no '+(c.platform==='bilibili'?'Bilibili':'OK.ru'));a.href=c.platform==='bilibili'?'https://www.bilibili.tv/en/video/'+encodeURIComponent(c.videoId):'https://ok.ru/video/'+encodeURIComponent(c.videoId);a.target='_blank';a.rel='noopener noreferrer';info.append(a);
+   var a=el('a','','↗ Conferir no '+(c.platform==='archive'?'Internet Archive':c.platform==='bilibili'?'Bilibili':'OK.ru'));a.href=c.platform==='archive'?c.detail:c.platform==='bilibili'?'https://www.bilibili.tv/en/video/'+encodeURIComponent(c.videoId):'https://ok.ru/video/'+encodeURIComponent(c.videoId);a.target='_blank';a.rel='noopener noreferrer';info.append(a);
    var row=el('div','reviewRow');
-   var b=el('button','','Vincular a um evento');b.type='button';b.addEventListener('click',function(){openCandidate(c)});
+   var isLinked=linkedNow.has(candidateKey(c))||approvedIds.has(candidateKey(c));var b=el('button','',isLinked?'✓ Já vinculado':'Vincular a um evento');b.type='button';b.disabled=isLinked;if(!isLinked)b.addEventListener('click',function(){openCandidate(c)});
    var x=el('button','reviewDismiss','🗑 Lixeira');x.type='button';x.title='Dispensar para todos os navegadores pela Oracle';x.addEventListener('click',function(){changeReview('trash',[asItem(c)])});
    row.append(b,x);info.append(row);
    card.append(im,info);grid.append(card)
@@ -671,10 +684,10 @@ function initReviewPanel(){
    var t=trash[k],parts=k.split(':'),platform=parts[0]||'okru',vid=parts[1]||'';
    var card=el('div','reviewCard'),info=el('div','reviewInfo'),im=el('img','');
    im.alt='Miniatura do vídeo';im.loading='lazy';im.referrerPolicy='no-referrer';
-   var cached=(thumbCache()[k]||'');jojoSetPoster(im,t.th||cached,t.t||('Vídeo '+vid),platform==='bilibili'?'BILIBILI':'OK.RU');
-   info.append(el('strong','',(platform==='bilibili'?'🟦 Bilibili · ':'🟠 OK.ru · ')+(t.t||'Vídeo '+vid)));
+   var cached=(thumbCache()[k]||'');jojoSetPoster(im,t.th||cached,t.t||('Vídeo '+vid),platform==='archive'?'ARCHIVE':platform==='bilibili'?'BILIBILI':'OK.RU');
+   info.append(el('strong','',(platform==='archive'?'🟪 Internet Archive · ':platform==='bilibili'?'🟦 Bilibili · ':'🟠 OK.ru · ')+(t.t||'Vídeo '+vid)));
    info.append(el('small','trashMeta',[(t.d?'⏱ '+t.d:''),(t.ts?'Na lixeira desde '+new Date(t.ts).toLocaleDateString('pt-BR'):'')].filter(Boolean).join(' · ')));
-   var a=el('a','','↗ Conferir');a.href=platform==='bilibili'?'https://www.bilibili.tv/en/video/'+encodeURIComponent(vid):'https://ok.ru/video/'+encodeURIComponent(vid);a.target='_blank';a.rel='noopener noreferrer';info.append(a);
+   var a=el('a','','↗ Conferir');a.href=platform==='archive'?'https://archive.org/':platform==='bilibili'?'https://www.bilibili.tv/en/video/'+encodeURIComponent(vid):'https://ok.ru/video/'+encodeURIComponent(vid);a.target='_blank';a.rel='noopener noreferrer';info.append(a);
    var row=el('div','reviewRow');
    var r=el('button','reviewRestoreBtn','↩ Restaurar');r.type='button';r.addEventListener('click',function(){changeReview('restore',[{key:k}])});
    var d=el('button','danger','🧨 Excluir de vez');d.type='button';d.title='Some da lista e não volta, mesmo que a Oracle encontre de novo';d.addEventListener('click',function(){changeReview('purge',[{key:k}])});
@@ -731,7 +744,7 @@ function initReviewPanel(){
    if(fromUpdates&&!old._reviewUpdate){old.id=e.id;old._reviewUpdate=true}
    if((!old.title||/^(collision|dynamite|raw|smackdown)$/i.test(old.title))&&/grand slam|blood.?guts/i.test(e.title||''))old.title=e.title;
   }
-  (state.updates||[]).filter(function(e){return e.company===code}).forEach(function(e){add(e,true)});
+  (state.updates||[]).filter(function(e){return e.company===code||(code==='nxt'&&e.company==='wwe'&&/\bnxt\b/i.test((e.show||'')+' '+(e.title||'')))}).forEach(function(e){add(e,true)});
   var catalog=state.cache[code]||[];if(!Array.isArray(catalog))catalog=(catalog.catalogue&&catalog.catalogue.episodes)||[];
   catalog.forEach(function(e){add(e,false)});
   if(code==='wwe'){
@@ -742,7 +755,7 @@ function initReviewPanel(){
  }
  function updateReviewEvents(){
   var company=$('reviewCompany').value,search=clean($('reviewEventSearch').value.trim()),older=$('reviewOlder').checked,show=$('reviewShow').value,sel=$('reviewEvent'),old=sel.value;
-  var cutoff=new Date(Date.now()-120*86400000).toISOString().slice(0,10);
+  var cutoff=new Date(Date.now()-(company==='roh'?540:180)*86400000).toISOString().slice(0,10);
   var rows=reviewEvents.filter(function(e){var n=clean([e.title,e.show,e.date].join(' '));return(!show||showBucket(e)===show)&&(!search||n.indexOf(search)>=0)&&(!older&&!search?e.date>=cutoff:true)}).slice(0,350);
   sel.replaceChildren(new Option('Selecione o show…',''));
   rows.forEach(function(e){sel.add(new Option(e.date+' · '+(names[e._company||e.company||company]||company.toUpperCase())+' · '+e.title+' ('+(e.sources||[]).length+'/3)',e.id))});
@@ -772,11 +785,11 @@ function initReviewPanel(){
   }).catch(function(err){txt($('reviewEventHelp'),'Falha ao atualizar calendário: '+err.message)})
  }
  function openCandidate(c,manualUrl){
-  selectedCandidate=c;selectedId=String(c.videoId);selectedPlatform=c.platform||'okru';selectedManualUrl=manualUrl||'';
-  txt($('reviewSummary'),(selectedPlatform==='bilibili'?'Bilibili':'OK.ru')+' · Vídeo '+selectedId+' · '+(c.title||'Sem título identificado'));
+  selectedCandidate=c;selectedId=String(c.videoId);selectedPlatform=c.platform||'okru';selectedManualUrl=manualUrl||(selectedPlatform==='archive'?c.url||'':'');
+  txt($('reviewSummary'),(selectedPlatform==='archive'?'Internet Archive':selectedPlatform==='bilibili'?'Bilibili':'OK.ru')+' · Vídeo '+selectedId+' · '+(c.title||'Sem título identificado'));
   var sel=$('reviewCompany');sel.replaceChildren();codes.forEach(function(k){sel.add(new Option(names[k],k))});
-  sel.value=detectedCompany(c);$('reviewShow').value='';$('reviewEventSearch').value=reviewDateFromTitle(c.title);$('reviewOlder').checked=false;
-  $('reviewKey').value='';$('reviewRights').checked=false;txt($('reviewFeedback'),'');
+  sel.value=detectedCompany(c);$('reviewShow').value='';$('reviewEventSearch').value=reviewDateFromTitle(c.title);$('reviewOlder').checked=(sel.value==='roh');
+  $('reviewKey').value='';$('reviewThumbUrl').value=/^https:\/\//.test(c.thumbnailUrl||'')?c.thumbnailUrl:'';$('reviewRights').checked=false;txt($('reviewFeedback'),'');
   if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
   changeReviewCompany(sel.value,reviewSuggestedProgramme(c,sel.value));
  }
@@ -785,7 +798,7 @@ function initReviewPanel(){
  $('reviewEventSearch').addEventListener('input',updateReviewEvents);
  $('reviewOlder').addEventListener('change',updateReviewEvents);
  $('reviewReload').addEventListener('click',function(){load()});
- $('reviewSearch').addEventListener('input',function(){if(this.value.trim())$('reviewRelevance').value='all';render()});$('reviewPlatform').addEventListener('change',render);$('reviewProfile').addEventListener('change',render);$('reviewRelevance').addEventListener('change',render);
+ $('reviewSearch').addEventListener('input',function(){if(this.value.trim())$('reviewRelevance').value='all';render()});$('reviewPlatform').addEventListener('change',render);$('reviewShowLinked').addEventListener('change',render);$('reviewProfile').addEventListener('change',render);$('reviewRelevance').addEventListener('change',render);
  $('autoMatchOpen').addEventListener('click',function(){if(typeof panel.showModal==='function'){if(!panel.open)panel.showModal()}else panel.setAttribute('open','');load()});
  $('reviewClose').addEventListener('click',function(){panel.close()});
  panel.addEventListener('click',function(e){if(e.target===panel)panel.close()});
@@ -811,7 +824,7 @@ $('reviewDismissUnknown').addEventListener('click',function(){changeReview('tras
   if(!eventId||!key||!rights)return;
   btn.disabled=true;txt($('reviewFeedback'),'Registrando sua aprovação…');
   fetch(cfg+'/api/jojo-monitor/approve',{method:'POST',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({key:key,videoId:selectedId,platform:selectedPlatform,eventId:eventId,rightsConfirmed:rights,manualUrl:selectedManualUrl})})
+   body:JSON.stringify({key:key,videoId:selectedId,platform:selectedPlatform,eventId:eventId,rightsConfirmed:rights,manualUrl:selectedManualUrl,thumbnailUrl:$('reviewThumbUrl').value.trim()})})
    .then(function(r){return r.json().then(function(data){return {ok:r.ok,data:data}})})
    .then(function(result){$('reviewKey').value='';txt($('reviewFeedback'),result.data.message||'Resposta recebida');
       if(result.ok){setTimeout(function(){dialog.close();load()},1000)}})
@@ -849,8 +862,11 @@ function isPpv(r){return /^(PPV|PLE|Weekly PPV|Premium Live Event)$/i.test(Strin
 function mergeUpdates(code,rows){var all=rows.slice(),seen={};
  function sourceKey(s){return (s.type||'')+'|'+(s.videoId||s.url||'')}
  all.forEach(function(r){seen[(r.date||'')+'|'+clean(r.title)]=r; if(r.id)seen['id:'+r.id]=r});
- state.updates.forEach(function(r){if(r.company!==code)return;
-  var k=r.date+'|'+clean(r.title),existing=seen['id:'+r.id]||seen[k];
+ state.updates.forEach(function(update){
+   var isNxt=code==='nxt'&&update.company==='wwe'&&/\bnxt\b/i.test((update.show||'')+' '+(update.title||''));
+   if(update.company!==code&&!isNxt)return;
+   var r=isNxt?Object.assign({},update,{company:'nxt',_company:'nxt'}):update;
+   var k=r.date+'|'+clean(r.title),existing=seen['id:'+r.id]||seen[k];
   if(!existing){var matches=all.filter(function(x){return x.date===r.date&&x.show===r.show});if(matches.length===1)existing=matches[0]}
   if(existing){var known=new Set((existing.sources||[]).map(sourceKey));(r.sources||[]).forEach(function(src){if(!known.has(sourceKey(src))&&(existing.sources||[]).length<3){existing.sources=(existing.sources||[]).concat([src]);known.add(sourceKey(src))}});if((existing.sources||[]).length)existing.scheduled=false;if(r.title&&/grand slam|blood & guts/i.test(r.title))existing.title=r.title;if(!existing.thumbnail&&(r.thumbnail||r.poster))existing.thumbnail=r.thumbnail||r.poster;if(!existing.poster&&r.poster)existing.poster=r.poster;existing._needle=clean([existing.title,existing.show,existing.description,existing.date].join(' '));return}
   var available=Array.isArray(r.sources)&&r.sources.length>0;
@@ -860,14 +876,29 @@ function mergeUpdates(code,rows){var all=rows.slice(),seen={};
 // Weekly placeholders only surface in the next 7 days (or 21 days back).
 // Future PPVs/PLEs remain visible regardless of lead time; historical playable shows remain intact.
 function localISODate(offset){var d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+offset);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function scheduledVisible(r,search){if(!r.scheduled)return true;if(search)return true;
- var today=localISODate(0),week=localISODate(7),past=localISODate(-21);
- return (r.date>=past&&r.date<=week) || (isPpv(r)&&r.date>=today);
+function nextWeeklyByShow(){
+ var today=localISODate(0),out={},ppvs={};
+ (state.rows||[]).forEach(function(r){if(!r.scheduled||r.date<today)return;
+  var key=r._company||r.company;
+  if(isPpv(r)){if(!ppvs[key]||r.date<ppvs[key])ppvs[key]=r.date;return}
+  if(!out[key]||r.date<out[key])out[key]=r.date;
+ });state.nextPpv=ppvs;return out;
+}
+function scheduledVisible(r,search){
+ if(!r.scheduled)return true;
+ if(search)return true; // Pesquisa explícita permite localizar qualquer data para revisão
+ if(isPpv(r))return r.date>=localISODate(0)&&r.date===((state.nextPpv||{})[r._company||r.company]||'');
+ var today=localISODate(0),key=r._company||r.company;
+ return r.date>=today&&r.date===((state.nextWeekly||{})[key]||'');
 }
 function renderUpcoming(){var node=$('upcomingPanel'),box=$('upcomingCards');box.replaceChildren();
- var today=localISODate(0),past=localISODate(-7),week=localISODate(7);
- var rows=state.rows.filter(function(r){return r.scheduled&&r.date>=past&&(r.date<=week||(isPpv(r)&&r.date>=today))&&((state.company==='all')||r._company===state.company)&&(!$('ppvOnly').checked||isPpv(r))}).sort(function(a,b){var af=a.date>=today,bf=b.date>=today;return af!==bf?(af?-1:1):(af?chronology(a,b):chronology(b,a))}).slice(0,12);
- node.hidden=!rows.length;rows.forEach(function(r){var b=el('button','upcomingCard');b.type='button';b.append(el('strong','',r.title));b.append(el('small','',r.date+' · '+names[r._company]+' · '+(r.date>=today?(r.provisional?'Previsão semanal':'Agendado'):'Aguardando vídeo')));b.addEventListener('click',function(){open(r)});box.append(b)})}
+ var today=localISODate(0),rows=state.rows.filter(function(r){return r.scheduled&&scheduledVisible(r,false)&&r.date>=today&&
+  (state.company==='all'||r._company===state.company)&&(!$('ppvOnly').checked||isPpv(r))});
+ rows.sort(function(a,b){return chronology(a,b)});rows=rows.slice(0,12);
+ node.hidden=!rows.length;rows.forEach(function(r){var b=el('button','upcomingCard');b.type='button';
+ b.append(el('strong','',r.title));b.append(el('small','',cardDateBR(r.date)+' · '+names[r._company]+' · '+
+ (r.provisional?'Previsão semanal':'Agendado')));b.addEventListener('click',function(){open(r)});box.append(b)})
+}
 function fetchCompany(code){if(state.cache[code])return Promise.resolve(state.cache[code]);return fetch('./'+code+'.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw Error('HTTP '+r.status+' ao buscar '+code+'.json');return r.json()}).then(function(x){if(!x.catalogue||!Array.isArray(x.catalogue.episodes))throw Error('Arquivo de catálogo incompatível');state.cache[code]=x.catalogue.episodes.map(function(r){r._company=code;return r});return state.cache[code]})}
 function showBucket(r){
  var n=clean([r.show,r.title].join(' '));
@@ -893,19 +924,33 @@ function updateShowFilter(){
 }
 function pick(code){state.company=code;state.rows=[];state.filtered=[];state.queue=[];state.limit=80;saveCompany(code);Array.prototype.forEach.call($companies.children,function(c){c.classList.toggle('active',c.dataset.company===code);c.setAttribute('aria-pressed',c.dataset.company===code?'true':'false')});$results.replaceChildren(el('div','empty','Carregando '+names[code]+'…'));txt($('count'),'Carregando…');status('Buscando '+names[code]+' no seu GitHub…');var job=code==='all'?Promise.all(codes.map(fetchCompany)).then(function(sets){return [].concat.apply([],sets.map(function(rows,i){return mergeUpdates(codes[i],rows)}))}):fetchCompany(code).then(function(rows){return mergeUpdates(code,rows)});return job.then(function(rows){if(state.company!==code)return;state.rows=rows;rows.forEach(function(r){if(!r._needle)r._needle=clean([r.title,r.show,r.description,r.date].join(' '))});setYearOptions(rows);$('year').value='';$('search').value='';updateShowFilter();apply();status(names[code]+': '+rows.length.toLocaleString('pt-BR')+' eventos carregados.');}).catch(function(err){$results.replaceChildren(el('div','empty','Não foi possível carregar os eventos. '+err.message));status('Falha no catálogo. Verifique se os arquivos JSON estão no GitHub Pages.');txt($('count'),'Erro de carregamento')})}
 function chronology(a,b){var x=String(a.date||''),y=String(b.date||'');return x.localeCompare(y)||String(a._company||'').localeCompare(String(b._company||''))||String(a.title||'').localeCompare(String(b.title||''))}
-function apply(){if(!state.company)return;var term=clean($('search').value.trim()),year=$('year').value;state.filtered=state.rows.filter(function(r){return scheduledVisible(r,!!term)&&(!year||String(r.year)===year)&&(!$('showFilter').value||showBucket(r)===$('showFilter').value)&&(!$('ppvOnly').checked||isPpv(r))&&(!term||r._needle.indexOf(term)>=0)}).slice();state.queue=state.filtered.slice().sort(chronology);state.filtered.sort(function(a,b){return $('order').value==='old'?chronology(a,b):-chronology(a,b)});state.limit=80;updateYearRail();txt($('timelineLabel'),year?'Ano '+year+' · '+names[state.company]:'Linha do tempo completa · '+names[state.company]);render();renderUpcoming()}
+function apply(){if(!state.company)return;state.nextWeekly=nextWeeklyByShow();var term=clean($('search').value.trim()),year=$('year').value;state.filtered=state.rows.filter(function(r){return scheduledVisible(r,!!term)&&(!year||String(r.year)===year)&&(!$('showFilter').value||showBucket(r)===$('showFilter').value)&&(!$('ppvOnly').checked||isPpv(r))&&(!term||r._needle.indexOf(term)>=0)}).slice();state.queue=state.filtered.slice().sort(chronology);state.filtered.sort(function(a,b){return $('order').value==='old'?chronology(a,b):-chronology(a,b)});state.limit=80;updateYearRail();txt($('timelineLabel'),year?'Ano '+year+' · '+names[state.company]:'Linha do tempo completa · '+names[state.company]);render();renderUpcoming()}
 function sourceName(s){if(s.type==='archive')return 'Internet Archive'+(s.height?' · '+s.height+'p':'');if(s.type==='youtube')return 'YouTube';if(s.type==='okru')return 'OK.ru';if(s.type==='bilibili')return 'Bilibili';if(s.type==='dailymotion')return 'Dailymotion';return s.label||s.type||'Fonte'}
 function eventImage(r){
  var candidates=[r.thumbnail,r.poster,((state.thumbByEvent||{})[r.id]||'')];
  (r.sources||[]).forEach(function(src){if(src.thumbnail)candidates.push(src.thumbnail);if(src.thumbnailUrl)candidates.push(src.thumbnailUrl)});
- for(var i=0;i<candidates.length;i++){if(https(candidates[i]))return candidates[i]}
- // Archive's own public preview service, not a synthetic claim of a photo.
- for(var j=0;j<(r.sources||[]).length;j++){var src=r.sources[j];if(src.type==='archive'){
-   var id=archiveId(src.url||'');if(id)return 'https://archive.org/services/img/'+encodeURIComponent(id);
- }}
- return '';
+ (r.sources||[]).forEach(function(src){if(src.type==='archive'){
+   var id=archiveId(src.url||'');if(id)candidates.push('https://archive.org/services/img/'+encodeURIComponent(id));
+ }});
+ return candidates.filter(function(x){return !!https(x)});
 }
-function render(){var rows=state.filtered.slice(0,state.limit),frag=document.createDocumentFragment();rows.forEach(function(r){var card=el('button','event');card.type='button';card.setAttribute('aria-label','Abrir '+r.title);var img=el('img','thumb');img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';var link=eventImage(r);jojoSetPoster(img,link,r.title,r._company);card.append(img);var bd=el('div','eventBody');bd.append(el('div','eventMeta',[r.date,names[r._company],r.show].filter(Boolean).join(' · ')));bd.append(el('div','eventTitle',r.title||'Evento sem título'));var ss=r.sources||[];bd.append(el('div','eventTypes',r.scheduled?(r.provisional?'📅 Previsão semanal · Sem vídeo':'📅 Evento registrado · Aguardando vídeo'):ss.map(sourceName).filter(function(v,i,a){return a.indexOf(v)===i}).slice(0,2).join(' · ')));card.append(bd);card.addEventListener('click',function(){open(r)});frag.append(card)});$results.replaceChildren(frag);txt($('count'),state.filtered.length.toLocaleString('pt-BR')+' resultados · '+Math.min(state.limit,state.filtered.length).toLocaleString('pt-BR')+' exibidos');$('more').style.display=state.limit<state.filtered.length?'block':'none';if(!state.filtered.length)$results.append(el('div','empty','Nenhum evento encontrado. Tente outro ano ou termo.'))}
+function cardDateBR(iso){var m=String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?m[3]+'/'+m[2]+'/'+m[1]:iso}
+function render(){var rows=state.filtered.slice(0,state.limit),frag=document.createDocumentFragment();rows.forEach(function(r){var card=el('button','event');card.type='button';card.setAttribute('aria-label','Abrir '+r.title);var img=el('img','thumb');img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';var link=eventImage(r);jojoSetPoster(img,link,r.title,r._company);card.append(img);var bd=el('div','eventBody');bd.append(el('div','eventMeta',[cardDateBR(r.date),names[r._company],r.show].filter(Boolean).join(' · ')));bd.append(el('div','eventTitle',r.title||'Evento sem título'));var ss=r.sources||[];bd.append(el('div','eventTypes',r.scheduled?(r.provisional?'📅 Previsão semanal · Sem vídeo':'📅 Evento registrado · Aguardando vídeo'):ss.map(sourceName).filter(function(v,i,a){return a.indexOf(v)===i}).slice(0,2).join(' · ')));card.append(bd);card.addEventListener('click',function(){open(r)});frag.append(card)});$results.replaceChildren(frag);txt($('count'),state.filtered.length.toLocaleString('pt-BR')+' resultados · '+Math.min(state.limit,state.filtered.length).toLocaleString('pt-BR')+' exibidos');$('more').style.display=state.limit<state.filtered.length?'block':'none';if(!state.filtered.length)$results.append(el('div','empty','Nenhum evento encontrado. Tente outro ano ou termo.'))}
+function reportedBroken(s){if(!s)return null;return (state.brokenSources||{})[(s.type||'okru')+':'+(s.videoId||'')]||null}
+function updateSourceDebug(){var r=state.current,s=state.source,box=$('sourceDebug'),info=$('sourceDebugText'),a=$('sourceDebugOpen');
+ if(!r||!s){box.hidden=true;return}box.hidden=false;
+ var flag=reportedBroken(s),url=sourceUrl(s)||'',parts=[
+ 'Evento: '+(r.id||r.title)+' · '+r.date+' · '+r.show,
+ 'Fonte: '+sourceName(s),'ID: '+String(s.videoId||'(não informado)'),
+ 'Perfil de origem: '+String(s.owner||s.origin||'(não informado)'),
+ 'Título original: '+String(s.title||'(não informado)'),
+ 'Duração (segundos): '+String(s.duration||'(não informada)'),
+ 'URL: '+url,'Player: '+(s.type==='okru'&&okruVideoId(s)?'https://ok.ru/videoembed/'+okruVideoId(s):'(conforme fonte)'),
+ 'Situação: '+(flag?flag.status+' · relato '+flag.reportedAt:'Reprodução não verificada; HTTP 200 não é garantia')];
+ txt(info,parts.join('\n'));a.href=archivedetail(s)||url||'#';a.hidden=!url;
+}
+function loadBrokenSources(){fetch('./config/broken_sources.json?t='+Date.now(),{cache:'no-store'})
+ .then(function(r){return r.ok?r.json():null}).then(function(x){state.brokenSources=(x&&x.sources)||{};updateSourceDebug()}).catch(function(){})}
 function okruVideoId(s){if(!s)return '';var id=String(s.videoId||'');if(/^\d{5,25}$/.test(id))return id;try{var u=new URL(String(s.url||''));if(!/(^|\.)ok\.ru$/.test(u.hostname))return '';var m=u.pathname.match(/^\/video(?:embed)?\/(\d{5,25})(?:\/|$)/);return m?m[1]:''}catch(e){return ''}}
 function sourceUrl(s){if(!s)return '';if(s.type==='archive')return https((Array.isArray(s.urls)&&s.urls.length?s.urls[state.partIndex]||s.urls[0]:s.url));if(s.type==='youtube'&&/^[A-Za-z0-9_-]{11}$/.test(s.videoId||''))return 'https://www.youtube.com/watch?v='+s.videoId;if(s.type==='dailymotion'&&/^[A-Za-z0-9]+$/.test(s.videoId||''))return 'https://www.dailymotion.com/video/'+s.videoId;if(s.type==='okru'&&/^[0-9]+$/.test(s.videoId||''))return 'https://ok.ru/video/'+s.videoId;if(s.type==='bilibili'&&/^[0-9]{8,20}$/.test(String(s.videoId||'')))return 'https://www.bilibili.tv/en/video/'+s.videoId;return https(s.url)}
 function archiveId(url){try{var u=new URL(url);if(!/(^|\.)archive\.org$/.test(u.hostname))return '';var m=u.pathname.match(/^\/(?:download|details|embed)\/([^/]+)/);return m?decodeURIComponent(m[1]):''}catch(e){return ''}}
@@ -914,14 +959,14 @@ function playDirect(){var s=state.source,video=$('video'),embed=$('embed');embed
 function playEmbed(){var s=state.source,video=$('video'),embed=$('embed');if(!s)return;video.pause();video.removeAttribute('src');video.load();video.style.display='none';embed.style.display='block';var u=sourceUrl(s),id=archiveId(u),src='';if(s.type==='archive'&&id){src='https://archive.org/embed/'+encodeURIComponent(id)}else if(s.type==='okru'&&okruVideoId(s)){src='https://ok.ru/videoembed/'+okruVideoId(s)}else if(s.type==='youtube'&&/^[A-Za-z0-9_-]{11}$/.test(s.videoId||'')){src='https://www.youtube-nocookie.com/embed/'+s.videoId}else if(s.type==='dailymotion'){src='https://www.dailymotion.com/embed/video/'+encodeURIComponent(s.videoId)}if(!src){embed.style.display='none';video.style.display='block';txt($('videoInfo'),'Sem player incorporado para esta fonte. Use Abrir fonte.');return}embed.src=src;txt($('videoInfo'),s.type==='okru'?'Abrindo o OK.ru. Se aparecer “Video has not been found”, use “Vídeo não abre? Procurar alternativa” — a fonte pode ter sido removida.':'Tentando o player incorporado do provedor…');saveWatch()}
 function changeSource(index,resume){var list=state.current&&state.current.sources||[],s=list[Number(index)];if(!s)return;state.source=s;state.partIndex=resume&&s.type==='archive'?Math.max(0,Math.min(99,Number(resume.partIndex)||0)):0;state.resumeSeconds=resume&&s.type==='archive'?Math.max(0,Number(resume.seconds)||0):0;
  var url=sourceUrl(s),a=$('sourceLink');a.href=archivedetail(s)||url||'#';a.style.display=url?'inline-flex':'none';txt(a,s.type==='okru'?'↗ Abrir no OK.ru':s.type==='bilibili'?'↗ Abrir no Bilibili':'↗ Abrir fonte');$('playDirect').style.display=s.type==='archive'?'inline-flex':'none';$('playEmbed').style.display=['archive','youtube','dailymotion','okru'].indexOf(s.type)>=0?'inline-flex':'none';$('vlcBtn').style.display=s.type==='archive'?'inline-flex':'none';
- if(s.type==='archive')playDirect();else if(['youtube','dailymotion','okru'].indexOf(s.type)>=0)playEmbed();else{var v=$('video');v.pause();v.removeAttribute('src');v.load();$('embed').src='about:blank';v.style.display='block';$('embed').style.display='none';txt($('videoInfo'),s.type==='bilibili'?'Bilibili internacional: o player incorporado não foi confirmado. Use Abrir no Bilibili; a disponibilidade depende da sua região e da autorização do vídeo.':'Use Abrir fonte para tentar reproduzir no site original.');saveWatch()}}
+ updateSourceDebug();if(s.type==='archive')playDirect();else if(reportedBroken(s)){var v=$('video'),e=$('embed');v.pause();v.removeAttribute('src');v.load();v.style.display='block';e.src='about:blank';e.style.display='none';txt($('videoInfo'),'⚠ Fonte sinalizada como indisponível: '+reportedBroken(s).status+'. Use Depurar fonte ou Procurar alternativa. O botão Player incorporado permite tentar manualmente.')}else if(['youtube','dailymotion','okru'].indexOf(s.type)>=0)playEmbed();else{var v=$('video');v.pause();v.removeAttribute('src');v.load();$('embed').src='about:blank';v.style.display='block';$('embed').style.display='none';txt($('videoInfo'),s.type==='bilibili'?'Bilibili internacional: o player incorporado não foi confirmado. Use Abrir no Bilibili; a disponibilidade depende da sua região e da autorização do vídeo.':'Use Abrir fonte para tentar reproduzir no site original.');saveWatch()}}
 
 function queueIndex(){if(!state.current)return -1;return state.queue.indexOf(state.current)}
 function updateEpisodeNav(){var i=queueIndex(),prev=i>0?state.queue[i-1]:null,next=i>=0?state.queue[i+1]:null;$('prevEvent').disabled=!prev;$('nextEvent').disabled=!next;txt($('upNext'),next?'A seguir: '+next.date+' · '+names[next._company]+' · '+next.title:'Fim da cronologia selecionada')}
 function switchEvent(direction,onlyPlayable){var i=queueIndex();if(i<0)return false;for(var j=i+direction;j>=0&&j<state.queue.length;j+=direction){var r=state.queue[j];if(onlyPlayable&&!(r.sources||[]).some(function(s){return !!sourceUrl(s)}))continue;open(r,true);return true}return false}
 function onVideoEnded(){var s=state.source;if(!state.current||!s)return;var parts=Array.isArray(s.urls)?s.urls:[];if(state.partIndex+1<parts.length){state.partIndex++;state.resumeSeconds=0;saveWatch();txt($('videoInfo'),'Parte '+(state.partIndex+1)+' de '+parts.length+' · reproduzindo em sequência');playDirect();return}var key=watchId(state.current);removeWatch(key);state.resumeSeconds=0;if(state.autoNext){if(!switchEvent(1,true))txt($('videoInfo'),'Fim dos eventos reproduzíveis desta seleção.')}else{txt($('videoInfo'),'O evento terminou. Autoplay desativado.');updateEpisodeNav()}}
 function open(r,advancing,resume){if(state.current&&state.source)saveWatch();if(!advancing)state.lastFocus=document.activeElement;
- var v=$('video');v.pause();v.removeAttribute('src');v.load();$('embed').src='about:blank';state.current=r;state.source=null;state.partIndex=0;state.resumeSeconds=0;txt($('videoTitle'),r.title||'Evento');txt($('videoSubtitle'),[names[r._company||state.company],r.date,r.show].filter(Boolean).join(' · '));remember(r.id||r.title);
+ var v=$('video');v.pause();v.removeAttribute('src');v.load();$('embed').src='about:blank';state.current=r;state.source=null;state.partIndex=0;state.resumeSeconds=0;$('sourceDebug').open=false;$('sourceDebug').hidden=true;txt($('videoTitle'),r.title||'Evento');txt($('videoSubtitle'),[names[r._company||state.company],r.date,r.show].filter(Boolean).join(' · '));remember(r.id||r.title);
  var opt=$('sourceChoice');opt.replaceChildren();var list=r.sources||[];list.forEach(function(s,i){opt.add(new Option(sourceName(s)+(s.label?' — '+s.label:''),String(i)))});$('shade').classList.add('show');$('shade').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';updateEpisodeNav();
  if(list.length){var idx=resume&&resume.sourceIndex>=0&&resume.sourceIndex<list.length?Number(resume.sourceIndex):0;opt.value=String(idx);changeSource(idx,resume)}else{txt($('videoInfo'),r.scheduled?(r.provisional?'Data semanal prevista, sem confirmação de transmissão ou vídeo. Confira a programação oficial.':'Evento anunciado oficialmente. Ainda não há vídeo cadastrado; use o site oficial para detalhes.'):'Esse evento não tem fontes de vídeo cadastradas.');$('playDirect').style.display='none';$('playEmbed').style.display='none';$('vlcBtn').style.display='none';var a=$('sourceLink');a.href=https(r.official_url)||'#';a.style.display=https(r.official_url)?'inline-flex':'none';txt(a,'↗ Informações oficiais')}
  if(!advancing)$('close').focus()}
@@ -930,7 +975,7 @@ function close(){if(state.current&&state.source)saveWatch();var v=$('video');v.p
 function vlc(){var s=state.source,u=sourceUrl(s);if(!u||s.type!=='archive')return;try{var parsed=new URL(u);var fallback=encodeURIComponent(u);location.href='intent://'+parsed.host+parsed.pathname+parsed.search+'#Intent;scheme=https;package=org.videolan.vlc;S.browser_fallback_url='+fallback+';end'}catch(e){txt($('videoInfo'),'Não foi possível abrir o VLC; use Abrir fonte.') }}
 function isTyping(node){return node&&['INPUT','TEXTAREA','SELECT'].indexOf(node.tagName)>=0}
 function spatial(e){if(!$('gate').hidden)return;if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].indexOf(e.key)<0)return;if(isTyping(document.activeElement)||document.activeElement&&document.activeElement.tagName==='VIDEO')return;var root=$('shade').classList.contains('show')?$('shade'):document.body;var focusable=Array.prototype.slice.call(root.querySelectorAll('button,a[href],select,input')).filter(function(x){return x.offsetParent!==null&&!x.disabled});if(!focusable.length)return;var active=document.activeElement;if(!active||focusable.indexOf(active)<0){focusable[0].focus();e.preventDefault();return}var r=active.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,best=null,score=1e12;focusable.forEach(function(x){if(x===active)return;var z=x.getBoundingClientRect(),dx=z.left+z.width/2-cx,dy=z.top+z.height/2-cy,forward=e.key==='ArrowRight'?dx>8:e.key==='ArrowLeft'?dx< -8:e.key==='ArrowDown'?dy>8:dy< -8;if(!forward)return;var primary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dx):Math.abs(dy);var secondary=e.key==='ArrowRight'||e.key==='ArrowLeft'?Math.abs(dy):Math.abs(dx);var s=primary+secondary*2.8;if(s<score){score=s;best=x}});if(best){e.preventDefault();best.focus();best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}}
-function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('showFilter').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('findOtherSource').addEventListener('click',function(){var r=state.current;if(!r)return;close();var query=[names[r._company||r.company||'wwe']||'',r.title,r.date].filter(Boolean).join(' ');$('reviewSearch').value=query;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').focus()});$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initAutoMatchSync();initLinkHealth();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
+function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('showFilter').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('debugSource').addEventListener('click',function(){updateSourceDebug();$('sourceDebug').open=!$('sourceDebug').open});loadBrokenSources();$('findOtherSource').addEventListener('click',function(){var r=state.current;if(!r)return;close();var query=[names[r._company||r.company||'wwe']||'',r.title,r.date].filter(Boolean).join(' ');$('reviewSearch').value=query;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').focus()});$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}fetchUpdates().then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initAutoMatchSync();initLinkHealth();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}

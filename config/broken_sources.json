@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "notes": "Relatos de reprodução; HTTP 200 não comprova funcionamento. Não substituir fontes automaticamente.",
+  "sources": {
+    "okru:16275187173966": {
+      "eventId": "wwe:2026-11-02:raw",
+      "reportedAt": "2026-11-16",
+      "status": "Reportado como indisponível no player: Video has not been found",
+      "verifyManually": true
+    }
+  }
+}
