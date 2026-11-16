@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T11:43:59Z",
+  "generatedAt": "2026-11-16T11:54:10.336112Z",
   "events": [
     {
       "id": "official:aew:2026-08-22:collision",
@@ -573,10 +573,20 @@
       "year": 2026,
       "title": "ROH on HonorClub — 05/11/2026",
       "show": "HonorClub",
-      "status": "awaiting_video",
-      "sources": [],
-      "provisional": true,
-      "description": "Cadastro provisório para revisão. Data informada no título de vídeo encontrado; confirmar episódio e autorização antes de publicar fonte."
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801539658619392",
+          "url": "https://www.bilibili.tv/en/video/4801539658619392",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/34054ef0c976789371a52b01c6b25bd2.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
+      "provisional": false,
+      "description": "Cadastro provisório para revisão. Data informada no título de vídeo encontrado; confirmar episódio e autorização antes de publicar fonte.",
+      "approvedAt": "2026-11-16T11:26:36Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/34054ef0c976789371a52b01c6b25bd2.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "auto:aew:2026-11-14:collision",
@@ -718,10 +728,21 @@
       "year": 2026,
       "title": "AEW Dynamite: Grand Slam France",
       "show": "Dynamite",
-      "status": "awaiting_video",
-      "sources": [],
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801188292598784",
+          "url": "https://www.bilibili.tv/en/video/4801188292598784",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/4b730cb32e436f4e1cc1eb9f8cf6ebd2.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
       "official_url": "https://www.allelitewrestling.com/post/aew-grand-slam-france-dynamite-results",
-      "description": "Edição especial Grand Slam France Dynamite realizada em 06/10/2026."
+      "description": "Edição especial Grand Slam France Dynamite realizada em 06/10/2026.",
+      "provisional": false,
+      "approvedAt": "2026-11-16T11:25:56Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/4b730cb32e436f4e1cc1eb9f8cf6ebd2.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:tna:2026-11-05:impact",
@@ -1166,6 +1187,27 @@
       "provisional": true,
       "sources": [],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+    },
+    {
+      "id": "aew:2025-10-22:dynamite",
+      "company": "aew",
+      "date": "2025-10-22",
+      "year": 2025,
+      "title": "Dynamite",
+      "show": "Dynamite",
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4797237039994368",
+          "url": "https://www.bilibili.tv/en/video/4797237039994368",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/e3d770eab248bbffc0f21248ef119c4c.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T11:26:04Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/e3d770eab248bbffc0f21248ef119c4c.jpg@720w_405h_1e_1c_90q"
     }
   ],
   "sources": [
