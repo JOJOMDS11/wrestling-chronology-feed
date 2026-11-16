@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T13:46:04.316302Z",
+  "generatedAt": "2026-11-16T14:30:32.787912Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -665,9 +665,22 @@
           "url": "https://archive.org/download/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel/pTgARYuBF7bswLfk%20saveclips.org-6af399ec45e55.mp4",
           "label": "Internet Archive · Revisão administrativa",
           "thumbnail": "https://archive.org/services/img/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel"
+        },
+        {
+          "type": "archive",
+          "videoId": "a6ec43f228781bb7f3c1055ed42ff95ca",
+          "url": "https://archive.org/download/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel/WWE.RAW.2026.11.09.NF.DEF.1080p%20saveclips.org-6af397cb8ba74.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel"
+        },
+        {
+          "type": "okru",
+          "videoId": "16365068290638",
+          "url": "https://ok.ru/video/16365068290638",
+          "label": "OK.ru · Revisão administrativa"
         }
       ],
-      "approvedAt": "2026-11-16T13:33:55Z",
+      "approvedAt": "2026-11-16T14:05:51Z",
       "thumbnail": "https://archive.org/services/img/wwe.-raw.-2026.11.09.-nf.-def.-720p.-webrip.-hfr.h-264-heel"
     },
     {
@@ -747,9 +760,18 @@
       "title": "Friday Night SmackDown",
       "show": "SmackDown",
       "official_url": "https://www.wwe.com/shows/smackdown/2026-11-13",
-      "status": "awaiting_video",
-      "sources": [],
-      "description": "Edição de SmackDown em 13/11/2026, confirmada no site oficial WWE. Vídeo não verificado."
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16414871980622",
+          "url": "https://ok.ru/video/16414871980622",
+          "label": "OK.ru · Revisão administrativa"
+        }
+      ],
+      "description": "Edição de SmackDown em 13/11/2026, confirmada no site oficial WWE. Vídeo não verificado.",
+      "provisional": false,
+      "approvedAt": "2026-11-16T13:51:32Z"
     },
     {
       "id": "auto:aew:2026-11-14:collision",
@@ -1201,6 +1223,25 @@
       "provisional": true,
       "sources": [],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+    },
+    {
+      "id": "wwe:2026-11-02:raw",
+      "company": "wwe",
+      "date": "2026-11-02",
+      "year": 2026,
+      "title": "Raw",
+      "show": "Raw",
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16275297405518",
+          "url": "https://ok.ru/video/16275297405518",
+          "label": "OK.ru · Revisão administrativa"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T13:52:24Z"
     }
   ],
   "sources": [
