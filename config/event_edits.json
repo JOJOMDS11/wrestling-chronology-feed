@@ -852,5 +852,27 @@
       "thumbnailUrl": "https://jojomds11.github.io/wrestling-chronology-feed/undefined",
       "updatedAt": "2026-11-16T21:55:11Z"
     }
+  },
+  "manualEvents": {
+    "manual:tna:2026-10-11:b0a4e458146ff767": {
+      "id": "manual:tna:2026-10-11:b0a4e458146ff767",
+      "company": "tna",
+      "date": "2026-10-11",
+      "year": 2026,
+      "title": "Bound for Glory",
+      "show": "PPV",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801244516850176",
+          "url": "https://www.bilibili.tv/en/video/4801244516850176",
+          "label": "Adição manual · bilibili"
+        }
+      ],
+      "thumbnail": "",
+      "scheduled": false,
+      "manual": true,
+      "createdAt": "2026-11-16T22:13:27Z"
+    }
   }
 }

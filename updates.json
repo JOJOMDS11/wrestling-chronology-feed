@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T16:59:10Z",
+  "generatedAt": "2026-11-17T03:52:01.011315Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -577,10 +577,21 @@
       "year": 2026,
       "title": "AEW Collision: Grand Slam France",
       "show": "Collision",
-      "status": "awaiting_video",
-      "sources": [],
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801234698639872",
+          "url": "https://www.bilibili.tv/en/video/4801234698639872",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/eb17167ffaf9693e96a1d68ef4a61632.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
       "official_url": "https://www.allelitewrestling.com/post/aew-grand-slam-france-collision-results",
-      "description": "Episódio Collision exibido em 10/10/2026; gravado em Paris em 06/10. Não confundir com a data de gravação."
+      "description": "Episódio Collision exibido em 10/10/2026; gravado em Paris em 06/10. Não confundir com a data de gravação.",
+      "provisional": false,
+      "approvedAt": "2026-11-16T22:26:34Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/eb17167ffaf9693e96a1d68ef4a61632.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "reference:wwe:2026-10-10:money-in-the-bank-2026",
@@ -1715,6 +1726,27 @@
       "provisional": true,
       "sources": [],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+    },
+    {
+      "id": "roh:2026-10-08:honorclub",
+      "company": "roh",
+      "date": "2026-10-08",
+      "year": 2026,
+      "title": "HonorClub #187",
+      "show": "HonorClub",
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801224758794752",
+          "url": "https://www.bilibili.tv/en/video/4801224758794752",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/fd62775038bfc4dc30ccf7541b4897b8.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T22:26:27Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/fd62775038bfc4dc30ccf7541b4897b8.jpg@720w_405h_1e_1c_90q"
     }
   ],
   "sources": [
