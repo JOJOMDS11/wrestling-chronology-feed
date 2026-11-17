@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T03:52:01.011315Z",
+  "generatedAt": "2026-11-17T18:37:03Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -545,6 +545,27 @@
       "status": "awaiting_video",
       "sources": [],
       "description": "Evento e gravações em Paris em 06/10/2026; os programas Dynamite e Collision podem ter datas de exibição diferentes. Confirmar qual gravação corresponde ao vídeo."
+    },
+    {
+      "id": "roh:2026-10-08:honorclub",
+      "company": "roh",
+      "date": "2026-10-08",
+      "year": 2026,
+      "title": "HonorClub #187",
+      "show": "HonorClub",
+      "status": "video_available",
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801224758794752",
+          "url": "https://www.bilibili.tv/en/video/4801224758794752",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/fd62775038bfc4dc30ccf7541b4897b8.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
+      "provisional": false,
+      "approvedAt": "2026-11-16T22:26:27Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/fd62775038bfc4dc30ccf7541b4897b8.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "auto:tna:2026-10-09:xplosion",
@@ -1726,27 +1747,6 @@
       "provisional": true,
       "sources": [],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
-    },
-    {
-      "id": "roh:2026-10-08:honorclub",
-      "company": "roh",
-      "date": "2026-10-08",
-      "year": 2026,
-      "title": "HonorClub #187",
-      "show": "HonorClub",
-      "status": "video_available",
-      "sources": [
-        {
-          "type": "bilibili",
-          "videoId": "4801224758794752",
-          "url": "https://www.bilibili.tv/en/video/4801224758794752",
-          "label": "Bilibili · Revisão administrativa",
-          "thumbnail": "https://pic.bstarstatic.com/ugc/fd62775038bfc4dc30ccf7541b4897b8.jpg@720w_405h_1e_1c_90q"
-        }
-      ],
-      "provisional": false,
-      "approvedAt": "2026-11-16T22:26:27Z",
-      "thumbnail": "https://pic.bstarstatic.com/ugc/fd62775038bfc4dc30ccf7541b4897b8.jpg@720w_405h_1e_1c_90q"
     }
   ],
   "sources": [

@@ -322,6 +322,40 @@
       "sourceProfiles": [
         "Internet Archive · ROH Wrestling"
       ]
+    },
+    {
+      "videoId": "a7ff5ee6de525d05ec3a9cddae0cc2ef1",
+      "platform": "archive",
+      "url": "https://archive.org/download/full-gear-2026/Full%20Gear%202026.mp4",
+      "detail": "https://archive.org/details/full-gear-2026",
+      "title": "AEW Full Gear 2026",
+      "filename": "Full Gear 2026.mp4",
+      "thumbnailUrl": "https://archive.org/services/img/full-gear-2026",
+      "possibleEventIds": [
+        "reference:aew:2026-11-14:aew-full-gear-2026"
+      ],
+      "confidence": "Metadados: nome e ano semelhantes; reprodução e direitos NÃO verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive - PPV pendente"
+      ]
+    },
+    {
+      "videoId": "a352f4a8b9adc4253b4043d2d2932be4e",
+      "platform": "archive",
+      "url": "https://archive.org/download/six-man-texas-deathmatch-aew-full-gear-2026/Adam%20Page%20%26%20Brodido%20%28Bandido%20%26%20Brody%20King%29%20%28c%29%20vs.%20Swerve%20Strickland%20%26%20The%20New%20Level%20%28Austin%20Creed%20%26%20Kofi%29%20-%20Texas%20Deathmatch%20for%20the%20AEW%20World%20Trios%20Championships%20-%20AEW%20Full%20Gear%202026.mp4",
+      "detail": "https://archive.org/details/six-man-texas-deathmatch-aew-full-gear-2026",
+      "title": "Adam Page & Brodido (Bandido & Brody King) (c) Vs. Swerve Strickland & The New Level (Austin Creed & Kofi) Texas Deathmatch For The AEW World Trios Championships AEW Full Gear 2026",
+      "filename": "Adam Page & Brodido (Bandido & Brody King) (c) vs. Swerve Strickland & The New Level (Austin Creed & Kofi) - Texas Deathmatch for the AEW World Trios Championships - AEW Full Gear 2026.mp4",
+      "thumbnailUrl": "https://archive.org/services/img/six-man-texas-deathmatch-aew-full-gear-2026",
+      "possibleEventIds": [
+        "reference:aew:2026-11-14:aew-full-gear-2026"
+      ],
+      "confidence": "Metadados: nome e ano semelhantes; reprodução e direitos NÃO verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive - PPV pendente"
+      ]
     }
   ]
 }
