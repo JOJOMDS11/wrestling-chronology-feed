@@ -356,6 +356,23 @@
       "sourceProfiles": [
         "Internet Archive - PPV pendente"
       ]
+    },
+    {
+      "videoId": "a90fcf8b0c2ca41aa55d6d71761a61b51",
+      "platform": "archive",
+      "url": "https://archive.org/download/aew-full-gear-2026-tommaso-ciampac-vs-ilja-dragunov-aew-national-championship/AEW%20Full%20Gear%202026%20Tommaso%20Ciampa%28c%29%20VS%20Ilja%20Dragunov%20AEW%20National%20Championship.mp4",
+      "detail": "https://archive.org/details/aew-full-gear-2026-tommaso-ciampac-vs-ilja-dragunov-aew-national-championship",
+      "title": "AEW Full Gear 2026 Tommaso Ciampa(c) VS Ilja Dragunov AEW National Championship",
+      "filename": "AEW Full Gear 2026 Tommaso Ciampa(c) VS Ilja Dragunov AEW National Championship.mp4",
+      "thumbnailUrl": "https://archive.org/services/img/aew-full-gear-2026-tommaso-ciampac-vs-ilja-dragunov-aew-national-championship",
+      "possibleEventIds": [
+        "reference:aew:2026-11-14:aew-full-gear-2026"
+      ],
+      "confidence": "Metadados: nome e ano semelhantes; reprodução e direitos NÃO verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive - PPV pendente"
+      ]
     }
   ]
 }
