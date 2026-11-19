@@ -36,6 +36,31 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 .monitorMeta{font-size:12px;color:#b9adcb;margin-top:7px}.monitorProfiles{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
 .monitorProfile{font-size:12px;background:#2b223b;border:1px solid #544367;border-radius:10px;padding:9px 12px;color:#dcd2ed;text-decoration:none}
 .monitorProfile:hover{border-color:#9e7ac4}
+
+/* JOJO · historico auditavel das adicoes e descobertas (19/11/2026) */
+.recentLinksFold{margin:0 0 16px;border:1px solid #615079;border-radius:15px;background:#20182d;overflow:hidden}
+.recentLinksFold>summary{list-style:none;cursor:pointer;padding:14px 17px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-weight:850;color:#eedfff}
+.recentLinksFold>summary::-webkit-details-marker{display:none}
+.recentLinksFold>summary:before{content:'▸';color:#caa5f7}.recentLinksFold[open]>summary:before{content:'▾'}
+.recentLinksTip{margin-left:auto;font-size:12px;font-weight:550;color:#b7a7ca}
+.recentLinksBody{border-top:1px solid #4b3a5d;padding:13px 16px 17px}
+.recentLinksNote{font-size:12px;line-height:1.5;color:#c8bbdb;margin:0 0 12px}
+.recentLinksControls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:9px}
+.recentLinksControls button,.recentLinksCard button{background:#47315e;color:#f1e7ff;border:1px solid #8b6ca8;border-radius:9px;padding:9px 11px;font-size:12px;font-weight:750;cursor:pointer}
+.recentLinksControls button[aria-selected=true]{background:#8055ae;border-color:#c49cf3}
+.recentLinksControls input{background:#120e1b;color:#f9f5ff;border:1px solid #72558c;border-radius:9px;min-width:0;flex:1 1 220px;padding:10px;font-size:13px}
+.recentLinksMeta{color:#c3b4d4;font-size:12px;margin:6px 0 12px}
+.recentLinksItems{display:grid;gap:9px;max-height:540px;overflow:auto;overscroll-behavior:contain}
+.recentLinksCard{border:1px solid #57456e;border-radius:11px;background:#2a2039;padding:12px;display:grid;gap:5px;min-width:0}
+.recentLinksCard strong{font-size:14px;overflow-wrap:anywhere;color:#f0e3ff}
+.recentLinksCard small{font-size:12px;color:#cbbbdc;overflow-wrap:anywhere;line-height:1.45}
+.recentLinksCard .recentLinksDestination{font-size:13px;color:#f4eaff}
+.recentLinksCard .recentLinksWarning{color:#ffcd95}
+.recentLinksActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;align-items:center}
+.recentLinksCard a{display:inline-flex;align-items:center;text-decoration:none;border:1px solid #6e538b;border-radius:9px;padding:8px 10px;color:#d9bdff;font-size:12px}
+.recentLinksCard button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:540px){.recentLinksTip{margin-left:0}.recentLinksBody{padding:12px}.recentLinksControls button{flex:1 1 auto}.recentLinksCard button,.recentLinksCard a{flex:1 1 auto;text-align:center;justify-content:center}}
+
 /* Links manuais para sites e arquivos confiaveis */
 .trustedPanel{margin:0 0 19px;border:1px solid #56436e;border-radius:16px;background:#20192d;overflow:hidden}
 .trustedPanel summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:15px 18px;cursor:pointer;list-style:none;font-weight:850;color:#e7d7ff}
@@ -326,6 +351,21 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 
 </section>
 
+</details>
+
+<details class="recentLinksFold" id="recentLinksFold">
+ <summary><span>🆕 Últimos vídeos adicionados · conferir show</span><span id="recentLinksTip" class="recentLinksTip">Aprovações, edições e descobertas</span></summary>
+ <div class="recentLinksBody">
+  <p class="recentLinksNote">Confira a empresa, o programa e a data de cada link. <b>Aprovação na Oracle não garante que a sincronização já publicou o vídeo no catálogo</b> nem que ele reproduz. Candidatos descobertos pelo robô ficam separados. Se errou o destino, copie o link, remova-o do evento errado no ✏️ e adicione-o ao evento certo.</p>
+  <div class="recentLinksControls" role="group" aria-label="Filtrar vídeos recentes">
+   <button type="button" id="recentLinksLinked" aria-pressed="true" aria-selected="true">✅ Adicionados aos shows</button>
+   <button type="button" id="recentLinksPending" aria-pressed="false" aria-selected="false">📡 Descobertos pelo robô</button>
+   <button type="button" id="recentLinksRefresh">↻ Atualizar</button>
+   <input id="recentLinksSearch" type="search" placeholder="Pesquisar vídeo, programa ou data…" aria-label="Pesquisar últimos vídeos">
+  </div>
+  <div class="recentLinksMeta" id="recentLinksMeta" role="status" aria-live="polite">Abra esta aba para consultar a Oracle.</div>
+  <div class="recentLinksItems" id="recentLinksItems"></div>
+ </div>
 </details>
 <nav class="chooser" id="companies" aria-label="Empresas"></nav><section class="yearGuide" aria-label="Linha do tempo por ano"><div class="yearGuideTitle">Escolha um ano da cronologia</div><nav class="yearRail" id="yearRail" aria-label="Anos da cronologia"></nav></section>
 <section aria-label="Filtros"><div class="controls"><input id="search" type="search" autocomplete="off" placeholder="Buscar título, programa ou data…" aria-label="Buscar eventos"><select id="year" aria-label="Ano"><option value="">Todos os anos</option></select><label class="showFilter" id="showFilterWrap" hidden>📺 Programa <select id="showFilter" aria-label="Filtrar programa ou brand"><option value="">Todas as brands</option></select></label><label class="ppvControl"><input id="ppvOnly" type="checkbox"> Somente PPVs / PLEs</label><button type="button" id="ppvAuditOpen" class="ppvAuditBtn">🔎 Auditar PPVs por ano</button><select id="order" aria-label="Ordem"><option value="old">Cronológico: antigos primeiro</option><option value="new">Mais recentes primeiro</option></select></div><div class="count"><span id="count">Selecione uma empresa.</span><span id="mode" class="badge">Catálogo próprio</span></div></section>
@@ -1760,7 +1800,118 @@ function initPpvAudit(){
  })
 }
 
-function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('showFilter').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('debugSource').addEventListener('click',function(){updateSourceDebug();$('sourceDebug').open=!$('sourceDebug').open});loadBrokenSources();$('findOtherSource').addEventListener('click',function(){var r=state.current;if(!r)return;close();var query=[names[r._company||r.company||'wwe']||'',r.title,r.date].filter(Boolean).join(' ');$('reviewSearch').value=query;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').focus()});$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}Promise.all([fetchUpdates(),loadEventEdits()]).then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initReviewPanel();initEventEditor();initAutoMatchSync();initFillPhotos();initLinkHealth();initPpvAudit();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
+
+/* Auditoria de vinculos: fontes do editor + aprovacoes da Oracle; candidatos separados. */
+function initRecentLinksAudit(){
+ var fold=$('recentLinksFold'),list=$('recentLinksItems'),meta=$('recentLinksMeta'),tip=$('recentLinksTip');
+ if(!fold||!list)return;
+ var rows=[],pending=[],tab='linked',loaded=false,busy=false,incomplete='';
+ function srcKey(s){return String(s&&((s.type||s.platform))||'')+'|'+String(s&&(s.videoId||s.url)||'')}
+ function sourceUrlSafe(s){
+  var t=String(s.type||s.platform||'').toLowerCase(),id=String(s.videoId||'');
+  if(t==='okru'&&/^\d{8,20}$/.test(id))return 'https://ok.ru/video/'+id;
+  if(t==='bilibili'&&/^\d{8,20}$/.test(id))return 'https://www.bilibili.tv/en/video/'+id;
+  if(t==='archive'&&/^https:\/\/archive\.org\/download\//.test(String(s.url||'')))return String(s.url);
+  return https(s.url||'')||'';
+ }
+ function eventFor(id,manual){
+  var found=(state.updates||[]).find(function(e){return e.id===id});
+  if(!found)Object.keys(state.cache||{}).some(function(code){var arr=state.cache[code]||[];found=arr.find(function(e){return e.id===id});return !!found});
+  if(!found&&manual&&manual[id])found=manual[id];
+  if(found)return {title:found.title||found.show||id,date:found.date||'',company:found._company||found.company||'',show:found.show||'',found:true};
+  var parts=String(id).match(/^(?:auto:)?(wwe|aew|nxt|tna|roh|njpw|ecw|wcw):(\d{4}-\d{2}-\d{2}):([^:]+)/i);
+  return parts?{title:parts[3].replace(/[-_]/g,' '),date:parts[2],company:parts[1].toLowerCase(),show:parts[3],found:false}:
+     {title:id,date:'',company:'',show:'',found:false};
+ }
+ function since(ts){var n=Date.parse(ts||'');return Number.isFinite(n)?new Date(n).toLocaleString('pt-BR'): 'Data de inclusão não registrada'}
+ function makeCard(item,discovered){
+  var card=el('article','recentLinksCard'),tag=discovered?'📡 Descoberto · não vinculado':item.kind==='approved'?'✅ Aprovado pelo AutoMatch':'✏️ Fonte no editor';
+  card.append(el('strong','',tag));
+  var e=item.event||{},dest=discovered?'Destino: nenhum show cadastrado':('Destino: '+(names[e.company]||String(e.company||'').toUpperCase()||'Empresa não localizada')+' · '+(e.show||e.title||'')+(e.show&&e.title&&clean(e.show)!==clean(e.title)?' — '+e.title:'')+(e.date?' · '+cardDateBR(e.date):''));
+  card.append(el('div','recentLinksDestination',dest));
+  if(!discovered&&!e.found)card.append(el('small','recentLinksWarning','⚠️ ID de evento ainda não localizado no catálogo carregado; confira antes de editar.'));
+  if(item.title)card.append(el('small','','Vídeo: '+item.title));
+  if(item.url)card.append(el('small','','URL: '+item.url));
+  if(!discovered)card.append(el('small','','Evento: '+item.eventId));
+  var platform={okru:'OK.ru',bilibili:'Bilibili',archive:'Internet Archive',youtube:'YouTube',dailymotion:'Dailymotion'}[item.platform]||item.platform||'Fonte';
+  card.append(el('small','',platform+' · '+(item.kind==='approved'?'Aprovado: ':item.kind==='manual'?'Última edição do registro: ':item.firstSeenAt?'Primeira observação: ':'Publicado: ')+since(item.at)));
+  if(discovered)card.append(el('small','','Possível(is) show(s): '+((item.possibleEventIds||[]).slice(0,3).map(function(id){var ev=eventFor(id);return (ev.show||ev.title)+(ev.date?' '+cardDateBR(ev.date):'')}).join(' · ')||'Nenhuma correspondência confirmada')));
+  if(item.hiddenByEditor)card.append(el('small','recentLinksWarning','⚠️ Esta fonte está removida no editor do evento; a aprovação original permanece no histórico.'));
+  var acts=el('div','recentLinksActions');
+  if(item.url){var a=el('a','','↗ Conferir vídeo');a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';acts.append(a);
+   var cp=el('button','','📋 Copiar link');cp.type='button';cp.addEventListener('click',function(){
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(item.url).then(function(){cp.textContent='✓ Copiado'}).catch(function(){window.prompt('Copie o link:',item.url)});
+    else window.prompt('Copie o link:',item.url);
+   });acts.append(cp);
+  }
+  if(!discovered){var openBtn=el('button','','✏️ Abrir show e editar');openBtn.type='button';openBtn.addEventListener('click',function(){
+   var code=(e.company==='nxt'?'nxt':e.company);if(codes.indexOf(code)<0){alert('Empresa não reconhecida: confira o ID '+item.eventId);return}
+   openBtn.disabled=true;
+   pick(code).then(function(){
+    var r=(state.rows||[]).find(function(x){return x.id===item.eventId});
+    if(!r){alert('Não encontrei este ID de evento no catálogo. O vínculo continua listado para conferência: '+item.eventId);return}
+    fold.open=false;open(r);openEventEditor();
+   }).catch(function(){alert('Não foi possível carregar o show. Tente novamente.')}).finally(function(){openBtn.disabled=false});
+  });acts.append(openBtn)}
+  else{var search=el('button','','🎬 Revisar no AutoMatch');search.type='button';search.addEventListener('click',function(){fold.open=false;$('reviewSearch').value=item.title||item.videoId||'';$('reviewRelevance').value='all';$('reviewPlatform').value=item.platform||'';$('autoMatchOpen').click();$('reviewSearch').dispatchEvent(new Event('input',{bubbles:true}))});acts.append(search)}
+  card.append(acts);return card;
+ }
+ function render(){
+  list.replaceChildren();$('recentLinksLinked').setAttribute('aria-selected',String(tab==='linked'));
+  $('recentLinksLinked').setAttribute('aria-pressed',String(tab==='linked'));
+  $('recentLinksPending').setAttribute('aria-selected',String(tab==='pending'));
+  $('recentLinksPending').setAttribute('aria-pressed',String(tab==='pending'));
+  var query=clean($('recentLinksSearch').value||''),items=tab==='linked'?rows:pending;
+  var filtered=items.filter(function(x){return !query||clean([x.title,x.eventId,x.event&&x.event.title,x.event&&x.event.show,x.event&&x.event.date,x.platform,x.videoId].join(' ')).indexOf(query)>=0});
+  txt(meta,(tab==='linked'?'Links vinculados / editados: ':'Candidatos descobertos (sem vínculo): ')+items.length+' · '+filtered.length+' no filtro · Ordem: registros mais recentes primeiro'+(incomplete?' · ⚠️ Consulta parcial: '+incomplete:''));
+  if(!filtered.length)list.append(el('p','recentLinksNote',loaded?'Nada encontrado nesta lista. Tente limpar a busca.':'Ainda não foi possível consultar a Oracle.'));
+  filtered.slice(0,60).forEach(function(x){list.append(makeCard(x,tab==='pending'))});
+  if(filtered.length>60)list.append(el('small','recentLinksNote','Exibindo os primeiros 60 registros. Use a busca para localizar um vídeo específico.'));
+ }
+ function load(){if(busy)return Promise.resolve();busy=true;txt(meta,'Consultando aprovações, editor e descobertas…');
+  return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('Configuração da Oracle ausente');return r.json()}).then(function(conf){
+   var base=String(conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\s\/?#]+$/.test(base))throw Error('Endereço HTTPS da Oracle inválido');
+   function json(path,fallback){return fetch(base+'/api/jojo-monitor/'+path,{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).catch(function(){return fallback})}
+   return Promise.all([json('approved',null),json('event-edits',null),json('candidates',null)]);
+  }).then(function(data){
+   var approvals=data[0]&&Array.isArray(data[0].approved)?data[0].approved:[];
+   var edits=data[1]&&data[1].events&&typeof data[1].events==='object'?data[1].events:null;
+   var manualEvents=data[1]&&data[1].manualEvents||{};
+   incomplete=[!data[0]?'aprovações':null,!data[1]?'edições':null,!data[2]?'candidatos':null].filter(Boolean).join(', ');
+   if(!edits)edits=state.eventEdits||{};
+   rows=[];
+   approvals.forEach(function(a){if(!a||!a.eventId||!a.videoId)return;var id=String(a.eventId),ed=edits[id]||{},type=String(a.platform||'okru'),key=type+'|'+a.videoId;
+    rows.push({kind:'approved',eventId:id,event:eventFor(id,manualEvents),platform:type,videoId:String(a.videoId),url:sourceUrlSafe(Object.assign({type:type},a)),at:a.approvedAt||'',hiddenByEditor:(ed.removed||[]).indexOf(key)>=0,title:''});
+   });
+   Object.keys(edits).forEach(function(id){var e=edits[id];if(!e||!Array.isArray(e.added))return;e.added.forEach(function(s){if(!s)return;var key=srcKey(s),url=sourceUrlSafe(s);if(!key||!url)return;
+    // A manual source already in the approval queue is shown once, with its approval timestamp.
+    if(rows.some(function(x){return x.eventId===id&&x.platform===String(s.type||s.platform||'')&&x.videoId===String(s.videoId||'')}))return;
+    rows.push({kind:'manual',eventId:id,event:eventFor(id,manualEvents),platform:String(s.type||s.platform||''),videoId:String(s.videoId||''),url:url,at:e.updatedAt||'',title:''});
+   })});
+   // PPVs criados pelo administrador: fonte inicial fica em manualEvents, não em edits[].added.
+   Object.keys(manualEvents).forEach(function(id){var e=manualEvents[id];if(!e||!Array.isArray(e.sources))return;
+    e.sources.forEach(function(src){var url=sourceUrlSafe(src);if(!url)return;var platform=String(src.type||src.platform||'');
+     if(rows.some(function(x){return x.eventId===id&&x.url===url}))return;
+     rows.push({kind:'manual',eventId:id,event:eventFor(id,manualEvents),platform:platform,videoId:String(src.videoId||''),url:url,at:e.createdAt||'',title:''});
+    });
+   });
+   rows.sort(function(a,b){return String(b.at||'').localeCompare(String(a.at||''))||a.eventId.localeCompare(b.eventId)});
+   pending=((data[2]&&Array.isArray(data[2].candidates))?data[2].candidates:[]).filter(function(c){return c&&c.videoId&&sourceUrlSafe(c)}).map(function(c){return {platform:c.platform||'okru',videoId:c.videoId,title:c.title||'',url:sourceUrlSafe(c),at:c.firstSeenAt||c.publishedAt||'',firstSeenAt:!!c.firstSeenAt,possibleEventIds:c.possibleEventIds||[]}}).sort(function(a,b){return String(b.at||'').localeCompare(String(a.at||''))});
+   loaded=true;txt(tip,rows.length+' adicionados · '+pending.length+' descobertos');render();
+  }).catch(function(err){
+   txt(meta,'⚠️ Sem resposta da Oracle: '+err.message+'. Os registros não foram alterados.');
+   if(!loaded){list.replaceChildren(el('p','recentLinksNote','Abra a Oracle ou atualize esta aba para consultar os registros.'))}
+  }).finally(function(){busy=false})
+ }
+ fold.addEventListener('toggle',function(){if(fold.open)load()});
+ $('recentLinksRefresh').addEventListener('click',load);
+ $('recentLinksSearch').addEventListener('input',render);
+ $('recentLinksLinked').addEventListener('click',function(){tab='linked';render()});
+ $('recentLinksPending').addEventListener('click',function(){tab='pending';render()});
+ document.addEventListener('visibilitychange',function(){if(!document.hidden&&fold.open)load()});
+}
+
+function init(){var all=el('button','choice','TODAS');all.dataset.company='all';all.type='button';all.setAttribute('aria-pressed','false');all.addEventListener('click',function(){pick('all')});$companies.append(all);codes.forEach(function(c){var b=el('button','choice',names[c]);b.dataset.company=c;b.type='button';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){pick(c)});$companies.append(b)});var timer;$('search').addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(apply,180)});$('year').addEventListener('change',function(){apply()});$('order').addEventListener('change',apply);$('showFilter').addEventListener('change',apply);$('ppvOnly').addEventListener('change',apply);$('more').addEventListener('click',function(){state.limit+=80;render()});$('close').addEventListener('click',close);$('shade').addEventListener('click',function(e){if(e.target===$('shade'))close()});$('video').addEventListener('error',function(){if(state.current&&state.source)txt($('videoInfo'),'O MP4 não abriu no player HTML da TV. Tente Player do Archive ou Abrir fonte.')});$('video').addEventListener('ended',onVideoEnded);$('video').addEventListener('loadedmetadata',function(){var sec=state.resumeSeconds; if(!sec||state.source&&state.source.type!=='archive')return;var max=Number.isFinite(this.duration)&&this.duration>0?Math.max(0,this.duration-5):sec;try{this.currentTime=Math.min(sec,max);txt($('videoInfo'),'Retomando em '+formatSeconds(this.currentTime)+'…')}catch(e){}state.resumeSeconds=0});$('video').addEventListener('timeupdate',function(){if(Date.now()-state.lastWatchSave>4000)saveWatch()});$('video').addEventListener('pause',function(){if(state.current&&state.source&&state.source.type==='archive'&&this.currentTime>1)saveWatch()});window.addEventListener('pagehide',function(){if(state.current&&state.source)saveWatch()});$('sourceChoice').addEventListener('change',function(){if(state.current&&state.source)saveWatch();changeSource(this.value)});$('playDirect').addEventListener('click',playDirect);$('playEmbed').addEventListener('click',playEmbed);$('vlcBtn').addEventListener('click',vlc);$('debugSource').addEventListener('click',function(){updateSourceDebug();$('sourceDebug').open=!$('sourceDebug').open});loadBrokenSources();$('findOtherSource').addEventListener('click',function(){var r=state.current;if(!r)return;close();var query=[names[r._company||r.company||'wwe']||'',r.title,r.date].filter(Boolean).join(' ');$('reviewSearch').value=query;$('reviewRelevance').value='all';$('reviewPlatform').value='';$('autoMatchOpen').click();$('reviewSearch').focus()});$('prevEvent').addEventListener('click',function(){switchEvent(-1)});$('nextEvent').addEventListener('click',function(){switchEvent(1)});try{state.autoNext=localStorage.getItem('wc_autoplay')!=='false'}catch(e){}$('autoplayNext').checked=state.autoNext;$('autoplayNext').addEventListener('change',function(){state.autoNext=!!this.checked;try{localStorage.setItem('wc_autoplay',String(state.autoNext))}catch(e){}});$('lock').addEventListener('click',lock);$('continueClear').addEventListener('click',function(){if(confirm('Limpar o histórico de Continue assistindo somente deste navegador?'))storeWatch([])});renderContinue();document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Backspace'&&$('shade').classList.contains('show')&&!isTyping(document.activeElement)){if($('shade').classList.contains('show')){close();e.preventDefault();return}}spatial(e)});var initial='wwe';try{var saved=localStorage.getItem('wc_company');if(['all'].concat(codes).indexOf(saved)>=0)initial=saved}catch(e){}Promise.all([fetchUpdates(),loadEventEdits()]).then(function(){pick(initial)});loadMonitorStatus();loadTrustedSites();initMonitorManual();initRecentLinksAudit();initReviewPanel();initEventEditor();initAutoMatchSync();initFillPhotos();initLinkHealth();initPpvAudit();$('monitorRefresh').addEventListener('click',loadMonitorStatus)}
 var ACCESS_HASH="040bbd9b87eb515eebdf4f3a53cf898e4f49586e70844dc0b54b0711d1ab7a89";
 var started=false;
 function start(){if(!started){started=true;init()}$('gate').hidden=true;document.body.style.overflow='';$('search').focus()}
