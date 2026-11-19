@@ -1368,9 +1368,16 @@
       "year": 2026,
       "title": "WWE NXT",
       "show": "NXT",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
+      "status": "video_available",
+      "provisional": false,
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16464708700750",
+          "url": "https://ok.ru/video/16464708700750",
+          "label": "OK.ru · NXT 17/11 informado pelo administrador"
+        }
+      ],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
     },
     {
@@ -1380,9 +1387,16 @@
       "year": 2026,
       "title": "AEW Dynamite",
       "show": "Dynamite",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
+      "status": "video_available",
+      "provisional": false,
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16476789738062",
+          "url": "https://ok.ru/video/16476789738062",
+          "label": "OK.ru · Dynamite 18/11 confirmado pelo administrador"
+        }
+      ],
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
     },
     {

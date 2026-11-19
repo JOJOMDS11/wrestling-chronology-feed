@@ -531,7 +531,7 @@ a{color:inherit}button,input,select{font:inherit}button,select{cursor:pointer}bu
 var codes=['wwe','wcw','ecw','tna','roh','njpw','nxt','aew'];
 var names={all:'TODAS',wwe:'WWE',wcw:'WCW',ecw:'ECW',tna:'TNA',roh:'ROH',njpw:'NJPW',nxt:'NXT',aew:'AEW'};
 var $=function(id){return document.getElementById(id)};
-var state={company:'',rows:[],filtered:[],queue:[],limit:80,current:null,source:null,partIndex:0,cache:{},lastFocus:null,autoNext:true,updates:[],resumeSeconds:0,lastWatchSave:0,brokenSources:{},eventEdits:{},manualPpvs:{},eventEditApi:''};
+var state={company:'',rows:[],filtered:[],queue:[],limit:80,current:null,source:null,partIndex:0,cache:{},lastFocus:null,autoNext:true,updates:[],resumeSeconds:0,lastWatchSave:0,brokenSources:{},eventEdits:{},manualPpvs:{},eventEditApi:'',approvedSources:{},approvalsLive:false};
 var $companies=$('companies'),$results=$('results'),$status=$('status');
 function txt(el,value){el.textContent=String(value==null?'':value);return el}
 function el(tag,className,value){var e=document.createElement(tag);if(className)e.className=className;if(value!==undefined)txt(e,value);return e}
@@ -1049,6 +1049,8 @@ function initReviewPanel(){
    var quota=data[0];
    txt($('reviewLinkQuota'),Number.isFinite(Number(quota.linksDailyLimit))&&quota.linksDailyLimit!=null?'🔗 Vinculações hoje: '+Number(quota.linksUsedToday||0)+' / '+Number(quota.linksDailyLimit)+' · restam '+Number(quota.linksRemainingToday||0)+' (reset 00h Brasília)':'🔗 Limite de vinculações: consulte a Oracle após instalar a API atualizada.');
    approvedIds=new Set((data[1].approved||[]).map(candidateKey));
+   state.approvedSources=approvedSourcesByEvent(data[1].approved||[]);state.approvalsLive=true;
+   if(state.rows&&state.rows.length){state.rows.forEach(applyEventEditRow);if(state.company)apply()}
    // Suggestions are metadata only. No show is linked without manual approval.
    var hints={};var alreadyLinked=linkedIds();
    candidates.forEach(function(c){var key=candidateKey(c);if(approvedIds.has(key)||alreadyLinked.has(key)||dismissed.has(key))return;
@@ -1362,7 +1364,7 @@ $('reviewDismissUnknown').addEventListener('click',function(){changeReview('tras
    body:JSON.stringify({key:key,videoId:selectedId,platform:selectedPlatform,eventId:eventId,rightsConfirmed:rights,manualUrl:selectedManualUrl,thumbnailUrl:$('reviewThumbUrl').value.trim()})})
    .then(function(r){return r.json().then(function(data){return {ok:r.ok,data:data}})})
    .then(function(result){$('reviewKey').value='';txt($('reviewFeedback'),result.data.message||'Resposta recebida');
-      if(result.ok){setTimeout(function(){dialog.close();load()},1000)}})
+      if(result.ok){setTimeout(function(){dialog.close();loadEventEdits().then(function(){if(state.company)return pick(state.company)}).then(function(){return load()})},450)}})
    .catch(function(){txt($('reviewFeedback'),'Falha de conexão. Confira o HTTPS da Oracle.')})
    .finally(function(){btn.disabled=false})
  });
@@ -1542,11 +1544,74 @@ function switchEvent(direction,onlyPlayable){var i=queueIndex();if(i<0)return fa
 function onVideoEnded(){var s=state.source;if(!state.current||!s)return;var parts=Array.isArray(s.urls)?s.urls:[];if(state.partIndex+1<parts.length){state.partIndex++;state.resumeSeconds=0;saveWatch();txt($('videoInfo'),'Parte '+(state.partIndex+1)+' de '+parts.length+' · reproduzindo em sequência');playDirect();return}var key=watchId(state.current);removeWatch(key);state.resumeSeconds=0;if(state.autoNext){if(!switchEvent(1,true))txt($('videoInfo'),'Fim dos eventos reproduzíveis desta seleção.')}else{txt($('videoInfo'),'O evento terminou. Autoplay desativado.');updateEpisodeNav()}}
 
 /* Editor manual dos eventos: não reaproveita o botão de aprovação de candidatos. */
+/* Hotfix: aprovacoes na Oracle devem aparecer no player, mesmo antes do sync GitHub. */
+function approvedSourcesByEvent(records){
+ var grouped={};
+ (Array.isArray(records)?records:[]).forEach(function(a){
+  if(!a||typeof a!=='object')return;
+  var id=String(a.eventId||''),type=String(a.platform||'').toLowerCase(),vid=String(a.videoId||'');
+  if(!/^[a-z0-9:_-]{8,180}$/i.test(id))return;
+  var url='';
+  if(type==='okru'&&/^\d{8,20}$/.test(vid))url='https://ok.ru/video/'+vid;
+  else if(type==='bilibili'&&/^\d{8,20}$/.test(vid))url='https://www.bilibili.tv/en/video/'+vid;
+  else if(type==='archive'&&/^a[0-9a-f]{32}$/.test(vid)){
+   try{var parsed=new URL(String(a.url||''));if(parsed.protocol==='https:'&&parsed.hostname==='archive.org'&&/^\/download\/[a-zA-Z0-9_.-]{3,120}\/[^?#]+\.(?:mp4|m4v|webm|ogv)$/i.test(parsed.pathname)&&!parsed.search&&!parsed.hash)url=parsed.href}catch(e){}
+  }
+  if(!url)return;
+  var source={type:type,videoId:vid,url:url,label:'AutoMatch · aprovado na Oracle'};
+  if(typeof a.thumbnailUrl==='string'&&https(a.thumbnailUrl))source.thumbnailUrl=a.thumbnailUrl;
+  if(!grouped[id])grouped[id]=[];
+  if(!grouped[id].some(function(s){return editSourceKey(s)===editSourceKey(source)}))grouped[id].push(source);
+ });
+ // OK.ru primeiro para shows sem fonte, porque Bilibili.tv frequentemente exige acesso externo.
+ Object.keys(grouped).forEach(function(id){grouped[id].sort(function(a,b){var rank={okru:0,archive:1,bilibili:2};return (rank[a.type]||0)-(rank[b.type]||0)})});
+ return grouped;
+}
+function editorBaseForEvent(r){
+ var base=((r&&r._editBase||{}).sources||r.sources||[]).slice(),found=new Set(base.map(editSourceKey));
+ ((state.approvedSources||{})[r.id]||[]).forEach(function(s){var k=editSourceKey(s);if(k&&!found.has(k)){base.push(s);found.add(k)}});
+ return base;
+}
 function editSourceKey(s){if(!s)return '';var t=String(s.type||s.platform||''),id=String(s.videoId||'');if(t==='archive')id=id||String(s.url||'');return t&&id?t+'|'+id:''}
 function editSourceUrl(s){if(!s)return '';if(s.type==='archive')return String(s.url||((s.urls||[])[0])||'');if(s.type==='okru'&&s.videoId)return 'https://ok.ru/video/'+s.videoId;if(s.type==='bilibili'&&s.videoId)return 'https://www.bilibili.tv/en/video/'+s.videoId;if(s.type==='youtube'&&s.videoId)return 'https://www.youtube.com/watch?v='+s.videoId;if(s.type==='dailymotion'&&s.videoId)return 'https://www.dailymotion.com/video/'+s.videoId;return String(s.url||'')}
 function editKeyForUrl(url){try{var u=new URL(url),h=u.hostname.toLowerCase(),m;if(u.protocol!=='https:')return '';if(h==='ok.ru'&&(m=u.pathname.match(/^\/video(?:embed)?\/([0-9]{8,20})\/?$/)))return 'okru|'+m[1];if(h==='www.bilibili.tv'&&(m=u.pathname.match(/^\/en\/video\/([0-9]{8,20})\/?$/)))return 'bilibili|'+m[1];if(['youtube.com','www.youtube.com'].indexOf(h)>=0&&u.pathname==='/watch'&&/^[A-Za-z0-9_-]{11}$/.test(u.searchParams.get('v')||''))return 'youtube|'+u.searchParams.get('v');if(h==='youtu.be'&&(m=u.pathname.match(/^\/([A-Za-z0-9_-]{11})\/?$/)))return 'youtube|'+m[1];if(h==='www.dailymotion.com'&&(m=u.pathname.match(/^\/video\/([a-zA-Z0-9]+)\/?$/)))return 'dailymotion|'+m[1];if(h==='archive.org'||h==='www.archive.org'){if(u.username||u.password||u.hash)return '';var parts=u.pathname.match(/^\/(details|embed|download)\/([a-zA-Z0-9_.-]{3,120})(?:\/(.*))?\/?$/);if(!parts||parts[2].indexOf('..')>=0)return '';if(parts[1]==='download'){if(u.search||!parts[3]||!/^.+\.(mp4|m4v|webm|ogv)$/i.test(parts[3])||parts[3].split('/').some(function(t){return !t||t==='.'||t==='..'}))return ''}else{if(parts[3]||(!/^\/?$/.test(u.pathname.slice(('/'+parts[1]+'/'+parts[2]).length)))||Array.from(u.searchParams.keys()).some(function(x){return x!=='start'})||((u.searchParams.get('start')||'')&&!/^\d{1,7}(?:\.\d{1,3})?$/.test(u.searchParams.get('start'))))return ''}return 'archive|'+url}return ''}catch(e){return ''}}
-function applyEventEditRow(r){if(!r||!r.id)return r;if(!r._editBase){r._editBase={sources:Array.isArray(r.sources)?r.sources.map(function(x){return Object.assign({},x)}):[],thumbnail:r.thumbnail||'',poster:r.poster||'',scheduled:!!r.scheduled}}var orig=r._editBase,edit=(state.eventEdits||{})[r.id];r.sources=orig.sources.map(function(x){return Object.assign({},x)});r.thumbnail=orig.thumbnail;r.poster=orig.poster;r.scheduled=orig.scheduled;if(!edit)return r;var removed=new Set(edit.removed||[]);r.sources=r.sources.filter(function(src){return !removed.has(editSourceKey(src))});var seen=new Set(r.sources.map(editSourceKey));(edit.added||[]).forEach(function(src){var k=editSourceKey(src);if(k&&!seen.has(k)){r.sources.push(Object.assign({},src));seen.add(k)}});var th=edit.sourceThumbnails||{};r.sources.forEach(function(src){var img=th[editSourceKey(src)];if(img&&https(img)){src.thumbnail=img;src.thumbnailUrl=img}});if(edit.thumbnailUrl&&https(edit.thumbnailUrl)){r.thumbnail=edit.thumbnailUrl;r.poster=''}r.scheduled=!r.sources.length;return r}
-function loadEventEdits(){return fetch('./config/event_edits.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():{events:{}}}).catch(function(){return {events:{}}}).then(function(staticData){state.eventEdits=staticData&&staticData.events&&typeof staticData.events==='object'?staticData.events:{};state.manualPpvs=staticData&&staticData.manualEvents&&typeof staticData.manualEvents==='object'?staticData.manualEvents:{};return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(conf){var base=String(conf&&conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\s/?#]+$/.test(base))return;state.eventEditApi=base;return fetch(base+'/api/jojo-monitor/event-edits',{cache:'no-store',credentials:'omit'}).then(function(r){return r.ok?r.json():null}).then(function(data){if(data&&data.events&&typeof data.events==='object')state.eventEdits=data.events;if(data&&data.manualEvents&&typeof data.manualEvents==='object')state.manualPpvs=data.manualEvents})}).catch(function(){})})}
+function applyEventEditRow(r){
+ if(!r||!r.id)return r;
+ if(!r._editBase)r._editBase={sources:Array.isArray(r.sources)?r.sources.map(function(x){return Object.assign({},x)}):[],thumbnail:r.thumbnail||'',poster:r.poster||'',scheduled:!!r.scheduled};
+ var orig=r._editBase,edit=(state.eventEdits||{})[r.id]||{};
+ r.sources=orig.sources.map(function(x){return Object.assign({},x)});r.thumbnail=orig.thumbnail;r.poster=orig.poster;
+ var removed=new Set(edit.removed||[]);
+ r.sources=r.sources.filter(function(src){return !removed.has(editSourceKey(src))});
+ var seen=new Set(r.sources.map(editSourceKey));
+ // A aprovacao fica no evento exato, sem alterar fontes publicadas ou validar reproducoes.
+ ((state.approvedSources||{})[r.id]||[]).forEach(function(src){var k=editSourceKey(src);if(k&&!removed.has(k)&&!seen.has(k)&&r.sources.length<3){r.sources.push(Object.assign({},src));seen.add(k)}});
+ seen=new Set(r.sources.map(editSourceKey));
+ (edit.added||[]).forEach(function(src){var k=editSourceKey(src);if(k&&!seen.has(k)){r.sources.push(Object.assign({},src));seen.add(k)}});
+ var th=edit.sourceThumbnails||{};
+ r.sources.forEach(function(src){var img=th[editSourceKey(src)];if(img&&https(img)){src.thumbnail=img;src.thumbnailUrl=img}});
+ if(edit.thumbnailUrl&&https(edit.thumbnailUrl)){r.thumbnail=edit.thumbnailUrl;r.poster=''}
+ r.scheduled=r.sources.length?false:((edit.removed||[]).length||(edit.added||[]).length||((state.approvedSources||{})[r.id]||[]).length?true:orig.scheduled);
+ return r;
+}
+function loadEventEdits(){
+ return fetch('./config/event_edits.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():{events:{}}}).catch(function(){return {events:{}}}).then(function(staticData){
+  state.eventEdits=staticData&&staticData.events&&typeof staticData.events==='object'?staticData.events:{};
+  state.manualPpvs=staticData&&staticData.manualEvents&&typeof staticData.manualEvents==='object'?staticData.manualEvents:{};
+  return fetch('./config/monitor_api.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(conf){
+   var base=String(conf&&conf.apiBase||'').replace(/\/+$/,'');if(!/^https:\/\/[^\s/?#]+$/.test(base))return;
+   state.eventEditApi=base;
+   return Promise.all([
+    fetch(base+'/api/jojo-monitor/event-edits',{cache:'no-store',credentials:'omit'}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
+    fetch(base+'/api/jojo-monitor/approved',{cache:'no-store',credentials:'omit'}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+   ]).then(function(data){
+    var edits=data[0],approvals=data[1];
+    if(edits&&edits.events&&typeof edits.events==='object')state.eventEdits=edits.events;
+    if(edits&&edits.manualEvents&&typeof edits.manualEvents==='object')state.manualPpvs=edits.manualEvents;
+    if(approvals&&Array.isArray(approvals.approved)){state.approvedSources=approvedSourcesByEvent(approvals.approved);state.approvalsLive=true}
+   });
+  }).catch(function(){});
+ });
+}
 var eventEditor=null;
 function archiveDownloadFromDetails(value){
  try{var u=new URL(value),host=u.hostname.toLowerCase();if(u.protocol!=='https:'||!['archive.org','www.archive.org'].includes(host)||u.search||u.hash)return '';
@@ -1600,8 +1665,8 @@ function editArchivePicker(row,wrap){
 }
 function editShowSourceRow(row){var wrap=el('div','eventEditRow'),head=el('div','eventEditRowHead'),name=el('b','',row.label||'Fonte de vídeo'),rem=el('button','danger','🗑 Remover');rem.type='button';rem.setAttribute('aria-label','Remover '+(row.label||'fonte'));head.append(name,rem);var l1=el('label','');l1.append(document.createTextNode('URL do vídeo'));var link=el('input','');link.type='url';link.placeholder='https://archive.org/download/ITEM/arquivo.mp4 ou https://ok.ru/video/123456789';link.maxLength=650;link.value=row.url||'';link.required=true;l1.append(link);var l2=el('label','');l2.append(document.createTextNode('Miniatura desta fonte (opcional)'));var thumb=el('input','');thumb.type='url';thumb.placeholder='https://.../imagem.jpg';thumb.maxLength=700;thumb.value=row.thumb||'';l2.append(thumb);wrap.append(head,l1,l2);var archiveBtn=el('button','secondary','📂 Buscar arquivo no Internet Archive');archiveBtn.type='button';wrap.append(archiveBtn);archiveBtn.addEventListener('click',function(){var open=wrap.querySelector('.jojoArchiveFileTools');if(open){open.remove();return}editArchivePicker(row,wrap)});$('eventEditSources').append(wrap);link.addEventListener('input',function(){var k=editKeyForUrl(link.value.trim());if(k)name.textContent=({'archive':'Internet Archive','okru':'OK.ru','youtube':'YouTube','bilibili':'Bilibili','dailymotion':'Dailymotion'}[k.split('|')[0]]||'Fonte')+' · editar/remover'});rem.addEventListener('click',function(){wrap.remove();eventEditor.rows=eventEditor.rows.filter(function(x){return x!==row})});link.addEventListener('change',function(){var direct=archiveDownloadFromDetails(link.value.trim());if(direct){link.value=direct;link.dispatchEvent(new Event('input'))}});row.link=link;row.thumbField=thumb;return wrap}
 function editRefreshPreview(){var e=$('eventEditPreview'),image=https($('eventEditPoster').value);jojoSetPoster(e,image||eventImage(eventEditor.event),eventEditor.event.title,eventEditor.event._company)}
-function openEventEditor(){var r=state.current;if(!r||!r.id){txt($('videoInfo'),'Este evento não possui ID estável para edição.');return}var edited=(state.eventEdits||{})[r.id]||{};eventEditor={event:r,revision:Number(edited.revision||0),rows:[]};$('eventEditEvent').textContent=r.title+' · '+(r.date||'')+' · '+(names[r._company||r.company]||'');$('eventEditPoster').value=edited.thumbnailUrl||'';$('eventEditKey').value='';$('eventEditRights').checked=false;txt($('eventEditFeedback'),'');$('eventEditSources').replaceChildren();var base=new Set(((r._editBase||{}).sources||r.sources||[]).map(editSourceKey));var keys=new Set();(r.sources||[]).forEach(function(src,i){var key=editSourceKey(src);if(!key||keys.has(key))return;keys.add(key);var row={existingKey:key,base:base.has(key),url:editSourceUrl(src),initialUrl:editSourceUrl(src),thumb:src.thumbnail||src.thumbnailUrl||'',label:sourceName(src)+' '+(i+1)};eventEditor.rows.push(row);editShowSourceRow(row)});if(!eventEditor.rows.length)$('eventEditSources').append(el('div','eventEditEmpty','Este evento não tem vídeos. Clique em + Adicionar URL para cadastrar a primeira fonte.'));editRefreshPreview();$('eventEditDialog').showModal();$('eventEditPoster').focus()}
-function initEventEditor(){var dlg=$('eventEditDialog');if(!dlg)return;$('eventEditOpen').addEventListener('click',openEventEditor);$('noVideoAdd').addEventListener('click',openEventEditor);$('eventEditCancel').addEventListener('click',function(){dlg.close()});dlg.addEventListener('close',function(){$('eventEditKey').value='';eventEditor=null});$('eventEditPoster').addEventListener('input',function(){if(eventEditor)editRefreshPreview()});$('eventEditAdd').addEventListener('click',function(){if(!eventEditor)return;if(eventEditor.rows.length>=40){txt($('eventEditFeedback'),'Limite de 40 fontes neste editor.');return}var blank=$('eventEditSources').querySelector('.eventEditEmpty');if(blank)blank.remove();var row={base:false,existingKey:'',url:'',thumb:'',label:'Nova fonte '+(eventEditor.rows.length+1)};eventEditor.rows.push(row);editShowSourceRow(row);row.link.focus()});$('eventEditForm').addEventListener('submit',function(e){e.preventDefault();if(!eventEditor||!state.eventEditApi){txt($('eventEditFeedback'),'API Oracle indisponível. Não foi possível salvar.');return}var ctx=eventEditor,r=ctx.event,base=(r._editBase||{}).sources||r.sources||[],desired=[],keptBase=new Set(),added=[],thumbs={},seen=new Set(),errors=[];
+function openEventEditor(){var r=state.current;if(!r||!r.id){txt($('videoInfo'),'Este evento não possui ID estável para edição.');return}var edited=(state.eventEdits||{})[r.id]||{};eventEditor={event:r,revision:Number(edited.revision||0),rows:[]};$('eventEditEvent').textContent=r.title+' · '+(r.date||'')+' · '+(names[r._company||r.company]||'');$('eventEditPoster').value=edited.thumbnailUrl||'';$('eventEditKey').value='';$('eventEditRights').checked=false;txt($('eventEditFeedback'),'');$('eventEditSources').replaceChildren();var base=new Set(editorBaseForEvent(r).map(editSourceKey));var keys=new Set();(r.sources||[]).forEach(function(src,i){var key=editSourceKey(src);if(!key||keys.has(key))return;keys.add(key);var row={existingKey:key,base:base.has(key),url:editSourceUrl(src),initialUrl:editSourceUrl(src),thumb:src.thumbnail||src.thumbnailUrl||'',label:sourceName(src)+' '+(i+1)};eventEditor.rows.push(row);editShowSourceRow(row)});if(!eventEditor.rows.length)$('eventEditSources').append(el('div','eventEditEmpty','Este evento não tem vídeos. Clique em + Adicionar URL para cadastrar a primeira fonte.'));editRefreshPreview();$('eventEditDialog').showModal();$('eventEditPoster').focus()}
+function initEventEditor(){var dlg=$('eventEditDialog');if(!dlg)return;$('eventEditOpen').addEventListener('click',openEventEditor);$('noVideoAdd').addEventListener('click',openEventEditor);$('eventEditCancel').addEventListener('click',function(){dlg.close()});dlg.addEventListener('close',function(){$('eventEditKey').value='';eventEditor=null});$('eventEditPoster').addEventListener('input',function(){if(eventEditor)editRefreshPreview()});$('eventEditAdd').addEventListener('click',function(){if(!eventEditor)return;if(eventEditor.rows.length>=40){txt($('eventEditFeedback'),'Limite de 40 fontes neste editor.');return}var blank=$('eventEditSources').querySelector('.eventEditEmpty');if(blank)blank.remove();var row={base:false,existingKey:'',url:'',thumb:'',label:'Nova fonte '+(eventEditor.rows.length+1)};eventEditor.rows.push(row);editShowSourceRow(row);row.link.focus()});$('eventEditForm').addEventListener('submit',function(e){e.preventDefault();if(!eventEditor||!state.eventEditApi){txt($('eventEditFeedback'),'API Oracle indisponível. Não foi possível salvar.');return}var ctx=eventEditor,r=ctx.event,base=editorBaseForEvent(r),desired=[],keptBase=new Set(),added=[],thumbs={},seen=new Set(),errors=[];
 ctx.rows.forEach(function(row){var url=archiveDownloadFromDetails(row.link.value.trim())||row.link.value.trim(),thumb=row.thumbField.value.trim(),key=editKeyForUrl(url);if(!key){errors.push('URL não reconhecida: '+url.slice(0,90));return}if(seen.has(key)){errors.push('Você repetiu a mesma fonte: '+url.slice(0,90));return}seen.add(key);if(thumb&&!https(thumb)){errors.push('Miniatura deve usar HTTPS');return}desired.push({url:url,thumbnailUrl:thumb,key:key});if(row.base&&(row.existingKey===key||(key.indexOf('archive|')===0&&row.initialUrl===url))){keptBase.add(row.existingKey);if(thumb)thumbs[row.existingKey]=thumb}else added.push({url:url,thumbnailUrl:thumb})});
 if(errors.length){txt($('eventEditFeedback'),errors[0]);return}var removed=[];base.forEach(function(src){var k=editSourceKey(src);if(k&&!keptBase.has(k)&&removed.indexOf(k)<0)removed.push(k)});var poster=$('eventEditPoster').value.trim();if(poster&&!https(poster)){txt($('eventEditFeedback'),'Miniatura do evento deve começar com HTTPS.');return}
 if(removed.length&&!window.confirm('Remover '+removed.length+' fonte(s) deste evento? Os links serão ocultados, mas o histórico da edição ficará na Oracle.'))return;
@@ -1610,6 +1675,7 @@ var button=$('eventEditSave');button.disabled=true;txt($('eventEditFeedback'),'S
 function open(r,advancing,resume){if(state.current&&state.source)saveWatch();if(!advancing)state.lastFocus=document.activeElement;
  var v=$('video');v.pause();v.removeAttribute('src');v.load();$('embed').src='about:blank';bilibiliNotice(null);state.current=r;state.source=null;state.partIndex=0;state.resumeSeconds=0;$('sourceDebug').open=false;$('sourceDebug').hidden=true;txt($('videoTitle'),r.title||'Evento');txt($('videoSubtitle'),[names[r._company||state.company],r.date,r.show].filter(Boolean).join(' · '));remember(r.id||r.title);
  var opt=$('sourceChoice');opt.replaceChildren();var list=r.sources||[];$('noVideoAdd').hidden=!!list.length;list.forEach(function(s,i){opt.add(new Option(sourceName(s)+(s.label?' — '+s.label:''),String(i)))});$('shade').classList.add('show');$('shade').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';updateEpisodeNav();
+ if(!list.length){$('video').style.display='none';$('embed').style.display='none'}else{$('video').style.display='block'}
  if(list.length){var idx=resume&&resume.sourceIndex>=0&&resume.sourceIndex<list.length?Number(resume.sourceIndex):0;opt.value=String(idx);changeSource(idx,resume)}else{txt($('videoInfo'),r.scheduled?(r.provisional?'Data semanal prevista, sem confirmação de transmissão ou vídeo. Confira a programação oficial.':'Evento anunciado oficialmente. Ainda não há vídeo cadastrado; use o site oficial para detalhes.'):'Esse evento não tem fontes de vídeo cadastradas.');$('playDirect').style.display='none';$('playEmbed').style.display='none';$('vlcBtn').style.display='none';var a=$('sourceLink');a.href=https(r.official_url)||'#';a.style.display=https(r.official_url)?'inline-flex':'none';txt(a,'↗ Informações oficiais')}
  if(!advancing)$('close').focus()}
 function close(){if(state.current&&state.source)saveWatch();bilibiliNotice(null);var v=$('video');v.pause();v.removeAttribute('src');v.load();$('embed').src='about:blank';$('shade').classList.remove('show');$('shade').setAttribute('aria-hidden','true');document.body.style.overflow='';state.current=null;state.source=null;state.partIndex=0;state.resumeSeconds=0;if(state.lastFocus&&state.lastFocus.isConnected)state.lastFocus.focus()}
