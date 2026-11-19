@@ -999,7 +999,13 @@ function initReviewPanel(){
    var quota=data[0];
    txt($('reviewLinkQuota'),Number.isFinite(Number(quota.linksDailyLimit))&&quota.linksDailyLimit!=null?'🔗 Vinculações hoje: '+Number(quota.linksUsedToday||0)+' / '+Number(quota.linksDailyLimit)+' · restam '+Number(quota.linksRemainingToday||0)+' (reset 00h Brasília)':'🔗 Limite de vinculações: consulte a Oracle após instalar a API atualizada.');
    approvedIds=new Set((data[1].approved||[]).map(candidateKey));
-   applyThumbnailCandidates(candidates);render();return refreshRemoteReview();
+   // Suggestions are metadata only. No show is linked without manual approval.
+   var hints={};var alreadyLinked=linkedIds();
+   candidates.forEach(function(c){var key=candidateKey(c);if(approvedIds.has(key)||alreadyLinked.has(key)||dismissed.has(key))return;
+    (c.possibleEventIds||[]).forEach(function(id){if(typeof id==='string')hints[id]=(hints[id]||0)+1});
+   });
+   state.autoMatchHints=hints;
+   applyThumbnailCandidates(candidates);render();if(state.company&&typeof apply==='function')apply();return refreshRemoteReview();
   }).catch(function(err){if(!silent){setMsg('Não foi possível buscar os candidatos: '+err.message);grid.replaceChildren()}})
  }
 
@@ -1415,7 +1421,13 @@ function eventImage(r){
  return candidates.filter(function(x){return !!https(x)});
 }
 function cardDateBR(iso){var m=String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?m[3]+'/'+m[2]+'/'+m[1]:iso}
-function render(){var rows=state.filtered.slice(0,state.limit),frag=document.createDocumentFragment();rows.forEach(function(r){var card=el('button','event');card.type='button';card.setAttribute('aria-label','Abrir '+r.title);var img=el('img','thumb');img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';var link=eventImage(r);jojoSetPoster(img,link,r.title,r._company);card.append(img);var bd=el('div','eventBody');bd.append(el('div','eventMeta',[cardDateBR(r.date),names[r._company],r.show].filter(Boolean).join(' · ')));bd.append(el('div','eventTitle',r.title||'Evento sem título'));var ss=r.sources||[];bd.append(el('div','eventTypes',r.scheduled?(r.provisional?'📅 Previsão semanal · Sem vídeo':'📅 Evento registrado · Aguardando vídeo'):ss.map(sourceName).filter(function(v,i,a){return a.indexOf(v)===i}).slice(0,2).join(' · ')));card.append(bd);card.addEventListener('click',function(){open(r)});frag.append(card)});$results.replaceChildren(frag);txt($('count'),state.filtered.length.toLocaleString('pt-BR')+' resultados · '+Math.min(state.limit,state.filtered.length).toLocaleString('pt-BR')+' exibidos');$('more').style.display=state.limit<state.filtered.length?'block':'none';if(!state.filtered.length)$results.append(el('div','empty','Nenhum evento encontrado. Tente outro ano ou termo.'))}
+function render(){var rows=state.filtered.slice(0,state.limit),frag=document.createDocumentFragment();rows.forEach(function(r){var card=el('button','event');card.type='button';card.setAttribute('aria-label','Abrir '+r.title);var img=el('img','thumb');img.alt='';img.loading='lazy';img.referrerPolicy='no-referrer';var link=eventImage(r);jojoSetPoster(img,link,r.title,r._company);card.append(img);var bd=el('div','eventBody');bd.append(el('div','eventMeta',[cardDateBR(r.date),names[r._company],r.show].filter(Boolean).join(' · ')));bd.append(el('div','eventTitle',r.title||'Evento sem título'));var ss=r.sources||[];bd.append(el('div','eventTypes',r.scheduled?(r.provisional?'📅 Previsão semanal · Sem vídeo':'📅 Evento registrado · Aguardando vídeo'):ss.map(sourceName).filter(function(v,i,a){return a.indexOf(v)===i}).slice(0,2).join(' · ')));
+ var hintCount=(state.autoMatchHints||{})[r.id]||0;
+ if(hintCount&&(!ss.length||r.scheduled)){
+  var hint=el('div','eventTypes','🎬 '+hintCount+' possível(is) vídeo(s) no AutoMatch · revisão pendente');
+  hint.style.color='#caa6ff';bd.append(hint);
+ }
+ card.append(bd);card.addEventListener('click',function(){open(r)});frag.append(card)});$results.replaceChildren(frag);txt($('count'),state.filtered.length.toLocaleString('pt-BR')+' resultados · '+Math.min(state.limit,state.filtered.length).toLocaleString('pt-BR')+' exibidos');$('more').style.display=state.limit<state.filtered.length?'block':'none';if(!state.filtered.length)$results.append(el('div','empty','Nenhum evento encontrado. Tente outro ano ou termo.'))}
 function reportedBroken(s){if(!s)return null;return (state.brokenSources||{})[(s.type||'okru')+':'+(s.videoId||'')]||null}
 function updateSourceDebug(){var r=state.current,s=state.source,box=$('sourceDebug'),info=$('sourceDebugText'),a=$('sourceDebugOpen');
  if(!r||!s){box.hidden=true;return}box.hidden=false;
