@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T18:37:03Z",
+  "generatedAt": "2026-11-19T21:31:48.286570Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -1263,9 +1263,20 @@
       "title": "AEW Full Gear 2026",
       "show": "PPV",
       "official_url": "https://www.allelitewrestling.com/post/aew-full-gear-2026-preview",
-      "sources": [],
-      "status": "awaiting_video",
-      "referenceOnly": true
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801631968172544",
+          "url": "https://www.bilibili.tv/en/video/4801631968172544",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/19740558e762a3808972db7148ad7ae7.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
+      "status": "video_available",
+      "referenceOnly": true,
+      "provisional": false,
+      "approvedAt": "2026-11-19T15:13:53Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/19740558e762a3808972db7148ad7ae7.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "auto:aew:2026-11-14:collision",
@@ -1274,10 +1285,20 @@
       "year": 2026,
       "title": "Collision",
       "show": "Collision",
-      "status": "awaiting_video",
-      "provisional": true,
+      "status": "video_available",
+      "provisional": false,
       "description": "Grade semanal provisória (não confirma transmissão). Verifique o calendário da empresa antes de aprovar vídeo.",
-      "sources": []
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801641562511872",
+          "url": "https://www.bilibili.tv/en/video/4801641562511872",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/3650726cbf127cbd0bc7d1b315ff88fb.jpg@720w_405h_1e_1c_90q"
+        }
+      ],
+      "approvedAt": "2026-11-19T15:13:44Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/3650726cbf127cbd0bc7d1b315ff88fb.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "official:aew:2026-11-14:full-gear",
@@ -1375,10 +1396,12 @@
           "type": "okru",
           "videoId": "16464708700750",
           "url": "https://ok.ru/video/16464708700750",
-          "label": "OK.ru · NXT 17/11 informado pelo administrador"
+          "label": "OK.ru · NXT 17/11 informado pelo administrador",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19024739437134&type=37&idx=3&scl=4&tkn=wGfUcDNKcb25Z_A5MJbLFaYVr8I&fn=external_8"
         }
       ],
-      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo.",
+      "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19024739437134&type=37&idx=3&scl=4&tkn=wGfUcDNKcb25Z_A5MJbLFaYVr8I&fn=external_8"
     },
     {
       "id": "auto:aew:2026-11-18:dynamite",
@@ -1394,10 +1417,27 @@
           "type": "okru",
           "videoId": "16476789738062",
           "url": "https://ok.ru/video/16476789738062",
-          "label": "OK.ru · Dynamite 18/11 confirmado pelo administrador"
+          "label": "OK.ru · Dynamite 18/11 confirmado pelo administrador",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19045537745486&type=37&idx=2&scl=4&tkn=rB5nPV8Ryr1drRFGRK0e42AyMzo&fn=external_8"
+        },
+        {
+          "type": "okru",
+          "videoId": "16734986963567",
+          "url": "https://ok.ru/video/16734986963567",
+          "label": "OK.ru · Revisão administrativa",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19125584988783&type=37&idx=1&scl=4&tkn=n8fajo0lqQgwHzVvOdGRvmC-KIQ&fn=external_8"
+        },
+        {
+          "type": "bilibili",
+          "videoId": "4801676316645888",
+          "url": "https://www.bilibili.tv/en/video/4801676316645888",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/bf005ab4a4bf358a3ce05c62ef944ab6.jpg@720w_405h_1e_1c_90q"
         }
       ],
-      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo.",
+      "approvedAt": "2026-11-19T15:08:54Z",
+      "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19125584988783&type=37&idx=1&scl=4&tkn=n8fajo0lqQgwHzVvOdGRvmC-KIQ&fn=external_8"
     },
     {
       "id": "auto:roh:2026-11-19:honorclub",
