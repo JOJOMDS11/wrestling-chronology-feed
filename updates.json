@@ -1349,10 +1349,17 @@
       "year": 2026,
       "title": "Monday Night RAW",
       "show": "RAW",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Grade semanal provisória; confira a transmissão oficial antes de aprovar um vídeo."
+      "status": "video_available",
+      "provisional": false,
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16458775923278",
+          "url": "https://ok.ru/video/16458775923278",
+          "label": "OK.ru · Link informado pelo administrador"
+        }
+      ],
+      "description": "Edição de 16/11/2026. Link OK.ru informado pelo administrador; reprodução ainda requer conferência."
     },
     {
       "id": "auto:wwe:2026-11-17:nxt",
