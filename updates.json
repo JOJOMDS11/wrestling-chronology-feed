@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T11:38:57.008694Z",
+  "generatedAt": "2026-11-20T17:50:45Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -1560,6 +1560,18 @@
       "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
     },
     {
+      "id": "auto:tna:2026-11-27:xplosion",
+      "company": "tna",
+      "date": "2026-11-27",
+      "year": 2026,
+      "title": "TNA Xplosion",
+      "show": "Xplosion",
+      "status": "awaiting_video",
+      "provisional": true,
+      "sources": [],
+      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+    },
+    {
       "id": "auto:wwe:2026-11-27:smackdown",
       "company": "wwe",
       "date": "2026-11-27",
@@ -1804,18 +1816,6 @@
       "year": 2026,
       "title": "AEW Dynamite",
       "show": "Dynamite",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
-    },
-    {
-      "id": "auto:tna:2026-11-27:xplosion",
-      "company": "tna",
-      "date": "2026-11-27",
-      "year": 2026,
-      "title": "TNA Xplosion",
-      "show": "Xplosion",
       "status": "awaiting_video",
       "provisional": true,
       "sources": [],
