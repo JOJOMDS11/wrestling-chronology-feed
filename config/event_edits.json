@@ -859,6 +859,21 @@
       "sourceThumbnails": {},
       "thumbnailUrl": "https://jojomds11.github.io/wrestling-chronology-feed/undefined",
       "updatedAt": "2026-11-17T09:56:28Z"
+    },
+    "auto:wwe:2026-11-20:smackdown": {
+      "revision": 1,
+      "removed": [],
+      "added": [
+        {
+          "type": "okru",
+          "videoId": "16499752438350",
+          "url": "https://ok.ru/video/16499752438350",
+          "label": "Adição manual · okru"
+        }
+      ],
+      "sourceThumbnails": {},
+      "thumbnailUrl": "",
+      "updatedAt": "2026-11-21T17:42:06Z"
     }
   },
   "manualEvents": {
