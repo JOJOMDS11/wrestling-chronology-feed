@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-21T16:49:33.667841Z",
+  "checkedAt": "2026-11-22T17:13:06.131052Z",
   "referenceCoverage": "partial",
   "notice": "Referências da Wikipédia são listas históricas independentes; não substituem calendários oficiais. Anos com fonte indisponível não estão completos. A auditoria não altera vídeos.",
   "wikipediaSources": {
@@ -53,8 +53,8 @@
         "2027": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     },
     "wcw": {
       "status": "updated",
@@ -81,8 +81,8 @@
         "2001": 3
       },
       "url": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     },
     "ecw": {
       "status": "updated",
@@ -96,12 +96,12 @@
         "2001": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     },
     "tna": {
       "status": "updated",
-      "count": 415,
+      "count": 413,
       "yearCounts": {
         "2002": 26,
         "2003": 52,
@@ -112,14 +112,14 @@
         "2008": 12,
         "2009": 12,
         "2010": 12,
-        "2011": 12,
+        "2011": 13,
         "2012": 12,
-        "2013": 14,
-        "2014": 12,
-        "2015": 14,
+        "2013": 11,
+        "2014": 13,
+        "2015": 12,
         "2016": 12,
-        "2017": 14,
-        "2018": 21,
+        "2017": 12,
+        "2018": 24,
         "2019": 29,
         "2020": 10,
         "2021": 16,
@@ -130,8 +130,8 @@
         "2026": 8
       },
       "url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     },
     "roh": {
       "status": "updated",
@@ -159,8 +159,8 @@
         "2026": 4
       },
       "url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     },
     "aew": {
       "status": "updated",
@@ -177,8 +177,8 @@
         "2027": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     },
     "njpw": {
       "status": "updated",
@@ -225,8 +225,8 @@
         "2027": 3
       },
       "url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     },
     "nxt": {
       "status": "updated",
@@ -242,8 +242,8 @@
         "2021": 4
       },
       "url": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00"
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00"
     }
   },
   "catalogueFailures": [],
@@ -406,10 +406,10 @@
         "njpw": 11
       },
       "cataloguePpvs": 37,
-      "references": 43,
+      "references": 44,
       "missing": 11,
       "withoutVideo": 0,
-      "withSources": 32,
+      "withSources": 33,
       "upcoming": 0
     },
     "2012": {
@@ -432,10 +432,10 @@
         "njpw": 10
       },
       "cataloguePpvs": 28,
-      "references": 35,
-      "missing": 18,
+      "references": 36,
+      "missing": 17,
       "withoutVideo": 0,
-      "withSources": 17,
+      "withSources": 19,
       "upcoming": 0
     },
     "2014": {
@@ -446,8 +446,8 @@
         "njpw": 1
       },
       "cataloguePpvs": 23,
-      "references": 47,
-      "missing": 25,
+      "references": 50,
+      "missing": 28,
       "withoutVideo": 0,
       "withSources": 22,
       "upcoming": 0
@@ -460,8 +460,8 @@
         "njpw": 1
       },
       "cataloguePpvs": 26,
-      "references": 56,
-      "missing": 30,
+      "references": 58,
+      "missing": 32,
       "withoutVideo": 0,
       "withSources": 26,
       "upcoming": 0
@@ -474,8 +474,8 @@
         "njpw": 1
       },
       "cataloguePpvs": 28,
-      "references": 59,
-      "missing": 31,
+      "references": 60,
+      "missing": 32,
       "withoutVideo": 0,
       "withSources": 28,
       "upcoming": 0
@@ -488,8 +488,8 @@
         "njpw": 1
       },
       "cataloguePpvs": 30,
-      "references": 84,
-      "missing": 54,
+      "references": 83,
+      "missing": 53,
       "withoutVideo": 0,
       "withSources": 30,
       "upcoming": 0
@@ -504,8 +504,8 @@
         "njpw": 1
       },
       "cataloguePpvs": 37,
-      "references": 107,
-      "missing": 71,
+      "references": 111,
+      "missing": 75,
       "withoutVideo": 0,
       "withSources": 36,
       "upcoming": 0
@@ -520,8 +520,8 @@
         "njpw": 1
       },
       "cataloguePpvs": 52,
-      "references": 128,
-      "missing": 82,
+      "references": 129,
+      "missing": 83,
       "withoutVideo": 0,
       "withSources": 46,
       "upcoming": 0
@@ -8375,11 +8375,11 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2009-06-21:slammiversary",
+      "id": "wiki:tna:2009-06-21:slammiversary-seven",
       "company": "tna",
       "date": "2009-06-21",
       "year": 2009,
-      "title": "Slammiversary",
+      "title": "Slammiversary Seven",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "with_sources",
@@ -9023,18 +9023,6 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2011-01-04:global-impact-3",
-      "company": "tna",
-      "date": "2011-01-04",
-      "year": 2011,
-      "title": "Global Impact 3",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:tna:2011-01-09:genesis",
       "company": "tna",
       "date": "2011-01-09",
@@ -9117,6 +9105,18 @@
       "state": "with_sources",
       "eventId": "wwe:2011-02-20:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2011-02-24:global-impact-3",
+      "company": "tna",
+      "date": "2011-02-24",
+      "year": 2011,
+      "title": "Global Impact 3",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:roh:2011-02-26:roh-9th-anniversary-show",
@@ -9477,6 +9477,18 @@
       "state": "with_sources",
       "eventId": "njpw:2011-11-12:ppv:powerstruggle",
       "sourcesCount": 1
+    },
+    {
+      "id": "wiki:tna:2011-11-13:turning-point",
+      "company": "tna",
+      "date": "2011-11-13",
+      "year": 2011,
+      "title": "Turning Point",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "with_sources",
+      "eventId": "tna:2011-11-13:ppv:turningpoint",
+      "sourcesCount": 2
     },
     {
       "id": "wiki:wwe:2011-11-20:survivor-series",
@@ -10091,18 +10103,6 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2013-01-12:joker-s-wild-34",
-      "company": "tna",
-      "date": "2013-01-12",
-      "year": 2013,
-      "title": "Joker's Wild [ 34 ]",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:tna:2013-01-13:genesis",
       "company": "tna",
       "date": "2013-01-13",
@@ -10175,42 +10175,6 @@
       "sourcesCount": 2
     },
     {
-      "id": "wiki:tna:2013-03-17:10-reunion",
-      "company": "tna",
-      "date": "2013-03-17",
-      "year": 2013,
-      "title": "10 Reunion",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2013-03-18:tag-team-tournament",
-      "company": "tna",
-      "date": "2013-03-18",
-      "year": 2013,
-      "title": "Tag Team Tournament",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2013-03-19:hardcore-justice-2",
-      "company": "tna",
-      "date": "2013-03-19",
-      "year": 2013,
-      "title": "Hardcore Justice 2",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:roh:2013-04-05:supercard-of-honor-vii",
       "company": "roh",
       "date": "2013-04-05",
@@ -10221,6 +10185,18 @@
       "state": "missing",
       "eventId": null,
       "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2013-04-05:x-travaganza",
+      "company": "tna",
+      "date": "2013-04-05",
+      "year": 2013,
+      "title": "X-Travaganza",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "with_sources",
+      "eventId": "tna:2013-04-05:ppv:onenightonlyxtravaganza",
+      "sourcesCount": 1
     },
     {
       "id": "wiki:njpw:2013-04-07:invasion-attack",
@@ -10257,6 +10233,18 @@
       "state": "missing",
       "eventId": null,
       "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2013-05-03:joker-s-wild",
+      "company": "tna",
+      "date": "2013-05-03",
+      "year": 2013,
+      "title": "Joker's Wild",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "with_sources",
+      "eventId": "tna:2013-05-03:ppv:onenightonlyjokerswild",
+      "sourcesCount": 1
     },
     {
       "id": "wiki:roh:2013-05-04:border-wars",
@@ -10331,6 +10319,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2013-07-05:hardcore-justice-2",
+      "company": "tna",
+      "date": "2013-07-05",
+      "year": 2013,
+      "title": "Hardcore Justice 2",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2013-07-14:money-in-the-bank",
       "company": "wwe",
       "date": "2013-07-14",
@@ -10343,6 +10343,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2013-08-02:10-reunion",
+      "company": "tna",
+      "date": "2013-08-02",
+      "year": 2013,
+      "title": "10 Reunion",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2013-08-18:summerslam",
       "company": "wwe",
       "date": "2013-08-18",
@@ -10353,6 +10365,18 @@
       "state": "with_sources",
       "eventId": "wwe:2013-08-18:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2013-09-06:knockouts-knockdown",
+      "company": "tna",
+      "date": "2013-09-06",
+      "year": 2013,
+      "title": "Knockouts Knockdown",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:wwe:2013-09-15:night-of-champions",
@@ -10439,6 +10463,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2013-11-01:tournament-of-champions",
+      "company": "tna",
+      "date": "2013-11-01",
+      "year": 2013,
+      "title": "Tournament of Champions",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:njpw:2013-11-09:power-struggle",
       "company": "njpw",
       "date": "2013-11-09",
@@ -10463,6 +10499,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2013-12-06:world-cup",
+      "company": "tna",
+      "date": "2013-12-06",
+      "year": 2013,
+      "title": "World Cup",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2013-12-15:tlc-tables-ladders-chairs",
       "company": "wwe",
       "date": "2013-12-15",
@@ -10475,23 +10523,11 @@
       "sourcesCount": 2
     },
     {
-      "id": "wiki:tna:2013-12-29:hardcore-justice-3",
+      "id": "wiki:tna:2014-01-03:tag-team-tournament",
       "company": "tna",
-      "date": "2013-12-29",
-      "year": 2013,
-      "title": "Hardcore Justice 3",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2013-12-30:oldschool",
-      "company": "tna",
-      "date": "2013-12-30",
-      "year": 2013,
-      "title": "#OldSchool",
+      "date": "2014-01-03",
+      "year": 2014,
+      "title": "Tag Team Tournament",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -10511,6 +10547,18 @@
       "sourcesCount": 1
     },
     {
+      "id": "wiki:tna:2014-01-10:hardcore-justice-3",
+      "company": "tna",
+      "date": "2014-01-10",
+      "year": 2014,
+      "title": "Hardcore Justice 3",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2014-01-26:royal-rumble",
       "company": "wwe",
       "date": "2014-01-26",
@@ -10523,11 +10571,11 @@
       "sourcesCount": 2
     },
     {
-      "id": "wiki:tna:2014-02-02:joker-s-wild-2",
+      "id": "wiki:tna:2014-02-07:oldschool",
       "company": "tna",
-      "date": "2014-02-02",
+      "date": "2014-02-07",
       "year": 2014,
-      "title": "Joker's Wild 2",
+      "title": "#OldSchool",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -10583,18 +10631,6 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2014-03-02:global-impact-japan",
-      "company": "tna",
-      "date": "2014-03-02",
-      "year": 2014,
-      "title": "Global Impact Japan",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:tna:2014-03-09:lockdown",
       "company": "tna",
       "date": "2014-03-09",
@@ -10629,18 +10665,6 @@
       "state": "with_sources",
       "eventId": "wwe:2014-04-06:ppv",
       "sourcesCount": 8
-    },
-    {
-      "id": "wiki:tna:2014-04-12:world-cup",
-      "company": "tna",
-      "date": "2014-04-12",
-      "year": 2014,
-      "title": "World Cup",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
     },
     {
       "id": "wiki:tna:2014-04-27:sacrifice",
@@ -10679,6 +10703,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2014-05-09:joker-s-wild-2",
+      "company": "tna",
+      "date": "2014-05-09",
+      "year": 2014,
+      "title": "Joker's Wild 2",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:njpw:2014-05-10:global-wars",
       "company": "njpw",
       "date": "2014-05-10",
@@ -10697,18 +10733,6 @@
       "year": 2014,
       "title": "Global Wars",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2014-05-10:knockouts-knockdown",
-      "company": "tna",
-      "date": "2014-05-10",
-      "year": 2014,
-      "title": "Knockouts Knockdown",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -10835,6 +10859,18 @@
       "sourcesCount": 3
     },
     {
+      "id": "wiki:tna:2014-07-04:global-impact-japan",
+      "company": "tna",
+      "date": "2014-07-04",
+      "year": 2014,
+      "title": "Global Impact Japan",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2014-07-20:battleground",
       "company": "wwe",
       "date": "2014-07-20",
@@ -10845,6 +10881,18 @@
       "state": "with_sources",
       "eventId": "wwe:2014-07-20:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2014-08-01:x-travaganza",
+      "company": "tna",
+      "date": "2014-08-01",
+      "year": 2014,
+      "title": "X-Travaganza",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:wwe:2014-08-17:summerslam",
@@ -10859,11 +10907,11 @@
       "sourcesCount": 2
     },
     {
-      "id": "wiki:tna:2014-09-05:turning-point",
+      "id": "wiki:tna:2014-09-05:world-cup",
       "company": "tna",
       "date": "2014-09-05",
       "year": 2014,
-      "title": "Turning Point",
+      "title": "World Cup",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -10877,18 +10925,6 @@
       "year": 2014,
       "title": "All Star Extravaganza VI",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2014-09-06:rivals",
-      "company": "tna",
-      "date": "2014-09-06",
-      "year": 2014,
-      "title": "Rivals",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -10991,6 +11027,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2014-11-07:knockouts-knockdown",
+      "company": "tna",
+      "date": "2014-11-07",
+      "year": 2014,
+      "title": "Knockouts Knockdown",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:njpw:2014-11-08:power-struggle",
       "company": "njpw",
       "date": "2014-11-08",
@@ -11013,6 +11061,18 @@
       "state": "with_sources",
       "eventId": "wwe:2014-11-23:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2014-12-05:victory-road",
+      "company": "tna",
+      "date": "2014-12-05",
+      "year": 2014,
+      "title": "Victory Road",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:roh:2014-12-07:final-battle",
@@ -11075,6 +11135,18 @@
       "sourcesCount": 1
     },
     {
+      "id": "wiki:tna:2015-01-09:turning-point",
+      "company": "tna",
+      "date": "2015-01-09",
+      "year": 2015,
+      "title": "Turning Point",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2015-01-25:royal-rumble",
       "company": "wwe",
       "date": "2015-01-25",
@@ -11085,6 +11157,18 @@
       "state": "with_sources",
       "eventId": "wwe:2015-01-25:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2015-02-06:rivals",
+      "company": "tna",
+      "date": "2015-02-06",
+      "year": 2015,
+      "title": "Rivals",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:njpw:2015-02-11:the-new-beginning-in-osaka",
@@ -11123,54 +11207,6 @@
       "sourcesCount": 2
     },
     {
-      "id": "wiki:tna:2015-02-13:global-impact-usa-vs-the-world",
-      "company": "tna",
-      "date": "2015-02-13",
-      "year": 2015,
-      "title": "Global Impact – USA vs. The World",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2015-02-14:joker-s-wild",
-      "company": "tna",
-      "date": "2015-02-14",
-      "year": 2015,
-      "title": "Joker's Wild",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2015-02-15:world-cup",
-      "company": "tna",
-      "date": "2015-02-15",
-      "year": 2015,
-      "title": "World Cup",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2015-02-16:gut-check",
-      "company": "tna",
-      "date": "2015-02-16",
-      "year": 2015,
-      "title": "Gut Check",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:wwe:2015-02-22:fastlane",
       "company": "wwe",
       "date": "2015-02-22",
@@ -11195,6 +11231,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2015-03-06:joker-s-wild",
+      "company": "tna",
+      "date": "2015-03-06",
+      "year": 2015,
+      "title": "Joker's Wild",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2015-03-29:wrestlemania-31",
       "company": "wwe",
       "date": "2015-03-29",
@@ -11205,6 +11253,18 @@
       "state": "with_sources",
       "eventId": "wwe:2015-03-29:ppv",
       "sourcesCount": 6
+    },
+    {
+      "id": "wiki:tna:2015-04-01:hardcore-justice",
+      "company": "tna",
+      "date": "2015-04-01",
+      "year": 2015,
+      "title": "Hardcore Justice",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:njpw:2015-04-05:invasion-attack",
@@ -11249,6 +11309,18 @@
       "year": 2015,
       "title": "Wrestling Dontaku",
       "official_url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2015-05-06:x-travaganza",
+      "company": "tna",
+      "date": "2015-05-06",
+      "year": 2015,
+      "title": "X-Travaganza",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -11399,6 +11471,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2015-07-01:knockouts-knockdown",
+      "company": "tna",
+      "date": "2015-07-01",
+      "year": 2015,
+      "title": "Knockouts Knockdown",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2015-07-04:the-beast-in-the-east",
       "company": "wwe",
       "date": "2015-07-04",
@@ -11435,35 +11519,11 @@
       "sourcesCount": 2
     },
     {
-      "id": "wiki:tna:2015-07-24:gfw-amped-anthology-part-1",
+      "id": "wiki:tna:2015-08-05:world-cup",
       "company": "tna",
-      "date": "2015-07-24",
+      "date": "2015-08-05",
       "year": 2015,
-      "title": "GFW Amped Anthology – Part 1",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2015-07-25:gfw-amped-anthology-part-2",
-      "company": "tna",
-      "date": "2015-07-25",
-      "year": 2015,
-      "title": "GFW Amped Anthology – Part 2",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2015-08-21:gfw-amped-anthology-part-3",
-      "company": "tna",
-      "date": "2015-08-21",
-      "year": 2015,
-      "title": "GFW Amped Anthology – Part 3",
+      "title": "World Cup",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -11517,6 +11577,18 @@
       "state": "with_sources",
       "eventId": "wwe:2015-08-23:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2015-09-04:gut-check",
+      "company": "tna",
+      "date": "2015-09-04",
+      "year": 2015,
+      "title": "Gut Check",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:roh:2015-09-18:all-star-extravaganza-vii",
@@ -11639,18 +11711,6 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2015-10-23:gfw-amped-anthology-part-4",
-      "company": "tna",
-      "date": "2015-10-23",
-      "year": 2015,
-      "title": "GFW Amped Anthology – Part 4",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:wwe:2015-10-25:hell-in-a-cell",
       "company": "wwe",
       "date": "2015-10-25",
@@ -11661,6 +11721,18 @@
       "state": "with_sources",
       "eventId": "wwe:2015-10-25:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2015-11-06:the-tna-classic",
+      "company": "tna",
+      "date": "2015-11-06",
+      "year": 2015,
+      "title": "The TNA Classic",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:njpw:2015-11-07:power-struggle",
@@ -11685,6 +11757,18 @@
       "state": "with_sources",
       "eventId": "wwe:2015-11-22:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2015-12-04:global-impact-usa-vs-the-world",
+      "company": "tna",
+      "date": "2015-12-04",
+      "year": 2015,
+      "title": "Global Impact – USA vs. The World",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:wwe:2015-12-13:tlc-tables-ladders-chairs",
@@ -11747,30 +11831,6 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2016-01-05:rivals",
-      "company": "tna",
-      "date": "2016-01-05",
-      "year": 2016,
-      "title": "Rivals",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2016-01-07:joker-s-wild",
-      "company": "tna",
-      "date": "2016-01-07",
-      "year": 2016,
-      "title": "Joker's Wild",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:tna:2016-01-08:live",
       "company": "tna",
       "date": "2016-01-08",
@@ -11793,6 +11853,18 @@
       "state": "with_sources",
       "eventId": "wwe:2016-01-24:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2016-02-05:rivals",
+      "company": "tna",
+      "date": "2016-02-05",
+      "year": 2016,
+      "title": "Rivals",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:njpw:2016-02-11:the-new-beginning-in-osaka",
@@ -11855,6 +11927,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2016-03-04:joker-s-wild",
+      "company": "tna",
+      "date": "2016-03-04",
+      "year": 2016,
+      "title": "Joker's Wild",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2016-03-12:roadblock",
       "company": "wwe",
       "date": "2016-03-12",
@@ -11865,18 +11949,6 @@
       "state": "with_sources",
       "eventId": "wwe:2016-03-12:ppv",
       "sourcesCount": 1
-    },
-    {
-      "id": "wiki:tna:2016-03-17:knockouts-knockdown",
-      "company": "tna",
-      "date": "2016-03-17",
-      "year": 2016,
-      "title": "Knockouts Knockdown",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
     },
     {
       "id": "wiki:nxt:2016-04-01:nxt-takeover-dallas",
@@ -11921,6 +11993,18 @@
       "year": 2016,
       "title": "Invasion Attack",
       "official_url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2016-04-22:knockouts-knockdown",
+      "company": "tna",
+      "date": "2016-04-22",
+      "year": 2016,
+      "title": "Knockouts Knockdown",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -12011,6 +12095,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2016-05-20:victory-road",
+      "company": "tna",
+      "date": "2016-05-20",
+      "year": 2016,
+      "title": "Victory Road",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2016-05-22:extreme-rules",
       "company": "wwe",
       "date": "2016-05-22",
@@ -12059,18 +12155,6 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2016-06-13:world-cup",
-      "company": "tna",
-      "date": "2016-06-13",
-      "year": 2016,
-      "title": "World Cup",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:njpw:2016-06-19:dominion-6-19-in-osaka-jo-hall",
       "company": "njpw",
       "date": "2016-06-19",
@@ -12107,11 +12191,11 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2016-07-13:x-travaganza",
+      "id": "wiki:tna:2016-07-22:world-cup",
       "company": "tna",
-      "date": "2016-07-13",
+      "date": "2016-07-22",
       "year": 2016,
-      "title": "X-Travaganza",
+      "title": "World Cup",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -12129,30 +12213,6 @@
       "state": "with_sources",
       "eventId": "wwe:2016-07-24:ppv",
       "sourcesCount": 2
-    },
-    {
-      "id": "wiki:tna:2016-08-11:september",
-      "company": "tna",
-      "date": "2016-08-11",
-      "year": 2016,
-      "title": "September",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2016-08-16:against-all-odds",
-      "company": "tna",
-      "date": "2016-08-16",
-      "year": 2016,
-      "title": "Against All Odds",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
     },
     {
       "id": "wiki:roh:2016-08-19:death-before-dishonor-xiv",
@@ -12203,6 +12263,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2016-08-26:x-travaganza",
+      "company": "tna",
+      "date": "2016-08-26",
+      "year": 2016,
+      "title": "X-Travaganza",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:roh:2016-08-27:field-of-honor",
       "company": "roh",
       "date": "2016-08-27",
@@ -12233,6 +12305,18 @@
       "year": 2016,
       "title": "Cruiserweight Classic Finale",
       "official_url": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2016-09-16:september",
+      "company": "tna",
+      "date": "2016-09-16",
+      "year": 2016,
+      "title": "September",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -12311,18 +12395,6 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2016-10-05:december",
-      "company": "tna",
-      "date": "2016-10-05",
-      "year": 2016,
-      "title": "December",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:wwe:2016-10-09:no-mercy",
       "company": "wwe",
       "date": "2016-10-09",
@@ -12357,6 +12429,18 @@
       "state": "with_sources",
       "eventId": "wwe:2016-10-30:ppv",
       "sourcesCount": 2
+    },
+    {
+      "id": "wiki:tna:2016-11-04:against-all-odds",
+      "company": "tna",
+      "date": "2016-11-04",
+      "year": 2016,
+      "title": "Against All Odds",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:njpw:2016-11-05:power-struggle",
@@ -12431,6 +12515,18 @@
       "sourcesCount": 2
     },
     {
+      "id": "wiki:tna:2016-12-12:december",
+      "company": "tna",
+      "date": "2016-12-12",
+      "year": 2016,
+      "title": "December",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2016-12-18:roadblock-end-of-the-line",
       "company": "wwe",
       "date": "2016-12-18",
@@ -12477,30 +12573,6 @@
       "state": "with_sources",
       "eventId": "tna:2017-01-06:ppv",
       "sourcesCount": 1
-    },
-    {
-      "id": "wiki:tna:2017-01-07:joker-s-wild",
-      "company": "tna",
-      "date": "2017-01-07",
-      "year": 2017,
-      "title": "Joker's Wild",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2017-01-08:rivals",
-      "company": "tna",
-      "date": "2017-01-08",
-      "year": 2017,
-      "title": "Rivals",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
     },
     {
       "id": "wiki:wwe:2017-01-14:united-kingdom-championship-tournament",
@@ -12569,6 +12641,18 @@
       "year": 2017,
       "title": "The New Beginning in Sapporo ~Resurrection!~",
       "official_url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2017-02-10:joker-s-wild",
+      "company": "tna",
+      "date": "2017-02-10",
+      "year": 2017,
+      "title": "Joker's Wild",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -12647,18 +12731,6 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2017-03-03:victory-road-knockouts-knockdown",
-      "company": "tna",
-      "date": "2017-03-03",
-      "year": 2017,
-      "title": "Victory Road – Knockouts Knockdown",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:wwe:2017-03-05:fastlane",
       "company": "wwe",
       "date": "2017-03-05",
@@ -12677,6 +12749,18 @@
       "year": 2017,
       "title": "ROH 15th Anniversary Show",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2017-03-17:rivals",
+      "company": "tna",
+      "date": "2017-03-17",
+      "year": 2017,
+      "title": "Rivals",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -12743,23 +12827,11 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2017-04-22:turning-point",
+      "id": "wiki:tna:2017-04-14:victory-road-knockouts-knockdown",
       "company": "tna",
-      "date": "2017-04-22",
+      "date": "2017-04-14",
       "year": 2017,
-      "title": "Turning Point",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2017-04-23:no-surrender",
-      "company": "tna",
-      "date": "2017-04-23",
-      "year": 2017,
-      "title": "No Surrender",
+      "title": "Victory Road – Knockouts Knockdown",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -12821,6 +12893,18 @@
       "year": 2017,
       "title": "Ford Community & Performing Arts Center",
       "official_url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2017-05-11:turning-point",
+      "company": "tna",
+      "date": "2017-05-11",
+      "year": 2017,
+      "title": "Turning Point",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -12923,6 +13007,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2017-06-16:no-surrender",
+      "company": "tna",
+      "date": "2017-06-16",
+      "year": 2017,
+      "title": "No Surrender",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:wwe:2017-06-18:money-in-the-bank",
       "company": "wwe",
       "date": "2017-06-18",
@@ -13005,6 +13101,18 @@
       "state": "with_sources",
       "eventId": "wwe:2017-07-23:ppv",
       "sourcesCount": 1
+    },
+    {
+      "id": "wiki:tna:2017-08-11:gfw-amped-anthology-part-1",
+      "company": "tna",
+      "date": "2017-08-11",
+      "year": 2017,
+      "title": "GFW Amped Anthology – Part 1",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:njpw:2017-08-18:war-of-the-worlds-uk",
@@ -13109,6 +13217,18 @@
       "year": 2017,
       "title": "Mae Young Classic Finale",
       "official_url": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2017-09-15:gfw-amped-anthology-part-2",
+      "company": "tna",
+      "date": "2017-09-15",
+      "year": 2017,
+      "title": "GFW Amped Anthology – Part 2",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -13235,6 +13355,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2017-10-13:gfw-amped-anthology-part-3",
+      "company": "tna",
+      "date": "2017-10-13",
+      "year": 2017,
+      "title": "GFW Amped Anthology – Part 3",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:njpw:2017-10-14:express-live",
       "company": "njpw",
       "date": "2017-10-14",
@@ -13259,18 +13391,6 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2017-10-14:canadian-clash",
-      "company": "tna",
-      "date": "2017-10-14",
-      "year": 2017,
-      "title": "Canadian Clash",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:njpw:2017-10-15:odeum-expo-center",
       "company": "njpw",
       "date": "2017-10-15",
@@ -13289,18 +13409,6 @@
       "year": 2017,
       "title": "Odeum Expo Center",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2017-10-21:st-clair-college-sportsplex",
-      "company": "tna",
-      "date": "2017-10-21",
-      "year": 2017,
-      "title": "St. Clair College Sportsplex",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -13341,30 +13449,6 @@
       "state": "with_sources",
       "eventId": "tna:2017-11-05:ppv",
       "sourcesCount": 1
-    },
-    {
-      "id": "wiki:tna:2017-11-07:aberdeen-pavilion",
-      "company": "tna",
-      "date": "2017-11-07",
-      "year": 2017,
-      "title": "Aberdeen Pavilion",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2017-11-09:barbed-wire-massacre-iii",
-      "company": "tna",
-      "date": "2017-11-09",
-      "year": 2017,
-      "title": "Barbed Wire Massacre III",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
     },
     {
       "id": "wiki:roh:2017-11-11:elite",
@@ -13415,11 +13499,11 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2017-12-03:diamondback-saloon",
+      "id": "wiki:tna:2017-12-08:gfw-amped-anthology-part-4",
       "company": "tna",
-      "date": "2017-12-03",
+      "date": "2017-12-08",
       "year": 2017,
-      "title": "Diamondback Saloon",
+      "title": "GFW Amped Anthology – Part 4",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -13469,6 +13553,30 @@
       "year": 2018,
       "title": "New Year Dash!!",
       "official_url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2018-01-10:collision-in-oklahoma",
+      "company": "tna",
+      "date": "2018-01-10",
+      "year": 2018,
+      "title": "Collision in Oklahoma",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2018-01-18:barbed-wire-massacre-iii",
+      "company": "tna",
+      "date": "2018-01-18",
+      "year": 2018,
+      "title": "Barbed Wire Massacre III",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -13535,18 +13643,6 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2018-02-03:brace-for-impact",
-      "company": "tna",
-      "date": "2018-02-03",
-      "year": 2018,
-      "title": "Brace for Impact",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:roh:2018-02-09:honor-reigns-supreme",
       "company": "roh",
       "date": "2018-02-09",
@@ -13559,12 +13655,36 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2018-02-09:brace-for-impact",
+      "company": "tna",
+      "date": "2018-02-09",
+      "year": 2018,
+      "title": "Brace for Impact",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:njpw:2018-02-10:the-new-beginning-in-osaka",
       "company": "njpw",
       "date": "2018-02-10",
       "year": 2018,
       "title": "The New Beginning in Osaka",
       "official_url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2018-02-16:canadian-clash",
+      "company": "tna",
+      "date": "2018-02-16",
+      "year": 2018,
+      "title": "Canadian Clash",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -13643,36 +13763,24 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2018-03-03:march-breakdown",
-      "company": "tna",
-      "date": "2018-03-03",
-      "year": 2018,
-      "title": "March Breakdown",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2018-03-04:last-chancery",
-      "company": "tna",
-      "date": "2018-03-04",
-      "year": 2018,
-      "title": "Last Chancery",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:roh:2018-03-09:roh-16th-anniversary-show",
       "company": "roh",
       "date": "2018-03-09",
       "year": 2018,
       "title": "ROH 16th Anniversary Show",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2018-03-09:last-chancery",
+      "company": "tna",
+      "date": "2018-03-09",
+      "year": 2018,
+      "title": "Last Chancery",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -13691,11 +13799,11 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2018-03-24:cali-combat",
+      "id": "wiki:tna:2018-03-16:march-breakdown",
       "company": "tna",
-      "date": "2018-03-24",
+      "date": "2018-03-16",
       "year": 2018,
-      "title": "Cali Combat",
+      "title": "March Breakdown",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -13799,11 +13907,11 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2018-04-22:redemption-35",
+      "id": "wiki:tna:2018-04-22:redemption",
       "company": "tna",
       "date": "2018-04-22",
       "year": 2018,
-      "title": "Redemption [ 35 ]",
+      "title": "Redemption",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "with_sources",
@@ -13955,6 +14063,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2018-05-11:cali-combat",
+      "company": "tna",
+      "date": "2018-05-11",
+      "year": 2018,
+      "title": "Cali Combat",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:njpw:2018-05-12:royal-oak-music-theatre",
       "company": "njpw",
       "date": "2018-05-12",
@@ -14039,18 +14159,6 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2018-06-03:zero-fear",
-      "company": "tna",
-      "date": "2018-06-03",
-      "year": 2018,
-      "title": "Zero Fear",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:njpw:2018-06-09:dominion-6-9-in-osaka-jo-hall",
       "company": "njpw",
       "date": "2018-06-09",
@@ -14069,6 +14177,18 @@
       "year": 2018,
       "title": "State of the Art",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2018-06-15:zero-fear",
+      "company": "tna",
+      "date": "2018-06-15",
+      "year": 2018,
+      "title": "Zero Fear",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -14327,9 +14447,9 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2018-08-25:bad-intentions",
+      "id": "wiki:tna:2018-08-31:bad-intentions",
       "company": "tna",
-      "date": "2018-08-25",
+      "date": "2018-08-31",
       "year": 2018,
       "title": "Bad Intentions",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
@@ -14361,6 +14481,18 @@
       "state": "with_sources",
       "eventId": "tna:2018-09-09:ppv",
       "sourcesCount": 1
+    },
+    {
+      "id": "wiki:tna:2018-09-14:night-of-the-dummies",
+      "company": "tna",
+      "date": "2018-09-14",
+      "year": 2018,
+      "title": "Night of the Dummies",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:njpw:2018-09-15:destruction-in-hiroshima",
@@ -14429,18 +14561,6 @@
       "year": 2018,
       "title": "Fighting Spirit Unleashed",
       "official_url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
-      "id": "wiki:tna:2018-10-06:bcw-25th-anniversary",
-      "company": "tna",
-      "date": "2018-10-06",
-      "year": 2018,
-      "title": "BCW 25th Anniversary",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -14627,6 +14747,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2018-11-16:bcw-25th-anniversary",
+      "company": "tna",
+      "date": "2018-11-16",
+      "year": 2018,
+      "title": "BCW 25th Anniversary",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:nxt:2018-11-17:nxt-takeover-wargames",
       "company": "nxt",
       "date": "2018-11-17",
@@ -14687,18 +14819,6 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2018-12-01:back-to-cali",
-      "company": "tna",
-      "date": "2018-12-01",
-      "year": 2018,
-      "title": "Back to Cali",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:roh:2018-12-14:final-battle",
       "company": "roh",
       "date": "2018-12-14",
@@ -14735,11 +14855,11 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2019-01-03:opening-day",
+      "id": "wiki:tna:2018-12-21:back-to-cali",
       "company": "tna",
-      "date": "2019-01-03",
-      "year": 2019,
-      "title": "Opening Day",
+      "date": "2018-12-21",
+      "year": 2018,
+      "title": "Back to Cali",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
@@ -14963,6 +15083,18 @@
       "sourcesCount": 0
     },
     {
+      "id": "wiki:tna:2019-02-09:new-beginnings",
+      "company": "tna",
+      "date": "2019-02-09",
+      "year": 2019,
+      "title": "New Beginnings",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
       "id": "wiki:roh:2019-02-10:bound-by-honor",
       "company": "roh",
       "date": "2019-02-10",
@@ -15047,9 +15179,21 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2019-03-02:clash-in-the-bluegrass",
+      "id": "wiki:tna:2019-03-02:opening-day",
       "company": "tna",
       "date": "2019-03-02",
+      "year": 2019,
+      "title": "Opening Day",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2019-03-09:clash-in-the-bluegrass",
+      "company": "tna",
+      "date": "2019-03-09",
       "year": 2019,
       "title": "Clash in the Bluegrass",
       "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
@@ -15165,18 +15309,6 @@
       "state": "with_sources",
       "eventId": "wwe:2019-04-07:ppv",
       "sourcesCount": 1
-    },
-    {
-      "id": "wiki:tna:2019-04-12:salute-to-the-troops",
-      "company": "tna",
-      "date": "2019-04-12",
-      "year": 2019,
-      "title": "Salute to the Troops",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
     },
     {
       "id": "wiki:tna:2019-04-13:critical-transformation",
@@ -15353,6 +15485,18 @@
       "year": 2019,
       "title": "DeltaPlex Arena",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
+    },
+    {
+      "id": "wiki:tna:2019-05-11:salute-to-the-troops",
+      "company": "tna",
+      "date": "2019-05-11",
+      "year": 2019,
+      "title": "Salute to the Troops",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
       "referenceType": "wikipedia",
       "state": "missing",
       "eventId": null,
@@ -17699,18 +17843,6 @@
       "sourcesCount": 1
     },
     {
-      "id": "wiki:tna:2021-09-17:knockouts-knockdown",
-      "company": "tna",
-      "date": "2021-09-17",
-      "year": 2021,
-      "title": "Knockouts Knockdown",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:tna:2021-09-18:victory-road",
       "company": "tna",
       "date": "2021-09-18",
@@ -17733,6 +17865,18 @@
       "state": "with_sources",
       "eventId": "wwe:2021-09-26:ppv",
       "sourcesCount": 1
+    },
+    {
+      "id": "wiki:tna:2021-10-09:knockouts-knockdown",
+      "company": "tna",
+      "date": "2021-10-09",
+      "year": 2021,
+      "title": "Knockouts Knockdown",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:wwe:2021-10-21:crown-jewel",
@@ -18515,18 +18659,6 @@
       "sourcesCount": 0
     },
     {
-      "id": "wiki:tna:2022-11-25:throwback-throwdown-iii",
-      "company": "tna",
-      "date": "2022-11-25",
-      "year": 2022,
-      "title": "Throwback Throwdown III",
-      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "referenceType": "wikipedia",
-      "state": "missing",
-      "eventId": null,
-      "sourcesCount": 0
-    },
-    {
       "id": "wiki:wwe:2022-11-26:survivor-series-wargames",
       "company": "wwe",
       "date": "2022-11-26",
@@ -18537,6 +18669,18 @@
       "state": "with_sources",
       "eventId": "wwe:2022-11-26:ppv",
       "sourcesCount": 1
+    },
+    {
+      "id": "wiki:tna:2022-12-02:throwback-throwdown-iii",
+      "company": "tna",
+      "date": "2022-12-02",
+      "year": 2022,
+      "title": "Throwback Throwdown III",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
+      "referenceType": "wikipedia",
+      "state": "missing",
+      "eventId": null,
+      "sourcesCount": 0
     },
     {
       "id": "wiki:roh:2022-12-10:final-battle",
@@ -22214,8 +22358,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -22233,8 +22377,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -22252,8 +22396,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -22271,8 +22415,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 27,
       "unverifiedYear": false
     },
@@ -22290,8 +22434,8 @@
       "coverage": "curated_only",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -22309,8 +22453,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 8,
       "unverifiedYear": false
     },
@@ -22328,8 +22472,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 10,
       "unverifiedYear": false
     },
@@ -22347,8 +22491,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -22366,8 +22510,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 19,
       "unverifiedYear": false
     },
@@ -22385,8 +22529,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 31,
       "unverifiedYear": false
     },
@@ -22404,8 +22548,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -22423,8 +22567,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -22442,8 +22586,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 10,
       "unverifiedYear": false
     },
@@ -22461,8 +22605,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 9,
       "unverifiedYear": false
     },
@@ -22480,8 +22624,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 22,
       "unverifiedYear": false
     },
@@ -22499,8 +22643,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 21,
       "unverifiedYear": false
     },
@@ -22518,8 +22662,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -22537,8 +22681,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -22556,8 +22700,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 9,
       "unverifiedYear": false
     },
@@ -22575,8 +22719,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -22594,8 +22738,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 31,
       "unverifiedYear": false
     },
@@ -22613,8 +22757,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 18,
       "unverifiedYear": false
     },
@@ -22632,8 +22776,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -22651,8 +22795,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 15,
       "unverifiedYear": false
     },
@@ -22670,8 +22814,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 8,
       "unverifiedYear": false
     },
@@ -22689,8 +22833,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -22708,8 +22852,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 31,
       "unverifiedYear": false
     },
@@ -22727,8 +22871,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 18,
       "unverifiedYear": false
     },
@@ -22746,8 +22890,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -22765,8 +22909,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -22784,8 +22928,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -22803,8 +22947,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -22822,8 +22966,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 20,
       "unverifiedYear": false
     },
@@ -22841,8 +22985,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 19,
       "unverifiedYear": false
     },
@@ -22860,8 +23004,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -22879,8 +23023,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 16,
       "unverifiedYear": false
     },
@@ -22898,8 +23042,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -22917,8 +23061,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 7,
       "unverifiedYear": false
     },
@@ -22936,8 +23080,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 24,
       "unverifiedYear": false
     },
@@ -22955,8 +23099,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 20,
       "unverifiedYear": false
     },
@@ -22974,8 +23118,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -22993,8 +23137,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 10,
       "unverifiedYear": false
     },
@@ -23012,8 +23156,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -23031,8 +23175,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 6,
       "unverifiedYear": false
     },
@@ -23050,8 +23194,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 15,
       "unverifiedYear": false
     },
@@ -23069,8 +23213,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 27,
       "unverifiedYear": false
     },
@@ -23088,8 +23232,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -23097,18 +23241,18 @@
       "company": "tna",
       "year": 2019,
       "cataloguePpvs": 18,
-      "references": 28,
-      "wikipediaReferences": 28,
+      "references": 29,
+      "wikipediaReferences": 29,
       "matched": 18,
-      "missing": 10,
+      "missing": 11,
       "withoutVideo": 0,
       "withSources": 18,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 29,
       "unverifiedYear": false
     },
@@ -23126,8 +23270,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -23145,8 +23289,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 37,
       "unverifiedYear": false
     },
@@ -23164,8 +23308,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 28,
       "unverifiedYear": false
     },
@@ -23183,8 +23327,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 23,
       "unverifiedYear": false
     },
@@ -23202,8 +23346,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -23211,19 +23355,19 @@
       "company": "tna",
       "year": 2018,
       "cataloguePpvs": 10,
-      "references": 20,
-      "wikipediaReferences": 20,
+      "references": 24,
+      "wikipediaReferences": 24,
       "matched": 10,
-      "missing": 10,
+      "missing": 14,
       "withoutVideo": 0,
       "withSources": 10,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
-      "wikipediaRowsInYear": 21,
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
+      "wikipediaRowsInYear": 24,
       "unverifiedYear": false
     },
     {
@@ -23240,8 +23384,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -23259,8 +23403,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 34,
       "unverifiedYear": false
     },
@@ -23278,8 +23422,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 25,
       "unverifiedYear": false
     },
@@ -23297,8 +23441,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 25,
       "unverifiedYear": false
     },
@@ -23316,8 +23460,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -23325,19 +23469,19 @@
       "company": "tna",
       "year": 2017,
       "cataloguePpvs": 3,
-      "references": 13,
-      "wikipediaReferences": 13,
+      "references": 12,
+      "wikipediaReferences": 12,
       "matched": 3,
-      "missing": 10,
+      "missing": 9,
       "withoutVideo": 0,
       "withSources": 3,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
-      "wikipediaRowsInYear": 14,
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
+      "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
     {
@@ -23354,8 +23498,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -23373,8 +23517,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 27,
       "unverifiedYear": false
     },
@@ -23392,8 +23536,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 21,
       "unverifiedYear": false
     },
@@ -23411,8 +23555,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -23420,18 +23564,18 @@
       "company": "tna",
       "year": 2016,
       "cataloguePpvs": 3,
-      "references": 11,
-      "wikipediaReferences": 11,
+      "references": 12,
+      "wikipediaReferences": 12,
       "matched": 3,
-      "missing": 8,
+      "missing": 9,
       "withoutVideo": 0,
       "withSources": 3,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -23449,8 +23593,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 9,
       "unverifiedYear": false
     },
@@ -23468,8 +23612,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -23487,8 +23631,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 21,
       "unverifiedYear": false
     },
@@ -23506,8 +23650,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -23515,19 +23659,19 @@
       "company": "tna",
       "year": 2015,
       "cataloguePpvs": 2,
-      "references": 10,
-      "wikipediaReferences": 10,
+      "references": 12,
+      "wikipediaReferences": 12,
       "matched": 2,
-      "missing": 8,
+      "missing": 10,
       "withoutVideo": 0,
       "withSources": 2,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
-      "wikipediaRowsInYear": 14,
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
+      "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
     {
@@ -23544,8 +23688,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 6,
       "unverifiedYear": false
     },
@@ -23563,8 +23707,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -23582,8 +23726,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 16,
       "unverifiedYear": false
     },
@@ -23601,8 +23745,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -23610,19 +23754,19 @@
       "company": "tna",
       "year": 2014,
       "cataloguePpvs": 4,
-      "references": 10,
-      "wikipediaReferences": 10,
+      "references": 13,
+      "wikipediaReferences": 13,
       "matched": 4,
-      "missing": 6,
+      "missing": 9,
       "withoutVideo": 0,
       "withSources": 4,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
-      "wikipediaRowsInYear": 12,
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
+      "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
     {
@@ -23639,8 +23783,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -23658,8 +23802,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -23677,8 +23821,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -23686,19 +23830,19 @@
       "company": "tna",
       "year": 2013,
       "cataloguePpvs": 6,
-      "references": 10,
-      "wikipediaReferences": 10,
-      "matched": 4,
-      "missing": 6,
+      "references": 11,
+      "wikipediaReferences": 11,
+      "matched": 6,
+      "missing": 5,
       "withoutVideo": 0,
-      "withSources": 4,
+      "withSources": 6,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
-      "wikipediaRowsInYear": 14,
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
+      "wikipediaRowsInYear": 11,
       "unverifiedYear": false
     },
     {
@@ -23715,8 +23859,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -23734,8 +23878,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 8,
       "unverifiedYear": false
     },
@@ -23753,8 +23897,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -23772,8 +23916,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -23791,8 +23935,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 9,
       "unverifiedYear": false
     },
@@ -23810,8 +23954,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -23829,8 +23973,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -23838,19 +23982,19 @@
       "company": "tna",
       "year": 2011,
       "cataloguePpvs": 12,
-      "references": 12,
-      "wikipediaReferences": 12,
-      "matched": 11,
+      "references": 13,
+      "wikipediaReferences": 13,
+      "matched": 12,
       "missing": 1,
       "withoutVideo": 0,
-      "withSources": 11,
+      "withSources": 12,
       "upcoming": 0,
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
-      "wikipediaRowsInYear": 12,
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
+      "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
     {
@@ -23867,8 +24011,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 6,
       "unverifiedYear": false
     },
@@ -23886,8 +24030,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -23905,8 +24049,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -23924,8 +24068,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -23943,8 +24087,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -23962,8 +24106,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -23981,8 +24125,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -24000,8 +24144,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24019,8 +24163,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -24038,8 +24182,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 10,
       "unverifiedYear": false
     },
@@ -24057,8 +24201,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -24076,8 +24220,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24095,8 +24239,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -24114,8 +24258,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 8,
       "unverifiedYear": false
     },
@@ -24133,8 +24277,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 15,
       "unverifiedYear": false
     },
@@ -24152,8 +24296,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24171,8 +24315,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -24190,8 +24334,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -24209,8 +24353,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 16,
       "unverifiedYear": false
     },
@@ -24228,8 +24372,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24247,8 +24391,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -24266,8 +24410,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -24285,8 +24429,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -24304,8 +24448,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 15,
       "unverifiedYear": false
     },
@@ -24323,8 +24467,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24342,8 +24486,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -24361,8 +24505,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -24380,8 +24524,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -24399,8 +24543,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -24418,8 +24562,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 38,
       "unverifiedYear": false
     },
@@ -24437,8 +24581,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -24456,8 +24600,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -24475,8 +24619,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -24494,8 +24638,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 52,
       "unverifiedYear": false
     },
@@ -24513,8 +24657,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -24532,8 +24676,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -24551,8 +24695,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -24570,8 +24714,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 26,
       "unverifiedYear": false
     },
@@ -24589,8 +24733,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -24608,8 +24752,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -24627,8 +24771,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -24646,8 +24790,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 6,
       "unverifiedYear": false
     },
@@ -24665,8 +24809,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -24684,8 +24828,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -24703,8 +24847,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -24722,8 +24866,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 6,
       "unverifiedYear": false
     },
@@ -24741,8 +24885,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -24760,8 +24904,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 8,
       "unverifiedYear": false
     },
@@ -24779,8 +24923,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 14,
       "unverifiedYear": false
     },
@@ -24798,8 +24942,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -24817,8 +24961,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24836,8 +24980,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 6,
       "unverifiedYear": false
     },
@@ -24855,8 +24999,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -24874,8 +25018,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -24893,8 +25037,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24912,8 +25056,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -24931,8 +25075,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -24950,8 +25094,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -24969,8 +25113,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 12,
       "unverifiedYear": false
     },
@@ -24988,8 +25132,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -25007,8 +25151,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 13,
       "unverifiedYear": false
     },
@@ -25026,8 +25170,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -25045,8 +25189,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 10,
       "unverifiedYear": false
     },
@@ -25064,8 +25208,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -25083,8 +25227,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 10,
       "unverifiedYear": false
     },
@@ -25102,8 +25246,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 7,
       "unverifiedYear": false
     },
@@ -25121,8 +25265,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 10,
       "unverifiedYear": false
     },
@@ -25140,8 +25284,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -25159,8 +25303,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -25178,8 +25322,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 2,
       "unverifiedYear": false
     },
@@ -25197,8 +25341,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 8,
       "unverifiedYear": false
     },
@@ -25216,8 +25360,8 @@
       "coverage": "not_audited",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 0,
       "unverifiedYear": true
     },
@@ -25235,8 +25379,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -25254,8 +25398,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 2,
       "unverifiedYear": false
     },
@@ -25273,8 +25417,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 8,
       "unverifiedYear": false
     },
@@ -25292,8 +25436,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25311,8 +25455,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -25330,8 +25474,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25349,8 +25493,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 7,
       "unverifiedYear": false
     },
@@ -25368,8 +25512,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -25387,8 +25531,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25406,8 +25550,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 6,
       "unverifiedYear": false
     },
@@ -25425,8 +25569,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 4,
       "unverifiedYear": false
     },
@@ -25444,8 +25588,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 2,
       "unverifiedYear": false
     },
@@ -25463,8 +25607,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -25482,8 +25626,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -25501,8 +25645,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25520,8 +25664,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 5,
       "unverifiedYear": false
     },
@@ -25539,8 +25683,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -25558,8 +25702,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 3,
       "unverifiedYear": false
     },
@@ -25577,8 +25721,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 2,
       "unverifiedYear": false
     },
@@ -25596,8 +25740,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25615,8 +25759,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25634,8 +25778,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25653,8 +25797,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 2,
       "unverifiedYear": false
     },
@@ -25672,8 +25816,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25691,8 +25835,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     },
@@ -25710,8 +25854,8 @@
       "coverage": "partial",
       "sourceStatus": "updated",
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "sourceCheckedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "sourceCheckedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "wikipediaRowsInYear": 1,
       "unverifiedYear": false
     }
@@ -25721,64 +25865,64 @@
       "sourceStatus": "updated",
       "sourceCount": 580,
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 43
     },
     "nxt": {
       "sourceStatus": "updated",
       "sourceCount": 36,
       "sourceUrl": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 8
     },
     "tna": {
       "sourceStatus": "updated",
-      "sourceCount": 415,
+      "sourceCount": 413,
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 25
     },
     "aew": {
       "sourceStatus": "updated",
       "sourceCount": 56,
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 9
     },
     "roh": {
       "sourceStatus": "updated",
       "sourceCount": 177,
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 20
     },
     "njpw": {
       "sourceStatus": "updated",
       "sourceCount": 405,
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 39
     },
     "wcw": {
       "sourceStatus": "updated",
       "sourceCount": 119,
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 19
     },
     "ecw": {
       "sourceStatus": "updated",
       "sourceCount": 24,
       "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "checkedAt": "2026-11-21T16:49:28.785467+00:00",
-      "lastSuccessAt": "2026-11-21T16:49:28.785467+00:00",
+      "checkedAt": "2026-11-22T17:12:59.205432+00:00",
+      "lastSuccessAt": "2026-11-22T17:12:59.205432+00:00",
       "yearsWithReferences": 6
     }
   }
