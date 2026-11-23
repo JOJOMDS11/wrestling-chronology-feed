@@ -874,6 +874,27 @@
       "sourceThumbnails": {},
       "thumbnailUrl": "",
       "updatedAt": "2026-11-21T17:42:06Z"
+    },
+    "auto:aew:2026-11-21:collision": {
+      "revision": 1,
+      "removed": [],
+      "added": [
+        {
+          "type": "bilibili",
+          "videoId": "4801710019320832",
+          "url": "https://www.bilibili.tv/en/video/4801710019320832",
+          "label": "Adição manual · bilibili"
+        },
+        {
+          "type": "okru",
+          "videoId": "17118459202297",
+          "url": "https://ok.ru/video/17118459202297",
+          "label": "Adição manual · okru"
+        }
+      ],
+      "sourceThumbnails": {},
+      "thumbnailUrl": "",
+      "updatedAt": "2026-11-23T10:41:24Z"
     }
   },
   "manualEvents": {

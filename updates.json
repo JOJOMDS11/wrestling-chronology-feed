@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T17:50:45Z",
+  "generatedAt": "2026-11-23T21:21:53.354483Z",
   "events": [
     {
       "id": "aew:2025-10-22:dynamite",
@@ -1194,9 +1194,16 @@
           "url": "https://archive.org/download/roh-on-honor-club-episode-192-12-11-26/ROH%20on%20HonorClub%20Episode%20192%2012-11-26.mp4",
           "label": "Internet Archive · Revisão administrativa",
           "thumbnail": "https://archive.org/services/img/roh-on-honor-club-episode-192-12-11-26"
+        },
+        {
+          "type": "bilibili",
+          "videoId": "4801608557009408",
+          "url": "https://www.bilibili.tv/en/video/4801608557009408",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/34054ef0c976789371a52b01c6b25bd2.jpg@720w_405h_1e_1c_90q"
         }
       ],
-      "approvedAt": "2026-11-16T16:47:37Z",
+      "approvedAt": "2026-11-23T10:36:04Z",
       "thumbnail": "https://archive.org/services/img/roh-on-honor-club-episode-192-12-11-26"
     },
     {
@@ -1446,10 +1453,34 @@
       "year": 2026,
       "title": "ROH on HonorClub",
       "show": "HonorClub",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+      "status": "video_available",
+      "provisional": false,
+      "sources": [
+        {
+          "type": "bilibili",
+          "videoId": "4801692458686976",
+          "url": "https://www.bilibili.tv/en/video/4801692458686976",
+          "label": "Bilibili · Revisão administrativa",
+          "thumbnail": "https://pic.bstarstatic.com/ugc/97cde7d4b153e9313e642b4a041cd763.jpg@720w_405h_1e_1c_90q"
+        },
+        {
+          "type": "okru",
+          "videoId": "16488608107086",
+          "url": "https://ok.ru/video/16488608107086",
+          "label": "OK.ru · Revisão administrativa",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19065071536718&type=37&idx=1&scl=4&tkn=qcaoLG3y4eXe5XKGlQ5UMVMQ-b8&fn=external_8"
+        },
+        {
+          "type": "okru",
+          "videoId": "16488528611918",
+          "url": "https://ok.ru/video/16488528611918",
+          "label": "OK.ru · Revisão administrativa",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19064942234190&type=37&idx=1&scl=4&tkn=ueEmIZTI7ABaGTxH-XCp31oiE9M&fn=external_8"
+        }
+      ],
+      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo.",
+      "approvedAt": "2026-11-23T10:42:54Z",
+      "thumbnail": "https://pic.bstarstatic.com/ugc/97cde7d4b153e9313e642b4a041cd763.jpg@720w_405h_1e_1c_90q"
     },
     {
       "id": "auto:tna:2026-11-19:impact",
@@ -1458,10 +1489,20 @@
       "year": 2026,
       "title": "TNA Impact",
       "show": "Impact",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+      "status": "video_available",
+      "provisional": false,
+      "sources": [
+        {
+          "type": "archive",
+          "videoId": "a1cb4cc2f9568a774787c5356e1d89d6f",
+          "url": "https://archive.org/download/tna-impact-wrestling-19-11-26/TNA%20Impact%20Wrestling%2019-11-26.mp4",
+          "label": "Internet Archive · Revisão administrativa",
+          "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-19-11-26"
+        }
+      ],
+      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo.",
+      "approvedAt": "2026-11-23T10:35:25Z",
+      "thumbnail": "https://archive.org/services/img/tna-impact-wrestling-19-11-26"
     },
     {
       "id": "auto:tna:2026-11-20:xplosion",
@@ -1482,10 +1523,20 @@
       "year": 2026,
       "title": "Friday Night SmackDown",
       "show": "SmackDown",
-      "status": "awaiting_video",
-      "provisional": true,
-      "sources": [],
-      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo."
+      "status": "video_available",
+      "provisional": false,
+      "sources": [
+        {
+          "type": "okru",
+          "videoId": "16499752438350",
+          "url": "https://ok.ru/video/16499752438350",
+          "label": "OK.ru · Revisão administrativa",
+          "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19084231182926&type=37&idx=0&scl=4&tkn=Pz8Ar9CLWriZ4gbAywKZTAl-x2k&fn=external_8"
+        }
+      ],
+      "description": "Previsão semanal automática para data futura; não confirma que a emissora realizará o show nesta data. Confirme a programação oficial antes de vincular vídeo.",
+      "approvedAt": "2026-11-23T10:43:21Z",
+      "thumbnail": "https://iv.okcdn.ru/videoPreview?id=19084231182926&type=37&idx=0&scl=4&tkn=Pz8Ar9CLWriZ4gbAywKZTAl-x2k&fn=external_8"
     },
     {
       "id": "auto:aew:2026-11-21:collision",
