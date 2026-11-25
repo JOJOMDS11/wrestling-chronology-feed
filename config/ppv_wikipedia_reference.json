@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-24T20:12:26.863118Z",
+  "checkedAt": "2026-11-25T19:21:23.717001Z",
   "source": "Wikipedia (referências históricas independentes, não calendário oficial nem fontes de vídeo)",
   "sources": {
     "wwe": {
       "status": "updated",
-      "count": 579,
+      "count": 580,
       "yearCounts": {
         "1985": 2,
         "1986": 1,
@@ -48,12 +48,12 @@
         "2023": 18,
         "2024": 21,
         "2025": 31,
-        "2026": 26,
+        "2026": 27,
         "2027": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     },
     "wcw": {
       "status": "updated",
@@ -80,8 +80,8 @@
         "2001": 3
       },
       "url": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     },
     "ecw": {
       "status": "updated",
@@ -95,8 +95,8 @@
         "2001": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     },
     "tna": {
       "status": "updated",
@@ -129,8 +129,8 @@
         "2026": 8
       },
       "url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     },
     "roh": {
       "status": "updated",
@@ -158,8 +158,8 @@
         "2026": 5
       },
       "url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     },
     "aew": {
       "status": "updated",
@@ -176,8 +176,8 @@
         "2027": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     },
     "njpw": {
       "status": "updated",
@@ -224,8 +224,8 @@
         "2027": 3
       },
       "url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     },
     "nxt": {
       "status": "updated",
@@ -241,8 +241,8 @@
         "2021": 4
       },
       "url": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "checkedAt": "2026-11-24T20:12:26.863118+00:00",
-      "lastSuccessAt": "2026-11-24T20:12:26.863118+00:00"
+      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
+      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
     }
   },
   "events": [
@@ -25517,6 +25517,20 @@
       "referenceOnly": true
     },
     {
+      "id": "wiki:wwe:2026-12-15:worlds-collide-doomsday-34",
+      "company": "wwe",
+      "date": "2026-12-15",
+      "year": 2026,
+      "title": "Worlds Collide: Doomsday [ 34 ]",
+      "show": "PPV",
+      "official_url": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
+      "referenceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
+      "referenceType": "wikipedia",
+      "status": "reference_only",
+      "sources": [],
+      "referenceOnly": true
+    },
+    {
       "id": "wiki:aew:2026-12-19:worlds-end-83",
       "company": "aew",
       "date": "2026-12-19",
@@ -25559,11 +25573,11 @@
       "referenceOnly": true
     },
     {
-      "id": "wiki:wwe:2027-02-06:royal-rumble-34",
+      "id": "wiki:wwe:2027-02-06:royal-rumble-35",
       "company": "wwe",
       "date": "2027-02-06",
       "year": 2027,
-      "title": "Royal Rumble [ 34 ]",
+      "title": "Royal Rumble [ 35 ]",
       "show": "PPV",
       "official_url": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
       "referenceUrl": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
