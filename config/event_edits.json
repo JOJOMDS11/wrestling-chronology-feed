@@ -895,6 +895,27 @@
       "sourceThumbnails": {},
       "thumbnailUrl": "",
       "updatedAt": "2026-11-23T10:41:24Z"
+    },
+    "auto:wwe:2026-11-23:raw": {
+      "revision": 4,
+      "removed": [],
+      "added": [
+        {
+          "type": "okru",
+          "videoId": "16542685596238",
+          "url": "https://ok.ru/video/16542685596238",
+          "label": "Adição manual · okru"
+        },
+        {
+          "type": "okru",
+          "videoId": "16543114136142",
+          "url": "https://ok.ru/video/16543114136142",
+          "label": "Adição manual · okru"
+        }
+      ],
+      "sourceThumbnails": {},
+      "thumbnailUrl": "https://i.ibb.co/nNh31YHZ/imagem-2026-11-24-210616944.png",
+      "updatedAt": "2026-11-25T00:07:33Z"
     }
   },
   "manualEvents": {
