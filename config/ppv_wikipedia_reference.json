@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-25T19:21:23.717001Z",
+  "checkedAt": "2026-11-26T19:04:52.022263Z",
   "source": "Wikipedia (referências históricas independentes, não calendário oficial nem fontes de vídeo)",
   "sources": {
     "wwe": {
@@ -52,8 +52,8 @@
         "2027": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_WWE_pay-per-view_and_livestreaming_supercards",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     },
     "wcw": {
       "status": "updated",
@@ -80,8 +80,8 @@
         "2001": 3
       },
       "url": "https://en.wikipedia.org/wiki/List_of_JCP/WCW_closed-circuit_events_and_pay-per-view_events",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     },
     "ecw": {
       "status": "updated",
@@ -95,8 +95,8 @@
         "2001": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_ECW_supercards_and_pay-per-view_events",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     },
     "tna": {
       "status": "updated",
@@ -129,8 +129,8 @@
         "2026": 8
       },
       "url": "https://en.wikipedia.org/wiki/List_of_TNA_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     },
     "roh": {
       "status": "updated",
@@ -158,8 +158,8 @@
         "2026": 5
       },
       "url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     },
     "aew": {
       "status": "updated",
@@ -176,8 +176,8 @@
         "2027": 1
       },
       "url": "https://en.wikipedia.org/wiki/List_of_All_Elite_Wrestling_pay-per-view_events",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     },
     "njpw": {
       "status": "updated",
@@ -224,8 +224,8 @@
         "2027": 3
       },
       "url": "https://en.wikipedia.org/wiki/List_of_major_NJPW_events",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     },
     "nxt": {
       "status": "updated",
@@ -241,8 +241,8 @@
         "2021": 4
       },
       "url": "https://en.wikipedia.org/wiki/NXT_TakeOver",
-      "checkedAt": "2026-11-25T19:21:23.717001+00:00",
-      "lastSuccessAt": "2026-11-25T19:21:23.717001+00:00"
+      "checkedAt": "2026-11-26T19:04:52.022263+00:00",
+      "lastSuccessAt": "2026-11-26T19:04:52.022263+00:00"
     }
   },
   "events": [
@@ -16099,7 +16099,7 @@
       "company": "roh",
       "date": "2018-07-20",
       "year": 2018,
-      "title": "Honor For All",
+      "title": "Honor for All",
       "show": "PPV",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
       "referenceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
@@ -17569,7 +17569,7 @@
       "company": "roh",
       "date": "2019-06-01",
       "year": 2019,
-      "title": "State Of The Art",
+      "title": "State of the Art",
       "show": "PPV",
       "official_url": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
       "referenceUrl": "https://en.wikipedia.org/wiki/List_of_Ring_of_Honor_pay-per-view_and_livestreaming_events",
