@@ -409,6 +409,44 @@
       "sourceProfiles": [
         "Internet Archive · ROH Wrestling"
       ]
+    },
+    {
+      "videoId": "a650137acd4ff54d9a465e54979107ee5",
+      "platform": "archive",
+      "url": "https://archive.org/download/wwe.-raw.-2026.11.23.-nf.-def.-720p.-webrip.h-264-heel/WWE.RAW.2026.11.23.NF.DEF.720p.WEBRip.h264-HEEL.mp4",
+      "duration": "2:25:24",
+      "detail": "https://archive.org/details/wwe.-raw.-2026.11.23.-nf.-def.-720p.-webrip.h-264-heel",
+      "title": "WWE. RAW. 2026.11.23. NF. DEF. 720p. WEBRip.h 264 HEEL",
+      "filename": "WWE.RAW.2026.11.23.NF.DEF.720p.WEBRip.h264-HEEL.mp4",
+      "publishedAt": "2026-11-27T15:20:08Z",
+      "thumbnailUrl": "https://archive.org/services/img/wwe.-raw.-2026.11.23.-nf.-def.-720p.-webrip.h-264-heel",
+      "possibleEventIds": [
+        "auto:wwe:2026-11-23:raw"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
+    },
+    {
+      "videoId": "ab941ee2c02cf7f2049f506052ddaec06",
+      "platform": "archive",
+      "url": "https://archive.org/download/tna-impact-wrestling-26-11-26/TNA%20Impact%20Wrestling%2026-11-26.mp4",
+      "duration": "1:32:58",
+      "detail": "https://archive.org/details/tna-impact-wrestling-26-11-26",
+      "title": "TNA Impact Wrestling 26-11-26",
+      "filename": "TNA Impact Wrestling 26-11-26.mp4",
+      "publishedAt": "2026-11-27T18:24:33Z",
+      "thumbnailUrl": "https://archive.org/services/img/tna-impact-wrestling-26-11-26",
+      "possibleEventIds": [
+        "auto:tna:2026-11-26:impact"
+      ],
+      "confidence": "candidatura por título e data; reprodução e direitos não verificados",
+      "review": "pendente",
+      "sourceProfiles": [
+        "Internet Archive"
+      ]
     }
   ]
 }
